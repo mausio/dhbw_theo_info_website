@@ -1,5 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
-
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -16,42 +15,16 @@ export const GlobalStyle = createGlobalStyle`
   figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video {
-    margin: 0;
-    padding: 0;
+    //margin: 0;
+    //padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
+    //font-size: 100%;
+    //font: inherit;
     vertical-align: baseline;
     font-family: Helvetica, Arial, sans-serif
   }
 
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
 
-  body {
-    line-height: 1;
-  }
-
-  ol, ul {
-    list-style: none;
-  }
-
-  blockquote, q {
-    quotes: none;
-  }
-
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
 
 
   :root {
@@ -64,13 +37,11 @@ export const GlobalStyle = createGlobalStyle`
       --accent:#e2001a;
   }
 
-  h1, h2, h3, h4, h5, h6, p {
-    color: var(--quarternary);
+  h1, h2, h3, h4, h5, h6, p, button {
+    color: var(--black);
   }
 
   body {
-    overflow: hidden;
-    background-color: var(--black);
+    background-color: var(--primary);
   }
-  
-`
+`;
