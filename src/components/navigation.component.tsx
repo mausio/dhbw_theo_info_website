@@ -91,8 +91,6 @@ const DropdownElement = ({ childKey: key, childValue: value }) => {
 };
 
 const NavigationBar = () => {
-  const [menu, setMenu] = useState<undefined | string>(undefined);
-
   const navigate = useNavigate();
 
   const handleNavigate = (dest: string) => {
@@ -117,7 +115,7 @@ const NavigationBar = () => {
   return (
     <>
       <NavigationBarContainer>
-        <LogoLinkButton>
+        <LogoLinkButton onClick={() => handleNavigate(APP_ROUTES.home)}>
           <Logo src={dhbwLogo as string} />
         </LogoLinkButton>
 
