@@ -15,8 +15,8 @@ export const APP_ROUTES = {
     binary: 'binary',
   },
   graphs: {
-    bfs: 'bfs',
-    dfs: 'dfs',
+    bfs: 'BFS',
+    dfs: 'DFS',
     dijkstra: 'dijkstra',
   },
   coding: {

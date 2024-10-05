@@ -14,7 +14,7 @@ export const NavigationBarContainer = styled.div`
   margin: 25px auto;
   z-index: 1000;
   width: 96vw;
-  height: 80px;
+  height: 70px;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
@@ -28,7 +28,9 @@ export const NavigationBarContainer = styled.div`
 `;
 
 export const Logo = styled(GenericImage)`
-  height: 50px;
+  position: relative;
+  top: -1px;
+  height: 40px;
   margin: 0 10px;
 `;
 
@@ -47,9 +49,10 @@ export const LogoLinkButton = styled.a`
 
 export const LinkList = styled.ol`
   display: flex;
+  justify-content: space-evenly;
   list-style: none;
   column-gap: 10px;
-  margin: 0px 20px;
+  margin-right: 20px;
 `;
 
 export const LinkButton = styled.button`
@@ -60,57 +63,82 @@ export const LinkButton = styled.button`
   padding: 0 2px;
 `;
 
-export const LinkListButton = styled(LinkButton)``;
-
 export const LanguageButton = styled(LinkButton)`
   color: var(--accent);
 `;
 
-export const ListElement = styled.div`
-  padding: 5px;
+export const ListElement = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  min-height: 30px;
+  border: none;
+  background-color: transparent;
+  text-transform: capitalize;
+  font-weight: bold;
+
+  padding: 0 5px;
 
   border-radius: 5px;
-
-  &:active {
-  }
 
   &:hover {
     background: var(--secondary);
-    color: var(--quarternary);
 
-    button {
-      color: var(--quarternary);
-      transition: ease-out 0.05s;
+    backdrop-filter: brightness(1.1);
+    transition: 0.1s;
+  }
+
+  &:active {
+    background: var(--secondary);
+    backdrop-filter: brightness(0.95);
+
+    box-shadow:
+      rgb(0, 0, 0) 3px 3px 1px 0px inset,
+      rgba(0, 0, 0, 0.5) -0.1px -0.1px 2px -1px inset;
+
+    scale: 0.99;
+
+    p {
+      scale: 0.98;
     }
 
-    transition: ease-out 0.05s;
+    transition: ease-in 0.05s;
   }
 
-  transition: ease-in 0.3s;
-
-  &:hover ol {
-    display: block;
-  }
+  box-shadow: none;
 `;
 
 export const SubLinkList = styled.ol`
-  display: none;
+  display: block;
   position: absolute;
-  width: 80px;
-  height: 140px;
-  background: var(--secondary);
+  width: 90px;
+  height: auto;
+  background: var(--quarternary);
   border-radius: 5px;
   z-index: 1100;
+  margin: 0;
+  padding: 0;
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
 `;
 
-export const LinkerContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: auto 0;
+export const ClickableElementBinder = styled.div`
+  min-width: 90px;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
 `;
 
-export const TopSpacer = styled.div`
-  padding: 0 0;
+export const SubListElement = styled(ListElement)`
+  justify-content: start;
+  p {
+    align-self: start;
+    text-align: start;
+    margin-left: 5px;
+  }
   width: 100%;
+  min-height: 15px;
 `;
