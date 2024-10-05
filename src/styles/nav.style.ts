@@ -63,10 +63,6 @@ export const LinkButton = styled.button`
   padding: 0 2px;
 `;
 
-export const LanguageButton = styled(LinkButton)`
-  color: var(--accent);
-`;
-
 export const ListElement = styled.button`
   display: flex;
   align-items: center;
@@ -107,6 +103,10 @@ export const ListElement = styled.button`
   }
 
   box-shadow: none;
+`;
+
+export const LanguageButton = styled(ListElement)`
+  color: var(--accent);
 `;
 
 export const SubLinkList = styled.ol`

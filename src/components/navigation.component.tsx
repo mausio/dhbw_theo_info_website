@@ -121,6 +121,7 @@ const NavigationBar = () => {
 
         <LinkList>
           {createLinks()}
+          {/*TODO: Add translation for German*/}
           <LanguageButton>English</LanguageButton>
         </LinkList>
       </NavigationBarContainer>
