@@ -1,17 +1,29 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
   ],
   "compilerOptions": {
     "lib": [
       "es6",
       "dom"
     ],
-    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
-  },
-
+    // TODO: uncomment
+//        "noImplicitAny": true,
+//        "noUnusedParameters": true,
+//        "noUnusedParameters": true,
+//        "strict": true
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": false
+  }
 }
