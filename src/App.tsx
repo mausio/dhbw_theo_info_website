@@ -10,8 +10,6 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path={'*'} element={<FourOfourPage />} />
       </Route>
-      Hier ist ein Bullshit
-      <DiesGibtEsNicht />
     </Routes>
   );
 }
