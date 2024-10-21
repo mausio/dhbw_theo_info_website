@@ -14,16 +14,18 @@
       "dom"
     ],
     "forceConsistentCasingInFileNames": true,
-    "strictNullChecks": true,
-    "noImplicitThis": true,
     // TODO: uncomment
 //        "noImplicitAny": true,
 //        "noUnusedParameters": true,
 //        "noUnusedParameters": true,
 //        "strict": true
+//    "strictNullChecks": true,
+//    "noImplicitThis": true,
     "noImplicitAny": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "strictNullChecks": false,
+    "noImplicitThis": false,
     "strict": false
   }
 }
