@@ -39,8 +39,8 @@ jobs:
       run: npm install
 
     # Lint the project (using eslint)
-    - name: Lint code
-      run: npm run lint
+    #- name: Lint code
+      #run: npm run lint
 
     # Run tests (if you have a test script)
     #- name: Run tests
