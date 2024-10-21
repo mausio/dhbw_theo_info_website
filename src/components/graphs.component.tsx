@@ -1,0 +1,36 @@
+import * as React from 'react';
+import { Bar, BarContainer, BarNumber, ChartContainer } from '../styles/insertion.style.ts';
+
+const BarChart = ({ bars, positions, selectedIndex, comparingIndex }) => {
+  const renderBars = () => {
+    return bars.map((bar, index) => {
+      const isSelected = index === selectedIndex;
+      const isComparing = index === comparingIndex;
+
+      return (
+        <BarContainer
+          style={{
+            left: `${positions[index] * 51}px`,
+            backgroundColor: isSelected ? 'lightcoral' : isComparing ? 'lightsteelblue' : 'transparent',
+          }}
+          key={index}
+        >
+          <Bar
+            style={{
+              height: `${bar * 20}px`,
+            }}
+          />
+          <BarNumber>{bar}</BarNumber>
+        </BarContainer>
+      );
+    });
+  };
+
+  return (
+    <div>
+      <ChartContainer>{renderBars()}</ChartContainer>
+    </div>
+  );
+};
+
+export default BarChart;
