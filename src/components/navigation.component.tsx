@@ -122,7 +122,7 @@ const NavigationBar = () => {
         <LinkList>
           {createLinks()}
           {/*TODO: Add translation for German*/}
-          <LanguageButton>English</LanguageButton>
+          <LanguageButton>English</LanguageButton>x
         </LinkList>
       </NavigationBarContainer>
       <GenericMainContainer>
