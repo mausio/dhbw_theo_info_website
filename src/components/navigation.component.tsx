@@ -13,7 +13,7 @@ import {
 } from '../styles/nav.style.ts';
 import { APP_ROUTES } from '../routes/routes.ts';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { GenericImprintNotice, GenericMainContainer } from '../styles/generic.style.ts';
+import { GenericImprintNotice } from '../styles/generic.style.ts';
 import { useState } from 'react';
 import { ClickAwayListener } from '@mui/material';
 
@@ -31,15 +31,20 @@ const SingleElement = ({ childKey: key, childValue: value }) => {
   );
 };
 
-const DropdownSingleElement = ({ childValue: value, childKey: key }) => {
+const DropdownSingleElement = ({ parentKey: parentKey, childValue: value, childKey: key }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (dest: string) => {
     navigate(dest);
   };
 
+  const buildName = () => {
+    return `${value} ${parentKey}`;
+  };
+
   return (
     <SubListElement onClick={() => handleNavigate(value)} key={`${key}09`}>
+      {/*<p>{buildName()}</p>*/}
       <p>{value}</p>
     </SubListElement>
   );
@@ -49,7 +54,7 @@ const DropdownList = ({ childValue: value, childKey: key }) => {
   return (
     <SubLinkList key={`${key}3`}>
       {Object.entries(value).map(([subKey, subValue]) => {
-        return <DropdownSingleElement childValue={subValue} childKey={subKey} key={`${key}05`} />;
+        return <DropdownSingleElement parentKey={key} childValue={subValue} childKey={subKey} key={`${key}05`} />;
       })}
     </SubLinkList>
   );
@@ -122,15 +127,13 @@ const NavigationBar = () => {
         <LinkList>
           {createLinks()}
           {/*TODO: Add translation for German*/}
-          <LanguageButton>English</LanguageButton>x
+          <LanguageButton>English</LanguageButton>
         </LinkList>
       </NavigationBarContainer>
-      <GenericMainContainer>
-        <Outlet />
-      </GenericMainContainer>
+      <Outlet />
       <GenericImprintNotice>
         <p>2024 DHBW Karlsruhe</p>
-        <ListElement onClick={() => handleNavigate(APP_ROUTES.imprint)}>{APP_ROUTES.imprint}</ListElement>
+        <ListElement onClick={() => handleNavigate(APP_ROUTES.imprint)}>Imprint</ListElement>
       </GenericImprintNotice>
     </>
   );

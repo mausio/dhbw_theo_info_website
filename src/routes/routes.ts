@@ -1,6 +1,6 @@
 export const APP_ROUTES = {
   home: '/',
-  imprint: 'imprint',
+  imprint: 'https://www.dhbw.de/impressum',
   sorting: {
     insertion: 'insertion',
     merge: 'merge',

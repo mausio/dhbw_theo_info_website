@@ -2,6 +2,7 @@ import Lottie from 'react-lottie';
 
 import dino from '../lotties/dino.json';
 import { DinoContainer } from '../styles/fourOfour.style.ts';
+import { GenericMainContainer } from '../styles/generic.style.ts';
 
 const FourOfourPage = () => {
   const defaultOptions = {
@@ -11,7 +12,7 @@ const FourOfourPage = () => {
   };
 
   return (
-    <>
+    <GenericMainContainer>
       <h1 style={{ marginBottom: '0' }}>This page could not be found :/</h1>
       <DinoContainer>
         <div>
@@ -25,7 +26,7 @@ const FourOfourPage = () => {
           />
         </div>
       </DinoContainer>
-    </>
+    </GenericMainContainer>
   );
 };
 

@@ -16,8 +16,8 @@ export const GenericMainContainer = styled.div`
 `;
 
 export const GenericImprintNotice = styled.div`
-  width: 93vw;
-  height: 50px;
+  width: 93.25vw;
+  height: 55px;
   inset: 0;
   margin: 10px auto;
   border-radius: 5px;
