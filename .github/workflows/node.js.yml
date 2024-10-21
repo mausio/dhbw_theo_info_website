@@ -1,4 +1,4 @@
-name: Node.js CI
+name: CI
 
 on:
   push:
@@ -12,18 +12,20 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x] # You can specify the Node.js versions here
+        node-version: [18.x] # Specify the version of Node.js here
 
     steps:
+    # Checkout the repository code
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    # Set up Node.js (specify the version you're using)
+    - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 
-    # Optional: Cache node_modules
+    # Cache node_modules to speed up builds
     - name: Cache node_modules
       uses: actions/cache@v3
       with:
@@ -36,7 +38,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Run tests
+    # Lint the project (using eslint)
+    - name: Lint code
+      run: npm run lint
+
+    # Run tests (if you have a test script)
     #- name: Run tests
       #run: npm run test
 
