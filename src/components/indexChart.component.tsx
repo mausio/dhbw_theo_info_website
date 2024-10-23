@@ -3,15 +3,13 @@ import { BarContainer, ChartContainer } from '../styles/insertion.style.ts';
 
 const IndexChart = ({ initialArray, positions, selectedIndex }) => {
   const renderBars = () => {
-    console.log(initialArray);
-
     return initialArray.map((_, index) => {
       const isSelected = index === selectedIndex;
 
       return (
         <BarContainer
           style={{
-            left: `${positions[index] * 51}px`,
+            left: `${positions[index] * 10}%`,
             color: isSelected ? 'red' : 'gray',
           }}
           key={index}

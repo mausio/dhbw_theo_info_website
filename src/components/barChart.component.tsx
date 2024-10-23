@@ -10,7 +10,7 @@ const BarChart = ({ bars, positions, selectedIndex, comparingIndex }) => {
       return (
         <BarContainer
           style={{
-            left: `${positions[index] * 51}px`,
+            left: `${positions[index] * 10}%`,
             backgroundColor: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : 'transparent',
           }}
           key={index}

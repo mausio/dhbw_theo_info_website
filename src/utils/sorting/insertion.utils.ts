@@ -19,3 +19,88 @@ export const insertionSort = ({ subject: subject }) => {
 
   return output;
 };
+
+//
+// const performAnimatedInsertionSort = async () => {
+//   setIsAnimated(true);
+//   setIsSorting(true);
+//   setIsManual(false);
+//   animatedRequestRef.current = true;
+//   exitRequestRef.current = false; // Reset stopRequestedRef
+//   const sortedBars = [...bars];
+//   const newPositions = [...positions];
+//
+//   for (let j = 1; j < sortedBars.length; j++) {
+//     const key = sortedBars[j];
+//     setKey(key);
+//     setSelectedIndex(j);
+//     setKeyIndex(j);
+//     await new Promise((resolve) => setTimeout(resolve, delay / speedRequestRef.current));
+//
+//     if (pauseRequestRef.current) {
+//       await performPause();
+//     }
+//
+//     let i = j - 1;
+//
+//     setComparingIndex(i);
+//     await new Promise((resolve) => setTimeout(resolve, delay / speedRequestRef.current));
+//
+//     if (pauseRequestRef.current) {
+//       await performPause();
+//     }
+//
+//     while (i >= 0) {
+//       if (sortedBars[i] < key) {
+//         break;
+//       }
+//       setSelectedIndex(i + 1);
+//       setComparingIndex(i);
+//       await new Promise((resolve) => setTimeout(resolve, delay / speedRequestRef.current));
+//
+//       sortedBars[i + 1] = sortedBars[i];
+//       newPositions[i + 1] = newPositions[i];
+//
+//       setBars([...sortedBars]);
+//       setPositions([...newPositions]);
+//
+//       if (pauseRequestRef.current) {
+//         await performPause();
+//       }
+//
+//       await new Promise((resolve) => setTimeout(resolve, delay / speedRequestRef.current));
+//
+//       if (pauseRequestRef.current) {
+//         await performPause();
+//       }
+//       i--;
+//     }
+//
+//     sortedBars[i + 1] = key;
+//     newPositions[i + 1] = key;
+//
+//     setBars([...sortedBars]);
+//     setPositions([...newPositions]);
+//
+//     if (exitRequestRef.current) {
+//       animatedRequestRef.current = false;
+//       makeChartInactive();
+//       break;
+//     } else if (pauseRequestRef.current) {
+//       await performPause();
+//     }
+//
+//     await new Promise((resolve) => setTimeout(resolve, delay / speedRequestRef.current));
+//
+//     setComparingIndex(null);
+//
+//     if (pauseRequestRef.current) {
+//       await performPause();
+//     }
+//   }
+//
+//   makeChartInactive();
+//   setIsSorted(false);
+//   setIsSorting(false);
+//   setIsAnimated(false);
+// };
