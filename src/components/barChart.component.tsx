@@ -11,7 +11,7 @@ const BarChart = ({ bars, positions, selectedIndex, comparingIndex }) => {
         <BarContainer
           style={{
             left: `${positions[index] * 51}px`,
-            backgroundColor: isSelected ? 'lightcoral' : isComparing ? 'lightsteelblue' : 'transparent',
+            backgroundColor: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : 'transparent',
           }}
           key={index}
         >
@@ -20,7 +20,14 @@ const BarChart = ({ bars, positions, selectedIndex, comparingIndex }) => {
               height: `${bar * 20}px`,
             }}
           />
-          <BarNumber>{bar}</BarNumber>
+          <BarNumber
+            style={{
+              fontWeight: isSelected ? 'bold' : isComparing ? 'bold' : 'normal',
+              color: isSelected ? 'white' : isComparing ? 'white' : 'black',
+            }}
+          >
+            {bar}
+          </BarNumber>
         </BarContainer>
       );
     });

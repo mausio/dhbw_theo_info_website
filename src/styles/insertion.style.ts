@@ -10,10 +10,7 @@ export const BarContainer = styled.div`
   width: 8%;
   padding: 6px 5px 5px 5px;
   position: absolute;
-  transition:
-    height 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
+  transition: height 0.3s ease-in-out;
   bottom: 0;
   text-align: center;
   border-radius: 5px;
@@ -23,10 +20,7 @@ export const Bar = styled.div`
   background-color: #39576f;
   border-radius: 5px;
   width: 100%;
-  transition:
-    height 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
+  transition: height 0.3s ease-in-out;
 `;
 
 export const BarNumber = styled.div`
