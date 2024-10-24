@@ -90,20 +90,27 @@ export const KeyIndexContainer = styled.div`
   border-radius: 50px;
 
   p {
-    min-width: 200px;
+    width: 75%;
     min-height: 20px;
     background: transparent;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 2px 7px;
     margin: 0;
     text-align: center;
     backdrop-filter: blur(10px) brightness(10) opacity(0.9);
     box-shadow: rgb(0, 0, 0, 0.2) 1px 1px 1px 0px inset;
     border: 0.5px solid black;
-    font-weight: bold;
+    font-weight: normal;
   }
 `;
 
-export const Spacer = styled.div`
-  min-width: 15px;
+export const InsertionGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'animation algo'
+    'task task';
+
+  background: coral;
 `;

@@ -1,12 +1,5 @@
 import { AlgorithmSection, Button } from '../styles/generic.style.ts';
-import {
-  ButtonPanel,
-  ChartAligner,
-  ControlPanel,
-  KeyIndexContainer,
-  SliderPanel,
-  Spacer,
-} from '../styles/insertion.style.ts';
+import { ButtonPanel, ChartAligner, ControlPanel, KeyIndexContainer, SliderPanel } from '../styles/insertion.style.ts';
 import BarChart from './barChart.component.tsx';
 import IndexChart from './indexChart.component.tsx';
 import { Slider } from '@mui/material';
@@ -30,7 +23,7 @@ const InsertionSortAnimationComponent = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [comparingIndex, setComparingIndex] = useState<number | null>(null);
   const [key, setKey] = useState<number | null>(null);
-  const [infoText, setInfoText] = useState<string>('');
+  const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
 
   const exitRequestRef = useRef<boolean>(false);
   const pauseRequestRef = useRef<boolean>(false);
@@ -79,11 +72,9 @@ const InsertionSortAnimationComponent = () => {
     for (let j = 1; j < sortedBars.length; j++) {
       const key = sortedBars[j];
       setKey(key);
+      setInfoText('A[' + (j + 1) + '] = key = ' + key);
+
       setSelectedIndex(j);
-
-      let i = j - 1;
-
-      setComparingIndex(i);
 
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
@@ -92,12 +83,23 @@ const InsertionSortAnimationComponent = () => {
         await wait();
       }
 
+      let i = j - 1;
+
       while (i >= 0) {
-        if (sortedBars[i] < key) {
-          break;
-        }
-        setSelectedIndex(i + 1);
         setComparingIndex(i);
+        setSelectedIndex(i + 1);
+
+        setInfoText(
+          'A[' +
+            (i + 1) +
+            '] = ' +
+            sortedBars[i] +
+            ' is ' +
+            (sortedBars[i] < key ? 'smaller' : 'greater') +
+            ' than the key(=' +
+            key +
+            ')'
+        );
 
         if (!stepRequestRef.current || pauseRequestRef.current) {
           await performPause();
@@ -105,12 +107,16 @@ const InsertionSortAnimationComponent = () => {
         if (!isManual) {
           await wait();
         }
+        if (sortedBars[i] < key) {
+          break;
+        }
+
+        setInfoText('propagating forward...');
 
         sortedBars[i + 1] = sortedBars[i];
         newPositions[i + 1] = newPositions[i];
 
-        setBars([...sortedBars]);
-        setPositions([...newPositions]);
+        updateBarsAndPositions([...sortedBars], [...newPositions]);
 
         if (!stepRequestRef.current || pauseRequestRef.current) {
           await performPause();
@@ -122,11 +128,24 @@ const InsertionSortAnimationComponent = () => {
         i--;
       }
 
+      setInfoText('placing the key(=' + key + ') at A[' + (i + 1) + ']');
+
       sortedBars[i + 1] = key;
       newPositions[i + 1] = key;
 
-      setBars([...sortedBars]);
-      setPositions([...newPositions]);
+      updateBarsAndPositions([...sortedBars], [...newPositions]);
+
+      if (!stepRequestRef.current || pauseRequestRef.current) {
+        await performPause();
+      }
+      if (!isManual) {
+        await wait();
+      }
+
+      setInfoText('moving on to the next key...');
+
+      setSelectedIndex(initialData.length + 1);
+      setComparingIndex(initialData.length + 1);
 
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
@@ -137,6 +156,7 @@ const InsertionSortAnimationComponent = () => {
       if (exitRequestRef.current) {
         break;
       }
+      // setComparingIndex(null);
     }
 
     if (exitRequestRef.current) {
@@ -148,6 +168,15 @@ const InsertionSortAnimationComponent = () => {
     setIsManual(false);
     setIsAnimated(false);
     setIsSorted(true);
+  };
+
+  const updateBarsAndPositions = (newBars: number[], newPositions: number[]) => {
+    if (bars != newBars) {
+      setBars(newBars);
+    }
+    if (positions != newPositions) {
+      setPositions(newPositions);
+    }
   };
 
   const wait = async () => {
@@ -187,23 +216,32 @@ const InsertionSortAnimationComponent = () => {
     setIsAnimated(false);
     stepRequestRef.current = false;
     pauseRequestRef.current = false;
+    speedRequestRef.current = 5;
     await performInsertionSort();
   };
 
   const startAnimated = async () => {
-    setIsShuffeling(false);
-    setIsManual(false);
-    setIsAnimated(true);
-    stepRequestRef.current = true;
-    pauseRequestRef.current = false;
-    await performInsertionSort();
+    if (isManual) {
+      setIsManual(false);
+      setIsShuffeling(false);
+      setIsAnimated(true);
+      stepRequestRef.current = true;
+      pauseRequestRef.current = false;
+      speedRequestRef.current = 1;
+    } else {
+      setIsShuffeling(false);
+      setIsAnimated(true);
+      stepRequestRef.current = true;
+      pauseRequestRef.current = false;
+      await performInsertionSort();
+    }
   };
 
   const makeAStep = async () => {
+    pauseRequestRef.current = false;
     stepRequestRef.current = true;
     await wait();
     stepRequestRef.current = false;
-    pauseRequestRef.current = false;
   };
 
   const exitSorting = async () => {
@@ -232,12 +270,6 @@ const InsertionSortAnimationComponent = () => {
   return (
     <AlgorithmSection>
       <KeyIndexContainer>
-        {/*<p style={{ color: 'red' }}>i:</p>*/}
-        {/*<p style={{ color: 'red' }}>{comparingIndex ? comparingIndex + 1 : 'none'}</p>*/}
-        {/*<Spacer></Spacer>*/}
-        {/*<p>key:</p>*/}
-        {/*<p>{key ? key : 'none'}</p>*/}
-        {/*<Spacer></Spacer>*/}
         <p>{infoText}</p>
       </KeyIndexContainer>
       <ChartAligner>
@@ -252,10 +284,10 @@ const InsertionSortAnimationComponent = () => {
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
             disabled={isManual}
-            step={0.25}
-            marks
-            min={0.25}
-            max={5}
+            step={0.2}
+            // marks
+            min={0.2}
+            max={2}
             sx={{ color: '#39576f' }}
           />
         </SliderPanel>
@@ -267,8 +299,8 @@ const InsertionSortAnimationComponent = () => {
             Sort
           </Button>
 
-          {isManual ? (
-            <Button onClick={makeAStep} disabled={!isManual || isShuffelling || isSorted || !isSorting || isAnimated}>
+          {isManual || isPaused ? (
+            <Button onClick={makeAStep} disabled={isShuffelling || isSorted || !isSorting || (isAnimated && !isPaused)}>
               Step
             </Button>
           ) : (
@@ -287,7 +319,7 @@ const InsertionSortAnimationComponent = () => {
               </Button>
             )
           ) : (
-            <Button onClick={startAnimated} disabled={isSorted || !isSorting || isAnimated || isManual}>
+            <Button onClick={startAnimated} disabled={isSorted || !isSorting || isAnimated}>
               Animate
             </Button>
           )}
