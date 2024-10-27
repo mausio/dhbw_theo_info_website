@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import dhbwLogo from '../assets/dhbw_logo.png';
+import dhbwLogo from '../../assets/dhbw_logo.png';
 import {
   ClickableElementBinder,
   LanguageButton,
@@ -10,10 +10,10 @@ import {
   NavigationBarContainer,
   SubLinkList,
   SubListElement,
-} from '../styles/nav.style.ts';
-import { APP_ROUTES } from '../routes/routes.ts';
+} from '../../styles/nav.style.ts';
+import { APP_ROUTES } from '../../routes/routes.ts';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { GenericImprintNotice } from '../styles/generic.style.ts';
+import { GenericImprintNotice } from '../../styles/generic.style.ts';
 import { useState } from 'react';
 import { ClickAwayListener } from '@mui/material';
 

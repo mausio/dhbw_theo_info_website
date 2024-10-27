@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Bar, BarContainer, BarNumber, ChartContainer } from '../styles/insertion.style.ts';
+import { Bar, BarContainer, BarNumber, ChartContainer } from '../../styles/insertion.style.ts';
 
-const BarChart = ({ bars, positions, selectedIndex, comparingIndex }) => {
+const BarChart = ({ bars, selectedIndex, comparingIndex }) => {
   const renderBars = () => {
     return bars.map((bar, index) => {
       const isSelected = index === selectedIndex;
@@ -10,7 +10,7 @@ const BarChart = ({ bars, positions, selectedIndex, comparingIndex }) => {
       return (
         <BarContainer
           style={{
-            left: `${positions[index] * 10}%`,
+            left: `${index * 10}%`,
             backgroundColor: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : 'transparent',
           }}
           key={index}

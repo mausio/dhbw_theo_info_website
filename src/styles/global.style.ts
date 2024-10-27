@@ -45,4 +45,5 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background-color: var(--primary);
   }
+  
 `;

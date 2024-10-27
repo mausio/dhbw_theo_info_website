@@ -1,11 +1,17 @@
-import { AlgorithmSection, Button } from '../styles/generic.style.ts';
-import { ButtonPanel, ChartAligner, ControlPanel, KeyIndexContainer, SliderPanel } from '../styles/insertion.style.ts';
+import { AlgorithmSection, Button } from '../../styles/generic.style.ts';
+import {
+  ButtonPanel,
+  ChartAligner,
+  ControlPanel,
+  KeyIndexContainer,
+  SliderPanel,
+} from '../../styles/insertion.style.ts';
 import BarChart from './barChart.component.tsx';
 import IndexChart from './indexChart.component.tsx';
 import { Slider } from '@mui/material';
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { swapInArray } from '../utils/shuffle.utils.ts';
+import { swapInArray } from '../../utils/shuffle.utils.ts';
 
 const initialData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -116,7 +122,7 @@ const InsertionSortAnimationComponent = () => {
         sortedBars[i + 1] = sortedBars[i];
         newPositions[i + 1] = newPositions[i];
 
-        updateBarsAndPositions([...sortedBars], [...newPositions]);
+        await updateBarsAndPositions([...sortedBars], [...newPositions]);
 
         if (!stepRequestRef.current || pauseRequestRef.current) {
           await performPause();
@@ -133,7 +139,7 @@ const InsertionSortAnimationComponent = () => {
       sortedBars[i + 1] = key;
       newPositions[i + 1] = key;
 
-      updateBarsAndPositions([...sortedBars], [...newPositions]);
+      await updateBarsAndPositions([...sortedBars], [...newPositions]);
 
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
@@ -170,12 +176,12 @@ const InsertionSortAnimationComponent = () => {
     setIsSorted(true);
   };
 
-  const updateBarsAndPositions = (newBars: number[], newPositions: number[]) => {
-    if (bars != newBars) {
-      setBars(newBars);
+  const updateBarsAndPositions = async (newBars: number[], newPositions: number[]) => {
+    if (JSON.stringify(bars) != JSON.stringify(newBars)) {
+      await setBars(newBars);
     }
-    if (positions != newPositions) {
-      setPositions(newPositions);
+    if (JSON.stringify(positions) != JSON.stringify(newPositions)) {
+      await setPositions(newPositions);
     }
   };
 
@@ -273,8 +279,8 @@ const InsertionSortAnimationComponent = () => {
         <p>{infoText}</p>
       </KeyIndexContainer>
       <ChartAligner>
-        <BarChart bars={bars} positions={positions} selectedIndex={selectedIndex} comparingIndex={comparingIndex} />
-        <IndexChart initialArray={initialData} positions={positions} selectedIndex={comparingIndex} />
+        <BarChart bars={bars} selectedIndex={selectedIndex} comparingIndex={comparingIndex} />
+        <IndexChart initialArray={initialData} selectedIndex={comparingIndex} />
       </ChartAligner>
       <ControlPanel>
         <SliderPanel>

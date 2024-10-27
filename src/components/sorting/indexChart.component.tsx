@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { BarContainer, ChartContainer } from '../styles/insertion.style.ts';
+import { BarContainer, ChartContainer } from '../../styles/insertion.style.ts';
 
-const IndexChart = ({ initialArray, positions, selectedIndex }) => {
+const IndexChart = ({ initialArray, selectedIndex }) => {
   const renderBars = () => {
     return initialArray.map((_, index) => {
       const isSelected = index === selectedIndex;
@@ -9,7 +9,7 @@ const IndexChart = ({ initialArray, positions, selectedIndex }) => {
       return (
         <BarContainer
           style={{
-            left: `${positions[index] * 10}%`,
+            left: `${index * 10}%`,
             color: isSelected ? 'red' : 'gray',
           }}
           key={index}

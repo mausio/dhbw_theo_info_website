@@ -1,10 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
-import NavigationBar from './components/navigation.component.tsx';
+import NavigationBar from './components/general/navigation.component.tsx';
 import HomePage from './pages/home.page.tsx';
 import FourOfourPage from './pages/fourOfour.page.tsx';
 import { APP_ROUTES } from './routes/routes.ts';
 import { useEffect } from 'react';
-import InsertionPage from './pages/sorting/Insertion.page.tsx';
+import InsertionPage from './pages/Insertion.page.tsx';
+
+//TODO: uninstall all unused packages
 
 function App() {
   return (

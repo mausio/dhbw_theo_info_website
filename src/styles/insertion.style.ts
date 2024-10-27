@@ -29,6 +29,7 @@ export const BarNumber = styled.div`
 `;
 
 export const ControlPanel = styled.div`
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -44,7 +45,6 @@ export const ControlPanel = styled.div`
 
   border-radius: 10px;
 
-  height: 100%;
   margin: 15px 3px 15px 3px;
 `;
 
@@ -77,7 +77,7 @@ export const SliderPanel = styled.div`
 
 export const KeyIndexContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -104,13 +104,59 @@ export const KeyIndexContainer = styled.div`
   }
 `;
 
-export const InsertionGrid = styled.div`
+export const MarkedText = styled.span`
+  background: lightgray;
+  border-radius: 2px;
+  padding: 1px 5px;
+`;
+
+export const MarkedRedText = styled(MarkedText)`
+  color: var(--accent);
+`;
+
+export const SortableContainer = styled.div`
+  width: 370px;
+  height: 65px;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+
+  border-radius: 5px;
+  background: transparent;
+
+  div {
+    width: 360px;
+  }
+`;
+
+export const IterationTitle = styled.p`
+  font-weight: bold;
+  margin: 0 0 20px 0;
+  padding: 0;
+  color: white;
+`;
+
+export const SingleIterationContainer = styled.div`
+  height: 90px;
+  position: relative;
+  width: fit-content;
+  padding: 20px;
+  margin: 10px auto;
+
+  border-radius: 10px;
+  box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 3px 0px inset;
+  background: color-mix(in srgb, var(--tertiary), white 20%);
+`;
+
+export const IterationsContainer = styled.div`
+  width: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    'animation algo'
-    'task task';
+  grid-auto-rows: 150px;
 
-  background: coral;
+  margin: 20px 0;
 `;
