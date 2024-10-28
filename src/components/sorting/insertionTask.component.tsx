@@ -39,7 +39,7 @@ const InsertionTaskComponent = () => {
   const handleConfetti = async () => {
     setIsRecycling(true);
     setIsRunningConfetti(true);
-    await wait(3000);
+    await wait(5000);
     setIsRecycling(false);
     await wait(10000);
     setIsRunningConfetti(false);
@@ -92,6 +92,12 @@ const InsertionTaskComponent = () => {
     return output;
   };
 
+  const isEven = (num) => num % 2 === 0;
+
+  const handleHeight = () => {
+    return isEven(iterations.length) ? (iterations.length / 2) * 150 : ((iterations.length + 1) / 2) * 150;
+  };
+
   return (
     <SortTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
@@ -102,7 +108,9 @@ const InsertionTaskComponent = () => {
       <p>
         Input array: <MarkedText>[{printArray(initialData)}]</MarkedText>
       </p>
-      <IterationsContainer style={{ height: 660, filter: isSolved && 'brightness(0.8)' }}>
+      <IterationsContainer
+        style={{ height: handleHeight(), transition: 'ease 1s', filter: isSolved && 'brightness(0.8)' }}
+      >
         {iterations.map((item, index) => (
           <InsertionIterationComponent
             key={`insertIterationComp.${index}`}

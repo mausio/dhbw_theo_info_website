@@ -145,7 +145,7 @@ export const SingleIterationContainer = styled.div`
   position: relative;
   width: fit-content;
   padding: 20px;
-  margin: 10px auto;
+  margin: 0 auto;
 
   border-radius: 10px;
   box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 3px 0px inset;
@@ -154,9 +154,10 @@ export const SingleIterationContainer = styled.div`
 
 export const IterationsContainer = styled.div`
   width: auto;
+  height: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 150px;
 
-  margin: 20px 0;
+  margin: 35px 0 25px 0;
 `;
