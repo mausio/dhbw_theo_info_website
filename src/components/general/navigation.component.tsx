@@ -10,10 +10,10 @@ import {
   NavigationBarContainer,
   SubLinkList,
   SubListElement,
-} from '../../styles/nav.style.ts';
+} from '../../styles/general/nav.style.ts';
 import { APP_ROUTES } from '../../routes/routes.ts';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { GenericImprintNotice } from '../../styles/generic.style.ts';
+import { GenericImprintNotice } from '../../styles/general/generic.style.ts';
 import { useState } from 'react';
 import { ClickAwayListener } from '@mui/material';
 

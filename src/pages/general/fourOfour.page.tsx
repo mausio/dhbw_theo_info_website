@@ -1,8 +1,8 @@
 import Lottie from 'react-lottie';
 
-import dino from '../lotties/dino.json';
-import { DinoContainer } from '../styles/fourOfour.style.ts';
-import { GenericMainContainer } from '../styles/generic.style.ts';
+import dino from '../../lotties/dino.json';
+import { DinoContainer } from '../../styles/general/fourOfour.style.ts';
+import { GenericMainContainer } from '../../styles/general/generic.style.ts';
 
 const FourOfourPage = () => {
   const defaultOptions = {

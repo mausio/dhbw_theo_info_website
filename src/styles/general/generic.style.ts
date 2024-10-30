@@ -137,6 +137,7 @@ export const AlgorithmSection = styled.div`
 `;
 
 export const GenericSortGrid = styled.div`
+  position: relative;
   width: 80%;
   margin: 50px auto;
 
@@ -149,6 +150,8 @@ export const GenericSortGrid = styled.div`
     'task task';
   column-gap: 50px;
   row-gap: 25px;
+
+  transition: 'ease 1s';
 `;
 
 export const CodeContainer = styled.div`
@@ -165,7 +168,7 @@ export const CodeContainer = styled.div`
   background-color: color-mix(in srgb, var(--contrastAccent), black 48%);
   letter-spacing: 0.06rem;
 
-  line-height: 1.5;
+  line-height: 1.4;
 
   .table-row {
     display: table-row;
@@ -174,7 +177,7 @@ export const CodeContainer = styled.div`
   .table-cell {
     display: table-cell;
     padding-right: 1rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #6b7280;
     text-align: left;
     user-select: none;
@@ -196,6 +199,8 @@ export const SortSpacer = styled.div`
 `;
 
 export const SortTaskContainer = styled.div`
+  position: relative;
+  transition: 1s ease;
   width: auto;
   height: auto;
   overflow: hidden;
@@ -217,4 +222,16 @@ export const SortTaskContainer = styled.div`
   }
 
   padding: 0 25px;
+`;
+
+export const Fader = styled.div`
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: ease 1s;
+  //background: linear-gradient(to bottom, transparent 80%, color-mix(in srgb, #39576f, black 48%) 99%);
+  //background: color-mix(in srgb, #39576f, black 48%);
 `;

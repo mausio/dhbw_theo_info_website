@@ -1,25 +1,25 @@
-import { AlgorithmSection, Button } from '../../styles/generic.style.ts';
+import { AlgorithmSection, Button } from '../../../styles/general/generic.style.ts';
 import {
   ButtonPanel,
   ChartAligner,
   ControlPanel,
   KeyIndexContainer,
   SliderPanel,
-} from '../../styles/insertion.style.ts';
-import BarChart from './barChart.component.tsx';
-import IndexChart from './indexChart.component.tsx';
-import { Slider } from '@mui/material';
+} from '../../../styles/sorting/insertion.style.ts';
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { swapInArray } from '../../utils/shuffle.utils.ts';
+import { useRef, useState } from 'react';
+import BarChart from '../../general/barChart.component.tsx';
+import IndexChart from '../../general/indexChart.component.tsx';
+import { Slider } from '@mui/material';
+import { swapInArray } from '../../../utils/array.utils.ts';
+import { wait } from '../../../utils/promise.utils.ts';
 
 const initialData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const InsertionSortAnimationComponent = () => {
+const MergeSortAnimation = () => {
   const delay = 1000;
 
   const [bars, setBars] = useState<number[]>(initialData);
-  const [positions, setPositions] = useState<number[]>([]);
   const [isManual, setIsManual] = useState<boolean>(false);
   const [isAnimated, setIsAnimated] = useState<boolean>(false);
   const [isShuffelling, setIsShuffeling] = useState<boolean>(false);
@@ -28,7 +28,6 @@ const InsertionSortAnimationComponent = () => {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [comparingIndex, setComparingIndex] = useState<number | null>(null);
-  const [key, setKey] = useState<number | null>(null);
   const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
 
   const exitRequestRef = useRef<boolean>(false);
@@ -37,15 +36,39 @@ const InsertionSortAnimationComponent = () => {
   const speedRequestRef = useRef<number>(1);
   const stepRequestRef = useRef<boolean>(false);
 
-  useEffect(() => {
-    setPositions(bars.map((_, index) => index));
-  }, [bars]);
-
-  const animateSwap = (i: number, j: number) => {
-    const newPositions = [...positions];
-    [newPositions[i], newPositions[j]] = [newPositions[j], newPositions[i]];
-    setPositions(newPositions);
+  const performMergeSort = () => {
+    mergeSort(bars);
   };
+
+  function mergeSort(bars) {
+    if (bars.length <= 1) {
+      return bars;
+    }
+
+    const middle = Math.floor(bars.length / 2);
+    const left = bars.slice(0, middle);
+    const right = bars.slice(middle);
+
+    return merge(mergeSort(left), mergeSort(right));
+  }
+
+  function merge(left, right) {
+    const sortedArray = [];
+    let i = 0;
+    let j = 0;
+
+    while (i < left.length && j < right.length) {
+      if (left[i] < right[j]) {
+        sortedArray.push(left[i]);
+        i++;
+      } else {
+        sortedArray.push(right[j]);
+        j++;
+      }
+    }
+
+    return sortedArray.concat(left.slice(i)).concat(right.slice(j));
+  }
 
   const smoothShuffleBars = async () => {
     setIsShuffeling(true);
@@ -59,10 +82,9 @@ const InsertionSortAnimationComponent = () => {
         const randomIndex = Math.floor(Math.random() * (i + 1));
 
         swapInArray(shuffledBars, i, randomIndex);
-        animateSwap(i, randomIndex);
         setBars([...shuffledBars]);
       }
-      await new Promise((resolve) => setTimeout(resolve, 350));
+      await wait(350);
     }
 
     setIsShuffeling(false);
@@ -70,134 +92,14 @@ const InsertionSortAnimationComponent = () => {
     shuffelingRequestRef.current = false;
   };
 
-  const performInsertionSort = async () => {
-    setIsSorting(true);
-    const sortedBars = [...bars];
-    const newPositions = [...positions];
-
-    for (let j = 1; j < sortedBars.length; j++) {
-      const key = sortedBars[j];
-      setKey(key);
-      setInfoText('A[' + (j + 1) + '] = key = ' + key);
-
-      setSelectedIndex(j);
-
-      if (!stepRequestRef.current || pauseRequestRef.current) {
-        await performPause();
-      }
-      if (!isManual) {
-        await wait();
-      }
-
-      let i = j - 1;
-
-      while (i >= 0) {
-        setComparingIndex(i);
-        setSelectedIndex(i + 1);
-
-        setInfoText(
-          'A[' +
-            (i + 1) +
-            '] = ' +
-            sortedBars[i] +
-            ' is ' +
-            (sortedBars[i] < key ? 'smaller' : 'greater') +
-            ' than the key(=' +
-            key +
-            ')'
-        );
-
-        if (!stepRequestRef.current || pauseRequestRef.current) {
-          await performPause();
-        }
-        if (!isManual) {
-          await wait();
-        }
-        if (sortedBars[i] < key) {
-          break;
-        }
-
-        setInfoText('propagating forward...');
-
-        sortedBars[i + 1] = sortedBars[i];
-        newPositions[i + 1] = newPositions[i];
-
-        await updateBarsAndPositions([...sortedBars], [...newPositions]);
-
-        if (!stepRequestRef.current || pauseRequestRef.current) {
-          await performPause();
-        }
-        if (!isManual) {
-          await wait();
-        }
-
-        i--;
-      }
-
-      setInfoText('placing the key(=' + key + ') at A[' + (i + 1) + ']');
-
-      sortedBars[i + 1] = key;
-      newPositions[i + 1] = key;
-
-      await updateBarsAndPositions([...sortedBars], [...newPositions]);
-
-      if (!stepRequestRef.current || pauseRequestRef.current) {
-        await performPause();
-      }
-      if (!isManual) {
-        await wait();
-      }
-
-      setInfoText('moving on to the next key...');
-
-      setSelectedIndex(initialData.length + 1);
-      setComparingIndex(initialData.length + 1);
-
-      if (!stepRequestRef.current || pauseRequestRef.current) {
-        await performPause();
-      }
-      if (!isManual) {
-        await wait();
-      }
-      if (exitRequestRef.current) {
-        break;
-      }
-      // setComparingIndex(null);
-    }
-
-    if (exitRequestRef.current) {
-      return;
-    }
-
-    makeChartInactive();
-    setIsSorting(false);
-    setIsManual(false);
-    setIsAnimated(false);
-    setIsSorted(true);
-  };
-
-  const updateBarsAndPositions = async (newBars: number[], newPositions: number[]) => {
-    if (JSON.stringify(bars) != JSON.stringify(newBars)) {
-      await setBars(newBars);
-    }
-    if (JSON.stringify(positions) != JSON.stringify(newPositions)) {
-      await setPositions(newPositions);
-    }
-  };
-
-  const wait = async () => {
-    await new Promise((resolve) => setTimeout(resolve, delay / speedRequestRef.current));
-  };
-
   const makeChartInactive = () => {
-    setKey(null);
     setSelectedIndex(null);
     setComparingIndex(null);
   };
 
   const performPause = async () => {
     if (pauseRequestRef.current || !stepRequestRef.current) {
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      await wait(10);
       await performPause();
     }
   };
@@ -208,7 +110,7 @@ const InsertionSortAnimationComponent = () => {
     if (!isManual && isAnimated) {
       exitRequestRef.current = false;
       pauseRequestRef.current = false;
-      await performInsertionSort();
+      await performMergeSort();
     }
   };
 
@@ -223,7 +125,7 @@ const InsertionSortAnimationComponent = () => {
     stepRequestRef.current = false;
     pauseRequestRef.current = false;
     speedRequestRef.current = 5;
-    await performInsertionSort();
+    await performMergeSort();
   };
 
   const startAnimated = async () => {
@@ -239,14 +141,14 @@ const InsertionSortAnimationComponent = () => {
       setIsAnimated(true);
       stepRequestRef.current = true;
       pauseRequestRef.current = false;
-      await performInsertionSort();
+      await performMergeSort();
     }
   };
 
   const makeAStep = async () => {
     pauseRequestRef.current = false;
     stepRequestRef.current = true;
-    await wait();
+    await wait(10);
     stepRequestRef.current = false;
   };
 
@@ -279,7 +181,7 @@ const InsertionSortAnimationComponent = () => {
         <p>{infoText}</p>
       </KeyIndexContainer>
       <ChartAligner>
-        <BarChart bars={bars} selectedIndex={selectedIndex} comparingIndex={comparingIndex} />
+        <BarChart bars={bars} selectedIndex={selectedIndex} comparingIndex={comparingIndex} pivotIndex={null} />
         <IndexChart initialArray={initialData} selectedIndex={comparingIndex} />
       </ChartAligner>
       <ControlPanel>
@@ -338,4 +240,4 @@ const InsertionSortAnimationComponent = () => {
   );
 };
 
-export default InsertionSortAnimationComponent;
+export default MergeSortAnimation;

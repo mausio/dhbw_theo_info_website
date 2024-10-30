@@ -1,33 +1,15 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { IterationsContainer, MarkedRedText, MarkedText } from '../../styles/insertion.style.ts';
-import { SortTaskContainer } from '../../styles/generic.style.ts';
+import { IterationsContainer, MarkedRedText, MarkedText } from '../../../styles/sorting/insertion.style.ts';
+import { SortTaskContainer } from '../../../styles/general/generic.style.ts';
+import ConfettiComponent from '../../general/confetti.component.tsx';
+import { calcArrayTaskContainerHeight, generateRandomArrayOfN } from '../../../utils/number.utils.ts';
+import { printArray } from '../../general/print.component.tsx';
+import { wait } from '../../../utils/promise.utils.ts';
 import InsertionIterationComponent from './insertionIteration.component.tsx';
-import ConfettiComponent from '../general/confetti.component.tsx';
 
-const generateRandomArrayOfN = (n: number) => {
-  const array: number[] = [];
-  for (let i = 0; i < n; i++) {
-    let n;
-    do {
-      n = Math.floor(Math.random() * 99) + 1;
-    } while (array.includes(n));
-    array.push(n);
-  }
-  return array;
-};
-
-const printArray = (array: number[]) => {
-  return array.map((item, index) => (
-    <span key={index}>
-      {item}
-      {index < array.length - 1 ? ', ' : ''}
-    </span>
-  ));
-};
-
-const InsertionTaskComponent = () => {
+const InsertionSortTaskComponent = () => {
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -43,10 +25,7 @@ const InsertionTaskComponent = () => {
     setIsRecycling(false);
     await wait(10000);
     setIsRunningConfetti(false);
-  };
-
-  const wait = async (wait) => {
-    await new Promise((resolve) => setTimeout(resolve, wait));
+    return;
   };
 
   useEffect(() => {
@@ -92,12 +71,6 @@ const InsertionTaskComponent = () => {
     return output;
   };
 
-  const isEven = (num) => num % 2 === 0;
-
-  const handleHeight = () => {
-    return isEven(iterations.length) ? (iterations.length / 2) * 150 : ((iterations.length + 1) / 2) * 150;
-  };
-
   return (
     <SortTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
@@ -109,7 +82,11 @@ const InsertionTaskComponent = () => {
         Input array: <MarkedText>[{printArray(initialData)}]</MarkedText>
       </p>
       <IterationsContainer
-        style={{ height: handleHeight(), transition: 'ease 1s', filter: isSolved && 'brightness(0.8)' }}
+        style={{
+          height: calcArrayTaskContainerHeight(iterations.length, 150),
+          transition: 'ease 1s',
+          filter: isSolved && 'brightness(0.8)',
+        }}
       >
         {iterations.map((item, index) => (
           <InsertionIterationComponent
@@ -131,4 +108,4 @@ const InsertionTaskComponent = () => {
   );
 };
 
-export default InsertionTaskComponent;
+export default InsertionSortTaskComponent;

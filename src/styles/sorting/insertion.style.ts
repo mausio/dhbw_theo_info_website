@@ -3,11 +3,13 @@ import styled from 'styled-components';
 export const ChartContainer = styled.div`
   position: relative;
   height: 250px;
+  margin: 7px auto;
 `;
 
 export const BarContainer = styled.div`
   width: 7%;
   padding: 6px 1.4% 5px 1.4%;
+  margin: 0 0.1%;
   position: absolute;
   transition: height 0.3s ease-in-out;
   bottom: 0;
@@ -90,10 +92,10 @@ export const KeyIndexContainer = styled.div`
   border-radius: 50px;
 
   p {
-    width: 75%;
+    width: 88%;
     min-height: 20px;
     background: transparent;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 2px 7px;
     margin: 0;
     text-align: center;

@@ -1,4 +1,4 @@
-import { GenericMainContainer } from '../styles/generic.style.ts';
+import { GenericMainContainer } from '../../styles/general/generic.style.ts';
 
 const HomePage = () => {
   return (

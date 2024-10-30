@@ -3,7 +3,7 @@ import {
   MarkedRedText,
   SingleIterationContainer,
   SortableContainer,
-} from '../../styles/insertion.style.ts';
+} from '../../../styles/sorting/insertion.style.ts';
 import {
   closestCenter,
   DndContext,
@@ -18,9 +18,9 @@ import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable 
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { CSS } from '@dnd-kit/utilities';
-import { Button } from '../../styles/generic.style.ts';
+import { Button } from '../../../styles/general/generic.style.ts';
 
-const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, iterations: nrOfIteration }) => {
+const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIteration: nrOfIteration, pivotArray }) => {
   const [activeId, setActiveId] = useState<number | null>(null);
   const [workingArray, setWorkingArray] = useState<number[]>(taskArray);
   const [isWrongAnswer, setIsWrongAnswer] = useState<boolean>(false);
@@ -35,6 +35,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
 
   const handleReset = () => {
     console.log(taskArray);
+    console.log(expectedArray);
     setWorkingArray(taskArray);
   };
 
@@ -89,7 +90,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
   return (
     <SingleIterationContainer>
       <IterationTitle>
-        After Iteration Nr <MarkedRedText>{nrOfIteration}</MarkedRedText>
+        After Iteration Nr <MarkedRedText>{nrOfIteration + 1}</MarkedRedText>
       </IterationTitle>
       <SortableContainer>
         <DndContext
@@ -113,7 +114,12 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
           <SortableContext items={workingArray} strategy={horizontalListSortingStrategy}>
             <div style={{ display: 'flex', gap: '5px', margin: '20px 0', justifyContent: 'center' }}>
               {workingArray.map((item) => (
-                <SortableItem key={item} id={item} isDisabled={isTrueAnswer || isWrongAnswer} />
+                <SortableItem
+                  key={item}
+                  id={item}
+                  isDisabled={isTrueAnswer || isWrongAnswer}
+                  isPivot={pivotArray[nrOfIteration] == item}
+                />
               ))}
             </div>
           </SortableContext>
@@ -152,7 +158,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
   );
 };
 
-const SortableItem = ({ id: id, isDisabled: isDisabled }) => {
+const SortableItem = ({ id: id, isDisabled: isDisabled, isPivot }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     resizeObserverConfig: undefined,
     disabled: isDisabled,
@@ -167,6 +173,7 @@ const SortableItem = ({ id: id, isDisabled: isDisabled }) => {
         transition,
         cursor: 'grab',
         padding: '10px',
+        color: isPivot ? 'red' : 'black',
         border: isDragging || isDisabled ? '1px solid #000' : '1px solid #ddd',
         backgroundColor: isDragging || isDisabled ? 'lightgray' : 'whitesmoke',
         display: 'inline-block',
@@ -184,4 +191,4 @@ const SortableItem = ({ id: id, isDisabled: isDisabled }) => {
   );
 };
 
-export default InsertionIterationComponent;
+export default QuickSortIteration;
