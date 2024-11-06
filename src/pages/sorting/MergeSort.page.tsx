@@ -1,4 +1,4 @@
-import { GenericMainContainer, GenericSortGrid } from '../../styles/general/generic.style.ts';
+import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../styles/general/generic.style.ts';
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import { mergeSortAlgo } from '../../algorithms/sorting.algorithms.ts';
 import * as React from 'react';
@@ -12,11 +12,9 @@ const MergeSortPage = () => {
       <GenericSortGrid>
         <MergeSortAnimation />
         <CodeBlockElement code={mergeSortAlgo} isFaderOn={true} />
-        {/*<TasksContainer >*/}
-        {/*//TODO: put tasks into one container for UI*/}
-        <MergeSortTaskOne />
-        {/*<MergeSortTaskTwo />*/}
-        {/*</TasksContainer>*/}
+        <TasksContainer>
+          <MergeSortTaskOne />
+        </TasksContainer>
       </GenericSortGrid>
     </GenericMainContainer>
   );

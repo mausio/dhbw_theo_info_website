@@ -3,7 +3,7 @@ import {
   MarkedRedText,
   SingleIterationContainer,
   SortableContainer,
-} from '../../../styles/sorting/insertion.style.ts';
+} from '../../../styles/sorting/insertionSort.style.ts';
 import {
   closestCenter,
   DndContext,
@@ -34,8 +34,6 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
   }, [taskArray]);
 
   const handleReset = () => {
-    console.log(taskArray);
-    console.log(expectedArray);
     setWorkingArray(taskArray);
   };
 
@@ -43,7 +41,7 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
     if (JSON.stringify(expectedArray) === JSON.stringify(workingArray)) {
       setIsWrongAnswer(false);
       setIsTrueAnswer(true);
-      setTaskArray([...workingArray]); // Update taskArray in parent
+      setTaskArray([...workingArray]);
     } else {
       setIsWrongAnswer(true);
       await wait();
@@ -146,7 +144,7 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
             minWidth: 55,
             width: 55,
             animation: isWrongAnswer ? 'shake 0.15s 2' : 'none',
-            background: isWrongAnswer ? 'indianred' : isTrueAnswer ? '#39576f' : '',
+            background: isWrongAnswer ? 'indianred' : isTrueAnswer ? 'rgba(45, 255, 196, 0.5)' : '',
           }}
           onClick={handleCheck}
           disabled={isWrongAnswer || isTrueAnswer}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { IterationsContainer, MarkedRedText, MarkedText } from '../../../styles/sorting/insertion.style.ts';
+import { IterationsContainer, MarkedRedText, MarkedText } from '../../../styles/sorting/insertionSort.style.ts';
 import { SortTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
 import { calcArrayTaskContainerHeight, generateRandomArrayOfN } from '../../../utils/number.utils.ts';
@@ -9,7 +9,7 @@ import { printArray } from '../../general/print.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
 import InsertionIterationComponent from './insertionIteration.component.tsx';
 
-const InsertionSortTaskComponent = () => {
+const InsertionSortIterationTaskComponent = () => {
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -40,6 +40,7 @@ const InsertionSortTaskComponent = () => {
         console.log('finished!');
         setIsSolved(true);
         handleConfetti();
+
         return;
       }
 
@@ -108,4 +109,4 @@ const InsertionSortTaskComponent = () => {
   );
 };
 
-export default InsertionSortTaskComponent;
+export default InsertionSortIterationTaskComponent;

@@ -129,10 +129,6 @@ export const SortableContainer = styled.div`
 
   border-radius: 5px;
   background: transparent;
-
-  div {
-    width: 360px;
-  }
 `;
 
 export const IterationTitle = styled.p`
@@ -143,10 +139,13 @@ export const IterationTitle = styled.p`
 `;
 
 export const SingleIterationContainer = styled.div`
-  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: fit-content;
   position: relative;
   width: fit-content;
-  padding: 20px;
+  padding: 15px 20px;
   margin: 0 auto;
 
   border-radius: 10px;
@@ -160,6 +159,7 @@ export const IterationsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 150px;
+  align-items: center;
 
   margin: 35px 0 25px 0;
 `;

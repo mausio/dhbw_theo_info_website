@@ -5,7 +5,7 @@ import {
   ControlPanel,
   KeyIndexContainer,
   SliderPanel,
-} from '../../../styles/sorting/insertion.style.ts';
+} from '../../../styles/sorting/insertionSort.style.ts';
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import BarChart from '../../general/barChart.component.tsx';

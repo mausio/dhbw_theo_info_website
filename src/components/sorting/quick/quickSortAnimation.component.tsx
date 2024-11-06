@@ -5,7 +5,7 @@ import {
   ControlPanel,
   KeyIndexContainer,
   SliderPanel,
-} from '../../../styles/sorting/insertion.style.ts';
+} from '../../../styles/sorting/insertionSort.style.ts';
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import BarChart from '../../general/barChart.component.tsx';
@@ -310,7 +310,7 @@ const QuickSortAnimation = () => {
             disabled={isManual}
             step={0.1}
             min={0.2}
-            max={2}
+            max={4}
             sx={{ color: '#39576f' }}
           />
         </SliderPanel>

@@ -3,7 +3,7 @@ import {
   MarkedRedText,
   SingleIterationContainer,
   SortableContainer,
-} from '../../../styles/sorting/insertion.style.ts';
+} from '../../../styles/sorting/insertionSort.style.ts';
 import {
   closestCenter,
   DndContext,
@@ -14,11 +14,12 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { arrayMove, horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { CSS } from '@dnd-kit/utilities';
-import { Button } from '../../../styles/general/generic.style.ts';
+import { BraceSpan, Button } from '../../../styles/general/generic.style.ts';
+import { SortableItem } from '../../general/draggable.component.tsx';
+import { wait } from '../../../utils/promise.utils.ts';
 
 const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, iterations: nrOfIteration }) => {
   const [activeId, setActiveId] = useState<number | null>(null);
@@ -44,13 +45,9 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
       setTaskArray([...workingArray]);
     } else {
       setIsWrongAnswer(true);
-      await wait();
+      await wait(500);
       setIsWrongAnswer(false);
     }
-  };
-
-  const wait = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
   };
 
   const handleDragStart = (event: DragStartEvent) => {
@@ -97,18 +94,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <span
-            style={{
-              fontWeight: 'lighter',
-              fontSize: '60px',
-              position: 'relative',
-              bottom: '3px',
-              paddingLeft: '2px',
-              color: 'white',
-            }}
-          >
-            [
-          </span>
+          <BraceSpan>[</BraceSpan>
           <SortableContext items={workingArray} strategy={horizontalListSortingStrategy}>
             <div style={{ display: 'flex', gap: '5px', margin: '20px 0', justifyContent: 'center' }}>
               {workingArray.map((item) => (
@@ -116,18 +102,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
               ))}
             </div>
           </SortableContext>
-          <span
-            style={{
-              fontWeight: 'lighter',
-              fontSize: '60px',
-              position: 'relative',
-              bottom: '3px',
-              paddingRight: '2px',
-              color: 'white',
-            }}
-          >
-            ]
-          </span>
+          <BraceSpan>]</BraceSpan>
         </DndContext>
       </SortableContainer>
       <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', columnGap: 5 }}>
@@ -139,7 +114,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
             minWidth: 55,
             width: 55,
             animation: isWrongAnswer ? 'shake 0.15s 2' : 'none',
-            background: isWrongAnswer ? 'indianred' : isTrueAnswer ? '#39576f' : '',
+            background: isWrongAnswer ? 'indianred' : isTrueAnswer ? 'rgba(45, 255, 196, 0.5)' : '',
           }}
           onClick={handleCheck}
           disabled={isWrongAnswer || isTrueAnswer}
@@ -148,38 +123,6 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
         </Button>
       </div>
     </SingleIterationContainer>
-  );
-};
-
-const SortableItem = ({ id: id, isDisabled: isDisabled }) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    resizeObserverConfig: undefined,
-    disabled: isDisabled,
-    id,
-  });
-
-  return (
-    <div
-      ref={setNodeRef}
-      style={{
-        transform: CSS.Transform.toString(transform),
-        transition,
-        cursor: 'grab',
-        padding: '10px',
-        border: isDragging || isDisabled ? '1px solid #000' : '1px solid #ddd',
-        backgroundColor: isDragging || isDisabled ? 'lightgray' : 'whitesmoke',
-        display: 'inline-block',
-        textAlign: 'center',
-        borderRadius: '5px',
-        width: '40px',
-        height: '40px',
-        boxSizing: 'border-box',
-      }}
-      {...attributes}
-      {...listeners}
-    >
-      {id}
-    </div>
   );
 };
 

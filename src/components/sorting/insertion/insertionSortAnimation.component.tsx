@@ -5,7 +5,7 @@ import {
   ControlPanel,
   KeyIndexContainer,
   SliderPanel,
-} from '../../../styles/sorting/insertion.style.ts';
+} from '../../../styles/sorting/insertionSort.style.ts';
 import BarChart from '../../general/barChart.component.tsx';
 import IndexChart from '../../general/indexChart.component.tsx';
 import { Slider } from '@mui/material';

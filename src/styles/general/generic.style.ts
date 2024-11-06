@@ -204,7 +204,6 @@ export const SortTaskContainer = styled.div`
   width: auto;
   height: auto;
   overflow: hidden;
-  grid-area: task;
   border-radius: 25px;
 
   background: radial-gradient(white, color-mix(in srgb, var(--primary), white 90%) 95%);
@@ -232,6 +231,30 @@ export const Fader = styled.div`
   height: 100%;
   width: 100%;
   transition: ease 1s;
-  //background: linear-gradient(to bottom, transparent 80%, color-mix(in srgb, #39576f, black 48%) 99%);
-  //background: color-mix(in srgb, #39576f, black 48%);
+`;
+
+export const TasksContainer = styled.div`
+  width: 100%;
+  display: flex;
+  grid-area: task;
+  flex-direction: column;
+  row-gap: 50px;
+`;
+
+export const BraceSpan = styled.span`
+  font-weight: lighter;
+  font-size: 60px;
+  position: relative;
+  bottom: 3px;
+  padding-left: 2px;
+  color: white;
+`;
+
+export const SortableArrayContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
 `;

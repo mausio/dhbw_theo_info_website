@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BarContainer, ChartContainer } from '../../styles/sorting/insertion.style.ts';
+import { BarContainer, ChartContainer } from '../../styles/sorting/insertionSort.style.ts';
 
 const IndexChart = ({ initialArray, comparingIndex, selectedIndex, pivotIndex, start, end }) => {
   const renderBars = () => {

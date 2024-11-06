@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { IterationsContainer, MarkedRedText, MarkedText } from '../../../styles/sorting/insertion.style.ts';
+import { IterationsContainer, MarkedRedText, MarkedText } from '../../../styles/sorting/insertionSort.style.ts';
 import { Button, SortTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
 import { calcArrayTaskContainerHeight, generateRandomArrayOfN } from '../../../utils/number.utils.ts';
@@ -9,7 +9,7 @@ import { printArray } from '../../general/print.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
 import QuickSortIteration from './quickSortIteration.component.tsx';
 
-const QuickSortTaskOne = () => {
+const QuickSortPartitionTasks = () => {
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -66,7 +66,7 @@ const QuickSortTaskOne = () => {
       const start = stack.pop();
 
       if (start < end) {
-        pivots.push(array[end]);
+        const pivot = array[end];
         const partitionIndex = partition(array, start, end);
 
         stack.push(partitionIndex + 1);
@@ -77,6 +77,7 @@ const QuickSortTaskOne = () => {
 
         if (output.length == 0 || JSON.stringify([...output[output.length - 1]]) != JSON.stringify([...array])) {
           output.push([...array]);
+          pivots.push(pivot);
         }
       }
     }
@@ -90,10 +91,10 @@ const QuickSortTaskOne = () => {
     for (let j = start; j <= end - 1; j++) {
       if (array[j] <= pivot) {
         i++;
-        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        [array[i], array[j]] = [array[j], array[i]];
       }
     }
-    [array[i + 1], array[end]] = [array[end], array[i + 1]]; // Place pivot in the correct position
+    [array[i + 1], array[end]] = [array[end], array[i + 1]];
     return i + 1;
   };
 
@@ -143,4 +144,4 @@ const QuickSortTaskOne = () => {
   );
 };
 
-export default QuickSortTaskOne;
+export default QuickSortPartitionTasks;

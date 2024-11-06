@@ -1,4 +1,4 @@
-export const quickSort = `
+export const quickSortAlgo = `
 //array index starts at 1
 function QuickSort(A, start, end) {
   if (start < end) {
