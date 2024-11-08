@@ -8,7 +8,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-const CodeBlockElement = ({ code, isFaderOn }) => {
+const CodeBlockElement = ({ code, isFaderOn, height }) => {
+  const containerHeight = 500;
+
   const [isCopied, setIsCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -23,16 +25,12 @@ const CodeBlockElement = ({ code, isFaderOn }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const containerHeight = 500;
-
   return (
     <CodeContainer
       style={{
-        position: 'relative',
-        maxHeight: isExpanded ? '100%' : containerHeight,
-        height: isExpanded ? '100%' : containerHeight,
+        maxHeight: isExpanded ? '100%' : height ? height : containerHeight,
+        height: isExpanded ? '100%' : height ? height : containerHeight,
         transition: 'ease 1s',
-        overflow: 'hidden',
       }}
     >
       {isFaderOn && (

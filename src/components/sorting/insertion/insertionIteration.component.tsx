@@ -1,9 +1,10 @@
 import {
+  ButtonIterationContainer,
   IterationTitle,
-  MarkedRedText,
   SingleIterationContainer,
+  SortableArrayContainer,
   SortableContainer,
-} from '../../../styles/sorting/insertionSort.style.ts';
+} from '../../../styles/general/iteration.style.ts';
 import {
   closestCenter,
   DndContext,
@@ -17,7 +18,7 @@ import {
 import { arrayMove, horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { BraceSpan, Button } from '../../../styles/general/generic.style.ts';
+import { BraceSpan, Button, MarkedRedText } from '../../../styles/general/generic.style.ts';
 import { SortableItem } from '../../general/draggable.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
 
@@ -34,7 +35,8 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
   }, [taskArray]);
 
   const handleReset = () => {
-    console.log(taskArray);
+    console.log(expectedArray);
+    console.log();
     setWorkingArray(taskArray);
   };
 
@@ -96,16 +98,16 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
         >
           <BraceSpan>[</BraceSpan>
           <SortableContext items={workingArray} strategy={horizontalListSortingStrategy}>
-            <div style={{ display: 'flex', gap: '5px', margin: '20px 0', justifyContent: 'center' }}>
+            <SortableArrayContainer>
               {workingArray.map((item) => (
                 <SortableItem key={item} id={item} isDisabled={isTrueAnswer || isWrongAnswer} />
               ))}
-            </div>
+            </SortableArrayContainer>
           </SortableContext>
           <BraceSpan>]</BraceSpan>
         </DndContext>
       </SortableContainer>
-      <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', columnGap: 5 }}>
+      <ButtonIterationContainer>
         <Button onClick={handleReset} style={{ minWidth: 55, width: 55 }} disabled={isTrueAnswer || isWrongAnswer}>
           Reset
         </Button>
@@ -121,7 +123,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
         >
           Check
         </Button>
-      </div>
+      </ButtonIterationContainer>
     </SingleIterationContainer>
   );
 };

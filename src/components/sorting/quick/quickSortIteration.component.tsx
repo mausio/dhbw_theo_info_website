@@ -1,10 +1,4 @@
 import {
-  IterationTitle,
-  MarkedRedText,
-  SingleIterationContainer,
-  SortableContainer,
-} from '../../../styles/sorting/insertionSort.style.ts';
-import {
   closestCenter,
   DndContext,
   DragEndEvent,
@@ -18,7 +12,13 @@ import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable 
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { CSS } from '@dnd-kit/utilities';
-import { Button } from '../../../styles/general/generic.style.ts';
+import { BraceSpan, Button, MarkedRedText } from '../../../styles/general/generic.style.ts';
+import {
+  ButtonIterationContainer,
+  IterationTitle,
+  SingleIterationContainer,
+  SortableContainer,
+} from '../../../styles/general/iteration.style.ts';
 
 const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIteration: nrOfIteration, pivotArray }) => {
   const [activeId, setActiveId] = useState<number | null>(null);
@@ -97,18 +97,7 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <span
-            style={{
-              fontWeight: 'lighter',
-              fontSize: '60px',
-              position: 'relative',
-              bottom: '3px',
-              paddingLeft: '2px',
-              color: 'white',
-            }}
-          >
-            [
-          </span>
+          <BraceSpan>[</BraceSpan>
           <SortableContext items={workingArray} strategy={horizontalListSortingStrategy}>
             <div style={{ display: 'flex', gap: '5px', margin: '20px 0', justifyContent: 'center' }}>
               {workingArray.map((item) => (
@@ -121,21 +110,10 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
               ))}
             </div>
           </SortableContext>
-          <span
-            style={{
-              fontWeight: 'lighter',
-              fontSize: '60px',
-              position: 'relative',
-              bottom: '3px',
-              paddingRight: '2px',
-              color: 'white',
-            }}
-          >
-            ]
-          </span>
+          <BraceSpan>]</BraceSpan>
         </DndContext>
       </SortableContainer>
-      <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', columnGap: 5 }}>
+      <ButtonIterationContainer>
         <Button onClick={handleReset} style={{ minWidth: 55, width: 55 }} disabled={isTrueAnswer || isWrongAnswer}>
           Reset
         </Button>
@@ -151,11 +129,10 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
         >
           Check
         </Button>
-      </div>
+      </ButtonIterationContainer>
     </SingleIterationContainer>
   );
 };
-
 const SortableItem = ({ id: id, isDisabled: isDisabled, isPivot }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     resizeObserverConfig: undefined,

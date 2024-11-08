@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { BarContainer, ChartContainer } from '../../styles/sorting/insertionSort.style.ts';
 
-const IndexChart = ({ initialArray, comparingIndex, selectedIndex, pivotIndex, start, end }) => {
+const IndexChart = ({
+  initialArray,
+  comparingIndex,
+  selectedIndex,
+  pivotIndex,
+  start,
+  end,
+  fullLength: fullLength,
+}) => {
   const renderBars = () => {
     return initialArray.map((_, index) => {
       const isSelected = index === selectedIndex;
@@ -14,10 +22,10 @@ const IndexChart = ({ initialArray, comparingIndex, selectedIndex, pivotIndex, s
       return (
         <BarContainer
           style={{
-            left: `${index * 10}%`,
+            width: fullLength && `${70 / initialArray.length}%`,
+            left: fullLength ? `${(index / initialArray.length) * 100}%` : `${index * 10}%`,
             color: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : isPivot ? 'palevioletred' : 'gray',
             background: isBetweenStartAndEnd ? 'lightgray' : 'transparent',
-            padding: '6px 1.55% 5px 1.55%',
             borderRadius: 0,
             borderTopLeftRadius: isStart ? 5 : 0,
             borderBottomLeftRadius: isStart ? 5 : 0,

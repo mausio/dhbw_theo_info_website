@@ -40,35 +40,9 @@ const MergeSortAnimation = () => {
     mergeSort(bars);
   };
 
-  function mergeSort(bars) {
-    if (bars.length <= 1) {
-      return bars;
-    }
+  function mergeSort(bars) {}
 
-    const middle = Math.floor(bars.length / 2);
-    const left = bars.slice(0, middle);
-    const right = bars.slice(middle);
-
-    return merge(mergeSort(left), mergeSort(right));
-  }
-
-  function merge(left, right) {
-    const sortedArray = [];
-    let i = 0;
-    let j = 0;
-
-    while (i < left.length && j < right.length) {
-      if (left[i] < right[j]) {
-        sortedArray.push(left[i]);
-        i++;
-      } else {
-        sortedArray.push(right[j]);
-        j++;
-      }
-    }
-
-    return sortedArray.concat(left.slice(i)).concat(right.slice(j));
-  }
+  function merge(left, right) {}
 
   const smoothShuffleBars = async () => {
     setIsShuffeling(true);

@@ -43,7 +43,9 @@ export const Button = styled.button`
   align-content: center;
   align-items: center;
 
-  min-width: 70px;
+  width: auto;
+
+  min-width: 65px;
   min-height: 30px;
 
   color: var(--black);
@@ -155,6 +157,7 @@ export const GenericSortGrid = styled.div`
 `;
 
 export const CodeContainer = styled.div`
+  overflow: hidden;
   position: relative;
   grid-area: code;
   width: auto;
@@ -165,7 +168,7 @@ export const CodeContainer = styled.div`
 
   padding: 15px 25px;
 
-  background-color: color-mix(in srgb, var(--contrastAccent), black 48%);
+  background-color: color-mix(in srgb, var(--contrastAccent), black 50%);
   letter-spacing: 0.06rem;
 
   line-height: 1.4;
@@ -181,6 +184,7 @@ export const CodeContainer = styled.div`
     color: #6b7280;
     text-align: left;
     user-select: none;
+    filter: brightness(1.25) saturate(1.1);
   }
 
   .CodeBlock_LineContent {
@@ -188,17 +192,7 @@ export const CodeContainer = styled.div`
   }
 `;
 
-export const SortSpacer = styled.div`
-  grid-area: spacer;
-  height: 5px;
-  width: 100%;
-  padding: 0;
-  margin: 0 auto;
-  border-radius: 50px;
-  background: color-mix(in srgb, var(--primary), white 89%);
-`;
-
-export const SortTaskContainer = styled.div`
+export const SingleTaskContainer = styled.div`
   position: relative;
   transition: 1s ease;
   width: auto;
@@ -209,8 +203,6 @@ export const SortTaskContainer = styled.div`
   background: radial-gradient(white, color-mix(in srgb, var(--primary), white 90%) 95%);
 
   box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
-
-  backdrop-filter: blur(20px);
 
   pre {
     width: auto;
@@ -247,14 +239,25 @@ export const BraceSpan = styled.span`
   position: relative;
   bottom: 3px;
   padding-left: 2px;
+  letter-spacing: 0;
   color: white;
 `;
 
-export const SortableArrayContainer = styled.div`
+export const MarkedText = styled.span`
+  background: lightgray;
+  border-radius: 2px;
+  padding: 1px 5px;
+`;
+
+export const MarkedRedText = styled(MarkedText)`
+  color: var(--accent);
+`;
+
+export const ButtonTaskContainer = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 15px;
   display: flex;
   flex-direction: row;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  height: auto;
+  column-gap: 5px;
 `;

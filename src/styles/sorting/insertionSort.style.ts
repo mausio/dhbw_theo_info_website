@@ -2,14 +2,13 @@ import styled from 'styled-components';
 
 export const ChartContainer = styled.div`
   position: relative;
-  height: 250px;
   margin: 7px auto;
 `;
 
 export const BarContainer = styled.div`
   width: 7%;
-  padding: 6px 1.4% 5px 1.4%;
-  margin: 0 0.1%;
+  padding: 6px 1.55% 5px 1.55%;
+  margin: 0;
   position: absolute;
   transition: height 0.3s ease-in-out;
   bottom: 0;
@@ -82,8 +81,9 @@ export const KeyIndexContainer = styled.div`
   height: auto;
   display: flex;
   justify-content: center;
+  align-content: center;
   flex-direction: row;
-  margin: 10px auto 25px auto;
+  margin: 5px auto 20px auto;
   padding: 6px 0;
   column-gap: 2px;
 
@@ -92,74 +92,18 @@ export const KeyIndexContainer = styled.div`
   border-radius: 50px;
 
   p {
-    width: 88%;
+    width: 90%;
     min-height: 20px;
     background: transparent;
-    border-radius: 5px;
-    padding: 2px 7px;
+    border-radius: 8px;
+    padding: 1px 7px;
     margin: 0;
     text-align: center;
+    justify-self: center;
+    align-self: center;
     backdrop-filter: blur(10px) brightness(10) opacity(0.9);
     box-shadow: rgb(0, 0, 0, 0.2) 1px 1px 1px 0px inset;
     border: 0.5px solid black;
     font-weight: normal;
   }
-`;
-
-export const MarkedText = styled.span`
-  background: lightgray;
-  border-radius: 2px;
-  padding: 1px 5px;
-`;
-
-export const MarkedRedText = styled(MarkedText)`
-  color: var(--accent);
-`;
-
-export const SortableContainer = styled.div`
-  width: 370px;
-  height: 65px;
-  padding: 0;
-
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  justify-items: center;
-
-  border-radius: 5px;
-  background: transparent;
-`;
-
-export const IterationTitle = styled.p`
-  font-weight: bold;
-  margin: 0 0 20px 0;
-  padding: 0;
-  color: white;
-`;
-
-export const SingleIterationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: fit-content;
-  position: relative;
-  width: fit-content;
-  padding: 15px 20px;
-  margin: 0 auto;
-
-  border-radius: 10px;
-  box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 3px 0px inset;
-  background: color-mix(in srgb, var(--tertiary), white 20%);
-`;
-
-export const IterationsContainer = styled.div`
-  width: auto;
-  height: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 150px;
-  align-items: center;
-
-  margin: 35px 0 25px 0;
 `;

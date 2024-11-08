@@ -3,8 +3,17 @@ export const generateRandomArrayOfN = (n: number) => {
   for (let i = 0; i < n; i++) {
     let n;
     do {
-      n = Math.floor(Math.random() * 99) + 1;
+      n = Math.floor(Math.random() * 99 + 1);
     } while (array.includes(n));
+    array.push(n);
+  }
+  return array;
+};
+
+export const generateRandomArrayOfNFromTo = (n: number, min: number, max: number) => {
+  const array: number[] = [];
+  for (let i = 0; i < n; i++) {
+    const n = Math.floor(Math.random() * (max - min + 1)) + min;
     array.push(n);
   }
   return array;

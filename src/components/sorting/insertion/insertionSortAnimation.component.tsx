@@ -281,10 +281,9 @@ const InsertionSortAnimationComponent = () => {
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
             disabled={isManual}
-            step={0.2}
-            // marks
-            min={0.2}
-            max={2}
+            step={0.25}
+            min={0.25}
+            max={3}
             sx={{ color: '#39576f' }}
           />
         </SliderPanel>

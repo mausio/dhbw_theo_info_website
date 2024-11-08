@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import InsertionSortPage from './pages/sorting/InsertionSort.page.tsx';
 import MergeSortPage from './pages/sorting/MergeSort.page.tsx';
 import QuickSortPage from './pages/sorting/QuickSort.page.tsx';
+import CountingSortPage from './pages/sorting/CountingSort.page.tsx';
 
 //TODO: uninstall all unused packages
 
@@ -18,6 +19,7 @@ function App() {
         <Route path={APP_ROUTES.sorting.insertion} element={<InsertionSortPage />} />
         <Route path={APP_ROUTES.sorting.merge} element={<MergeSortPage />} />
         <Route path={APP_ROUTES.sorting.quick} element={<QuickSortPage />} />
+        <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
         <Route path={'*'} element={<FourOfourPage />} />
         <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
       </Route>

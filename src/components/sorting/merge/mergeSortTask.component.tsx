@@ -1,11 +1,11 @@
-import { SortTaskContainer } from '../../../styles/general/generic.style.ts';
+import { MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
-import { IterationsContainer, MarkedRedText, MarkedText } from '../../../styles/sorting/insertionSort.style.ts';
 import IterationArrayChildTask from '../insertion/insertionIteration.component.tsx';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { calcArrayTaskContainerHeight, generateRandomArrayOfN } from '../../../utils/number.utils.ts';
 import { wait } from '../../../utils/promise.utils.ts';
+import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
 
 const printArray = (array: number[]) => {
   return array.map((item, index) => (
@@ -78,7 +78,7 @@ const MergeSortTaskOne = () => {
   };
 
   return (
-    <SortTaskContainer>
+    <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
       <h2>
         Task 1 Step-wise <MarkedRedText>A</MarkedRedText> value
@@ -110,7 +110,7 @@ const MergeSortTaskOne = () => {
           </>
         )}
       </IterationsContainer>
-    </SortTaskContainer>
+    </SingleTaskContainer>
   );
 };
 

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { IterationsContainer, MarkedRedText, MarkedText } from '../../../styles/sorting/insertionSort.style.ts';
-import { Button, SortTaskContainer } from '../../../styles/general/generic.style.ts';
+import { Button, MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
 import { calcArrayTaskContainerHeight, generateRandomArrayOfN } from '../../../utils/number.utils.ts';
 import { printArray } from '../../general/print.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
 import QuickSortIteration from './quickSortIteration.component.tsx';
+import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
 
 const QuickSortPartitionTasks = () => {
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
@@ -106,7 +106,7 @@ const QuickSortPartitionTasks = () => {
   }, []);
 
   return (
-    <SortTaskContainer>
+    <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
       <h2>
         Task 1 Step-wise <MarkedRedText>A</MarkedRedText> value of partition
@@ -140,7 +140,7 @@ const QuickSortPartitionTasks = () => {
         ))}
         {/*//TODO: Hier ein Interaktionsfenster erstellen für again, submit*/}
       </IterationsContainer>
-    </SortTaskContainer>
+    </SingleTaskContainer>
   );
 };
 

@@ -1,15 +1,22 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { generateRandomArrayOfN } from '../../../utils/number.utils.ts';
-import { BraceSpan, Button, SortTaskContainer } from '../../../styles/general/generic.style.ts';
+import {
+  BraceSpan,
+  Button,
+  ButtonTaskContainer,
+  MarkedRedText,
+  SingleTaskContainer,
+} from '../../../styles/general/generic.style.ts';
 import QuickSortEmptySpaceRecursion from './quickSortEmptySpacesRecursion.tsx';
 import { partitionStep } from '../../../types/sorting/quick.type.ts';
 import {
+  ButtonIterationContainer,
   IterationTitle,
-  MarkedRedText,
+  RecursionContainer,
   SingleIterationContainer,
   SortableContainer,
-} from '../../../styles/sorting/insertionSort.style.ts';
+} from '../../../styles/general/iteration.style.ts';
 import {
   closestCenter,
   DndContext,
@@ -33,7 +40,7 @@ export type QuickSortSolvedLevel = {
 };
 
 const QuickSortEmptySpacesTask = () => {
-  const initialArrayLength = 4;
+  const initialArrayLength = 10;
   const solvedLevelsArray = useRef<QuickSortSolvedLevel[]>([]);
   const [solvedList, setSolvedList] = useState<QuickSortSolvedLevel[]>([]);
 
@@ -211,16 +218,16 @@ const QuickSortEmptySpacesTask = () => {
   };
 
   return (
-    <SortTaskContainer>
+    <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
       <h2>Task 2 Quicksort Insights</h2>
       <p>
         Follow the template to describe the Quicksort process. The expected values are the partition results in each{' '}
         <MarkedRedText>QuickSort</MarkedRedText> function call.
       </p>
-      <SingleIterationContainer style={{ margin: '25px 10px' }}>
+      <SingleIterationContainer style={{ margin: '30px 0' }}>
         <IterationTitle>Input Array:</IterationTitle>
-        <SortableContainer style={{ width: 500 }}>
+        <SortableContainer>
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -238,40 +245,32 @@ const QuickSortEmptySpacesTask = () => {
             <BraceSpan>]</BraceSpan>
           </DndContext>
         </SortableContainer>
-        <Button
-          onClick={handleWorkingArrayReset}
-          disabled={!isProvideHelp}
-          style={{ position: 'absolute', top: '10px', right: '10px' }}
-        >
-          Reset
-        </Button>
+        <ButtonIterationContainer>
+          <Button onClick={handleWorkingArrayReset} disabled={!isProvideHelp}>
+            Reset
+          </Button>
+        </ButtonIterationContainer>
       </SingleIterationContainer>
-      <div style={{ margin: '25px 0', transition: '1s ease' }}>
+      <RecursionContainer>
         {triggerRerender && (
           <QuickSortEmptySpaceRecursion
             setSolvedList={setSolvedList}
             solvedList={solvedList}
             partitions={partitionSteps}
-            level={0}
             showPivots={isShowingPivots}
             solvedLevelsArray={solvedLevelsArray}
           />
         )}
-      </div>
-      <div
-        style={{ position: 'absolute', right: 15, top: 15, display: 'flex', flexDirection: 'row', columnGap: '5px' }}
-      >
-        {/*<Button onClick={handleNewArray} disabled={isSolved}>*/}
-        {/*  New Array*/}
-        {/*</Button>*/}
+      </RecursionContainer>
+      <ButtonTaskContainer>
         <Button onClick={toggleShowPivot} disabled={isSolved}>
           Help: Pivots
         </Button>
         <Button onClick={handleSubmit} disabled={!isSolved}>
           Submit
         </Button>
-      </div>
-    </SortTaskContainer>
+      </ButtonTaskContainer>
+    </SingleTaskContainer>
   );
 };
 

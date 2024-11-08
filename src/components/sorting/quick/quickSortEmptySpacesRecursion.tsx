@@ -26,23 +26,16 @@ const removeZerosFromArray = (a: number[]) => {
   return a;
 };
 
-const QuickSortEmptySpaceRecursion = ({
-  partitions,
-  level,
-  showPivots,
-  setSolvedList,
-  solvedList,
-  solvedLevelsArray,
-}) => {
+const QuickSortEmptySpaceRecursion = ({ partitions, showPivots, setSolvedList, solvedList, solvedLevelsArray }) => {
   const [tempStore, setTempStore] = useState<string>('');
   const [currentTempType, setCurrentTempType] = useState<string>('');
   const [isWrongAnswer, setIsWrongAnswer] = useState<string>('');
   const [isCorrectAnswer, setCorrectArray] = useState<string>('');
   const [isRowCorrect, setIsRowCorrect] = useState<boolean>(false);
 
-  const leftID = `level-${level}-left`;
-  const pivotID = `level-${level}-pivot`;
-  const rightID = `level-${level}-right`;
+  const leftID = `level-${Math.random()}-left`;
+  const pivotID = `level-${Math.random()}-pivot`;
+  const rightID = `level-${Math.random()}-right`;
 
   const leftArray = useRef<number[]>([]);
   const pivotArray = useRef<number[]>([]);
@@ -150,7 +143,7 @@ const QuickSortEmptySpaceRecursion = ({
   if (!partitions || partitions.length === 0) return <></>;
 
   return (
-    <DivideAndConquerContainer>
+    <DivideAndConquerContainer key={`DivideAndConquer${Math.random()}`}>
       {partitions.map((part) => {
         const leftSpacer = ((part.rightPartitions[0] && part.rightPartitions[0].leftPartitions) ||
           (part.rightPartitions[0] && part.rightPartitions[0].rightPartitions)) != undefined && <EmptySpacer />;
@@ -158,7 +151,7 @@ const QuickSortEmptySpaceRecursion = ({
           (part.leftPartitions[0] && part.leftPartitions[0].rightPartitions)) != undefined && <EmptySpacer />;
 
         return (
-          <Row level={level} style={{ position: 'relative' }}>
+          <Row key={`row-${Math.random()}`} style={{ position: 'relative' }}>
             {isRowCorrect && (
               <CheckCircleTwoToneIcon
                 style={{
@@ -201,7 +194,6 @@ const QuickSortEmptySpaceRecursion = ({
                 <QuickSortEmptySpaceRecursion
                   showPivots={showPivots}
                   partitions={part.leftPartitions}
-                  level={level + 1}
                   setSolvedList={setSolvedList}
                   solvedList={solvedList}
                   solvedLevelsArray={solvedLevelsArray}
@@ -267,7 +259,6 @@ const QuickSortEmptySpaceRecursion = ({
                 <QuickSortEmptySpaceRecursion
                   showPivots={showPivots}
                   partitions={part.rightPartitions}
-                  level={level + 1}
                   setSolvedList={setSolvedList}
                   solvedList={solvedList}
                   solvedLevelsArray={solvedLevelsArray}

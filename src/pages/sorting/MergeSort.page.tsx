@@ -10,11 +10,9 @@ const MergeSortPage = () => {
     <GenericMainContainer>
       <h1>Mergesort</h1>
       <GenericSortGrid>
-        <MergeSortAnimation />
+        {/*<MergeSortAnimation />*/}
         <CodeBlockElement code={mergeSortAlgo} isFaderOn={true} />
-        <TasksContainer>
-          <MergeSortTaskOne />
-        </TasksContainer>
+        <TasksContainer>{/*<MergeSortTaskOne />*/}</TasksContainer>
       </GenericSortGrid>
     </GenericMainContainer>
   );
