@@ -33,11 +33,11 @@ const CountingSortDeterminationTask = () => {
   const [countingBarsSolution, setCountingBarsSolution] = useState<number[]>([]);
   const [countingBars, setCountingBars] = useState<number[]>([]);
   const [sortedBars, setSortedBars] = useState<number[]>([]);
-  const [sortingBars, setSortingBars] = useState<number[]>([]);
+  const [sortableBars, setSortableBars] = useState<number[]>([]);
   const [unsortedBars, setUnsortedBars] = useState<number[]>([...initialData]);
   const [isSolved, setIsSolved] = useState<boolean>(false);
-  const [isAccumulatingBarsSolved, setIsAccumulatingBarsSolved] = useState<boolean>(true);
-  const [isCountingBarsSolved, setIsCountingBarsSolved] = useState<boolean>(true);
+  const [isAccumulatingBarsSolved, setIsAccumulatingBarsSolved] = useState<boolean>(false);
+  const [isCountingBarsSolved, setIsCountingBarsSolved] = useState<boolean>(false);
   const [isRunningConfetti, setIsRunningConfetti] = useState<boolean>(false);
   const [isRecycling, setIsRecycling] = useState<boolean>(false);
   const [selectedBar, setSelectedBar] = useState<string>('');
@@ -45,21 +45,31 @@ const CountingSortDeterminationTask = () => {
   const [correctAnswer, setCorrectAnswer] = useState<string>('');
   const [placeHolder, setPlaceHolder] = useState<string | number>(null);
   const [barsIterationSolution, setBarsIterationSolution] = useState<CountingIteration[]>([]);
+  const [iterationNr, setIterationNr] = useState<number>(0);
+  const [markedCount, setMarkedCount] = useState<number>(null);
+  const [markedUnsorted, setMarkedUnsorted] = useState<number>(null);
+  const [markedSortable, setMarkedSortable] = useState<number>(null);
+
+  const handleConfetti = async () => {
+    setIsRecycling(true);
+    setIsRunningConfetti(true);
+    await wait(3000);
+    setIsRecycling(false);
+    await wait(10000);
+    setIsRunningConfetti(false);
+  };
 
   function countingSort(inputArr) {
     if (inputArr.length === 0) return unsortedArray;
 
     const unsortedArray = [...inputArr];
 
-    // Step 1: Find the maximum value in the array
     const maxValue = Math.max(...unsortedArray);
-    const minValue = Math.min(...unsortedArray);
 
-    // Step 2: Initialize the arrays with zeros
     const countArray = new Array(maxValue).fill(0);
     const sortedArray = new Array(unsortedArray.length).fill(0);
 
-    // Step 3: Count the occurrences of each element
+    // 1
     for (let i = 0; i < unsortedArray.length; i++) {
       countArray[unsortedArray[i] - 1]++;
     }
@@ -68,8 +78,8 @@ const CountingSortDeterminationTask = () => {
       setCountingBars(Array(countArray.length).fill(0));
     }
 
-    // Step 4: Accumulate counts
-    for (let i = 1; i < countArray.length; i++) {
+    // 2
+    for (let i = 1; i <= maxValue - 1; i++) {
       countArray[i] += countArray[i - 1];
     }
     if (accumulatingBarsSolution.length <= 0) {
@@ -79,33 +89,35 @@ const CountingSortDeterminationTask = () => {
 
     const iterations: CountingIteration[] = [];
 
-    // Step 5: Build the sorted array
+    // 3
     for (let i = unsortedArray.length - 1; i >= 0; i--) {
       const currentValue = unsortedArray[i];
-      const position = countArray[currentValue - minValue] - 1;
+
+      const position = countArray[currentValue - 1] - 1;
+
       sortedArray[position] = currentValue;
-      countArray[currentValue - minValue]--;
+
+      countArray[currentValue - 1]--;
 
       unsortedArray[i] = 0;
 
       iterations.push({
-        currentCountingArrayIndex: currentValue,
+        currentCountingArrayIndex: currentValue - 1,
         currentSortableArrayIndex: position,
         currentUnsortedArrayIndex: i,
         countingArray: [...countArray],
         sortableArray: [...sortedArray],
         unsortedArray: [...unsortedArray],
       });
-      console.log(currentValue, position, i, countArray, sortedArray, unsortedArray);
-    }
-    if (sortedBars.length <= 0) {
-      setSortedBars(sortedArray);
-      setSortingBars(Array(sortedArray.length).fill(0));
-      setBarsIterationSolution([...iterations]);
     }
 
     console.log(iterations);
-    return sortedArray;
+
+    if (sortedBars.length <= 0) {
+      setSortedBars(sortedArray);
+      setSortableBars(Array(sortedArray.length).fill(0));
+      setBarsIterationSolution([...iterations]);
+    }
   }
 
   useEffect(() => {
@@ -117,25 +129,27 @@ const CountingSortDeterminationTask = () => {
 
     if (!newArr) return;
 
-    // checkBar(newArr[index], sortedBars[index], correctId, wrongId);
+    setUnsortedBars(newArr);
 
     setSelectedBar(null);
     setPlaceHolder(null);
 
-    setUnsortedBars(newArr);
+    checkIterationSolution(accumulatingBars, sortableBars, newArr);
+    checkBar(newArr[index], barsIterationSolution[iterationNr].unsortedArray[index], correctId, wrongId);
   };
 
-  const handleSortingBarsUpdate = (array, index, event, correctId, wrongId) => {
+  const handleSortableBarsUpdate = (array, index, event, correctId, wrongId) => {
     const newArr = performBarUpdate(array, index, event);
 
     if (!newArr) return;
 
-    // checkBar(newArr[index], [index], correctId, wrongId);
-
     setSelectedBar(null);
     setPlaceHolder(null);
 
-    setSortingBars(newArr);
+    setSortableBars(newArr);
+
+    checkIterationSolution(accumulatingBars, newArr, unsortedBars);
+    checkBar(newArr[index], barsIterationSolution[iterationNr].sortableArray[index], correctId, wrongId);
   };
 
   const handleCountingBarsUpdate = (array, index, event, correctId, wrongId) => {
@@ -143,32 +157,38 @@ const CountingSortDeterminationTask = () => {
 
     if (!newArr) return;
 
-    checkBar(newArr[index], countingBarsSolution[index], correctId, wrongId);
-
     setSelectedBar(null);
     setPlaceHolder(null);
 
+    checkBar(newArr[index], countingBarsSolution[index], correctId, wrongId);
     setCountingBars(newArr);
 
     if (!isCountingBarsSolved) {
-      setIsCountingBarsSolved(checkBars(newArr, countingBarsSolution));
+      setIsCountingBarsSolved(checkBarsArray(newArr, countingBarsSolution));
     }
   };
 
-  const handleAccumulatingBarsUpdate = (array, index, event, correctId, wrongId) => {
+  const handleAccumulatingBarsUpdate = async (array, index, event, correctId, wrongId) => {
     const newArr = performBarUpdate(array, index, event);
 
     if (!newArr) return;
-
-    checkBar(newArr[index], accumulatingBarsSolution[index], correctId, wrongId);
 
     setSelectedBar(null);
     setPlaceHolder(null);
 
     setAccumulatingBars(newArr);
 
+    if (isAccumulatingBarsSolved) {
+      checkIterationSolution(newArr, sortableBars, unsortedBars);
+      checkBar(newArr[index], barsIterationSolution[iterationNr].countingArray[index], correctId, wrongId);
+    }
+
     if (!isAccumulatingBarsSolved) {
-      setIsAccumulatingBarsSolved(checkBars(newArr, countingBarsSolution));
+      checkBar(newArr[index], accumulatingBarsSolution[index], correctId, wrongId);
+      setIsAccumulatingBarsSolved(checkBarsArray(newArr, accumulatingBarsSolution));
+      if (checkBarsArray(newArr, accumulatingBarsSolution)) {
+        setMarkedElements();
+      }
     }
   };
 
@@ -176,7 +196,7 @@ const CountingSortDeterminationTask = () => {
     if (!(event.type == 'blur' || event.key == 'Enter' || event.type == 'abort')) return null;
     const newValue = sanitizeAndParse(event.target.value);
 
-    if (0 <= newValue && newValue <= initialData.length + 1) {
+    if (0 <= newValue && newValue <= 20) {
       array[index] = newValue;
     }
     return array;
@@ -197,10 +217,9 @@ const CountingSortDeterminationTask = () => {
     return null;
   }
 
-  const checkBars = (array, expectedArray) => JSON.stringify(array) == JSON.stringify(expectedArray);
+  const checkBarsArray = (array, expectedArray) => JSON.stringify(array) == JSON.stringify(expectedArray);
 
   async function checkBar(a, b, correctId, wrongId) {
-    console.log(a, b);
     if (JSON.stringify(a) == JSON.stringify(b)) {
       setCorrectAnswer(correctId);
     } else {
@@ -209,6 +228,52 @@ const CountingSortDeterminationTask = () => {
     await wait(2000);
     setCorrectAnswer('');
     setWrongAnswer('');
+
+    return JSON.stringify(a) == JSON.stringify(b);
+  }
+
+  function setMarkedElements(num?) {
+    console.log('marking at iteration nr', num, iterationNr);
+    if ((num ? num : iterationNr) < barsIterationSolution.length) {
+      setMarkedCount(barsIterationSolution[num ? num : iterationNr].currentCountingArrayIndex);
+      setMarkedSortable(barsIterationSolution[num ? num : iterationNr].currentSortableArrayIndex);
+      setMarkedUnsorted(barsIterationSolution[num ? num : iterationNr].currentUnsortedArrayIndex);
+    } else {
+      setMarkedCount(null);
+      setMarkedSortable(null);
+      setMarkedUnsorted(null);
+    }
+  }
+
+  function checkIterationSolution(accumulatingBars, sortableBars, unsortedBars) {
+    if (handleCheck(sortableBars, sortedBars)) {
+      return;
+    }
+
+    if (
+      checkBarsArray(accumulatingBars, barsIterationSolution[iterationNr].countingArray) &&
+      checkBarsArray(sortableBars, barsIterationSolution[iterationNr].sortableArray) &&
+      checkBarsArray(unsortedBars, barsIterationSolution[iterationNr].unsortedArray)
+    ) {
+      setMarkedElements(iterationNr + 1);
+      setIterationNr(iterationNr + 1);
+      return;
+    }
+
+    setMarkedElements();
+  }
+
+  function handleCheck(sortableBars, expectedSolution) {
+    if (JSON.stringify(sortableBars) == JSON.stringify(expectedSolution)) {
+      console.log('done!');
+      setIsSolved(true);
+      setCountingBars(Array(countingBars.length).fill(0));
+      setAccumulatingBars(Array(accumulatingBars.length).fill(0));
+      handleConfetti();
+      return true;
+    }
+
+    return false;
   }
 
   return (
@@ -225,7 +290,9 @@ const CountingSortDeterminationTask = () => {
       <CountingSortEntriesContainer>
         <FirstStepContainer>
           <SingleDiagram>
-            <DiagramName>Counting Array</DiagramName>
+            <DiagramName>
+              <MarkedRedText>B</MarkedRedText> Array
+            </DiagramName>
             <BarChart barsHeight={10} height={120} bars={countingBars} doNotShowNumber={true} fullLength={true} />
             <DiagramIterationWrapper>
               {countingBars.map((bar, index) => {
@@ -234,7 +301,7 @@ const CountingSortDeterminationTask = () => {
                 const correctId = `correct-counting-bar-${index}`;
                 return (
                   <DiagramInput
-                    disabled={isCountingBarsSolved}
+                    disabled={isCountingBarsSolved || isSolved}
                     value={selectedBar === id ? placeHolder : bar}
                     onAbort={(e) => handleCountingBarsUpdate([...countingBars], index, e, correctId, wrongId)}
                     onBlur={(e) => handleCountingBarsUpdate([...countingBars], index, e, correctId, wrongId)}
@@ -263,9 +330,11 @@ const CountingSortDeterminationTask = () => {
           </SingleDiagram>
           {isCountingBarsSolved && (
             <>
-              <KeyboardDoubleArrowRightIcon style={{ fontSize: '1.75rem' }} />
+              <KeyboardDoubleArrowRightIcon style={{ fontSize: '1.75rem', color: 'gray' }} />
               <SingleDiagram>
-                <DiagramName>Accumulating Array</DiagramName>
+                <DiagramName>
+                  <MarkedRedText>B'</MarkedRedText> Array
+                </DiagramName>
                 <BarChart
                   barsHeight={10}
                   height={120}
@@ -300,6 +369,7 @@ const CountingSortDeterminationTask = () => {
                         style={{
                           width: `${70 / countingBars.length}%`,
                           left: `${(index / countingBars.length) * 100}%`,
+                          borderColor: markedCount == index && 'indianred',
                           animation:
                             wrongAnswer == wrongId
                               ? 'wrong 2s ease-in-out'
@@ -311,7 +381,7 @@ const CountingSortDeterminationTask = () => {
                     );
                   })}
                 </DiagramIterationWrapper>
-                <IndexChart initialArray={accumulatingBars} fullLength={true} />
+                <IndexChart pivotIndex={markedCount} initialArray={accumulatingBars} fullLength={true} />
               </SingleDiagram>
             </>
           )}
@@ -319,19 +389,22 @@ const CountingSortDeterminationTask = () => {
         {isCountingBarsSolved && isAccumulatingBarsSolved && (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <SingleDiagram style={{ width: '100%' }}>
-              <DiagramName>Sortable Array</DiagramName>
-              <BarChart barsHeight={25} height={130} bars={sortingBars} doNotShowNumber={true} fullLength={true} />
+              <DiagramName>
+                <MarkedRedText>C</MarkedRedText> Array
+              </DiagramName>
+              <BarChart barsHeight={25} height={130} bars={sortableBars} doNotShowNumber={true} fullLength={true} />
               <DiagramIterationWrapper>
-                {sortingBars.map((bar, index) => {
+                {sortableBars.map((bar, index) => {
                   const id = `sorting-bar-${index}`;
                   const wrongId = `wrong-sorting-bar-${index}`;
                   const correctId = `correct-sorting-bar-${index}`;
                   return (
                     <DiagramInput
+                      disabled={isSolved}
                       value={selectedBar === id ? placeHolder : bar}
-                      onAbort={(e) => handleSortingBarsUpdate([...sortingBars], index, e, correctId, wrongId)}
-                      onBlur={(e) => handleSortingBarsUpdate([...sortingBars], index, e, correctId, wrongId)}
-                      onKeyDown={(e) => handleSortingBarsUpdate([...sortingBars], index, e, correctId, wrongId)}
+                      onAbort={(e) => handleSortableBarsUpdate([...sortableBars], index, e, correctId, wrongId)}
+                      onBlur={(e) => handleSortableBarsUpdate([...sortableBars], index, e, correctId, wrongId)}
+                      onKeyDown={(e) => handleSortableBarsUpdate([...sortableBars], index, e, correctId, wrongId)}
                       onChange={(e) => {
                         if (selectedBar !== id) {
                           setSelectedBar(id);
@@ -339,8 +412,9 @@ const CountingSortDeterminationTask = () => {
                         setPlaceHolder(e.target.value);
                       }}
                       style={{
-                        width: `${70 / sortingBars.length}%`,
-                        left: `${(index / sortingBars.length) * 100}%`,
+                        width: `${70 / sortableBars.length}%`,
+                        left: `${(index / sortableBars.length) * 100}%`,
+                        borderColor: markedSortable == index && 'indianred',
                         animation:
                           wrongAnswer == wrongId
                             ? 'wrong 2s ease-in-out'
@@ -352,10 +426,12 @@ const CountingSortDeterminationTask = () => {
                   );
                 })}
               </DiagramIterationWrapper>
-              <IndexChart initialArray={sortingBars} fullLength={true} />
+              <IndexChart pivotIndex={markedSortable} initialArray={sortableBars} fullLength={true} />
             </SingleDiagram>
             <SingleDiagram style={{ width: '100%' }}>
-              <DiagramName>Unsorted Array</DiagramName>
+              <DiagramName>
+                <MarkedRedText>A</MarkedRedText> Array
+              </DiagramName>
               <BarChart barsHeight={25} height={130} bars={unsortedBars} doNotShowNumber={true} fullLength={true} />
               <DiagramIterationWrapper>
                 {unsortedBars.map((bar, index) => {
@@ -364,6 +440,7 @@ const CountingSortDeterminationTask = () => {
                   const correctId = `correct-unsorted-bar-${index}`;
                   return (
                     <DiagramInput
+                      disabled={isSolved}
                       value={selectedBar === id ? placeHolder : bar}
                       onAbort={(e) => handleUnsortedBarsUpdate([...unsortedBars], index, e, correctId, wrongId)}
                       onBlur={(e) => handleUnsortedBarsUpdate([...unsortedBars], index, e, correctId, wrongId)}
@@ -377,6 +454,7 @@ const CountingSortDeterminationTask = () => {
                       style={{
                         width: `${70 / unsortedBars.length}%`,
                         left: `${(index / unsortedBars.length) * 100}%`,
+                        borderColor: markedUnsorted == index && 'indianred',
                         animation:
                           wrongAnswer == wrongId
                             ? 'wrong 2s ease-in-out'
@@ -388,7 +466,7 @@ const CountingSortDeterminationTask = () => {
                   );
                 })}
               </DiagramIterationWrapper>
-              <IndexChart initialArray={unsortedBars} fullLength={true} />
+              <IndexChart pivotIndex={markedUnsorted} initialArray={unsortedBars} fullLength={true} />
             </SingleDiagram>
           </div>
         )}

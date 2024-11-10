@@ -9,7 +9,15 @@ import MergeSortPage from './pages/sorting/MergeSort.page.tsx';
 import QuickSortPage from './pages/sorting/QuickSort.page.tsx';
 import CountingSortPage from './pages/sorting/CountingSort.page.tsx';
 
+// Eine TODO-Liste
 //TODO: uninstall all unused packages
+//TODO: Translation of whole website
+//TODO: Responsive Design
+//TODO: Check ALL Sorting Algos for bugs!
+
+//TODO: Li-Deal?
+// Sorting, Translation, ResponsiveNess, Documentation for following Student, GAMIFICATION, Predefined places/functions for BackEnd Connections
+// => Aim: No worsening of grade
 
 function App() {
   return (

@@ -84,7 +84,6 @@ export const FirstStepContainer = styled.div`
   align-content: center;
   align-items: center;
   margin: 25px 0;
-  overflow: hidden;
 `;
 
 export const DiagramName = styled.p`

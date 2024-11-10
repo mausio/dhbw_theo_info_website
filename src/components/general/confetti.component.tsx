@@ -6,7 +6,7 @@ const ConfettiComponent = ({ run, recycle }) => {
     <Confetti
       recycle={recycle}
       height={window.innerHeight}
-      numberOfPieces={175}
+      numberOfPieces={200}
       colors={[
         '#e2001a',
         '#80deea',

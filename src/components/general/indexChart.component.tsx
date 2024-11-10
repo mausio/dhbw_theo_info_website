@@ -24,7 +24,7 @@ const IndexChart = ({
           style={{
             width: fullLength && `${70 / initialArray.length}%`,
             left: fullLength ? `${(index / initialArray.length) * 100}%` : `${index * 10}%`,
-            color: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : isPivot ? 'palevioletred' : 'gray',
+            color: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : isPivot ? 'indianred' : 'gray',
             background: isBetweenStartAndEnd ? 'lightgray' : 'transparent',
             borderRadius: 0,
             borderTopLeftRadius: isStart ? 5 : 0,

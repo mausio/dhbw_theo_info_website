@@ -81,7 +81,7 @@ const CountingSortAnimation = () => {
 
     const countArray = Array(maxValue - minValue + 1).fill(0);
 
-    setInfoText(`Next: counting phase`);
+    setInfoText(`Step 1: counting phase`);
     if (!stepRequestRef.current || pauseRequestRef.current) {
       await performPause();
     }
@@ -89,6 +89,7 @@ const CountingSortAnimation = () => {
       await wait(delay / speedRequestRef.current);
     }
 
+    // 1
     for (let i = 0; i < bars.length; i++) {
       setInfoText(`Accessing value A[${i + 1}] = ${bars[i]}`);
       setComparingIndex(i);
@@ -129,15 +130,15 @@ const CountingSortAnimation = () => {
     setComparingIndex(null);
     setSelectedIndex(null);
 
-    setInfoText(`Next: summing up the totals`);
+    setInfoText(`Step 2: summing up the totals`);
     if (!stepRequestRef.current || pauseRequestRef.current) {
       await performPause();
     }
     if (!isManual) {
       await wait(delay / speedRequestRef.current);
     }
-
-    for (let i = 1; i <= maxValue - minValue; i++) {
+    //2
+    for (let i = 1; i <= countArray.length - 1; i++) {
       setInfoText(`B[${i + 1}] = B[${i - 1 + 1}] + B[${i + 1}] ...`);
       setSelectedIndex(i - 1);
       setPivotIndex(i);
@@ -169,7 +170,7 @@ const CountingSortAnimation = () => {
     setSelectedIndex(null);
     setPivotIndex(null);
 
-    setInfoText(`Next: placing elements in sorted array`);
+    setInfoText(`Step 3: placing elements in sorted array`);
     if (!stepRequestRef.current || pauseRequestRef.current) {
       await performPause();
     }
@@ -182,13 +183,13 @@ const CountingSortAnimation = () => {
 
     const newSortedBars = [...sortedBars];
     const newBars = [...bars];
-
+    // 3
     for (let i = bars.length - 1; i >= 0; i--) {
       const currentValue = bars[i];
       const position = countArray[currentValue - minValue] - 1;
 
-      setPivotIndex(currentValue - minValue);
-      setInfoText(`Selecting counting element B[${currentValue - minValue}]`);
+      setComparingIndex(i);
+      setInfoText(`Selecting current element of unsorted A[${i + 1}]`);
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -196,8 +197,8 @@ const CountingSortAnimation = () => {
         await wait(delay / speedRequestRef.current);
       }
 
-      setComparingIndex(i);
-      setInfoText(`Selecting current element of unsorted A[${i + 1}]`);
+      setPivotIndex(currentValue - minValue);
+      setInfoText(`Selecting counting element B[${currentValue - minValue + 1}]`);
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -236,8 +237,8 @@ const CountingSortAnimation = () => {
         await wait(delay / speedRequestRef.current);
       }
 
-      setComparingIndex(null);
       setSortIndex(null);
+      setPivotIndex(null);
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -397,8 +398,8 @@ const CountingSortAnimation = () => {
             onChange={handleSliderChange}
             disabled={isManual}
             step={0.25}
-            min={0.25}
-            max={3}
+            min={0.5}
+            max={4}
             sx={{ color: '#39576f' }}
           />
         </SliderPanel>
