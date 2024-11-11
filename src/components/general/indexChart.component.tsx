@@ -27,10 +27,11 @@ const IndexChart = ({
             color: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : isPivot ? 'indianred' : 'gray',
             background: isBetweenStartAndEnd ? 'lightgray' : 'transparent',
             borderRadius: 0,
-            borderTopLeftRadius: isStart ? 5 : 0,
-            borderBottomLeftRadius: isStart ? 5 : 0,
-            borderTopRightRadius: isEnd ? 5 : 0,
-            borderBottomRightRadius: isEnd ? 5 : 0,
+            borderTopLeftRadius: isStart ? 6 : 0,
+            borderBottomLeftRadius: isStart ? 6 : 0,
+            borderTopRightRadius: isEnd ? 6 : 0,
+            borderBottomRightRadius: isEnd ? 6 : 0,
+            fontWeight: isPivot || isSelected || isComparing ? 'bolder' : 'normal',
           }}
           key={index}
         >

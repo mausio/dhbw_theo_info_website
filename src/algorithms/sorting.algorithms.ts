@@ -1,3 +1,28 @@
+export const radixSortAlgo = `
+RADIX-SORT(𝐴, 𝑑) {
+for (𝑖 = 1 𝒕𝒐 𝑑) {
+    use a stable sort to sort array 𝐴 on digit 𝑖
+  }
+}
+`;
+
+export const bucketSortAlgo = `
+function BUCKET-SORT(A,n){
+  let i = 0 to n-1
+      make B[i] an empty list
+      
+  for i = 1 to n
+      insert A[i] into list B[[n*A[i]]
+  
+  for i = 0 to n-1
+      sort list B[i] with insertion sort
+      
+  concatenate the lists B[0], B[1], ...
+  ..., B[n-1] together in order
+  
+  return the concatenated list 
+`;
+
 export const countingSortAlgo = `
 function CountingSort(A, B, k) {
   let C[0..k] be a new array

@@ -9,6 +9,7 @@ export const BarChartDivider = styled.div`
 export const CountingSortEntriesContainer = styled.div`
   display: flex;
   flex-direction: column;
+  row-gap: 25px;
 
   margin: 50px;
 `;
@@ -20,7 +21,7 @@ export const DiagramInput = styled.input`
   text-align: center;
   padding: 4px 0 4px 0;
   border-radius: 5px;
-  border: 2px dashed gray;
+  border: 2px dashed darkgray;
 
   @keyframes correct {
     0% {
@@ -60,11 +61,16 @@ export const DiagramInput = styled.input`
 
   &:disabled {
     border: darkgray dashed 2px !important;
+    filter: opacity(0.8);
   }
 `;
 
-export const SingleDiagram = styled.div`
+export const SingleDiagramContainer = styled.div`
   width: 40%;
+  margin: 0 0 0 10px;
+
+  //box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 5px 0px inset;
+  //background: white;
 `;
 
 export const DiagramIterationWrapper = styled.div`
@@ -83,7 +89,14 @@ export const FirstStepContainer = styled.div`
   justify-content: space-between;
   align-content: center;
   align-items: center;
-  margin: 25px 0;
+`;
+
+export const SecondStepContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
 `;
 
 export const DiagramName = styled.p`

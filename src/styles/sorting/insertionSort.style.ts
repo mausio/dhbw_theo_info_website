@@ -7,7 +7,7 @@ export const ChartContainer = styled.div`
 
 export const BarContainer = styled.div`
   width: 7%;
-  padding: 6px 1.55% 5px 1.55%;
+  padding: 5px 1.55% 4px 1.55%;
   margin: 0;
   position: absolute;
   transition: height 0.3s ease-in-out;

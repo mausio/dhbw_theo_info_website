@@ -10,7 +10,8 @@ import {
   DiagramIterationWrapper,
   DiagramName,
   FirstStepContainer,
-  SingleDiagram,
+  SecondStepContainer,
+  SingleDiagramContainer,
 } from '../../../styles/sorting/countingSort.style.ts';
 import BarChart from '../../general/barChart.component.tsx';
 import IndexChart from '../../general/indexChart.component.tsx';
@@ -27,7 +28,8 @@ export type CountingIteration = {
 };
 
 const CountingSortDeterminationTask = () => {
-  const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(10, 1, 5));
+  const n = 10;
+  const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(n, 1, 5));
   const [accumulatingBarsSolution, setAccumulatingBarsSolution] = useState<number[]>([]);
   const [accumulatingBars, setAccumulatingBars] = useState<number[]>([]);
   const [countingBarsSolution, setCountingBarsSolution] = useState<number[]>([]);
@@ -196,7 +198,7 @@ const CountingSortDeterminationTask = () => {
     if (!(event.type == 'blur' || event.key == 'Enter' || event.type == 'abort')) return null;
     const newValue = sanitizeAndParse(event.target.value);
 
-    if (0 <= newValue && newValue <= 20) {
+    if (0 <= newValue && newValue <= n + 1) {
       array[index] = newValue;
     }
     return array;
@@ -289,7 +291,7 @@ const CountingSortDeterminationTask = () => {
       </p>
       <CountingSortEntriesContainer>
         <FirstStepContainer>
-          <SingleDiagram>
+          <SingleDiagramContainer>
             <DiagramName>
               <MarkedRedText>B</MarkedRedText> Array
             </DiagramName>
@@ -327,15 +329,16 @@ const CountingSortDeterminationTask = () => {
               })}
             </DiagramIterationWrapper>
             <IndexChart initialArray={countingBars} fullLength={true} />
-          </SingleDiagram>
+          </SingleDiagramContainer>
           {isCountingBarsSolved && (
             <>
               <KeyboardDoubleArrowRightIcon style={{ fontSize: '1.75rem', color: 'gray' }} />
-              <SingleDiagram>
+              <SingleDiagramContainer>
                 <DiagramName>
                   <MarkedRedText>B'</MarkedRedText> Array
                 </DiagramName>
                 <BarChart
+                  pivotIndex={markedCount}
                   barsHeight={10}
                   height={120}
                   bars={accumulatingBars}
@@ -382,17 +385,24 @@ const CountingSortDeterminationTask = () => {
                   })}
                 </DiagramIterationWrapper>
                 <IndexChart pivotIndex={markedCount} initialArray={accumulatingBars} fullLength={true} />
-              </SingleDiagram>
+              </SingleDiagramContainer>
             </>
           )}
         </FirstStepContainer>
         {isCountingBarsSolved && isAccumulatingBarsSolved && (
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <SingleDiagram style={{ width: '100%' }}>
+          <SecondStepContainer>
+            <SingleDiagramContainer style={{ width: '100%' }}>
               <DiagramName>
                 <MarkedRedText>C</MarkedRedText> Array
               </DiagramName>
-              <BarChart barsHeight={25} height={130} bars={sortableBars} doNotShowNumber={true} fullLength={true} />
+              <BarChart
+                selectedIndex={markedSortable}
+                barsHeight={25}
+                height={130}
+                bars={sortableBars}
+                doNotShowNumber={true}
+                fullLength={true}
+              />
               <DiagramIterationWrapper>
                 {sortableBars.map((bar, index) => {
                   const id = `sorting-bar-${index}`;
@@ -414,7 +424,7 @@ const CountingSortDeterminationTask = () => {
                       style={{
                         width: `${70 / sortableBars.length}%`,
                         left: `${(index / sortableBars.length) * 100}%`,
-                        borderColor: markedSortable == index && 'indianred',
+                        borderColor: markedSortable == index && 'lightslategray',
                         animation:
                           wrongAnswer == wrongId
                             ? 'wrong 2s ease-in-out'
@@ -426,13 +436,20 @@ const CountingSortDeterminationTask = () => {
                   );
                 })}
               </DiagramIterationWrapper>
-              <IndexChart pivotIndex={markedSortable} initialArray={sortableBars} fullLength={true} />
-            </SingleDiagram>
-            <SingleDiagram style={{ width: '100%' }}>
+              <IndexChart selectedIndex={markedSortable} initialArray={sortableBars} fullLength={true} />
+            </SingleDiagramContainer>
+            <SingleDiagramContainer style={{ width: '100%' }}>
               <DiagramName>
                 <MarkedRedText>A</MarkedRedText> Array
               </DiagramName>
-              <BarChart barsHeight={25} height={130} bars={unsortedBars} doNotShowNumber={true} fullLength={true} />
+              <BarChart
+                comparingIndex={markedUnsorted}
+                barsHeight={25}
+                height={130}
+                bars={unsortedBars}
+                doNotShowNumber={true}
+                fullLength={true}
+              />
               <DiagramIterationWrapper>
                 {unsortedBars.map((bar, index) => {
                   const id = `sorted-bar-${index}`;
@@ -454,7 +471,7 @@ const CountingSortDeterminationTask = () => {
                       style={{
                         width: `${70 / unsortedBars.length}%`,
                         left: `${(index / unsortedBars.length) * 100}%`,
-                        borderColor: markedUnsorted == index && 'indianred',
+                        borderColor: markedUnsorted == index && 'lightslategray',
                         animation:
                           wrongAnswer == wrongId
                             ? 'wrong 2s ease-in-out'
@@ -466,9 +483,9 @@ const CountingSortDeterminationTask = () => {
                   );
                 })}
               </DiagramIterationWrapper>
-              <IndexChart pivotIndex={markedUnsorted} initialArray={unsortedBars} fullLength={true} />
-            </SingleDiagram>
-          </div>
+              <IndexChart selectedIndex={markedUnsorted} initialArray={unsortedBars} fullLength={true} />
+            </SingleDiagramContainer>
+          </SecondStepContainer>
         )}
       </CountingSortEntriesContainer>
 
