@@ -128,9 +128,9 @@ export const AlgorithmSection = styled.div`
 
   border-radius: 25px;
 
+  border: 1px solid darkgray;
   //background: color-mix(in srgb, var(--primary), white 92%);
   background: radial-gradient(white, color-mix(in srgb, var(--primary), white 90%) 95%);
-
   box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
 
   backdrop-filter: blur(20px);
@@ -164,10 +164,10 @@ export const CodeContainer = styled.div`
   height: auto;
   border-radius: 25px;
 
-  box-shadow: rgb(0, 0, 0, 0.6) 3px 3px 5px 1px inset;
-
   padding: 15px 25px;
 
+  border: 1px solid black;
+  box-shadow: rgb(0, 0, 0, 0.6) 3px 3px 5px 1px inset;
   background-color: color-mix(in srgb, var(--contrastAccent), black 50%);
   letter-spacing: 0.06rem;
 
@@ -200,8 +200,8 @@ export const SingleTaskContainer = styled.div`
   overflow: hidden;
   border-radius: 25px;
 
+  border: 1px solid darkgray;
   background: radial-gradient(white, color-mix(in srgb, var(--primary), white 90%) 95%);
-
   box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
 
   pre {

@@ -190,7 +190,6 @@ const BucketSortAnimation = () => {
       const updateArray = concatArray.concat(Array(initialData.length - concatArray.length).fill(0));
 
       setBars([...updateArray]);
-      await stepPauseWaitRequest();
       tempBuckets[i].items = [];
       await stepPauseWaitRequest();
     }

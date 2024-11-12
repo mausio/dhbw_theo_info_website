@@ -83,7 +83,7 @@ export const KeyIndexContainer = styled.div`
   justify-content: center;
   align-content: center;
   flex-direction: row;
-  margin: 5px auto 20px auto;
+  margin: 5px auto 15px auto;
   padding: 6px 0;
   column-gap: 2px;
 

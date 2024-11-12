@@ -27,6 +27,8 @@ export type CountingIteration = {
   currentUnsortedArrayIndex: number;
 };
 
+//TODO: Hier ist ein Bug. testen&testen&testen und finden =>
+
 const CountingSortDeterminationTask = () => {
   const n = 10;
   const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(n, 1, 5));
