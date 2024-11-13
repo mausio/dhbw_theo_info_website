@@ -3,6 +3,8 @@ import { radixSortAlgo } from '../../algorithms/sorting.algorithms.ts';
 import * as React from 'react';
 import RadixSortAnimation from '../../components/sorting/radix/radixSortAnimation.component.tsx';
 import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../styles/general/generic.style.ts';
+import RadixSortNumberTask from '../../components/sorting/radix/radixSortNumberTask.component.tsx';
+import RadixSortWordsTask from '../../components/sorting/radix/radixSortWordsTask.component.tsx';
 
 const RadixSortPage = () => {
   return (
@@ -11,7 +13,10 @@ const RadixSortPage = () => {
       <GenericSortGrid>
         <RadixSortAnimation />
         <CodeBlockElement height={600} code={radixSortAlgo} isFaderOn={false} />
-        <TasksContainer>{}</TasksContainer>
+        <TasksContainer>
+          <RadixSortNumberTask />
+          <RadixSortWordsTask />
+        </TasksContainer>
       </GenericSortGrid>
     </GenericMainContainer>
   );

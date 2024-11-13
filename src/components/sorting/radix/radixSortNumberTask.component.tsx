@@ -1,0 +1,118 @@
+import * as React from 'react';
+import { useState } from 'react';
+
+import { MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
+import ConfettiComponent from '../../general/confetti.component.tsx';
+import { calcArrayTaskContainerHeight, generateRandomArrayOfNFromTo } from '../../../utils/number.utils.ts';
+import { printArray } from '../../general/print.component.tsx';
+import { wait } from '../../../utils/promise.utils.ts';
+import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
+import RadixNumberIterationComponent from './radixSortNumberIteration.component.tsx';
+
+const RadixSortNumberIterationTask = () => {
+  const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(5, 1, 9999));
+  const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
+  const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
+  const [expectedArrays, setExpectedArrays] = useState<number[][]>(radixSort());
+  const [isSolved, setIsSolved] = useState<boolean>(false);
+  const [isRunningConfetti, setIsRunningConfetti] = useState<boolean>(false);
+  const [isRecycling, setIsRecycling] = useState<boolean>(false);
+
+  const handleConfetti = async () => {
+    setIsRecycling(true);
+    setIsRunningConfetti(true);
+    await wait(5000);
+    setIsRecycling(false);
+    await wait(10000);
+    setIsRunningConfetti(false);
+    return;
+  };
+
+  const handleCheck = (newTaskArray: number[], iterationIndex: number) => {
+    const currentExpectedArray = expectedArrays[iterationIndex];
+
+    if (JSON.stringify(currentExpectedArray) === JSON.stringify(newTaskArray)) {
+      if (expectedArrays.length <= iterationIndex + 1) {
+        setIsSolved(true);
+        handleConfetti();
+
+        return;
+      }
+
+      setTaskArray([...newTaskArray]);
+
+      setIterations([...[...expectedArrays.slice(0, iterationIndex + 1)], [...newTaskArray]]);
+    } else {
+      console.log('Incorrect array. Try again.');
+    }
+  };
+
+  function radixSort() {
+    const unsortedArray = [...initialData];
+    const expectedArray = [];
+
+    for (let digitIndex = 3; digitIndex >= 0; digitIndex--) {
+      const newIndex = [];
+
+      const digitInfo = unsortedArray.map((num, idx) => {
+        const digit = num.toString().split('');
+        const stringDigit = Array(4 - digit.length).fill('0');
+        const concatStringDigit = stringDigit.concat(digit);
+
+        const lastDigit = Number(concatStringDigit[digitIndex]);
+
+        return { num, lastDigit, originalIndex: idx };
+      });
+
+      digitInfo.sort((a, b) => a.lastDigit - b.lastDigit);
+
+      digitInfo.forEach((item, newIdx) => {
+        newIndex[item.originalIndex] = newIdx;
+      });
+
+      const swapper = [...unsortedArray];
+      for (let i = unsortedArray.length - 1; i >= 0; i--) {
+        unsortedArray[newIndex[i]] = swapper[i];
+      }
+
+      expectedArray.push([...unsortedArray]);
+    }
+
+    return expectedArray;
+  }
+
+  return (
+    <SingleTaskContainer>
+      <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
+      <h2>
+        Task 1 Step-wise <MarkedRedText>A</MarkedRedText> value, numbers
+      </h2>
+      <p>
+        Given the input array, fill in the values of array <MarkedRedText>A</MarkedRedText> after each for loop.
+      </p>
+      <p>
+        Input array: <MarkedText>[{printArray(initialData)}]</MarkedText>
+      </p>
+      <IterationsContainer
+        style={{
+          height: calcArrayTaskContainerHeight(iterations.length, 150),
+          transition: 'ease 1s',
+          filter: isSolved && 'brightness(0.8)',
+        }}
+      >
+        {iterations.map((item, index) => (
+          <RadixNumberIterationComponent
+            key={`insertIterationComp.${index}`}
+            expectedArray={expectedArrays[index]}
+            setTaskArray={(updatedArray) => handleCheck(updatedArray, index)}
+            taskArray={iterations.length === index + 1 ? taskArray : iterations[index]}
+            iterations={index + 1}
+          />
+        ))}
+        {/*//TODO: Hier ein Interaktionsfenster erstellen für again, submit*/}
+      </IterationsContainer>
+    </SingleTaskContainer>
+  );
+};
+
+export default RadixSortNumberIterationTask;

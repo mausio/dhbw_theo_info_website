@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const printArray = (array: number[]) => {
+export const printArray = (array: number[] | string[]) => {
   return array.map((item, index) => (
     <span key={index}>
       {item}

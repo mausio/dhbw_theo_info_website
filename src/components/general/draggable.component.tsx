@@ -2,7 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import * as React from 'react';
 
-export const SortableItem = ({ id: id, isDisabled: isDisabled }) => {
+export const SortableItem = ({ id: id, isDisabled: isDisabled, width: width, height: height }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     resizeObserverConfig: undefined,
     disabled: isDisabled,
@@ -10,20 +10,22 @@ export const SortableItem = ({ id: id, isDisabled: isDisabled }) => {
   });
 
   return (
-    <div
+    <p
       ref={setNodeRef}
       style={{
         transform: CSS.Transform.toString(transform),
         transition,
         cursor: 'grab',
-        padding: '10px',
         border: isDragging || isDisabled ? '1px solid #000' : '1px solid #ddd',
         backgroundColor: isDragging || isDisabled ? 'lightgray' : 'whitesmoke',
-        display: 'inline-block',
         textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyItems: 'center',
+        justifyContent: 'center',
         borderRadius: '5px',
-        width: '40px',
-        height: '40px',
+        width: width ? width : '40px',
+        height: height ? height : '40px',
         boxSizing: 'border-box',
         userSelect: 'none',
       }}
@@ -31,6 +33,6 @@ export const SortableItem = ({ id: id, isDisabled: isDisabled }) => {
       {...listeners}
     >
       {id}
-    </div>
+    </p>
   );
 };
