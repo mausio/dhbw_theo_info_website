@@ -10,6 +10,7 @@ import QuickSortPage from './pages/sorting/QuickSort.page.tsx';
 import CountingSortPage from './pages/sorting/CountingSort.page.tsx';
 import BucketSortPage from './pages/sorting/BucketSort.page.tsx';
 import RadixSortPage from './pages/sorting/RadixSort.page.tsx';
+import HeapSortPage from './pages/sorting/HeapSort.page.tsx';
 
 // Eine TODO-Liste
 //TODO: uninstall all unused packages
@@ -21,10 +22,15 @@ import RadixSortPage from './pages/sorting/RadixSort.page.tsx';
 //TODO: Check all Algorithms for correctness (seems like they all differ in their pseudo style => look at book)
 //TODO: Refactor Generic Styled Components into other files, e.g. "ControlPanel" is under "insertion.style" but should be generic
 //TODO: Set keys for lists
+//TODO: Create Standard Messages for e.g. "Shuffling", "Shuffling finished. Sort!", etc.
+//TODO: Centralize Data at one place, e.g. "InitialData" => "CountingSortInitialData", etc.
+//TODO: Apply "user-select: none" everywhere, e.g. "SortableItem", Iterations, Buttons etc.
+//TODO: Make the Control Panel a own component, make it generic and prop the getter and setter
 
 //TODO: Li-Deal?
-// Sorting Algos finished, Translation, ResponsiveNess, Progress Display (e.g. 0/2 done), Documentation for following Student, GAMIFICATION, Predefined places/functions for BackEnd Connections
+// Sorting Algos finished, Translation, Responsiveness, Progress Display (e.g. 0/2 done), Documentation for following Student, GAMIFICATION,
 // => Aim: No worsening of grade
+// => 6000 Zeilen geschrieben bereits
 
 function App() {
   return (
@@ -37,6 +43,7 @@ function App() {
         <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
         <Route path={APP_ROUTES.sorting.bucket} element={<BucketSortPage />} />
         <Route path={APP_ROUTES.sorting.radix} element={<RadixSortPage />} />
+        <Route path={APP_ROUTES.sorting.heap} element={<HeapSortPage />} />
         <Route path={'*'} element={<FourOfourPage />} />
         <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
       </Route>

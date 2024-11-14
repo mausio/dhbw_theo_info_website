@@ -33,23 +33,22 @@ const CodeBlockElement = ({ code, isFaderOn, height }) => {
         transition: 'ease 1s',
       }}
     >
-      {isFaderOn && (
-        <Fader
-          onClick={handleToggle}
-          style={{
-            background: isExpanded
-              ? 'transparent'
-              : ' linear-gradient(to bottom, transparent 78%, color-mix(in srgb, #39576f, black 48%) 97%)',
-          }}
-        />
-      )}
+      <Fader
+        onClick={handleToggle}
+        style={{
+          background: isExpanded
+            ? 'linear-gradient(to bottom, transparent 90%, color-mix(in srgb, #39576f, black 58%) 98%)'
+            : 'linear-gradient(to bottom, transparent 50%, color-mix(in srgb, #39576f, black 58%) 98%)',
+        }}
+      />
       <CodeBlock code={code} language={'js'} theme={themes.oneDark}>
         <div
+          onClick={handleToggle}
           style={{
             position: 'relative',
-            maxHeight: isExpanded ? '100%' : containerHeight,
-            height: isExpanded ? '100%' : containerHeight,
-            transition: 'ease 1s',
+            maxHeight: isExpanded ? '100%' : height ? height : containerHeight,
+            height: isExpanded ? '100%' : height ? height : containerHeight,
+            transition: 'ease 0.5s',
             overflow: 'hidden',
           }}
           className="relative"

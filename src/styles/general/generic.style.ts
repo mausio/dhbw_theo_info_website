@@ -153,7 +153,7 @@ export const GenericSortGrid = styled.div`
   column-gap: 50px;
   row-gap: 25px;
 
-  transition: 'ease 1s';
+  transition: ease 1s;
 `;
 
 export const CodeContainer = styled.div`
@@ -218,11 +218,11 @@ export const SingleTaskContainer = styled.div`
 export const Fader = styled.div`
   position: absolute;
   z-index: 1;
-  top: 0;
+  bottom: 0;
   left: 0;
-  height: 100%;
+  height: 200px;
   width: 100%;
-  transition: ease 1s;
+  transition: ease 0.5s;
 `;
 
 export const TasksContainer = styled.div`

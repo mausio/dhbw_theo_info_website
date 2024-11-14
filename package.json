@@ -23,6 +23,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@types/react-lottie": "^1.2.10",
     "@types/styled-components": "^5.1.34",
+    "@xyflow/react": "^12.3.5",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "mui": "^0.0.1",

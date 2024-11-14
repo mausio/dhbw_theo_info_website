@@ -9,7 +9,12 @@ const IndexChart = ({
   start,
   end,
   fullLength: fullLength,
+  height: height,
 }) => {
+  if (!initialArray) {
+    return <></>;
+  }
+
   const renderBars = () => {
     return initialArray.map((_, index) => {
       const isSelected = index === selectedIndex;
@@ -22,6 +27,7 @@ const IndexChart = ({
       return (
         <BarContainer
           style={{
+            height: height ? height : 'auto',
             width: fullLength && `${70 / initialArray.length}%`,
             left: fullLength ? `${(index / initialArray.length) * 100}%` : `${index * 10}%`,
             color: isSelected ? 'lightslategray' : isComparing ? 'lightsteelblue' : isPivot ? 'indianred' : 'gray',
