@@ -1,5 +1,5 @@
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
-import { radixSortAlgo } from '../../algorithms/sorting.algorithms.ts';
+import { radixSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
 import * as React from 'react';
 import RadixSortAnimation from '../../components/sorting/radix/radixSortAnimation.component.tsx';
 import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../styles/general/generic.style.ts';

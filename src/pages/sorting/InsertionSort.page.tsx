@@ -3,7 +3,7 @@ import * as React from 'react';
 import InsertionSortAnimationComponent from '../../components/sorting/insertion/insertionSortAnimation.component.tsx';
 import InsertionSortIterationTaskComponent from '../../components/sorting/insertion/insertionSortIterationTask.component.tsx';
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
-import { insertionSortAlgo } from '../../algorithms/sorting.algorithms.ts';
+import { insertionSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
 
 const InsertionSortPage = () => {
   return (

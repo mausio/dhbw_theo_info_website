@@ -1,6 +1,6 @@
 import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../styles/general/generic.style.ts';
 import * as React from 'react';
-import { quickSortAlgo } from '../../algorithms/sorting.algorithms.ts';
+import { quickSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
 import QuickSortAnimation from '../../components/sorting/quick/quickSortAnimation.component.tsx';
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import QuickSortPartitionTasks from '../../components/sorting/quick/quickSortPartitionTask.component.tsx';

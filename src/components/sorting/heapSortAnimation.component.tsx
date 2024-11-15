@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { wait } from '../../utils/promise.utils.ts';
 import { AlgorithmSection, Button } from '../../styles/general/generic.style.ts';
 import { ButtonPanel, ControlPanel, KeyIndexContainer, SliderPanel } from '../../styles/sorting/insertionSort.style.ts';
-import { Background, ReactFlow } from '@xyflow/react';
+import { Background, Controls, ReactFlow } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import TextUpdaterNode from '../general/textUpdater.component.tsx';
@@ -16,180 +16,16 @@ import {
   NodeValueIndexChart,
   SingleNodeValueIndexContainer,
 } from '../../styles/sorting/heapSort.style.ts';
+import { heapSortAnimationEdges, initialHeapSortAnimationNodes } from '../../static/initialData/heapSort.static.tsx';
 
 const connectionLineStyle = { stroke: '#fff' };
 
 const nodeTypes = { textUpdater: TextUpdaterNode };
 
-const edges = [
-  { id: '1-2', source: '1', target: '2', type: 'custom-edge' },
-  { id: '1-3', source: '1', target: '3', type: 'custom-edge' },
-  { id: '3-6', source: '3', target: '6', type: 'custom-edge' },
-  { id: '3-7', source: '3', target: '7', type: 'custom-edge' },
-  { id: '2-4', source: '2', target: '4', type: 'custom-edge' },
-  { id: '2-5', source: '2', target: '5', type: 'custom-edge' },
-  { id: '4-8', source: '4', target: '8', type: 'custom-edge' },
-  { id: '4-9', source: '4', target: '9', type: 'custom-edge' },
-  { id: '5-10', source: '5', target: '10', type: 'custom-edge' },
-];
-
-const initialNodes = [
-  {
-    id: '1',
-    data: {
-      value: 1,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableStart: false,
-      isConnectableEnd: true,
-    },
-    position: { x: 160, y: 0 },
-    type: 'textUpdater',
-  },
-  {
-    id: '2',
-    data: {
-      value: 2,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: true,
-      isConnectableStart: true,
-    },
-    position: { x: 80, y: 100 },
-    type: 'textUpdater',
-  },
-  {
-    id: '3',
-    data: {
-      value: 3,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: true,
-      isConnectableStart: true,
-    },
-    position: { x: 240, y: 100 },
-    type: 'textUpdater',
-  },
-  {
-    id: '4',
-    data: {
-      value: 4,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: true,
-      isConnectableStart: true,
-    },
-    position: { x: 40, y: 180 },
-    type: 'textUpdater',
-  },
-  {
-    id: '5',
-    data: {
-      value: 5,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: true,
-      isConnectableStart: true,
-    },
-    position: { x: 120, y: 180 },
-    type: 'textUpdater',
-  },
-  {
-    id: '6',
-    data: {
-      value: 6,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: false,
-      isConnectableStart: true,
-    },
-    position: { x: 200, y: 180 },
-    type: 'textUpdater',
-  },
-  {
-    id: '7',
-    data: {
-      value: 7,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: false,
-      isConnectableStart: true,
-    },
-    position: { x: 280, y: 180 },
-    type: 'textUpdater',
-  },
-  {
-    id: '8',
-    data: {
-      value: 8,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: false,
-      isConnectableStart: true,
-    },
-    position: { x: 0, y: 260 },
-    type: 'textUpdater',
-  },
-  {
-    id: '9',
-    data: {
-      value: 9,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: false,
-      isConnectableStart: true,
-    },
-    position: { x: 80, y: 260 },
-    type: 'textUpdater',
-  },
-  {
-    id: '10',
-    data: {
-      value: 10,
-      isYellow: false,
-      isRed: false,
-      isBlue: false,
-      isFocused: false,
-      isDisabled: true,
-      isConnectableEnd: false,
-      isConnectableStart: true,
-    },
-    position: { x: 160, y: 260 },
-    type: 'textUpdater',
-  },
-];
-
 const HeapSortAnimation = () => {
   const delay = 1000;
 
-  const [nodes, setNodes] = useState<>(initialNodes);
+  const [nodes, setNodes] = useState<>(initialHeapSortAnimationNodes);
   const [isManual, setIsManual] = useState<boolean>(false);
   const [isAnimated, setIsAnimated] = useState<boolean>(false);
   const [isShuffling, setIsShuffeling] = useState<boolean>(false);
@@ -204,30 +40,37 @@ const HeapSortAnimation = () => {
   const stepRequestRef = useRef<boolean>(false);
 
   async function shuffleNodes() {
-    let shuffledNodes = [...nodes];
+    let shuffledNodes = [...initialHeapSortAnimationNodes];
+    const length = shuffledNodes.length;
 
-    for (let i = shuffledNodes.length - 1; i >= 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+    for (let i = 0; i < length; i++) {
+      const randomIndex1 = Math.floor(Math.random() * length);
+      const randomIndex2 = Math.floor(Math.random() * length);
+      const randomIndex3 = Math.floor(Math.random() * length);
 
-      shuffledNodes = shuffledNodes.map((node) => {
-        if (node.id === `${i + 1}`) {
-          return { ...node, data: { ...node.data, isRed: false, isBlue: true } };
-        } else if (node.id === `${j + 1}`) {
-          return { ...node, data: { ...node.data, isRed: false, isBlue: true } };
+      shuffledNodes = shuffledNodes.map((node, index) => {
+        if (index === randomIndex1) {
+          return { ...node, data: { ...node.data, isFocused: true, isRed: true, isYellow: false, isBlue: false } };
+        } else if (index === randomIndex2) {
+          return { ...node, data: { ...node.data, isFocused: true, isRed: false, isYellow: true, isBlue: false } };
+        } else if (index === randomIndex3) {
+          return { ...node, data: { ...node.data, isFocused: true, isRed: false, isYellow: false, isBlue: true } };
         } else {
-          return { ...node, data: { ...node.data, isRed: false, isBlue: false } };
+          return { ...node, data: { ...node.data, isFocused: false, isYellow: false, isRed: false, isBlue: false } };
         }
       });
-      setNodes(shuffledNodes);
-      await wait(300);
 
-      const temp = shuffledNodes[i].data.value;
-      shuffledNodes[i].data.value = shuffledNodes[j].data.value;
-      shuffledNodes[j].data.value = temp;
+      setNodes([...shuffledNodes]);
+      await wait(250);
+
+      const temp = shuffledNodes[randomIndex1].data.value;
+      shuffledNodes[randomIndex1].data.value = shuffledNodes[randomIndex2].data.value;
+      shuffledNodes[randomIndex2].data.value = shuffledNodes[randomIndex3].data.value;
+      shuffledNodes[randomIndex3].data.value = temp;
 
       shuffledNodes = shuffledNodes.map((node) => ({
         ...node,
-        data: { ...node.data, isRed: false, isBlue: false },
+        data: { ...node.data, isRed: false, isBlue: false, isYellow: false, isFocused: false },
       }));
       setNodes([...shuffledNodes]);
     }
@@ -237,14 +80,291 @@ const HeapSortAnimation = () => {
   }
 
   const performShuffle = async () => {
+    setIsShuffeling(true);
     setInfoText('Shuffling!');
 
     await shuffleNodes();
 
+    setIsShuffeling(false);
+    setIsSorted(false);
     setInfoText('Shuffling finished. Start sorting!');
   };
 
-  const heapSort = async () => {};
+  const heapSort = async () => {
+    let tempNodes = [...nodes];
+    const n = tempNodes.length;
+
+    for (let i = Math.floor(n / 2); i > 0; i--) {
+      tempNodes = [...(await heapify([...tempNodes], n, i))];
+    }
+
+    for (let i = n; i > 0; i--) {
+      tempNodes = tempNodes.map((node, index) => {
+        if (i - 1 == index) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isFocused: true,
+              isRed: true,
+              isYellow: false,
+              isBlue: false,
+            },
+          };
+        }
+
+        if (index == 0) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isFocused: true,
+              isYellow: true,
+              isRed: false,
+              isBlue: false,
+            },
+          };
+        }
+
+        return node;
+      });
+      setNodes([...tempNodes]);
+      await stepPauseWaitRequest();
+
+      [tempNodes[0].data.value, tempNodes[i - 1].data.value] = [tempNodes[i - 1].data.value, tempNodes[0].data.value];
+
+      //TODO: Der Switch wird nicht animiert durch altbekannte Probleme; Redo with mapping
+
+      await stepPauseWaitRequest();
+
+      tempNodes = tempNodes.map((node, index) => {
+        console.log(i, index);
+
+        if (index + 1 == i / 2 || index + 1 == (i + 1) / 2) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isConnectableEnd: false,
+              isFocused: false,
+              isYellow: false,
+              isRed: false,
+            },
+          };
+        }
+
+        if (index == i - 1) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isSorted: true,
+              isFocused: false,
+              isYellow: false,
+              isRed: false,
+            },
+          };
+        }
+
+        return {
+          ...node,
+          data: {
+            ...node.data,
+            isFocused: false,
+            isYellow: false,
+            isRed: false,
+          },
+        };
+      });
+
+      setNodes([...tempNodes]);
+      await stepPauseWaitRequest();
+
+      tempNodes = [...(await heapify([...tempNodes], i - 1, 1))];
+    }
+
+    // TODO: Mark the root as sorted after the final swap
+    tempNodes[0].data.isSorted = true;
+    setNodes([...tempNodes]);
+    setIsSorted(true);
+  };
+
+  async function heapify(tempNodes, n, i) {
+    let largest = i;
+    const left = 2 * i;
+    const right = 2 * i + 1;
+
+    if (n <= i) {
+      console.log('out of bounce!');
+      //TODO: do sth here!
+    }
+
+    if (!tempNodes[left - 1] && !tempNodes[right - 1]) {
+      console.log('has no children');
+      //TODO: consider early return
+      // => don't forget to unset focus&color
+    }
+
+    if (tempNodes[largest - 1]) {
+      tempNodes = tempNodes.map((node) => {
+        const id = Number.parseInt(node.id);
+
+        if (id == largest) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isFocused: true,
+              isYellow: true, // Reset the highlight
+              isRed: false, // Reset the red color
+              isBlue: false, // Reset the blue color
+            },
+          };
+        }
+
+        return node;
+      });
+
+      setNodes([...tempNodes]);
+      await stepPauseWaitRequest();
+    }
+
+    tempNodes = tempNodes.map((node) => {
+      const id = Number.parseInt(node.id);
+      if (id == largest) {
+        return node;
+      }
+
+      if (id == left || id == right) {
+        // console.log(id == left ? 'left' : 'right', id == left ? left : right, 'value', node.data.value);
+
+        return {
+          ...node,
+          data: {
+            ...node.data,
+            isFocused: true,
+            isYellow: false, // Reset the highlight
+            isRed: false, // Reset the red color
+            isBlue: true, // Reset the blue color
+          },
+        };
+      }
+
+      return {
+        ...node,
+        data: {
+          ...node.data,
+          isFocused: false,
+          isYellow: false, // Reset the highlight
+          isRed: false, // Reset the red color
+          isBlue: false, // Reset the blue color
+        },
+      };
+    });
+
+    setNodes([...tempNodes]);
+    await stepPauseWaitRequest();
+
+    if (
+      !(left <= n && tempNodes[left - 1].data.value > tempNodes[largest - 1].data.value) &&
+      !(right <= n && tempNodes[right - 1].data.value > tempNodes[largest - 1].data.value)
+    ) {
+      // console.log('no value is bigger than largest one');
+      //TODO: consider early return
+      // => don't forget to unset focus&color
+    }
+
+    if (left <= n && tempNodes[left - 1].data.value > tempNodes[largest - 1].data.value) {
+      // console.log('comparing', tempNodes[left - 1].data.value, '>', tempNodes[largest - 1].data.value);
+      largest = left;
+
+      setNodes([...tempNodes]);
+      await stepPauseWaitRequest();
+    }
+
+    if (right <= n && tempNodes[right - 1].data.value > tempNodes[largest - 1].data.value) {
+      // console.log('comparing', tempNodes[right - 1].data.value, '>', tempNodes[largest - 1].data.value);
+
+      largest = right;
+
+      setNodes([...tempNodes]);
+      await stepPauseWaitRequest();
+    }
+
+    tempNodes = tempNodes.map((node) => {
+      return {
+        ...node,
+        data: {
+          ...node.data,
+          isFocused: false,
+          isYellow: false, // Reset the highlight
+          isRed: false, // Reset the red color
+          isBlue: false, // Reset the blue color
+        },
+      };
+    });
+
+    if (largest !== i) {
+      tempNodes[largest - 1].data.isRed = true;
+      tempNodes[largest - 1].data.isFocused = true;
+      tempNodes[i - 1].data.isYellow = true;
+      tempNodes[i - 1].data.isFocused = true;
+
+      // console.log('marking elements for swap');
+      setNodes([...tempNodes]);
+
+      await stepPauseWaitRequest();
+
+      const tempVal = tempNodes[i - 1].data.value;
+      tempNodes[i - 1].data.value = tempNodes[largest - 1].data.value;
+      tempNodes[largest - 1].data.value = tempVal;
+
+      tempNodes = tempNodes.map((node) => {
+        return {
+          ...node,
+          data: {
+            ...node.data,
+            isFocused: false,
+            isYellow: false, // Reset the highlight
+            isRed: false, // Reset the red color
+            isBlue: false, // Reset the blue color
+          },
+        };
+      });
+
+      tempNodes[largest - 1].data.isRed = true;
+      tempNodes[largest - 1].data.isFocused = true;
+      tempNodes[i - 1].data.isYellow = true;
+      tempNodes[i - 1].data.isFocused = true;
+
+      // console.log('swapped');
+
+      setNodes([...tempNodes]);
+      await stepPauseWaitRequest();
+
+      tempNodes = tempNodes.map((node) => {
+        return {
+          ...node,
+          data: {
+            ...node.data,
+            isFocused: false,
+            isYellow: false, // Reset the highlight
+            isRed: false, // Reset the red color
+            isBlue: false, // Reset the blue color
+          },
+        };
+      });
+
+      setNodes([...tempNodes]);
+      await stepPauseWaitRequest();
+
+      tempNodes = [...(await heapify([...tempNodes], n, largest))];
+    }
+
+    setNodes([...tempNodes]);
+
+    return [...tempNodes];
+  }
 
   const performHeapSort = async () => {
     setIsSorting(true);
@@ -352,7 +472,7 @@ const HeapSortAnimation = () => {
           <ReactFlow
             nodeTypes={nodeTypes}
             nodes={nodes}
-            edges={edges}
+            edges={heapSortAnimationEdges}
             fitView={true}
             onlyRenderVisibleElements={true}
             preventScrolling={false}
@@ -366,6 +486,7 @@ const HeapSortAnimation = () => {
             zoomOnDoubleClick={false}
           >
             <Background />
+            <Controls showZoom={false} showInteractive={false} position={'bottom-right'} />
           </ReactFlow>
         </NodeTreeContainer>
         <NodeValueIndexChart>
@@ -377,21 +498,28 @@ const HeapSortAnimation = () => {
               <SingleNodeValueIndexContainer>
                 <NodeChartValue
                   style={{
+                    filter: data.isSorted && 'brightness(0.9)',
                     borderLeft: id > 1 && 'none',
                     borderRight: id < 10 && 'dashed',
                     borderTopLeftRadius: id == 1 && 5,
                     borderBottomLeftRadius: id == 1 && 5,
                     borderBottomRightRadius: id == 10 && 5,
                     borderTopRightRadius: id == 10 && 5,
-                    backgroundColor: data.isYellow
-                      ? 'rgba(255, 171, 41, 0.8)'
-                      : data.isBlue
-                        ? 'lightsteelblue'
-                        : data.isRed
-                          ? 'palevioletred'
-                          : 'white',
-                    color: data.isYellow || data.isRed || data.isBlue ? 'white' : 'black',
-                    borderColor: data.isYellow || data.isRed || data.isBlue ? 'black' : 'black',
+                    backgroundColor: data.isSorted
+                      ? 'white'
+                      : data.isYellow
+                        ? 'rgba(255, 171, 41, 0.8)'
+                        : data.isBlue
+                          ? 'lightsteelblue'
+                          : data.isRed
+                            ? 'palevioletred'
+                            : 'white',
+                    color: data.isSorted ? 'dimgray' : data.isYellow || data.isRed || data.isBlue ? 'white' : 'black',
+                    borderColor: data.isSorted
+                      ? 'black'
+                      : data.isYellow || data.isRed || data.isBlue
+                        ? 'black'
+                        : 'black', //TODO: Fraglich ob das was bringt
                   }}
                 >
                   {data.value}

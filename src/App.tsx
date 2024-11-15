@@ -26,6 +26,7 @@ import HeapSortPage from './pages/sorting/HeapSort.page.tsx';
 //TODO: Centralize Data at one place, e.g. "InitialData" => "CountingSortInitialData", etc.
 //TODO: Apply "user-select: none" everywhere, e.g. "SortableItem", Iterations, Buttons etc.
 //TODO: Make the Control Panel a own component, make it generic and prop the getter and setter
+//TODO: Check Imprint Button as it not always reroutes to DHBW Imprint as expected
 
 //TODO: Li-Deal?
 // Sorting Algos finished, Translation, Responsiveness, Progress Display (e.g. 0/2 done), Documentation for following Student, GAMIFICATION,

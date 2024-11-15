@@ -1,7 +1,7 @@
 import { GenericMainContainer, GenericSortGrid } from '../../styles/general/generic.style.ts';
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import * as React from 'react';
-import { bucketSortAlgo } from '../../algorithms/sorting.algorithms.ts';
+import { bucketSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
 import BucketSortAnimation from '../../components/sorting/bucket/bucketSortAnimation.component.tsx';
 
 const BucketSortPage = () => {
