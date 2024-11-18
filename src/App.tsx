@@ -28,6 +28,10 @@ import HeapSortPage from './pages/sorting/HeapSort.page.tsx';
 //TODO: Make the Control Panel a own component, make it generic and prop the getter and setter
 //TODO: Check Imprint Button as it not always reroutes to DHBW Imprint as expected
 
+//TODO: Still development needed:
+// => Sorting Algo: HeapSort Tasks
+// => Sorting Algo: MergeSort Animation + Tasks
+
 //TODO: Li-Deal?
 // Sorting Algos finished, Translation, Responsiveness, Progress Display (e.g. 0/2 done), Documentation for following Student, GAMIFICATION,
 // => Aim: No worsening of grade
