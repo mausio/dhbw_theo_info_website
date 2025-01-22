@@ -16,23 +16,28 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { GenericImprintNotice } from '../../styles/general/generic.style.ts';
 import { useState } from 'react';
 import { ClickAwayListener } from '@mui/material';
+import { containsNot, removeNotFromString } from '../../utils/string.utils.ts';
+import i18next from '../../translation/i18next.ts';
+import { useTranslation } from 'react-i18next';
 
 const SingleElement = ({ childKey: key, childValue: value }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleNavigate = (dest: string) => {
     navigate(dest);
   };
 
   return (
-    <ListElement onClick={() => handleNavigate(value as string)} key={`${key}0`}>
-      <p>{key}</p>
+    <ListElement disabled={containsNot(key)} onClick={() => handleNavigate(value as string)} key={`${key}0`}>
+      <p>{t(`navigation.${removeNotFromString(key)}`)}</p>
     </ListElement>
   );
 };
 
 const DropdownSingleElement = ({ parentKey: parentKey, childValue: value, childKey: key }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleNavigate = (dest: string) => {
     navigate(dest);
@@ -43,9 +48,8 @@ const DropdownSingleElement = ({ parentKey: parentKey, childValue: value, childK
   };
 
   return (
-    <SubListElement onClick={() => handleNavigate(value)} key={`${key}09`}>
-      {/*<p>{buildName()}</p>*/}
-      <p>{value}</p>
+    <SubListElement disabled={containsNot(value)} onClick={() => handleNavigate(value)} key={`${key}09`}>
+      <p>{t(`navigation.${removeNotFromString(value)}`)}</p>
     </SubListElement>
   );
 };
@@ -63,6 +67,7 @@ const DropdownList = ({ childValue: value, childKey: key }) => {
 const DropdownElement = ({ childKey: key, childValue: value }) => {
   const [menu, setMenu] = useState<undefined | string>(undefined);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleNavigate = (dest: string) => {
     navigate(dest);
@@ -85,8 +90,8 @@ const DropdownElement = ({ childKey: key, childValue: value }) => {
   return (
     <ClickAwayListener onClickAway={(e) => handleClickAway()}>
       <ClickableElementBinder onClick={(e) => handleDropdownClick(e, key)} key={`${key}2`}>
-        <ListElement key={`${key}1`}>
-          <p>{key}</p>
+        <ListElement disabled={containsNot(key)} key={`${key}1`}>
+          <p>{t(`navigation.${removeNotFromString(key)}`)}</p>
           <ArrowDropDownIcon />
         </ListElement>
         {key == menu && <DropdownList childKey={key} childValue={value} key={`${key}06`} />}
@@ -96,7 +101,15 @@ const DropdownElement = ({ childKey: key, childValue: value }) => {
 };
 
 const NavigationBar = () => {
+  const { t } = useTranslation();
+  const [lang, setLang] = useState<'de' | 'en'>('en');
+
   const navigate = useNavigate();
+
+  function languageChange() {
+    i18next.changeLanguage(lang == 'en' ? 'de' : 'en');
+    setLang(lang == 'en' ? 'de' : 'en');
+  }
 
   const handleNavigate = (dest: string) => {
     navigate(dest);
@@ -106,6 +119,8 @@ const NavigationBar = () => {
     return (
       <>
         {Object.entries(APP_ROUTES).map(([key, value]) => {
+          if(containsNot(key)) return null;
+
           switch (typeof value) {
             case 'string':
               return <SingleElement childKey={key} childValue={value} key={`${key}07`} />;
@@ -121,19 +136,19 @@ const NavigationBar = () => {
     <>
       <NavigationBarContainer>
         <LogoLinkButton onClick={() => handleNavigate(APP_ROUTES.home)}>
-          <Logo src={dhbwLogo as string} />
+          <Logo src={dhbwLogo} />
         </LogoLinkButton>
 
         <LinkList>
           {createLinks()}
           {/*TODO: Add translation for German*/}
-          <LanguageButton>English</LanguageButton>
+          <LanguageButton onClick={() => languageChange()}>{lang == 'en' ? 'English' : 'Deutsch'}</LanguageButton>
         </LinkList>
       </NavigationBarContainer>
       <Outlet />
       <GenericImprintNotice>
-        <p>2024 DHBW Karlsruhe</p>
-        <ListElement onClick={() => handleNavigate(APP_ROUTES.imprint)}>Imprint</ListElement>
+        <p>2025 DHBW Karlsruhe</p>
+        <ListElement onClick={() => handleNavigate(APP_ROUTES.imprint)}>{t('navigation.imprint')}</ListElement>
       </GenericImprintNotice>
     </>
   );

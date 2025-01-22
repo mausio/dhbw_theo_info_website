@@ -1,0 +1,72 @@
+{
+  "navigation": {
+    "imprint": "Impressum",
+    "home": "Startseite",
+    "sorting": "Sortieralgorithmen",
+    "search": "Suche",
+    "graphs": "Graphen",
+    "coding": "Coding",
+    "account" : "Account",
+    "radix": "Radix",
+    "merge": "Merge",
+    "bucket": "Bucket",
+    "counting": "Counting",
+    "heap": "Heap",
+    "quick": "Quick",
+    "insertion": "Insertion"
+  },
+  "home": {
+    "title": "ALGO",
+    "subtitle": "Willkommen zu den Aufgaben der Algorithmen!",
+    "noLoginRequired": "Es ist nicht notwendig, sich anzumelden, um die Übungen zu machen.",
+    "bonusNote": "⚠️ Wenn Sie jedoch den Vorlesungsbonus erhalten möchten, müssen Sie sich anmelden und abgeschlossene Aufgaben einreichen.",
+    "tipsTitle": "💡 Tipps:",
+    "tipSubmit": "Vergessen Sie nach erfolgreichem Abschluss einer Aufgabe nicht, auf die Schaltfläche „Absenden“ zu klicken! 🔔",
+    "tipBigScreen": "Es ist schöner, große Bildschirme zu verwenden 🤓",
+    "loginInstruction": "Verwenden Sie zur Anmeldung die Informationen, die Ihr Dozent Ihnen gegeben hat. 📜",
+    "bonusInstruction": "Um den Bonus zu erhalten, schließen Sie alle Aufgaben vor der Prüfung ab!!! ⏳",
+    "fun": "Viel Spaß! 🎉"
+  },
+  "sorting": {
+    "insertion": {
+      "description": "Insertion Sort baut ein sortiertes Array auf, indem es ein Element nach dem anderen vergleicht und an die richtige Position einfügt, ähnlich wie beim Sortieren von Spielkarten in der Hand.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Beginne mit dem ersten Element als sortiert",
+        "2": "Nimm das nächste Element und vergleiche es mit allen Elementen im sortierten Bereich",
+        "3": "Verschiebe größere Elemente nach rechts, um Platz zu schaffen",
+        "4": "Füge das Element an der richtigen Position ein",
+        "5": "Wiederhole Schritte 2-4, bis alle Elemente sortiert sind"
+      },
+      "complexity": "Komplexität:",
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "animation": {
+        "initialMessage": "Mischen, dann sortieren! :)",
+        "shuffling": "Mische!",
+        "sortingCompleted": "Sortierung abgeschlossen!",
+        "key": "A[{{index}}] = Schlüssel = {{value}}",
+        "comparison": "A[{{index}}] = {{value}} ist {{comparison}} als der Schlüssel(={{key}})",
+        "smaller": "kleiner",
+        "greater": "größer",
+        "propagating": "propagiere vorwärts...",
+        "placingKey": "platziere den Schlüssel(={{key}}) bei A[{{index}}]",
+        "nextKey": "weiter zum nächsten Schlüssel..."
+      },
+      "task": {
+        "title": "Aufgabe 1 Schrittweise Wert",
+        "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder for-Schleife ein.",
+        "inputArray": "Eingabearray:",
+        "submit": "Einreichen?"
+      }
+    }
+  },
+  "general": {
+    "explanation": "^^^ Erklärung ^^^",
+    "tipps": "^^^ Tipps ^^^"
+  }
+}

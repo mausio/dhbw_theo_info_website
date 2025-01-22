@@ -46,7 +46,7 @@ export const ControlPanel = styled.div`
 
   border-radius: 10px;
 
-  margin: 15px 3px 15px 3px;
+  margin: 1px 1px 8px 1px;
 `;
 
 export const ChartAligner = styled.div`
@@ -63,7 +63,7 @@ export const ButtonPanel = styled.div`
 `;
 
 export const SliderPanel = styled.div`
-  width: 300px;
+  width: 250px;
   background: white;
   margin-top: 15px;
   padding: 0 20px;

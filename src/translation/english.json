@@ -1,0 +1,72 @@
+{
+  "navigation": {
+    "imprint": "Imprint",
+    "home": "Home",
+    "sorting": "Sorting",
+    "search": "search",
+    "graphs": "graphs",
+    "coding": "coding",
+    "account" : "account",
+    "radix": "Radix",
+    "merge": "Merge",
+    "bucket": "Bucket",
+    "counting": "Counting",
+    "heap": "Heap",
+    "quick": "Quick",
+    "insertion": "Insertion"
+  },
+  "home": {
+    "title": "ALGO",
+    "subtitle": "Welcome to the exercises of algorithms!",
+    "noLoginRequired": "It is not necessary to log in in order to do the exercises.",
+    "bonusNote": "⚠️ However, if you would like to gain the lecture bonus, you must log in and submit completed tasks.",
+    "tipsTitle": "💡 Tipps:",
+    "tipSubmit": "After completing a task successfully, don't forget to click the submit button! 🔔",
+    "tipBigScreen": "It is nicer to use big screens 🤓",
+    "loginInstruction": "To log in, use the information given by your lecturer. 📜",
+    "bonusInstruction": "To gain the bonus, complete all the tasks before the exam!!! ⏳",
+    "fun": "Have fun! 🎉"
+  },
+  "sorting": {
+    "insertion": {
+      "description": "Insertion Sort builds a sorted array one item at a time by comparing and inserting each element into its correct position, similar to sorting playing cards in your hands.",
+      "process": "Process:",
+      "steps": {
+        "1": "Start with first element as sorted",
+        "2": "Take next element and compare it with all elements in the sorted portion",
+        "3": "Shift larger elements to the right to make space",
+        "4": "Insert the element in its correct position",
+        "5": "Repeat steps 2-4 until all elements are sorted"
+      },
+      "complexity": "Complexity:",
+      "case": "Case",
+      "time": "Time",
+      "best": "Best",
+      "average": "Average",
+      "worst": "Worst",
+      "space": "Space",
+      "animation": {
+        "initialMessage": "shuffle, then sort! :)",
+        "shuffling": "Shuffling!",
+        "sortingCompleted": "Sorting completed!",
+        "key": "A[{{index}}] = key = {{value}}",
+        "comparison": "A[{{index}}] = {{value}} is {{comparison}} than the key(={{key}})",
+        "smaller": "smaller",
+        "greater": "greater",
+        "propagating": "propagating forward...",
+        "placingKey": "placing the key(={{key}}) at A[{{index}}]",
+        "nextKey": "moving on to the next key..."
+      },
+      "task": {
+        "title": "Task 1 Step-wise value",
+        "description": "Given the input array, fill in the values of array A after each for loop.",
+        "inputArray": "Input array:",
+        "submit": "Submit?"
+      }
+    }
+  },
+  "general": {
+    "explanation": "^^^ Explanation ^^^",
+    "tipps": "^^^ Tipps ^^^"
+  }
+}

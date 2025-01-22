@@ -262,14 +262,6 @@ const QuickSortAnimation = () => {
     stepRequestRef.current = false;
   };
 
-  const exitSorting = async () => {
-    setIsShuffeling(false);
-    setIsSorting(false);
-    setIsSorted(false);
-    makeChartInactive();
-    exitRequestRef.current = true;
-  };
-
   const pauseSorting = async () => {
     setIsPaused(true);
     pauseRequestRef.current = true;
@@ -346,9 +338,6 @@ const QuickSortAnimation = () => {
               Animate
             </Button>
           )}
-          <Button onClick={exitSorting} disabled={isShuffelling || isSorted || !isSorting || !isAnimated || isPaused}>
-            Exit
-          </Button>
         </ButtonPanel>
       </ControlPanel>
     </AlgorithmSection>

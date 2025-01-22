@@ -58,7 +58,6 @@ const BucketSortAnimation = () => {
   const [isEnd, setIsEnd] = useState<number | null>(null);
   const [buckets, setBuckets] = useState<Bucket[]>(initialBuckets);
 
-  const exitRequestRef = useRef<boolean>(false);
   const pauseRequestRef = useRef<boolean>(false);
   const speedRequestRef = useRef<number>(1);
   const stepRequestRef = useRef<boolean>(false);
@@ -73,8 +72,6 @@ const BucketSortAnimation = () => {
 
     setIsSorted(true);
     setIsSorting(false);
-    exitRequestRef.current = false;
-    pauseRequestRef.current = false;
     setIsManual(false);
     setIsAnimated(false);
     setIsPaused(false);
@@ -220,7 +217,6 @@ const BucketSortAnimation = () => {
     setIsSorting(true);
 
     if (!isManual && isAnimated) {
-      exitRequestRef.current = false;
       pauseRequestRef.current = false;
       await performBucketSort();
     }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
@@ -10,6 +11,7 @@ import InsertionIterationComponent from './insertionIteration.component.tsx';
 import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
 
 const InsertionSortIterationTaskComponent = () => {
+  const { t } = useTranslation();
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -76,11 +78,11 @@ const InsertionSortIterationTaskComponent = () => {
     <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
       <h2>
-        Task 1 Step-wise <MarkedRedText>A</MarkedRedText> value
+        {t('sorting.insertion.task.title')} <MarkedRedText>A</MarkedRedText>
       </h2>
-      <p>Given the input array, fill in the values of array A after each for loop.</p>
+      <p>{t('sorting.insertion.task.description')}</p>
       <p>
-        Input array: <MarkedText>[{printArray(initialData)}]</MarkedText>
+        {t('sorting.insertion.task.inputArray')} <MarkedText>[{printArray(initialData)}]</MarkedText>
       </p>
       <IterationsContainer
         style={{
@@ -101,7 +103,7 @@ const InsertionSortIterationTaskComponent = () => {
         {/*//TODO: Hier ein Interaktionsfenster erstellen für again, submit*/}
         {isSolved && (
           <>
-            <p>Submit?</p>
+            <p>{t('sorting.insertion.task.submit')}</p>
           </>
         )}
       </IterationsContainer>

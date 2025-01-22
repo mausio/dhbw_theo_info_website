@@ -1,3 +1,6 @@
+// NOT disables the link :)
+// Removing the NOT will enable the link, make it clickable and, therefore, can be used to navigate to a page
+
 export const APP_ROUTES = {
   home: '/',
   imprint: 'https://www.dhbw.de/impressum',
@@ -10,20 +13,20 @@ export const APP_ROUTES = {
     counting: 'counting',
     bucket: 'bucket',
   },
-  search: {
-    linear: 'linear',
-    binary: 'binary',
+  NOTsearch: {
+    linear: 'not linear',
+    binary: 'not binary',
   },
-  graphs: {
-    bfs: 'BFS',
-    dfs: 'DFS',
-    dijkstra: 'dijkstra',
+  NOTgraphs: {
+    bfs: 'NOT BFS',
+    dfs: 'not DFS',
+    dijkstra: 'not dijkstra',
   },
-  coding: {
-    huffmann: 'huffmann',
+  NOTcoding: {
+    huffmann: 'not huffmann',
   },
-  account: {
-    login: 'login',
-    logout: 'logout',
+  NOTaccount: {
+    login: 'not login',
+    logout: 'not logout',
   },
 };

@@ -30,7 +30,6 @@ const MergeSortAnimation = () => {
   const [comparingIndex, setComparingIndex] = useState<number | null>(null);
   const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
 
-  const exitRequestRef = useRef<boolean>(false);
   const pauseRequestRef = useRef<boolean>(false);
   const shuffelingRequestRef = useRef<boolean>(false);
   const speedRequestRef = useRef<number>(1);
@@ -82,7 +81,6 @@ const MergeSortAnimation = () => {
     setIsSorting(true);
 
     if (!isManual && isAnimated) {
-      exitRequestRef.current = false;
       pauseRequestRef.current = false;
       await performMergeSort();
     }
@@ -124,14 +122,6 @@ const MergeSortAnimation = () => {
     stepRequestRef.current = true;
     await wait(10);
     stepRequestRef.current = false;
-  };
-
-  const exitSorting = async () => {
-    setIsShuffeling(false);
-    setIsSorting(false);
-    setIsSorted(false);
-    makeChartInactive();
-    exitRequestRef.current = true;
   };
 
   const pauseSorting = async () => {
@@ -205,9 +195,6 @@ const MergeSortAnimation = () => {
               Animate
             </Button>
           )}
-          <Button onClick={exitSorting} disabled={isShuffelling || isSorted || !isSorting || !isAnimated || isPaused}>
-            Exit
-          </Button>
         </ButtonPanel>
       </ControlPanel>
     </AlgorithmSection>

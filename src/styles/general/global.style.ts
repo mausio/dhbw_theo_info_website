@@ -62,5 +62,4 @@ export const GlobalStyle = createGlobalStyle`
         display: none !important;
     }
     
-
 `;

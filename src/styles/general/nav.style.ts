@@ -8,13 +8,14 @@ export const GenericImage = styled.img`
 `;
 
 export const NavigationBarContainer = styled.div`
-  //position: sticky;
-  //top: 4vh;
-  //left: 2vw;
   margin: 25px auto;
+  position: relative;
   z-index: 1000;
-  width: 96vw;
+  width: 80%;
+  min-width: 300px;
+max-width: 1100px; 
   height: 70px;
+  padding: 5px 20px;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
@@ -31,7 +32,34 @@ export const Logo = styled(GenericImage)`
   position: relative;
   top: -1px;
   height: 40px;
-  margin: 0 10px;
+  padding: 5px;
+
+  width: 100px;
+
+  border-radius: 5px;
+
+  scale: 0.99;
+  transition: 0.1s ease-out;
+
+  &:hover {
+    backdrop-filter: brightness(1.25);
+    filter: saturate(1.1);
+    scale: 1.02;
+    transition: 0.2s ease-out;
+  }
+
+  &:active {
+    backdrop-filter: brightness(1);
+
+    box-shadow:
+      rgb(100, 100, 100, 0.9) 2px 2px 1px 0px inset,
+      rgba(50, 50, 50, 0.6) -0.2px -0.2px 1px -1px inset,
+      rgb(25, 25, 25, 0) 1.5px 1.5px 1px 0px,
+      rgba(0, 0, 0, 0) -0.1px -0.1px 2px -1px;
+
+    scale: 0.99;
+    transition: ease-in 0.1s;
+  }
 `;
 
 export const LogoLinkButton = styled.a`
@@ -73,22 +101,63 @@ export const ListElement = styled.button`
   background-color: transparent;
   text-transform: capitalize;
   font-weight: bold;
+  box-shadow: none;
 
   padding: 0 5px;
-
   border-radius: 5px;
 
-  &:hover {
-    background: var(--secondary);
+  scale: 0.99;
+  transition: 0.1s ease-out;
 
-    backdrop-filter: brightness(1.1);
-    transition: 0.1s;
+  &:disabled {
+    filter: opacity(0.75) contrast(0.1) saturate(0) grayscale(2);
+
+    backdrop-filter: none;
+    scale: 0.99;
+    transition: none;
+    box-shadow: none;
+
+    &:hover {
+      backdrop-filter: none;
+      scale: 0.99;
+      transition: none;
+      box-shadow: none;
+    }
+
+    &:active {
+      backdrop-filter: none;
+      scale: 0.99;
+      transition: none;
+      box-shadow: none;
+
+      animation: 0.15s shake 2;
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-6px);
+        }
+        75% {
+          transform: translateX(6px);
+        }
+      }
+    }
+  }
+
+  &:hover {
+    //background: var(--secondary);
+
+    backdrop-filter: brightness(0.7);
+    scale: 1.01;
+    transition: 0.2s ease-out;
   }
 
   &:active {
-    background: var(--secondary);
-    backdrop-filter: brightness(0.95);
-
+    //background: var(--secondary);
+    backdrop-filter: brightness(0.7);
     box-shadow:
       rgb(0, 0, 0) 3px 3px 1px 0px inset,
       rgba(0, 0, 0, 0.5) -0.1px -0.1px 2px -1px inset;
@@ -101,8 +170,6 @@ export const ListElement = styled.button`
 
     transition: ease-in 0.05s;
   }
-
-  box-shadow: none;
 `;
 
 export const LanguageButton = styled(ListElement)`

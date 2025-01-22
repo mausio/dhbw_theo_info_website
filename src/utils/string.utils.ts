@@ -29,3 +29,15 @@ export const generateRandomEasyStringArray = (maxCount, maxChars) => {
 
   return result;
 };
+
+export const containsNot = (str: string) => {
+  return str.toUpperCase().includes('NOT');
+};
+
+export const removeNotFromString = (str: string) => {
+  if (containsNot(str)) {
+    return str.replace(/^NOT\s*/i, '');
+  }
+
+  return str;
+};

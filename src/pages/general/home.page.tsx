@@ -1,23 +1,26 @@
 import { GenericMainContainer } from '../../styles/general/generic.style.ts';
+import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {
+  const { t } = useTranslation();
+
   return (
     <GenericMainContainer>
       <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-        <h1>ALGO</h1>
-        <h2>Welcome to the exercises of algorithms!</h2>
-        <p>It is not necessary to log in in order to do the exercises.</p>
-        <p>⚠️ However, if you would like to gain the lecture bonus, you must log in and submit completed tasks.</p>
+        <h1>{t('home.title')}</h1>
+        <h2>{t('home.subtitle')}</h2>
+        <p>{t('home.noLoginRequired')}</p>
+        <p>{t('home.bonusNote')}</p>
         <ul>
-          <li>To log in, use the information given by your lecturer. 📜</li>
-          <li>To gain the bonus, complete all the tasks before the exam!!! ⏳</li>
+          <li>{t('home.loginInstruction')}</li>
+          <li>{t('home.bonusInstruction')}</li>
         </ul>
-        <h3>💡 Tipps:</h3>
+        <h3>{t('home.tipsTitle')}</h3>
         <ul>
-          <li>After completing a task successfully, don't forget to click the submit button! 🔔</li>
-          <li>It is nicer to use big screens 🤓</li>
+          <li>{t('home.tipSubmit')}</li>
+          <li>{t('home.tipBigScreen')}</li>
         </ul>
-        <p>Have fun! 🎉</p>
+        <p>{t('home.fun')}</p>
         <br />
         <p></p>
       </div>

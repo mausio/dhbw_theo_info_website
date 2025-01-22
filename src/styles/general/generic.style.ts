@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const GenericMainContainer = styled.div`
-  width: 90vw;
+  width: 80%;
+  min-width: 300px;
+  max-width: 1100px; 
   height: 100%;
   inset: 0;
   margin: 25px auto;
+  padding: 10px 20px;
   border-radius: 5px;
   //background-color: var(--quarternary);
   backdrop-filter: brightness(100) opacity(1);
-  padding: 0.25vh 3vw;
 
   -webkit-box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 1);
   -moz-box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 1);
@@ -18,14 +20,16 @@ export const GenericMainContainer = styled.div`
 `;
 
 export const GenericImprintNotice = styled.div`
-  width: 93.25vw;
+  width: 80%;
+  min-width: 300px;
+max-width: 1100px; 
   height: 55px;
   inset: 0;
   margin: 10px auto;
+  padding: 10px 20px;
   border-radius: 5px;
   //background-color: var(--quarternary);
   backdrop-filter: brightness(100) opacity(1);
-  padding: 10px 20px;
 
   -webkit-box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 1);
   -moz-box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 1);
@@ -120,6 +124,8 @@ export const AlgorithmSection = styled.div`
   height: 500px;
   grid-area: animation;
   width: auto;
+  min-width: 350px;
+  max-width: 500px;
 
   display: flex;
   flex-direction: column;
@@ -135,25 +141,29 @@ export const AlgorithmSection = styled.div`
 
   backdrop-filter: blur(20px);
 
-  padding: 15px 25px;
+  padding: 10px 15px;
 `;
 
 export const GenericSortGrid = styled.div`
   position: relative;
-  width: 80%;
-  margin: 50px auto;
-
+  width: 100%;
+  max-width: 1000px; // Slightly smaller than container
+  margin: 30px auto;
+  
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(auto, 1fr) minmax(auto, 1fr);
   grid-template-rows: auto;
   grid-template-areas:
     'animation code'
     'spacer spacer'
     'task task';
-  column-gap: 50px;
-  row-gap: 25px;
+  column-gap: min(40px, 50px);
+  row-gap: min(20px, 50px);
 
   transition: ease 1s;
+
+
+  
 `;
 
 export const CodeContainer = styled.div`
@@ -161,10 +171,15 @@ export const CodeContainer = styled.div`
   position: relative;
   grid-area: code;
   width: auto;
+
+    min-width: 350px;
+  max-width: 500px;
+
+
   height: auto;
   border-radius: 25px;
 
-  padding: 15px 25px;
+  padding: 10px 15px;
 
   border: 1px solid black;
   box-shadow: rgb(0, 0, 0, 0.6) 3px 3px 5px 1px inset;

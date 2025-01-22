@@ -28,19 +28,21 @@ const CodeBlockElement = ({ code, isFaderOn, height }) => {
   return (
     <CodeContainer
       style={{
-        maxHeight: isExpanded ? '100%' : height ? height : containerHeight,
-        height: isExpanded ? '100%' : height ? height : containerHeight,
+        maxHeight: isFaderOn && isExpanded ? '100%' : height ? height : containerHeight,
+        height: isFaderOn && isExpanded ? '100%' : height ? height : containerHeight,
         transition: 'ease 1s',
       }}
     >
-      <Fader
-        onClick={handleToggle}
-        style={{
-          background: isExpanded
-            ? 'linear-gradient(to bottom, transparent 90%, color-mix(in srgb, #39576f, black 58%) 98%)'
-            : 'linear-gradient(to bottom, transparent 50%, color-mix(in srgb, #39576f, black 58%) 98%)',
-        }}
-      />
+      {isFaderOn && (
+        <Fader
+          onClick={handleToggle}
+          style={{
+            background: isExpanded
+              ? 'linear-gradient(to bottom, transparent 90%, color-mix(in srgb, #39576f, black 58%) 98%)'
+              : 'linear-gradient(to bottom, transparent 50%, color-mix(in srgb, #39576f, black 58%) 98%)',
+          }}
+        />
+      )}
       <CodeBlock code={code} language={'js'} theme={themes.oneDark}>
         <div
           onClick={handleToggle}

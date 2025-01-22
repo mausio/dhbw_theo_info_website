@@ -25,7 +25,7 @@ const nodeTypes = { textUpdater: TextUpdaterNode };
 const HeapSortAnimation = () => {
   const delay = 1000;
 
-  const [nodes, setNodes] = useState<>(initialHeapSortAnimationNodes);
+  const [nodes, setNodes] = useState(initialHeapSortAnimationNodes);
   const [isManual, setIsManual] = useState<boolean>(false);
   const [isAnimated, setIsAnimated] = useState<boolean>(false);
   const [isShuffling, setIsShuffeling] = useState<boolean>(false);

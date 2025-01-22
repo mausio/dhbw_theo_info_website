@@ -325,26 +325,6 @@ const CountingSortAnimation = () => {
     stepRequestRef.current = false;
   };
 
-  const exitSorting = async () => {
-    exitRequestRef.current = true;
-    await wait(100);
-    setIsShuffeling(false);
-    setIsSorted(false);
-    setIsManual(false);
-    setIsSorting(false);
-    setPivotIndex(null);
-    setIsAnimated(false);
-    setSelectedIndex(null);
-    setComparingIndex(null);
-    setBars(initialData);
-    setCountingBars(Array(Math.max(...initialData) - Math.min(...initialData) + 1).fill(0));
-    setSortedBars(Array(initialData.length).fill(0));
-    exitRequestRef.current = false;
-    stepRequestRef.current = false;
-    pauseRequestRef.current = false;
-    setInfoText(`shuffle, then sort! :)`);
-  };
-
   const pauseSorting = async () => {
     setIsPaused(true);
     pauseRequestRef.current = true;
@@ -435,9 +415,6 @@ const CountingSortAnimation = () => {
               Animate
             </Button>
           )}
-          <Button onClick={exitSorting} disabled={isShuffelling || isSorted || !isSorting || !isAnimated || isPaused}>
-            Exit
-          </Button>
         </ButtonPanel>
       </ControlPanel>
     </AlgorithmSection>
