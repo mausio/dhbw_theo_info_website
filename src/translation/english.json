@@ -189,6 +189,39 @@
           "check": "Check"
         }
       }
+    },
+    "merge": {
+      "description": "Merge Sort is a divide-and-conquer algorithm that recursively divides the array into smaller subarrays, sorts them, and then merges them back together.",
+      "process": "Process:",
+      "steps": {
+        "1": "Divide the array into two halves",
+        "2": "Recursively sort the left and right halves",
+        "3": "Merge the sorted halves back together",
+        "4": "Continue until the entire array is sorted"
+      },
+      "complexity": {
+        "best": "O(n log n)",
+        "average": "O(n log n)",
+        "worst": "O(n log n)",
+        "space": "O(n)"
+      },
+      "animation": {
+        "initialMessage": "shuffle, then sort! :)",
+        "lookingAtRange": "Looking at range [{{start}}-{{end}}]",
+        "findingMiddle": "Finding middle point at {{middle}}",
+        "dividing": "Dividing into [{{leftStart}}-{{leftEnd}}] and [{{rightStart}}-{{rightEnd}}]",
+        "sortingLeft": "Sorting left half [{{start}}-{{end}}]",
+        "sortingRight": "Sorting right half [{{start}}-{{end}}]",
+        "mergingRanges": "Merging ranges [{{leftStart}}-{{leftEnd}}] and [{{rightStart}}-{{rightEnd}}]",
+        "copyingLeft": "Copying left range [{{start}}-{{end}}]",
+        "copyingRight": "Copying right range [{{start}}-{{end}}]",
+        "mergingBack": "Merging back into range [{{start}}-{{end}}]",
+        "comparing": "Comparing L[{{leftIndex}}]={{leftValue}} and R[{{rightIndex}}]={{rightValue}}",
+        "placingLeft": "Placing L[{{index}}]={{value}} into position {{position}}",
+        "placingRight": "Placing R[{{index}}]={{value}} into position {{position}}",
+        "placingRemaining": "Placing remaining {{array}}[{{index}}]={{value}} into position {{position}}",
+        "mergeComplete": "Merge complete for range [{{start}}-{{end}}]"
+      }
     }
   },
   "general": {

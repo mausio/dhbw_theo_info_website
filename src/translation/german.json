@@ -195,6 +195,39 @@
           "check": "Prüfen"
         }
       }
+    },
+    "merge": {
+      "description": "Merge Sort ist ein Divide-and-Conquer-Algorithmus, der das Array rekursiv in kleinere Teilarrays aufteilt, diese sortiert und dann wieder zusammenführt.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Teile das Array in zwei Hälften",
+        "2": "Sortiere die linke und rechte Hälfte rekursiv",
+        "3": "Führe die sortierten Hälften wieder zusammen",
+        "4": "Fahre fort, bis das gesamte Array sortiert ist"
+      },
+      "complexity": {
+        "best": "O(n log n)",
+        "average": "O(n log n)",
+        "worst": "O(n log n)",
+        "space": "O(n)"
+      },
+      "animation": {
+        "initialMessage": "Mischen, dann sortieren! :)",
+        "lookingAtRange": "Betrachte Bereich [{{start}}-{{end}}]",
+        "findingMiddle": "Finde Mittelpunkt bei {{middle}}",
+        "dividing": "Teile in [{{leftStart}}-{{leftEnd}}] und [{{rightStart}}-{{rightEnd}}]",
+        "sortingLeft": "Sortiere linke Hälfte [{{start}}-{{end}}]",
+        "sortingRight": "Sortiere rechte Hälfte [{{start}}-{{end}}]",
+        "mergingRanges": "Führe Bereiche [{{leftStart}}-{{leftEnd}}] und [{{rightStart}}-{{rightEnd}}] zusammen",
+        "copyingLeft": "Kopiere linken Bereich [{{start}}-{{end}}]",
+        "copyingRight": "Kopiere rechten Bereich [{{start}}-{{end}}]",
+        "mergingBack": "Führe zurück in Bereich [{{start}}-{{end}}]",
+        "comparing": "Vergleiche L[{{leftIndex}}]={{leftValue}} und R[{{rightIndex}}]={{rightValue}}",
+        "placingLeft": "Platziere L[{{index}}]={{value}} an Position {{position}}",
+        "placingRight": "Platziere R[{{index}}]={{value}} an Position {{position}}",
+        "placingRemaining": "Platziere verbleibendes {{array}}[{{index}}]={{value}} an Position {{position}}",
+        "mergeComplete": "Zusammenführung abgeschlossen für Bereich [{{start}}-{{end}}]"
+      }
     }
   },
   "general": {

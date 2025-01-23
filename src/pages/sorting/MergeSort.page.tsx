@@ -11,7 +11,7 @@ const MergeSortPage = () => {
       <h1>Mergesort</h1>
       <GenericSortGrid>
         <MergeSortAnimation />
-        <CodeBlockElement code={mergeSortAlgo} isFaderOn={true} />
+        <CodeBlockElement height={625} code={mergeSortAlgo} isFaderOn={true} />
         <TasksContainer>{/*<MergeSortTaskOne />*/}</TasksContainer>
       </GenericSortGrid>
     </GenericMainContainer>
