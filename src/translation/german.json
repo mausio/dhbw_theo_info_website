@@ -1,0 +1,221 @@
+{
+  "navigation": {
+    "imprint": "Impressum",
+    "home": "Startseite",
+    "sorting": "Sortieralgorithmen",
+    "search": "Suche",
+    "graphs": "Graphen",
+    "coding": "Coding",
+    "account" : "Account",
+    "radix": "Radix",
+    "merge": "Merge",
+    "bucket": "Bucket",
+    "counting": "Counting",
+    "heap": "Heap",
+    "quick": "Quick",
+    "insertion": "Insertion"
+  },
+  "home": {
+    "title": "ALGO",
+    "subtitle": "Willkommen zu den Aufgaben der Algorithmen!",
+    "noLoginRequired": "Es ist nicht notwendig, sich anzumelden, um die Übungen zu machen.",
+    "bonusNote": "⚠️ Wenn Sie jedoch den Vorlesungsbonus erhalten möchten, müssen Sie sich anmelden und abgeschlossene Aufgaben einreichen.",
+    "tipsTitle": "💡 Tipps:",
+    "tipSubmit": "Vergessen Sie nach erfolgreichem Abschluss einer Aufgabe nicht, auf die Schaltfläche \"Absenden\" zu klicken! 🔔",
+    "tipBigScreen": "Es ist schöner, große Bildschirme zu verwenden 🤓",
+    "loginInstruction": "Verwenden Sie zur Anmeldung die Informationen, die Ihr Dozent Ihnen gegeben hat. 📜",
+    "bonusInstruction": "Um den Bonus zu erhalten, schließen Sie alle Aufgaben vor der Prüfung ab!!! ⏳",
+    "fun": "Viel Spaß! 🎉"
+  },
+  "sorting": {
+    "insertion": {
+      "description": "Insertion Sort baut ein sortiertes Array auf, indem es ein Element nach dem anderen vergleicht und an die richtige Position einfügt, ähnlich wie beim Sortieren von Spielkarten in der Hand.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Beginne mit dem ersten Element als sortiert",
+        "2": "Nimm das nächste Element und vergleiche es mit allen Elementen im sortierten Bereich",
+        "3": "Verschiebe größere Elemente nach rechts, um Platz zu schaffen",
+        "4": "Füge das Element an der richtigen Position ein",
+        "5": "Wiederhole Schritte 2-4, bis alle Elemente sortiert sind"
+      },
+      "complexity": "Komplexität:",
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "animation": {
+        "initialMessage": "Mischen, dann sortieren! :)",
+        "shuffling": "Mische!",
+        "sortingCompleted": "Sortierung abgeschlossen!",
+        "key": "A[{{index}}] = Schlüssel = {{value}}",
+        "comparison": "A[{{index}}] = {{value}} ist {{comparison}} als der Schlüssel(={{key}})",
+        "smaller": "kleiner",
+        "greater": "größer",
+        "propagating": "propagiere vorwärts...",
+        "placingKey": "platziere den Schlüssel(={{key}}) bei A[{{index}}]",
+        "nextKey": "weiter zum nächsten Schlüssel..."
+      },
+      "task": {
+        "title": "Aufgabe 1 Schrittweise Wert",
+        "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder for-Schleife ein.",
+        "inputArray": "Eingabearray:",
+        "submit": "Einreichen?"
+      }
+    },
+    "animation": {
+      "common": {
+        "initialMessage": "Mischen, dann sortieren! :)",
+        "shuffling": "Array wird gemischt...",
+        "shufflingFinished": "Array gemischt! Bereit zum Sortieren.",
+        "sortingComplete": "Sortierung abgeschlossen!",
+        "speedSlider": "Animationsgeschwindigkeit",
+        "buttons": {
+          "shuffle": "Mischen",
+          "sort": "Sortieren",
+          "step": "Schritt",
+          "manual": "Manuell",
+          "continue": "Fortsetzen",
+          "pause": "Pause",
+          "animate": "Animieren"
+        }
+      }
+    },
+    "heap": {
+      "animation": {
+        "initialMessage": "Mischen, dann sortieren! :)",
+        "shuffling": "Mische!",
+        "shufflingFinished": "Mischen beendet. Starte Sortierung!",
+        "sortingComplete": "Sortierung abgeschlossen!",
+        "outOfBounds": "außerhalb des Bereichs!",
+        "noChildren": "hat keine Kinder",
+        "buttons": {
+          "shuffle": "Mischen",
+          "sort": "Sortieren",
+          "step": "Schritt",
+          "manual": "Manuell",
+          "continue": "Fortsetzen",
+          "pause": "Pause",
+          "animate": "Animieren"
+        }
+      }
+    },
+    "counting": {
+      "description": "Counting Sort ist ein nicht-vergleichender Sortieralgorithmus, der durch Zählen der Vorkommen jedes Elements und deren Platzierung an der richtigen Position funktioniert.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Finde den Wertebereich des Eingabe-Arrays",
+        "2": "Erstelle ein Zähl-Array und zähle jedes Element",
+        "3": "Modifiziere das Zähl-Array, um die tatsächlichen Positionen zu enthalten",
+        "4": "Baue das Ausgabe-Array auf",
+        "5": "Kopiere das Ausgabe-Array zurück in das ursprüngliche Array"
+      },
+      "complexity": {
+        "best": "O(n+k)",
+        "average": "O(n+k)",
+        "worst": "O(n+k)",
+        "space": "O(n+k)"
+      },
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "animation": {
+        "countingPhase": "Starte Zählphase...",
+        "step1": "Erstelle Zähl-Array...",
+        "accessingValue": "Greife auf Wert bei Index {{index}} zu: {{value}}",
+        "selectingArray": "Wähle Zähl-Array bei Index {{index}}",
+        "incrementingCount": "Erhöhe Zähler bei Index {{index}} auf {{count}}",
+        "summingTotals": "Berechne Summen im Zähl-Array...",
+        "calculatingSum": "Berechne Summe bei Index {{index}} mit vorherigem Index {{prevIndex}}",
+        "sumResult": "Summe bei Index {{index}} ist {{sum}}",
+        "placingElements": "Platziere Elemente in sortierte Positionen...",
+        "selectingElement": "Wähle Element bei Index {{index}}",
+        "selectingCount": "Prüfe Zähler bei Index {{index}}",
+        "selectingPosition": "Position gefunden bei Index {{index}}",
+        "placingElement": "Verschiebe Element von Index {{sourceIndex}} zu Position {{targetIndex}}",
+        "decrementingCount": "Verringere Zähler bei Index {{index}}",
+        "done": "Fertig!",
+        "sortingComplete": "Array sortiert!"
+      },
+      "task": {
+        "title": "Aufgabe 1: Bestimmung der Zähl-Arrays",
+        "description": "Füllen Sie die Zähl-Arrays aus und konstruieren Sie das sortierte Array Schritt für Schritt.",
+        "inputArray": "Eingabe-Array:",
+        "arrays": {
+          "counting": "Zähl-Array",
+          "accumulating": "Akkumulierendes Array",
+          "sortable": "Sortierbares Array",
+          "unsorted": "Unsortiertes Array"
+        },
+        "submit": "Einreichen"
+      }
+    },
+    "radix": {
+      "description": "Radix Sort ist ein nicht-vergleichender Sortieralgorithmus, der Zahlen sortiert, indem jede Ziffer von der am wenigsten signifikanten zur am meisten signifikanten verarbeitet wird.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Beginne mit der rechten Ziffer",
+        "2": "Sortiere Zahlen basierend auf der aktuellen Ziffer",
+        "3": "Gehe zur nächsten Ziffer links",
+        "4": "Wiederhole, bis alle Ziffern verarbeitet sind"
+      },
+      "complexity": {
+        "best": "O(nk)",
+        "average": "O(nk)",
+        "worst": "O(nk)",
+        "space": "O(n+k)"
+      },
+      "animation": {
+        "initialMessage": "Mischen, dann sortieren! :)",
+        "shuffling": "Mische!",
+        "shufflingFinished": "Mischen beendet. Starte Sortierung!",
+        "sortingComplete": "Sortierung abgeschlossen!",
+        "selectingDigit": "Wähle Ziffer Nr. {{index}}",
+        "sorting": "Sortiere([{{digits}}])",
+        "finishedDigit": "Sortierung basierend auf Ziffer Nr.{{index}} abgeschlossen"
+      },
+      "task": {
+        "numbers": {
+          "title": "Aufgabe 1 Schrittweise A Wert, Zahlen",
+          "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder for-Schleife ein.",
+          "inputArray": "Eingabearray:"
+        },
+        "words": {
+          "title": "Aufgabe 2 Schrittweise B Wert, Wörter",
+          "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays B nach jeder for-Schleife ein.",
+          "inputArray": "Eingabearray:"
+        },
+        "iteration": {
+          "afterIteration": "Nach Iteration Nr",
+          "reset": "Zurück",
+          "check": "Prüfen"
+        }
+      }
+    }
+  },
+  "general": {
+    "explanation": "^^^ Erklärung ^^^",
+    "tipps": "^^^ Tipps ^^^",
+    "leaderboard": {
+      "title": "Top 10 Bestenliste 🏆",
+      "rank": "Rang",
+      "name": "Name",
+      "score": "Punkte",
+      "progress": "Fortschritt",
+      "noData": "Noch keine Einträge"
+    },
+    "buttons": {
+      "shuffle": "Mischen",
+      "sort": "Sortieren",
+      "step": "Schritt",
+      "manual": "Manuell",
+      "continue": "Fortsetzen",
+      "pause": "Pause",
+      "animate": "Animieren"
+    }
+  }
+}

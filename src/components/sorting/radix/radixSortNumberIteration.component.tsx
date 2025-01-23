@@ -21,8 +21,10 @@ import { useEffect, useState } from 'react';
 import { BraceSpan, Button, MarkedRedText } from '../../../styles/general/generic.style.ts';
 import { SortableItem } from '../../general/draggable.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
+import { useTranslation } from 'react-i18next';
 
 const RadixNumberIterationComponent = ({ expectedArray, taskArray, setTaskArray, iterations: nrOfIteration }) => {
+  const { t } = useTranslation();
   const [activeId, setActiveId] = useState<number | null>(null);
   const [workingArray, setWorkingArray] = useState<number[]>(taskArray);
   const [isWrongAnswer, setIsWrongAnswer] = useState<boolean>(false);
@@ -87,7 +89,7 @@ const RadixNumberIterationComponent = ({ expectedArray, taskArray, setTaskArray,
   return (
     <SingleIterationContainer>
       <IterationTitle>
-        After Iteration Nr <MarkedRedText>{nrOfIteration}</MarkedRedText>
+        {t('sorting.radix.task.iteration.afterIteration')} <MarkedRedText>{nrOfIteration}</MarkedRedText>
       </IterationTitle>
       <SortableContainer>
         <DndContext
@@ -109,7 +111,7 @@ const RadixNumberIterationComponent = ({ expectedArray, taskArray, setTaskArray,
       </SortableContainer>
       <ButtonIterationContainer>
         <Button onClick={handleReset} style={{ minWidth: 55, width: 55 }} disabled={isTrueAnswer || isWrongAnswer}>
-          Reset
+          {t('sorting.radix.task.iteration.reset')}
         </Button>
         <Button
           style={{
@@ -121,7 +123,7 @@ const RadixNumberIterationComponent = ({ expectedArray, taskArray, setTaskArray,
           onClick={handleCheck}
           disabled={isWrongAnswer || isTrueAnswer}
         >
-          Check
+          {t('sorting.radix.task.iteration.check')}
         </Button>
       </ButtonIterationContainer>
     </SingleIterationContainer>

@@ -13,9 +13,11 @@ import { DiagrammsContainer } from '../../../styles/sorting/radixSort.style.ts';
 import RadixSortDiagram from './radixSortDiagram.component.tsx';
 import { generateRandomArrayOfNFromTo } from '../../../utils/number.utils.ts';
 import { swapInArray } from '../../../utils/array.utils.ts';
+import { useTranslation } from 'react-i18next';
 
 const RadixSortAnimation = () => {
   const delay = 1000;
+  const { t } = useTranslation();
 
   const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(10, 1, 9999).sort((a, b) => a - b));
   const [initialEmptyData] = useState<number[]>(Array(initialData.length).fill(null));
@@ -28,7 +30,7 @@ const RadixSortAnimation = () => {
   const [isSorted, setIsSorted] = useState<boolean>(true);
   const [isSorting, setIsSorting] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
+  const [infoText, setInfoText] = useState<string>(t('sorting.radix.animation.initialMessage'));
   const [selectedColumn, setSelectedColumn] = useState<number>(null);
   const [selectedSecondaryRadixArrayRow, setSelectedSecondaryRadixArrayRow] = useState<number>(null);
   const [selectedMainRadixArrayRow, setSelectedMainRadixArrayRow] = useState<number>(null);
@@ -40,7 +42,7 @@ const RadixSortAnimation = () => {
   const stepRequestRef = useRef<boolean>(false);
 
   const performShuffle = async () => {
-    setInfoText('Shuffling!');
+    setInfoText(t('sorting.radix.animation.shuffling'));
     setIsColorFaderOn(true);
     setIsShuffeling(true);
 
@@ -67,7 +69,7 @@ const RadixSortAnimation = () => {
     await wait(300);
 
     setIsColorFaderOn(false);
-    setInfoText('Shuffling finished. Start sorting!');
+    setInfoText(t('sorting.radix.animation.shufflingFinished'));
   };
 
   const radixSort = async () => {
@@ -75,7 +77,7 @@ const RadixSortAnimation = () => {
     let secondaryArray = [...secondaryRadixArray];
 
     for (let digitIndex = 3; digitIndex >= 0; digitIndex--) {
-      setInfoText(`Selecting digit Nr. ${digitIndex + 1}`);
+      setInfoText(t('sorting.radix.animation.selectingDigit', { index: digitIndex + 1 }));
       setSelectedColumn(digitIndex);
 
       await stepPauseWaitRequest();
@@ -96,7 +98,7 @@ const RadixSortAnimation = () => {
 
       const digits = digitInfo.map((item) => item.lastDigit);
 
-      setInfoText(`Sorting([${digits}])`);
+      setInfoText(t('sorting.radix.animation.sorting', { digits: digits }));
 
       digitInfo.forEach((item, newIdx) => {
         newIndex[item.originalIndex] = newIdx;
@@ -121,7 +123,7 @@ const RadixSortAnimation = () => {
 
       await stepPauseWaitRequest();
 
-      setInfoText(`Finished sorting based on digit Nr.${digitIndex + 1}`);
+      setInfoText(t('sorting.radix.animation.finishedDigit', { index: digitIndex + 1 }));
       setMainRadixArray([...secondaryArray]);
       setSecondaryRadixArray([...unsortedArray]);
       await stepPauseWaitRequest();
@@ -148,7 +150,7 @@ const RadixSortAnimation = () => {
     exitRequestRef.current = false;
     pauseRequestRef.current = false;
     setIsPaused(false);
-    setInfoText('Sorting complete!');
+    setInfoText(t('sorting.radix.animation.sortingComplete'));
   };
 
   const performPause = async () => {
@@ -246,6 +248,8 @@ const RadixSortAnimation = () => {
         />
         <RadixSortDiagram
           radixData={secondaryRadixArray}
+          isShuffling={false}
+          isColorFaderOn={false}
           selectedColumn={selectedColumn}
           selectedRow={selectedSecondaryRadixArrayRow}
         />
@@ -253,7 +257,7 @@ const RadixSortAnimation = () => {
       <ControlPanel>
         <SliderPanel>
           <Slider
-            aria-label="Temperature"
+            aria-label={t('sorting.animation.common.speedSlider')}
             defaultValue={1}
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
@@ -266,10 +270,10 @@ const RadixSortAnimation = () => {
         </SliderPanel>
         <ButtonPanel>
           <Button onClick={performShuffle} disabled={isShuffling || isSorting}>
-            Shuffle
+            {t('sorting.animation.common.buttons.shuffle')}
           </Button>
           <Button onClick={performMakeChoice} disabled={isShuffling || isSorted || isSorting}>
-            Sort
+            {t('sorting.animation.common.buttons.sort')}
           </Button>
 
           {isManual || isPaused ? (
@@ -277,29 +281,29 @@ const RadixSortAnimation = () => {
               onClick={performMakeAStep}
               disabled={isShuffling || isSorted || !isSorting || (isAnimated && !isPaused)}
             >
-              Step
+              {t('sorting.animation.common.buttons.step')}
             </Button>
           ) : (
             <Button
               onClick={performStartManual}
               disabled={isManual || isShuffling || isSorted || !isSorting || isAnimated}
             >
-              Manual
+              {t('sorting.animation.common.buttons.manual')}
             </Button>
           )}
           {isAnimated ? (
             isPaused ? (
               <Button onClick={performContinueSorting} disabled={isShuffling || isSorted || !isSorting}>
-                Continue
+                {t('sorting.animation.common.buttons.continue')}
               </Button>
             ) : (
               <Button onClick={performPauseSorting} disabled={isShuffling || isSorted || !isSorting}>
-                Pause
+                {t('sorting.animation.common.buttons.pause')}
               </Button>
             )
           ) : (
             <Button onClick={performStartAnimating} disabled={isSorted || !isSorting || isAnimated}>
-              Animate
+              {t('sorting.animation.common.buttons.animate')}
             </Button>
           )}
         </ButtonPanel>

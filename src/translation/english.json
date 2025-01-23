@@ -63,10 +63,153 @@
         "inputArray": "Input array:",
         "submit": "Submit?"
       }
+    },
+    "animation": {
+      "common": {
+        "initialMessage": "shuffle, then sort! :)",
+        "shuffling": "Shuffling array...",
+        "shufflingFinished": "Array shuffled! Ready to sort.",
+        "sortingComplete": "Sorting complete!",
+        "speedSlider": "Animation Speed",
+        "buttons": {
+          "shuffle": "Shuffle",
+          "sort": "Sort",
+          "step": "Step",
+          "manual": "Manual",
+          "continue": "Continue",
+          "pause": "Pause",
+          "animate": "Animate"
+        }
+      }
+    },
+    "heap": {
+      "animation": {
+        "initialMessage": "shuffle, then sort! :)",
+        "shuffling": "Shuffling!",
+        "shufflingFinished": "Shuffling finished. Start sorting!",
+        "sortingComplete": "Sorting complete!",
+        "outOfBounds": "out of bounce!",
+        "noChildren": "has no children",
+        "buttons": {
+          "shuffle": "Shuffle",
+          "sort": "Sort",
+          "step": "Step",
+          "manual": "Manual",
+          "continue": "Continue",
+          "pause": "Pause",
+          "animate": "Animate"
+        }
+      }
+    },
+    "counting": {
+      "description": "Counting Sort is a non-comparative sorting algorithm that works by counting the occurrences of each element and placing them in their correct positions.",
+      "process": "Process:",
+      "steps": {
+        "1": "Find the range of input array",
+        "2": "Create a counting array and count occurrences",
+        "3": "Modify counting array to store actual positions",
+        "4": "Build output array using counting array",
+        "5": "Copy output array back to original array"
+      },
+      "complexity": {
+        "best": "O(n+k)",
+        "average": "O(n+k)",
+        "worst": "O(n+k)",
+        "space": "O(n+k)"
+      },
+      "animation": {
+        "countingPhase": "Starting counting phase...",
+        "step1": "Creating counting array...",
+        "accessingValue": "Accessing value at index {{index}}: {{value}}",
+        "selectingArray": "Selecting counting array at index {{index}}",
+        "incrementingCount": "Incrementing count at index {{index}} to {{count}}",
+        "summingTotals": "Summing totals in counting array...",
+        "calculatingSum": "Calculating sum at index {{index}} using previous index {{prevIndex}}",
+        "sumResult": "Sum at index {{index}} is {{sum}}",
+        "placingElements": "Placing elements in sorted positions...",
+        "selectingElement": "Selecting element at index {{index}}",
+        "selectingCount": "Looking up count at index {{index}}",
+        "selectingPosition": "Found position at index {{index}}",
+        "placingElement": "Moving element from index {{sourceIndex}} to position {{targetIndex}}",
+        "decrementingCount": "Decrementing count at index {{index}}",
+        "done": "Done!",
+        "sortingComplete": "Array sorted!"
+      },
+      "task": {
+        "title": "Task 1: Determination of counting arrays",
+        "description": "Fill in the counting arrays and construct the sorted array step by step.",
+        "inputArray": "Input array:",
+        "arrays": {
+          "counting": "Counting Array",
+          "accumulating": "Accumulating Array",
+          "sortable": "Sortable Array",
+          "unsorted": "Unsorted Array"
+        },
+        "submit": "Submit"
+      }
+    },
+    "radix": {
+      "description": "Radix Sort is a non-comparative sorting algorithm that sorts numbers by processing each digit position, starting from the least significant digit to the most significant digit.",
+      "process": "Process:",
+      "steps": {
+        "1": "Start with the rightmost digit",
+        "2": "Sort numbers based on the current digit",
+        "3": "Move to the next digit to the left",
+        "4": "Repeat until all digits are processed"
+      },
+      "complexity": {
+        "best": "O(nk)",
+        "average": "O(nk)",
+        "worst": "O(nk)",
+        "space": "O(n+k)"
+      },
+      "animation": {
+        "initialMessage": "shuffle, then sort! :)",
+        "shuffling": "Shuffling!",
+        "shufflingFinished": "Shuffling finished. Start sorting!",
+        "sortingComplete": "Sorting complete!",
+        "selectingDigit": "Selecting digit Nr. {{index}}",
+        "sorting": "Sorting([{{digits}}])",
+        "finishedDigit": "Finished sorting based on digit Nr.{{index}}"
+      },
+      "task": {
+        "numbers": {
+          "title": "Task 1 Step-wise A value, numbers",
+          "description": "Given the input array, fill in the values of array A after each for loop.",
+          "inputArray": "Input array:"
+        },
+        "words": {
+          "title": "Task 2 Step-wise B value, words",
+          "description": "Given the input array, fill in the values of array B after each for loop.",
+          "inputArray": "Input array:"
+        },
+        "iteration": {
+          "afterIteration": "After Iteration Nr",
+          "reset": "Reset",
+          "check": "Check"
+        }
+      }
     }
   },
   "general": {
     "explanation": "^^^ Explanation ^^^",
-    "tipps": "^^^ Tipps ^^^"
+    "tipps": "^^^ Tipps ^^^",
+    "leaderboard": {
+      "title": "Top 10 Leaderboard 🏆",
+      "rank": "Rank",
+      "name": "Name",
+      "score": "Score",
+      "progress": "Progress",
+      "noData": "No entries yet"
+    },
+    "buttons": {
+      "shuffle": "Shuffle",
+      "sort": "Sort",
+      "step": "Step",
+      "manual": "Manual",
+      "continue": "Continue",
+      "pause": "Pause",
+      "animate": "Animate"
+    }
   }
 }

@@ -17,6 +17,7 @@ import BarChart from '../../general/barChart.component.tsx';
 import IndexChart from '../../general/indexChart.component.tsx';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { wait } from '../../../utils/promise.utils.ts';
+import { useTranslation } from 'react-i18next';
 
 export type CountingIteration = {
   countingArray: number[];
@@ -30,6 +31,7 @@ export type CountingIteration = {
 //TODO: Hier ist ein Bug. testen&testen&testen und finden =>
 
 const CountingSortDeterminationTask = () => {
+  const { t } = useTranslation();
   const n = 10;
   const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(n, 1, 5));
   const [accumulatingBarsSolution, setAccumulatingBarsSolution] = useState<number[]>([]);
@@ -284,18 +286,17 @@ const CountingSortDeterminationTask = () => {
     <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
       <h2 style={{ maxWidth: '88%' }}>
-        Task 1: Determination of counting arrays and stepwise construction of a sorted array{' '}
-        <MarkedRedText>B</MarkedRedText> with counting sort.
+        {t('sorting.counting.task.title')} <MarkedRedText>B</MarkedRedText>
       </h2>
-      <p>Stuff: Description</p>
+      <p>{t('sorting.counting.task.description')}</p>
       <p>
-        Input array: <MarkedText>[{printArray(initialData)}]</MarkedText>
+        {t('sorting.counting.task.inputArray')} <MarkedText>[{printArray(initialData)}]</MarkedText>
       </p>
       <CountingSortEntriesContainer>
         <FirstStepContainer>
           <SingleDiagramContainer>
             <DiagramName>
-              <MarkedRedText>B</MarkedRedText> Array
+              <MarkedRedText>{t('sorting.counting.task.arrays.counting')}</MarkedRedText>
             </DiagramName>
             <BarChart barsHeight={10} height={120} bars={countingBars} doNotShowNumber={true} fullLength={true} />
             <DiagramIterationWrapper>
@@ -337,7 +338,7 @@ const CountingSortDeterminationTask = () => {
               <KeyboardDoubleArrowRightIcon style={{ fontSize: '1.75rem', color: 'gray' }} />
               <SingleDiagramContainer>
                 <DiagramName>
-                  <MarkedRedText>B'</MarkedRedText> Array
+                  <MarkedRedText>{t('sorting.counting.task.arrays.accumulating')}</MarkedRedText>
                 </DiagramName>
                 <BarChart
                   pivotIndex={markedCount}
@@ -395,7 +396,7 @@ const CountingSortDeterminationTask = () => {
           <SecondStepContainer>
             <SingleDiagramContainer style={{ width: '100%' }}>
               <DiagramName>
-                <MarkedRedText>C</MarkedRedText> Array
+                <MarkedRedText>{t('sorting.counting.task.arrays.sortable')}</MarkedRedText>
               </DiagramName>
               <BarChart
                 selectedIndex={markedSortable}
@@ -442,7 +443,7 @@ const CountingSortDeterminationTask = () => {
             </SingleDiagramContainer>
             <SingleDiagramContainer style={{ width: '100%' }}>
               <DiagramName>
-                <MarkedRedText>A</MarkedRedText> Array
+                <MarkedRedText>{t('sorting.counting.task.arrays.unsorted')}</MarkedRedText>
               </DiagramName>
               <BarChart
                 comparingIndex={markedUnsorted}
@@ -492,7 +493,7 @@ const CountingSortDeterminationTask = () => {
       </CountingSortEntriesContainer>
 
       <Button disabled={!isSolved} style={{ position: 'absolute', right: 15, top: 15 }}>
-        Submit
+        {t('sorting.counting.task.submit')}
       </Button>
     </SingleTaskContainer>
   );

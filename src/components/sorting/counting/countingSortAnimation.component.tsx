@@ -14,10 +14,12 @@ import { useRef, useState } from 'react';
 import { swapInArray } from '../../../utils/array.utils.ts';
 import { wait } from '../../../utils/promise.utils.ts';
 import { BarChartDivider } from '../../../styles/sorting/countingSort.style.ts';
+import { useTranslation } from 'react-i18next';
 
 const initialData = [1, 1, 1, 2, 2, 3, 3, 3, 3, 4];
 
 const CountingSortAnimation = () => {
+  const { t } = useTranslation();
   const delay = 1000;
 
   const [bars, setBars] = useState<number[]>(initialData);
@@ -36,9 +38,8 @@ const CountingSortAnimation = () => {
   const [pivotIndex, setPivotIndex] = useState<number | null>(null);
   const [sortIndex, setSortIndex] = useState<number | null>(null);
   const [key, setKey] = useState<number | null>(null);
-  const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
+  const [infoText, setInfoText] = useState<string>(t('sorting.animation.common.initialMessage'));
 
-  const exitRequestRef = useRef<boolean>(false);
   const pauseRequestRef = useRef<boolean>(false);
   const shuffelingRequestRef = useRef<boolean>(false);
   const speedRequestRef = useRef<number>(1);
@@ -48,6 +49,7 @@ const CountingSortAnimation = () => {
     setIsShuffeling(true);
     setSelectedIndex(null);
     setComparingIndex(null);
+    setInfoText(t('sorting.animation.common.shuffling'));
 
     const shuffledBars = [...bars];
 
@@ -63,12 +65,13 @@ const CountingSortAnimation = () => {
 
     setIsShuffeling(false);
     setIsSorted(false);
+    setInfoText(t('sorting.animation.common.shufflingFinished'));
     shuffelingRequestRef.current = false;
   };
 
   const performCountingSort = async () => {
     setIsSorting(true);
-    setInfoText(`Starting counting sort`);
+    setInfoText(t('sorting.counting.animation.countingPhase'));
     if (!stepRequestRef.current || pauseRequestRef.current) {
       await performPause();
     }
@@ -81,7 +84,7 @@ const CountingSortAnimation = () => {
 
     const countArray = Array(maxValue - minValue + 1).fill(0);
 
-    setInfoText(`Step 1: counting phase`);
+    setInfoText(t('sorting.counting.animation.step1'));
     if (!stepRequestRef.current || pauseRequestRef.current) {
       await performPause();
     }
@@ -91,7 +94,7 @@ const CountingSortAnimation = () => {
 
     // 1
     for (let i = 0; i < bars.length; i++) {
-      setInfoText(`Accessing value A[${i + 1}] = ${bars[i]}`);
+      setInfoText(t('sorting.counting.animation.accessingValue', { index: i + 1, value: bars[i] }));
       setComparingIndex(i);
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
@@ -100,7 +103,7 @@ const CountingSortAnimation = () => {
         await wait(delay / speedRequestRef.current);
       }
 
-      setInfoText(`Selecting corresponding array B[${bars[i] - minValue + 1}]`);
+      setInfoText(t('sorting.counting.animation.selectingArray', { index: bars[i] - minValue + 1 }));
       setSelectedIndex(bars[i] - minValue);
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
@@ -110,7 +113,10 @@ const CountingSortAnimation = () => {
       }
 
       countArray[bars[i] - minValue]++;
-      setInfoText(`Incrementing count B[${bars[i] - minValue + 1}] = ${countArray[bars[i] - minValue]} `);
+      setInfoText(t('sorting.counting.animation.incrementingCount', { 
+        index: bars[i] - minValue + 1, 
+        count: countArray[bars[i] - minValue] 
+      }));
       setCountingBars([...countArray]);
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
@@ -119,18 +125,12 @@ const CountingSortAnimation = () => {
         await wait(delay / speedRequestRef.current);
       }
       setSelectedIndex(null);
-      if (exitRequestRef.current) {
-        break;
-      }
-    }
-    if (exitRequestRef.current) {
-      return;
     }
 
     setComparingIndex(null);
     setSelectedIndex(null);
 
-    setInfoText(`Step 2: summing up the totals`);
+    setInfoText(t('sorting.counting.animation.summingTotals'));
     if (!stepRequestRef.current || pauseRequestRef.current) {
       await performPause();
     }
@@ -139,7 +139,10 @@ const CountingSortAnimation = () => {
     }
     //2
     for (let i = 1; i <= countArray.length - 1; i++) {
-      setInfoText(`B[${i + 1}] = B[${i - 1 + 1}] + B[${i + 1}] ...`);
+      setInfoText(t('sorting.counting.animation.calculatingSum', { 
+        index: i + 1,
+        prevIndex: i - 1 + 1
+      }));
       setSelectedIndex(i - 1);
       setPivotIndex(i);
       if (!stepRequestRef.current || pauseRequestRef.current) {
@@ -152,33 +155,24 @@ const CountingSortAnimation = () => {
       countArray[i] = countArray[i] + countArray[i - 1];
       setCountingBars([...countArray]);
 
-      setInfoText(`... B[${i + 1}] = ${countArray[i]}`);
+      setInfoText(t('sorting.counting.animation.sumResult', { index: i + 1, sum: countArray[i] }));
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
       if (!isManual) {
         await wait(delay / speedRequestRef.current);
       }
-      if (exitRequestRef.current) {
-        break;
-      }
-    }
-    if (exitRequestRef.current) {
-      return;
     }
 
     setSelectedIndex(null);
     setPivotIndex(null);
 
-    setInfoText(`Step 3: placing elements in sorted array`);
+    setInfoText(t('sorting.counting.animation.placingElements'));
     if (!stepRequestRef.current || pauseRequestRef.current) {
       await performPause();
     }
     if (!isManual) {
       await wait(delay / speedRequestRef.current);
-    }
-    if (exitRequestRef.current) {
-      return;
     }
 
     const newSortedBars = [...sortedBars];
@@ -189,7 +183,7 @@ const CountingSortAnimation = () => {
       const position = countArray[currentValue - minValue] - 1;
 
       setComparingIndex(i);
-      setInfoText(`Selecting current element of unsorted A[${i + 1}]`);
+      setInfoText(t('sorting.counting.animation.selectingElement', { index: i + 1 }));
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -198,7 +192,7 @@ const CountingSortAnimation = () => {
       }
 
       setPivotIndex(currentValue - minValue);
-      setInfoText(`Selecting counting element B[${currentValue - minValue + 1}]`);
+      setInfoText(t('sorting.counting.animation.selectingCount', { index: currentValue - minValue + 1 }));
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -208,7 +202,7 @@ const CountingSortAnimation = () => {
 
       newSortedBars[position] = currentValue;
       setSortIndex(position);
-      setInfoText(`Selecting new position C[${position + 1}]`);
+      setInfoText(t('sorting.counting.animation.selectingPosition', { index: position + 1 }));
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -219,7 +213,10 @@ const CountingSortAnimation = () => {
       newBars[i] = 0;
       setBars([...newBars]);
       setSortedBars([...newSortedBars]);
-      setInfoText(`Placing A[${currentValue - minValue + 1}] in C[${position + 1}]`);
+      setInfoText(t('sorting.counting.animation.placingElement', { 
+        sourceIndex: currentValue - minValue + 1,
+        targetIndex: position + 1
+      }));
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -229,7 +226,7 @@ const CountingSortAnimation = () => {
 
       countArray[currentValue - minValue]--;
       setCountingBars([...countArray]);
-      setInfoText(`Decrementing count for B[${currentValue - minValue + 1}]`);
+      setInfoText(t('sorting.counting.animation.decrementingCount', { index: currentValue - minValue + 1 }));
       if (!stepRequestRef.current || pauseRequestRef.current) {
         await performPause();
       }
@@ -245,15 +242,9 @@ const CountingSortAnimation = () => {
       if (!isManual) {
         await wait(delay / speedRequestRef.current);
       }
-      if (exitRequestRef.current) {
-        break;
-      }
-    }
-    if (exitRequestRef.current) {
-      return;
     }
 
-    setInfoText('Done!');
+    setInfoText(t('sorting.counting.animation.done'));
     setSelectedIndex(null);
     setPivotIndex(null);
     if (!stepRequestRef.current || pauseRequestRef.current) {
@@ -267,7 +258,7 @@ const CountingSortAnimation = () => {
     setIsSorted(true);
     setComparingIndex(null);
     setCountingBars(Array(countingBars.length).fill(0));
-    setInfoText('Array sorted!');
+    setInfoText(t('sorting.counting.animation.sortingComplete'));
   };
 
   const performPause = async () => {
@@ -281,8 +272,6 @@ const CountingSortAnimation = () => {
     setIsSorting(true);
 
     if (!isManual && isAnimated) {
-      exitRequestRef.current = false;
-      pauseRequestRef.current = false;
       await performCountingSort();
     }
   };
@@ -310,7 +299,7 @@ const CountingSortAnimation = () => {
       pauseRequestRef.current = false;
       speedRequestRef.current = 1;
     } else {
-      setIsShuffeling(false);
+      setIsShuffeling(false)
       setIsAnimated(true);
       stepRequestRef.current = true;
       pauseRequestRef.current = false;
@@ -372,7 +361,7 @@ const CountingSortAnimation = () => {
       <ControlPanel>
         <SliderPanel>
           <Slider
-            aria-label="Temperature"
+            aria-label={t('sorting.animation.common.speedSlider')}
             defaultValue={1}
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
@@ -385,34 +374,34 @@ const CountingSortAnimation = () => {
         </SliderPanel>
         <ButtonPanel>
           <Button onClick={smoothShuffleBars} disabled={isShuffelling || isSorting}>
-            Shuffle
+            {t('sorting.animation.common.buttons.shuffle')}
           </Button>
           <Button onClick={makeChoice} disabled={isShuffelling || isSorted || isSorting}>
-            Sort
+            {t('sorting.animation.common.buttons.sort')}
           </Button>
 
           {isManual || isPaused ? (
             <Button onClick={makeAStep} disabled={isShuffelling || isSorted || !isSorting || (isAnimated && !isPaused)}>
-              Step
+              {t('sorting.animation.common.buttons.step')}
             </Button>
           ) : (
             <Button onClick={startManual} disabled={isManual || isShuffelling || isSorted || !isSorting || isAnimated}>
-              Manual
+              {t('sorting.animation.common.buttons.manual')}
             </Button>
           )}
           {isAnimated ? (
             isPaused ? (
               <Button onClick={continueSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Continue
+                {t('sorting.animation.common.buttons.continue')}
               </Button>
             ) : (
               <Button onClick={pauseSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Pause
+                {t('sorting.animation.common.buttons.pause')}
               </Button>
             )
           ) : (
             <Button onClick={startAnimated} disabled={isSorted || !isSorting || isAnimated}>
-              Animate
+              {t('sorting.animation.common.buttons.animate')}
             </Button>
           )}
         </ButtonPanel>

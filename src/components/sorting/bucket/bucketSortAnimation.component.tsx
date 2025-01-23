@@ -20,6 +20,7 @@ import {
   BucketsContainer,
   LittleBucket,
 } from '../../../styles/sorting/bucketSort.style.ts';
+import { useTranslation } from 'react-i18next';
 
 const initialData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const initialBuckets = [
@@ -41,6 +42,7 @@ export type Bucket = {
 };
 
 const BucketSortAnimation = () => {
+  const { t } = useTranslation();
   const delay = 1000;
 
   const [bars, setBars] = useState<number[]>(initialData);
@@ -53,7 +55,7 @@ const BucketSortAnimation = () => {
   const [selectedBucketIndex, setSelectedBucketIndex] = useState<number | null>(null);
   const [barsComparingIndex, setBarsComparingIndex] = useState<number | null>(null);
   const [pivotIndex, setPivotIndex] = useState<number | null>(null);
-  const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
+  const [infoText, setInfoText] = useState<string>(t('sorting.animation.common.initialMessage'));
   const [isStart, setIsStart] = useState<number | null>(null);
   const [isEnd, setIsEnd] = useState<number | null>(null);
   const [buckets, setBuckets] = useState<Bucket[]>(initialBuckets);
@@ -80,14 +82,14 @@ const BucketSortAnimation = () => {
     setBarsComparingIndex(null);
     setIsStart(null);
     setIsEnd(null);
-    setInfoText('Sorting complete!');
+    setInfoText(t('sorting.animation.common.sortingComplete'));
   };
 
   const smoothShuffleBars = async () => {
     setIsShuffeling(true);
     setSelectedBucketIndex(null);
     setBarsComparingIndex(null);
-    setInfoText('Shuffling array...');
+    setInfoText(t('sorting.animation.common.shuffling'));
 
     const shuffledBars = [...bars];
 
@@ -102,7 +104,7 @@ const BucketSortAnimation = () => {
 
     setIsShuffeling(false);
     setIsSorted(false);
-    setInfoText('Array shuffled! Ready to sort.');
+    setInfoText(t('sorting.animation.common.shufflingFinished'));
   };
 
   async function bucketSort(initalBuckets) {
@@ -318,7 +320,7 @@ const BucketSortAnimation = () => {
       <ControlPanel>
         <SliderPanel>
           <Slider
-            aria-label="Speed"
+            aria-label={t('sorting.animation.common.speedSlider')}
             defaultValue={1}
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
@@ -331,34 +333,36 @@ const BucketSortAnimation = () => {
         </SliderPanel>
         <ButtonPanel>
           <Button onClick={smoothShuffleBars} disabled={isShuffelling || isSorting}>
-            Shuffle
+            {t('sorting.animation.common.buttons.shuffle')}
           </Button>
           <Button onClick={makeChoice} disabled={isShuffelling || isSorted || isSorting}>
-            Sort
+            {t('sorting.animation.common.buttons.sort')}
           </Button>
+
+
 
           {isManual || isPaused ? (
             <Button onClick={makeAStep} disabled={isShuffelling || isSorted || !isSorting || (isAnimated && !isPaused)}>
-              Step
+              {t('sorting.animation.common.buttons.step')}
             </Button>
           ) : (
             <Button onClick={startManual} disabled={isManual || isShuffelling || isSorted || !isSorting || isAnimated}>
-              Manual
+              {t('sorting.animation.common.buttons.manual')}
             </Button>
           )}
           {isAnimated ? (
             isPaused ? (
               <Button onClick={continueSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Continue
+                {t('sorting.animation.common.buttons.continue')}
               </Button>
             ) : (
               <Button onClick={pauseSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Pause
+                {t('sorting.animation.common.buttons.pause')}
               </Button>
             )
           ) : (
             <Button onClick={startAnimated} disabled={isSorted || !isSorting || isAnimated}>
-              Animate
+              {t('sorting.animation.common.buttons.animate')}
             </Button>
           )}
         </ButtonPanel>

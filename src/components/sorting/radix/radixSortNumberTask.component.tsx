@@ -8,8 +8,10 @@ import { printArray } from '../../general/print.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
 import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
 import RadixNumberIterationComponent from './radixSortNumberIteration.component.tsx';
+import { useTranslation } from 'react-i18next';
 
 const RadixSortNumberIterationTask = () => {
+  const { t } = useTranslation();
   const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(5, 1, 9999));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -85,13 +87,13 @@ const RadixSortNumberIterationTask = () => {
     <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
       <h2>
-        Task 1 Step-wise <MarkedRedText>A</MarkedRedText> value, numbers
+        {t('sorting.radix.task.numbers.title')} <MarkedRedText>A</MarkedRedText>
       </h2>
       <p>
-        Given the input array, fill in the values of array <MarkedRedText>A</MarkedRedText> after each for loop.
+        {t('sorting.radix.task.numbers.description')} <MarkedRedText>A</MarkedRedText>
       </p>
       <p>
-        Input array: <MarkedText>[{printArray(initialData)}]</MarkedText>
+        {t('sorting.radix.task.numbers.inputArray')} <MarkedText>[{printArray(initialData)}]</MarkedText>
       </p>
       <IterationsContainer
         style={{

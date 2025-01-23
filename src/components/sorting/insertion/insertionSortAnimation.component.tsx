@@ -257,7 +257,7 @@ const InsertionSortAnimationComponent = () => {
       <ControlPanel>
         <SliderPanel>
           <Slider
-            aria-label="Temperature"
+            aria-label={t('sorting.animation.common.speedSlider')}
             defaultValue={1}
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
@@ -270,34 +270,34 @@ const InsertionSortAnimationComponent = () => {
         </SliderPanel>
         <ButtonPanel>
           <Button onClick={smoothShuffleBars} disabled={isShuffelling || isSorting}>
-            Shuffle
+            {t('sorting.animation.common.buttons.shuffle')}
           </Button>
           <Button onClick={makeChoice} disabled={isShuffelling || isSorted || isSorting}>
-            Sort
+            {t('sorting.animation.common.buttons.sort')}
           </Button>
 
           {isManual || isPaused ? (
             <Button onClick={makeAStep} disabled={isShuffelling || isSorted || !isSorting || (isAnimated && !isPaused)}>
-              Step
+              {t('sorting.animation.common.buttons.step')}
             </Button>
           ) : (
             <Button onClick={startManual} disabled={isManual || isShuffelling || isSorted || !isSorting || isAnimated}>
-              Manual
+              {t('sorting.animation.common.buttons.manual')}
             </Button>
           )}
           {isAnimated ? (
             isPaused ? (
               <Button onClick={continueSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Continue
+                {t('sorting.animation.common.buttons.continue')}
               </Button>
             ) : (
               <Button onClick={pauseSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Pause
+                {t('sorting.animation.common.buttons.pause')}
               </Button>
             )
           ) : (
             <Button onClick={startAnimated} disabled={isSorted || !isSorting || isAnimated}>
-              Animate
+              {t('sorting.animation.common.buttons.animate')}
             </Button>
           )}
         </ButtonPanel>

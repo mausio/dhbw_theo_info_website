@@ -12,6 +12,7 @@ import BucketSortPage from './pages/sorting/BucketSort.page.tsx';
 import RadixSortPage from './pages/sorting/RadixSort.page.tsx';
 import HeapSortPage from './pages/sorting/HeapSort.page.tsx';
 import './translation/i18next.ts';
+import { LeaderboardProvider } from './context/LeaderboardContext';
 
 // Eine TODO-Liste
 //TODO: uninstall all unused packages
@@ -40,20 +41,22 @@ import './translation/i18next.ts';
 
 function App() {
   return (
-    <Routes>
-      <Route path={'/'} element={<NavigationBar key={'NavigationBar'} />}>
-        <Route index element={<HomePage />} />
-        <Route path={APP_ROUTES.sorting.insertion} element={<InsertionSortPage />} />
-        <Route path={APP_ROUTES.sorting.merge} element={<MergeSortPage />} />
-        <Route path={APP_ROUTES.sorting.quick} element={<QuickSortPage />} />
-        <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
-        <Route path={APP_ROUTES.sorting.bucket} element={<BucketSortPage />} />
-        <Route path={APP_ROUTES.sorting.radix} element={<RadixSortPage />} />
-        <Route path={APP_ROUTES.sorting.heap} element={<HeapSortPage />} />
-        <Route path={'*'} element={<FourOfourPage />} />
-        <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
-      </Route>
-    </Routes>
+    <LeaderboardProvider>
+      <Routes>
+        <Route path={'/'} element={<NavigationBar key={'NavigationBar'} />}>
+          <Route index element={<HomePage />} />
+          <Route path={APP_ROUTES.sorting.insertion} element={<InsertionSortPage />} />
+          <Route path={APP_ROUTES.sorting.merge} element={<MergeSortPage />} />
+          <Route path={APP_ROUTES.sorting.quick} element={<QuickSortPage />} />
+          <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
+          <Route path={APP_ROUTES.sorting.bucket} element={<BucketSortPage />} />
+          <Route path={APP_ROUTES.sorting.radix} element={<RadixSortPage />} />
+          <Route path={APP_ROUTES.sorting.heap} element={<HeapSortPage />} />
+          <Route path={'*'} element={<FourOfourPage />} />
+          <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
+        </Route>
+      </Routes>
+    </LeaderboardProvider>
   );
 }
 

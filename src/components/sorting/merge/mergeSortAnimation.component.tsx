@@ -13,10 +13,12 @@ import IndexChart from '../../general/indexChart.component.tsx';
 import { Slider } from '@mui/material';
 import { swapInArray } from '../../../utils/array.utils.ts';
 import { wait } from '../../../utils/promise.utils.ts';
+import { useTranslation } from 'react-i18next';
 
 const initialData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const MergeSortAnimation = () => {
+  const { t } = useTranslation();
   const delay = 1000;
 
   const [bars, setBars] = useState<number[]>(initialData);
@@ -28,32 +30,123 @@ const MergeSortAnimation = () => {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [comparingIndex, setComparingIndex] = useState<number | null>(null);
-  const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
+  const [infoText, setInfoText] = useState<string>(t('sorting.animation.common.initialMessage'));
 
   const pauseRequestRef = useRef<boolean>(false);
   const shuffelingRequestRef = useRef<boolean>(false);
   const speedRequestRef = useRef<number>(1);
   const stepRequestRef = useRef<boolean>(false);
 
-  const performMergeSort = () => {
-    mergeSort(bars);
+  const performMergeSort = async () => {
+    setIsSorting(true);
+    setIsSorted(false);
+    await mergeSort(bars, 0, bars.length - 1);
+    setIsSorted(true);
+    setIsSorting(false);
+    setIsManual(false);
+    setIsAnimated(false);
+    setIsPaused(false);
+    setSelectedIndex(null);
+    setComparingIndex(null);
+    setInfoText(t('sorting.animation.common.sortingComplete'));
   };
 
-  function mergeSort(bars) {}
+  async function mergeSort(arr: number[], left: number, right: number) {
+    if (left < right) {
+      const mid = Math.floor((left + right) / 2);
+      
+      setInfoText(`Dividing array from index ${left + 1} to ${right + 1}`);
+      setSelectedIndex(left);
+      setComparingIndex(right);
+      await stepPauseWaitRequest();
 
-  function merge(left, right) {}
+      await mergeSort(arr, left, mid);
+      await mergeSort(arr, mid + 1, right);
+      await merge(arr, left, mid, right);
+    }
+  }
+
+  async function merge(arr: number[], left: number, mid: number, right: number) {
+    const n1 = mid - left + 1;
+    const n2 = right - mid;
+
+    const L = new Array(n1);
+    const R = new Array(n2);
+
+    setInfoText(`Merging subarrays: [${left + 1}-${mid + 1}] and [${mid + 2}-${right + 1}]`);
+    await stepPauseWaitRequest();
+
+    for (let i = 0; i < n1; i++) {
+      L[i] = arr[left + i];
+      setSelectedIndex(left + i);
+      await stepPauseWaitRequest();
+    }
+
+    for (let j = 0; j < n2; j++) {
+      R[j] = arr[mid + 1 + j];
+      setComparingIndex(mid + 1 + j);
+      await stepPauseWaitRequest();
+    }
+
+    let i = 0;
+    let j = 0;
+    let k = left;
+
+    while (i < n1 && j < n2) {
+      setInfoText(`Comparing L[${i + 1}]=${L[i]} and R[${j + 1}]=${R[j]}`);
+      setSelectedIndex(left + i);
+      setComparingIndex(mid + 1 + j);
+      await stepPauseWaitRequest();
+
+      if (L[i] <= R[j]) {
+        setInfoText(`Placing ${L[i]} at position ${k + 1}`);
+        arr[k] = L[i];
+        i++;
+      } else {
+        setInfoText(`Placing ${R[j]} at position ${k + 1}`);
+        arr[k] = R[j];
+        j++;
+      }
+      setBars([...arr]);
+      await stepPauseWaitRequest();
+      k++;
+    }
+
+    while (i < n1) {
+      setInfoText(`Placing remaining left element ${L[i]} at position ${k + 1}`);
+      setSelectedIndex(k);
+      arr[k] = L[i];
+      setBars([...arr]);
+      await stepPauseWaitRequest();
+      i++;
+      k++;
+    }
+
+    while (j < n2) {
+      setInfoText(`Placing remaining right element ${R[j]} at position ${k + 1}`);
+      setComparingIndex(k);
+      arr[k] = R[j];
+      setBars([...arr]);
+      await stepPauseWaitRequest();
+      j++;
+      k++;
+    }
+
+    setSelectedIndex(null);
+    setComparingIndex(null);
+  }
 
   const smoothShuffleBars = async () => {
     setIsShuffeling(true);
     setSelectedIndex(null);
     setComparingIndex(null);
+    setInfoText(t('sorting.animation.common.shuffling'));
 
     const shuffledBars = [...bars];
 
     for (let r = 0; r < 3; r++) {
       for (let i = shuffledBars.length - 1; i > 0; i--) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
-
         swapInArray(shuffledBars, i, randomIndex);
         setBars([...shuffledBars]);
       }
@@ -62,6 +155,7 @@ const MergeSortAnimation = () => {
 
     setIsShuffeling(false);
     setIsSorted(false);
+    setInfoText(t('sorting.animation.common.shufflingFinished'));
     shuffelingRequestRef.current = false;
   };
 
@@ -75,6 +169,16 @@ const MergeSortAnimation = () => {
       await wait(10);
       await performPause();
     }
+  };
+
+  const stepPauseWaitRequest = async () => {
+    if (!stepRequestRef.current || pauseRequestRef.current) {
+      await performPause();
+    }
+    if (!isManual) {
+      await wait(delay / speedRequestRef.current);
+    }
+    await wait(10);
   };
 
   const makeChoice = async () => {
@@ -145,19 +249,36 @@ const MergeSortAnimation = () => {
         <p>{infoText}</p>
       </KeyIndexContainer>
       <ChartAligner>
-        <BarChart bars={bars} selectedIndex={selectedIndex} comparingIndex={comparingIndex} pivotIndex={null} />
-        <IndexChart initialArray={initialData} selectedIndex={comparingIndex} />
+        <BarChart 
+          bars={bars} 
+          selectedIndex={selectedIndex} 
+          comparingIndex={comparingIndex} 
+          pivotIndex={null}
+          height={150}
+          barsHeight={15}
+          doNotShowNumber={false}
+          fullLength={bars.length}
+        />
+        <IndexChart 
+          initialArray={initialData} 
+          selectedIndex={selectedIndex}
+          comparingIndex={comparingIndex}
+          pivotIndex={null}
+          start={null}
+          end={null}
+          fullLength={bars.length}
+          height={30}
+        />
       </ChartAligner>
       <ControlPanel>
         <SliderPanel>
           <Slider
-            aria-label="Temperature"
+            aria-label={t('sorting.animation.common.speedSlider')}
             defaultValue={1}
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
             disabled={isManual}
             step={0.2}
-            // marks
             min={0.2}
             max={2}
             sx={{ color: '#39576f' }}
@@ -165,34 +286,34 @@ const MergeSortAnimation = () => {
         </SliderPanel>
         <ButtonPanel>
           <Button onClick={smoothShuffleBars} disabled={isShuffelling || isSorting}>
-            Shuffle
+            {t('sorting.animation.common.buttons.shuffle')}
           </Button>
           <Button onClick={makeChoice} disabled={isShuffelling || isSorted || isSorting}>
-            Sort
+            {t('sorting.animation.common.buttons.sort')}
           </Button>
 
           {isManual || isPaused ? (
             <Button onClick={makeAStep} disabled={isShuffelling || isSorted || !isSorting || (isAnimated && !isPaused)}>
-              Step
+              {t('sorting.animation.common.buttons.step')}
             </Button>
           ) : (
             <Button onClick={startManual} disabled={isManual || isShuffelling || isSorted || !isSorting || isAnimated}>
-              Manual
+              {t('sorting.animation.common.buttons.manual')}
             </Button>
           )}
           {isAnimated ? (
             isPaused ? (
               <Button onClick={continueSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Continue
+                {t('sorting.animation.common.buttons.continue')}
               </Button>
             ) : (
               <Button onClick={pauseSorting} disabled={isShuffelling || isSorted || !isSorting}>
-                Pause
+                {t('sorting.animation.common.buttons.pause')}
               </Button>
             )
           ) : (
             <Button onClick={startAnimated} disabled={isSorted || !isSorting || isAnimated}>
-              Animate
+              {t('sorting.animation.common.buttons.animate')}
             </Button>
           )}
         </ButtonPanel>

@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import deutsch from './deutsch.json';
+import deutsch from './german.json';
 import english from './english.json';
 import { initReactI18next } from 'react-i18next';
 

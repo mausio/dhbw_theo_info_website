@@ -1,13 +1,17 @@
 import { GenericMainContainer } from '../../styles/general/generic.style.ts';
 import { useTranslation } from 'react-i18next';
+import Leaderboard from '../../components/general/leaderboard.component';
+import { useLeaderboard } from '../../context/LeaderboardContext';
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const { leaderboardData } = useLeaderboard();
 
   return (
     <GenericMainContainer>
       <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
         <h1>{t('home.title')}</h1>
+        <Leaderboard entries={leaderboardData} />
         <h2>{t('home.subtitle')}</h2>
         <p>{t('home.noLoginRequired')}</p>
         <p>{t('home.bonusNote')}</p>
@@ -21,8 +25,6 @@ const HomePage = () => {
           <li>{t('home.tipBigScreen')}</li>
         </ul>
         <p>{t('home.fun')}</p>
-        <br />
-        <p></p>
       </div>
     </GenericMainContainer>
   );
