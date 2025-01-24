@@ -41,7 +41,7 @@ const TippsAndExplanationWrapper: React.FC<TippsAndExplanationProps> = ({ childr
         <ExplanationContainer
           onClick={toggleExplanation}
           style={{
-            left: hideExplanation ? '-285px' : '5px',
+            left: hideExplanation ? '-290px' : '5px',
             transition: 'left 0.3s ease',
           }}
         >
@@ -50,13 +50,16 @@ const TippsAndExplanationWrapper: React.FC<TippsAndExplanationProps> = ({ childr
         </ExplanationContainer>
       </ClickAwayListener>
       {children}
-      {tipps && (
+      {tipps && React.Children.toArray(tipps).some(child => {
+        // Check if the child is a valid React element and not an empty fragment or div
+        return React.isValidElement(child) && !(child.type === React.Fragment && React.Children.count(child.props.children) === 0) && !(child.type === 'div' && React.Children.count(child.props.children) === 0);
+      }) && (
         <ClickAwayListener onClickAway={handleTippsClickAway}>
           <TippsContainer
             onClick={toggleTipps}
             style={{
               left: 'auto',
-              right: hideTipps ? '-285px' : '5px',
+              right: hideTipps ? '-290px' : '5px',
               transition: 'right 0.3s ease',
             }}
           >

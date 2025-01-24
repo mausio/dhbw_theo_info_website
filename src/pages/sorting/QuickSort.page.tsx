@@ -5,21 +5,70 @@ import QuickSortAnimation from '../../components/sorting/quick/quickSortAnimatio
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import QuickSortPartitionTasks from '../../components/sorting/quick/quickSortPartitionTask.component.tsx';
 import QuickSortEmptySpacesTask from '../../components/sorting/quick/quickSortEmptySpacesTask.component.tsx';
+import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
+import { useTranslation } from 'react-i18next';
 
-const InsertionSortPage = () => {
+const QuickSortPage = () => {
+  const { t } = useTranslation();
+
+  const explanation: React.ReactNode = (
+    <>
+      <p>
+        {t('sorting.quick.description')}
+      </p>
+      <h5>{t('sorting.quick.process')}</h5>
+      <ol>
+        <li>{t('sorting.quick.steps.1')}</li>
+        <li>{t('sorting.quick.steps.2')}</li>
+        <li>{t('sorting.quick.steps.3')}</li>
+        <li>{t('sorting.quick.steps.4')}</li>
+      </ol>
+      <h5>{t('sorting.quick.complexity')}</h5>
+      <table style={{ width: '100%' }}>
+        <tr>
+          <td style={{ width: '50%' }}>{t('sorting.quick.case')}</td>
+          <td style={{ width: '50%' }}>{t('sorting.quick.time')}</td>
+        </tr>
+        <tr>
+          <td>{t('sorting.quick.best')}</td>
+          <td>{t('sorting.quick.bestTime')}</td>
+        </tr>
+        <tr>
+          <td>{t('sorting.quick.average')}</td>
+          <td>{t('sorting.quick.averageTime')}</td>
+        </tr>
+        <tr>
+          <td>{t('sorting.quick.worst')}</td>
+          <td>{t('sorting.quick.worstTime')}</td>
+        </tr>
+        <tr>
+          <td>{t('sorting.quick.space')}</td>
+          <td>{t('sorting.quick.spaceComplexity')}</td>
+        </tr>
+      </table>
+    </>
+  );
+
+  const tipps: React.ReactNode = (
+    <>
+    </>
+  );
+
   return (
-    <GenericMainContainer>
-      <h1>Quicksort</h1>
-      <GenericSortGrid>
-        <QuickSortAnimation />
-        <CodeBlockElement code={quickSortAlgo} isFaderOn={false} />
-        <TasksContainer>
-          <QuickSortPartitionTasks />
-          <QuickSortEmptySpacesTask />
-        </TasksContainer>
-      </GenericSortGrid>
-    </GenericMainContainer>
+    <TippsAndExplanationWrapper tipps={tipps} explanation={explanation}>
+      <GenericMainContainer>
+        <h1>Quicksort</h1>
+        <GenericSortGrid>
+          <QuickSortAnimation />
+          <CodeBlockElement height={500} code={quickSortAlgo} isFaderOn={false} />
+          <TasksContainer>
+            <QuickSortPartitionTasks />
+            <QuickSortEmptySpacesTask />
+          </TasksContainer>
+        </GenericSortGrid>
+      </GenericMainContainer>
+    </TippsAndExplanationWrapper>
   );
 };
 
-export default InsertionSortPage;
+export default QuickSortPage;

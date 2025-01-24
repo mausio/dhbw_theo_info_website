@@ -83,6 +83,26 @@
       }
     },
     "heap": {
+      "description": "Heap Sort verwendet eine binäre Heap-Datenstruktur und sortiert Elemente durch wiederholtes Extrahieren des maximalen Elements und Neuaufbau des Heaps.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Erstelle einen Max-Heap aus dem Eingabe-Array",
+        "2": "Tausche die Wurzel (maximales Element) mit dem letzten Element des Heaps",
+        "3": "Entferne das letzte Element aus dem Heap (füge es zum sortierten Bereich hinzu)",
+        "4": "Heapifiziere das Wurzelelement, um die Max-Heap-Eigenschaft zu erhalten",
+        "5": "Wiederhole Schritte 2-4, bis der Heap leer ist"
+      },
+      "complexity": "Komplexität:",
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "bestTime": "O(n log n)",
+      "averageTime": "O(n log n)",
+      "worstTime": "O(n log n)",
+      "spaceComplexity": "O(1)",
       "animation": {
         "initialMessage": "Mischen, dann sortieren! :)",
         "shuffling": "Mische!",
@@ -90,6 +110,12 @@
         "sortingComplete": "Sortierung abgeschlossen!",
         "outOfBounds": "außerhalb des Bereichs!",
         "noChildren": "hat keine Kinder",
+        "lookingAtNode": "Betrachte Wert {{value}}",
+        "comparingWithChildren": "Vergleiche Wert {{parentValue}} mit seinen Kindern",
+        "swappingNodes": "Tausche Werte {{value1}} und {{value2}}",
+        "heapified": "Teilbaum bei Wert {{value}} heapifiziert",
+        "extractingMax": "Extrahiere maximales Element aus dem Heap",
+        "placingExtracted": "Platziere Wert {{value}} in sortierter Position",
         "buttons": {
           "shuffle": "Mischen",
           "sort": "Sortieren",
@@ -111,18 +137,17 @@
         "4": "Baue das Ausgabe-Array auf",
         "5": "Kopiere das Ausgabe-Array zurück in das ursprüngliche Array"
       },
-      "complexity": {
-        "best": "O(n+k)",
-        "average": "O(n+k)",
-        "worst": "O(n+k)",
-        "space": "O(n+k)"
-      },
+      "complexity": "Komplexität:",
       "case": "Fall",
       "time": "Zeit",
       "best": "Beste",
       "average": "Durchschnitt",
       "worst": "Schlechteste",
       "space": "Speicher",
+      "bestTime": "O(n+k)",
+      "averageTime": "O(n+k)",
+      "worstTime": "O(n+k)",
+      "spaceComplexity": "O(n+k)",
       "animation": {
         "countingPhase": "Starte Zählphase...",
         "step1": "Erstelle Zähl-Array...",
@@ -163,12 +188,17 @@
         "3": "Gehe zur nächsten Ziffer links",
         "4": "Wiederhole, bis alle Ziffern verarbeitet sind"
       },
-      "complexity": {
-        "best": "O(nk)",
-        "average": "O(nk)",
-        "worst": "O(nk)",
-        "space": "O(n+k)"
-      },
+      "complexity": "Komplexität:",
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "bestTime": "O(nk)",
+      "averageTime": "O(nk)",
+      "worstTime": "O(nk)",
+      "spaceComplexity": "O(n+k)",
       "animation": {
         "initialMessage": "Mischen, dann sortieren! :)",
         "shuffling": "Mische!",
@@ -205,29 +235,67 @@
         "3": "Führe die sortierten Hälften wieder zusammen",
         "4": "Fahre fort, bis das gesamte Array sortiert ist"
       },
-      "complexity": {
-        "best": "O(n log n)",
-        "average": "O(n log n)",
-        "worst": "O(n log n)",
-        "space": "O(n)"
-      },
+      "complexity": "Komplexität:",
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "bestTime": "O(n log n)",
+      "averageTime": "O(n log n)",
+      "worstTime": "O(n log n)",
+      "spaceComplexity": "O(n)",
       "animation": {
-        "initialMessage": "Mischen, dann sortieren! :)",
-        "lookingAtRange": "Betrachte Bereich [{{start}}-{{end}}]",
-        "findingMiddle": "Finde Mittelpunkt bei {{middle}}",
-        "dividing": "Teile in [{{leftStart}}-{{leftEnd}}] und [{{rightStart}}-{{rightEnd}}]",
-        "sortingLeft": "Sortiere linke Hälfte [{{start}}-{{end}}]",
-        "sortingRight": "Sortiere rechte Hälfte [{{start}}-{{end}}]",
-        "mergingRanges": "Führe Bereiche [{{leftStart}}-{{leftEnd}}] und [{{rightStart}}-{{rightEnd}}] zusammen",
-        "copyingLeft": "Kopiere linken Bereich [{{start}}-{{end}}]",
-        "copyingRight": "Kopiere rechten Bereich [{{start}}-{{end}}]",
-        "mergingBack": "Führe zurück in Bereich [{{start}}-{{end}}]",
-        "comparing": "Vergleiche L[{{leftIndex}}]={{leftValue}} und R[{{rightIndex}}]={{rightValue}}",
-        "placingLeft": "Platziere L[{{index}}]={{value}} an Position {{position}}",
-        "placingRight": "Platziere R[{{index}}]={{value}} an Position {{position}}",
-        "placingRemaining": "Platziere verbleibendes {{array}}[{{index}}]={{value}} an Position {{position}}",
-        "mergeComplete": "Zusammenführung abgeschlossen für Bereich [{{start}}-{{end}}]"
+        "copyingElement": "Kopiere Element A[{{index}}]={{value}} nach {{array}}[{{targetIndex}}]",
+        "removingElement": "Entferne Element aus dem Hauptarray an Position {{index}}",
+        "preparingArrays": "Bereite temporäre Arrays für die Zusammenführung vor",
+        "clearingArrays": "Leere temporäre Arrays",
+        "updatingMainArray": "Aktualisiere Hauptarray mit sortierten Elementen",
+        "sortingComplete": "Merge Sort erfolgreich abgeschlossen!"
       }
+    },
+    "quick": {
+      "description": "QuickSort ist ein Teile-und-Herrsche-Algorithmus, der ein Pivot-Element auswählt und das Array um dieses herum partitioniert, wobei kleinere Elemente links und größere rechts platziert werden.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Wähle ein Pivot-Element aus dem Array",
+        "2": "Partitioniere das Array um das Pivot-Element",
+        "3": "Sortiere die Teilarrays links und rechts rekursiv",
+        "4": "Kombiniere die sortierten Teilarrays"
+      },
+      "complexity": "Komplexität:",
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "bestTime": "O(n log n)",
+      "averageTime": "O(n log n)",
+      "worstTime": "O(n²)",
+      "spaceComplexity": "O(log n)"
+    },
+    "bucket": {
+      "description": "Bucket Sort teilt die Eingabe in eine endliche Anzahl von Behältern (Buckets) auf, sortiert jeden Behälter einzeln und verkettet sie dann zum endgültig sortierten Array.",
+      "process": "Prozess:",
+      "steps": {
+        "1": "Erstelle Behälter und verteile Elemente",
+        "2": "Sortiere Elemente innerhalb jedes Behälters",
+        "3": "Führe alle Behälter der Reihe nach zusammen",
+        "4": "Kombiniere Elemente zum sortierten Array"
+      },
+      "complexity": "Komplexität:",
+      "case": "Fall",
+      "time": "Zeit",
+      "best": "Beste",
+      "average": "Durchschnitt",
+      "worst": "Schlechteste",
+      "space": "Speicher",
+      "bestTime": "Ω(n+k)",
+      "averageTime": "Θ(n+k)",
+      "worstTime": "O(n²)",
+      "spaceComplexity": "O(n+k)"
     }
   },
   "general": {

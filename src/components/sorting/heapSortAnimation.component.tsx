@@ -6,6 +6,7 @@ import { AlgorithmSection, Button } from '../../styles/general/generic.style.ts'
 import { ButtonPanel, ControlPanel, KeyIndexContainer, SliderPanel } from '../../styles/sorting/insertionSort.style.ts';
 import { Background, Controls, ReactFlow } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import { useTranslation } from 'react-i18next';
 
 import TextUpdaterNode from '../general/textUpdater.component.tsx';
 import {
@@ -23,6 +24,7 @@ const connectionLineStyle = { stroke: '#fff' };
 const nodeTypes = { textUpdater: TextUpdaterNode };
 
 const HeapSortAnimation = () => {
+  const { t } = useTranslation();
   const delay = 1000;
 
   const [nodes, setNodes] = useState(initialHeapSortAnimationNodes);
@@ -32,7 +34,7 @@ const HeapSortAnimation = () => {
   const [isSorted, setIsSorted] = useState<boolean>(true);
   const [isSorting, setIsSorting] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [infoText, setInfoText] = useState<string>('shuffle, then sort! :)');
+  const [infoText, setInfoText] = useState<string>(t('sorting.heap.animation.initialMessage'));
 
   const exitRequestRef = useRef<boolean>(false);
   const pauseRequestRef = useRef<boolean>(false);
@@ -76,18 +78,18 @@ const HeapSortAnimation = () => {
     }
 
     setNodes([...shuffledNodes]);
-    setInfoText('Shuffling finished. Start sorting!');
+    setInfoText(t('sorting.heap.animation.shufflingFinished'));
   }
 
   const performShuffle = async () => {
     setIsShuffeling(true);
-    setInfoText('Shuffling!');
+    setInfoText(t('sorting.heap.animation.shuffling'));
 
     await shuffleNodes();
 
     setIsShuffeling(false);
     setIsSorted(false);
-    setInfoText('Shuffling finished. Start sorting!');
+    setInfoText(t('sorting.heap.animation.shufflingFinished'));
   };
 
   const heapSort = async () => {
@@ -99,6 +101,7 @@ const HeapSortAnimation = () => {
     }
 
     for (let i = n; i > 0; i--) {
+      setInfoText(t('sorting.heap.animation.extractingMax'));
       tempNodes = tempNodes.map((node, index) => {
         if (i - 1 == index) {
           return {
@@ -131,15 +134,16 @@ const HeapSortAnimation = () => {
       setNodes([...tempNodes]);
       await stepPauseWaitRequest();
 
+      setInfoText(t('sorting.heap.animation.swappingNodes', { 
+        value1: tempNodes[0].data.value, 
+        value2: tempNodes[i - 1].data.value 
+      }));
       [tempNodes[0].data.value, tempNodes[i - 1].data.value] = [tempNodes[i - 1].data.value, tempNodes[0].data.value];
-
-      //TODO: Der Switch wird nicht animiert durch altbekannte Probleme; Redo with mapping
 
       await stepPauseWaitRequest();
 
+      setInfoText(t('sorting.heap.animation.placingExtracted', { value: tempNodes[i - 1].data.value }));
       tempNodes = tempNodes.map((node, index) => {
-        console.log(i, index);
-
         if (index + 1 == i / 2 || index + 1 == (i + 1) / 2) {
           return {
             ...node,
@@ -183,7 +187,6 @@ const HeapSortAnimation = () => {
       tempNodes = [...(await heapify([...tempNodes], i - 1, 1))];
     }
 
-    // TODO: Mark the root as sorted after the final swap
     tempNodes[0].data.isSorted = true;
     setNodes([...tempNodes]);
     setIsSorted(true);
@@ -195,17 +198,15 @@ const HeapSortAnimation = () => {
     const right = 2 * i + 1;
 
     if (n <= i) {
-      console.log('out of bounce!');
-      //TODO: do sth here!
+      setInfoText(t('sorting.heap.animation.outOfBounds'));
     }
 
     if (!tempNodes[left - 1] && !tempNodes[right - 1]) {
-      console.log('has no children');
-      //TODO: consider early return
-      // => don't forget to unset focus&color
+      setInfoText(t('sorting.heap.animation.noChildren'));
     }
 
     if (tempNodes[largest - 1]) {
+      setInfoText(t('sorting.heap.animation.lookingAtNode', { value: tempNodes[largest - 1].data.value }));
       tempNodes = tempNodes.map((node) => {
         const id = Number.parseInt(node.id);
 
@@ -215,9 +216,9 @@ const HeapSortAnimation = () => {
             data: {
               ...node.data,
               isFocused: true,
-              isYellow: true, // Reset the highlight
-              isRed: false, // Reset the red color
-              isBlue: false, // Reset the blue color
+              isYellow: true,
+              isRed: false,
+              isBlue: false,
             },
           };
         }
@@ -229,6 +230,7 @@ const HeapSortAnimation = () => {
       await stepPauseWaitRequest();
     }
 
+    setInfoText(t('sorting.heap.animation.comparingWithChildren', { parentValue: tempNodes[largest - 1].data.value }));
     tempNodes = tempNodes.map((node) => {
       const id = Number.parseInt(node.id);
       if (id == largest) {
@@ -236,16 +238,14 @@ const HeapSortAnimation = () => {
       }
 
       if (id == left || id == right) {
-        // console.log(id == left ? 'left' : 'right', id == left ? left : right, 'value', node.data.value);
-
         return {
           ...node,
           data: {
             ...node.data,
             isFocused: true,
-            isYellow: false, // Reset the highlight
-            isRed: false, // Reset the red color
-            isBlue: true, // Reset the blue color
+            isYellow: false,
+            isRed: false,
+            isBlue: true,
           },
         };
       }
@@ -255,9 +255,9 @@ const HeapSortAnimation = () => {
         data: {
           ...node.data,
           isFocused: false,
-          isYellow: false, // Reset the highlight
-          isRed: false, // Reset the red color
-          isBlue: false, // Reset the blue color
+          isYellow: false,
+          isRed: false,
+          isBlue: false,
         },
       };
     });
@@ -265,28 +265,14 @@ const HeapSortAnimation = () => {
     setNodes([...tempNodes]);
     await stepPauseWaitRequest();
 
-    if (
-      !(left <= n && tempNodes[left - 1].data.value > tempNodes[largest - 1].data.value) &&
-      !(right <= n && tempNodes[right - 1].data.value > tempNodes[largest - 1].data.value)
-    ) {
-      // console.log('no value is bigger than largest one');
-      //TODO: consider early return
-      // => don't forget to unset focus&color
-    }
-
     if (left <= n && tempNodes[left - 1].data.value > tempNodes[largest - 1].data.value) {
-      // console.log('comparing', tempNodes[left - 1].data.value, '>', tempNodes[largest - 1].data.value);
       largest = left;
-
       setNodes([...tempNodes]);
       await stepPauseWaitRequest();
     }
 
     if (right <= n && tempNodes[right - 1].data.value > tempNodes[largest - 1].data.value) {
-      // console.log('comparing', tempNodes[right - 1].data.value, '>', tempNodes[largest - 1].data.value);
-
       largest = right;
-
       setNodes([...tempNodes]);
       await stepPauseWaitRequest();
     }
@@ -297,22 +283,24 @@ const HeapSortAnimation = () => {
         data: {
           ...node.data,
           isFocused: false,
-          isYellow: false, // Reset the highlight
-          isRed: false, // Reset the red color
-          isBlue: false, // Reset the blue color
+          isYellow: false,
+          isRed: false,
+          isBlue: false,
         },
       };
     });
 
     if (largest !== i) {
+      setInfoText(t('sorting.heap.animation.swappingNodes', { 
+        value1: tempNodes[i - 1].data.value, 
+        value2: tempNodes[largest - 1].data.value 
+      }));
       tempNodes[largest - 1].data.isRed = true;
       tempNodes[largest - 1].data.isFocused = true;
       tempNodes[i - 1].data.isYellow = true;
       tempNodes[i - 1].data.isFocused = true;
 
-      // console.log('marking elements for swap');
       setNodes([...tempNodes]);
-
       await stepPauseWaitRequest();
 
       const tempVal = tempNodes[i - 1].data.value;
@@ -325,9 +313,9 @@ const HeapSortAnimation = () => {
           data: {
             ...node.data,
             isFocused: false,
-            isYellow: false, // Reset the highlight
-            isRed: false, // Reset the red color
-            isBlue: false, // Reset the blue color
+            isYellow: false,
+            isRed: false,
+            isBlue: false,
           },
         };
       });
@@ -336,8 +324,6 @@ const HeapSortAnimation = () => {
       tempNodes[largest - 1].data.isFocused = true;
       tempNodes[i - 1].data.isYellow = true;
       tempNodes[i - 1].data.isFocused = true;
-
-      // console.log('swapped');
 
       setNodes([...tempNodes]);
       await stepPauseWaitRequest();
@@ -348,9 +334,9 @@ const HeapSortAnimation = () => {
           data: {
             ...node.data,
             isFocused: false,
-            isYellow: false, // Reset the highlight
-            isRed: false, // Reset the red color
-            isBlue: false, // Reset the blue color
+            isYellow: false,
+            isRed: false,
+            isBlue: false,
           },
         };
       });
@@ -358,11 +344,11 @@ const HeapSortAnimation = () => {
       setNodes([...tempNodes]);
       await stepPauseWaitRequest();
 
+      setInfoText(t('sorting.heap.animation.heapified', { value: tempNodes[largest - 1].data.value }));
       tempNodes = [...(await heapify([...tempNodes], n, largest))];
     }
 
     setNodes([...tempNodes]);
-
     return [...tempNodes];
   }
 
@@ -379,7 +365,7 @@ const HeapSortAnimation = () => {
     exitRequestRef.current = false;
     pauseRequestRef.current = false;
     setIsPaused(false);
-    setInfoText('Sorting complete!');
+    setInfoText(t('sorting.heap.animation.sortingComplete'));
   };
 
   const performPause = async () => {
@@ -533,7 +519,7 @@ const HeapSortAnimation = () => {
       <ControlPanel>
         <SliderPanel>
           <Slider
-            aria-label="Temperature"
+            aria-label={t('sorting.animation.common.speedSlider')}
             defaultValue={1}
             valueLabelDisplay="auto"
             onChange={handleSliderChange}
@@ -546,10 +532,10 @@ const HeapSortAnimation = () => {
         </SliderPanel>
         <ButtonPanel>
           <Button onClick={performShuffle} disabled={isShuffling || isSorting}>
-            Shuffle
+            {t('sorting.heap.animation.buttons.shuffle')}
           </Button>
           <Button onClick={performMakeChoice} disabled={isShuffling || isSorted || isSorting}>
-            Sort
+            {t('sorting.heap.animation.buttons.sort')}
           </Button>
 
           {isManual || isPaused ? (
@@ -557,29 +543,29 @@ const HeapSortAnimation = () => {
               onClick={performMakeAStep}
               disabled={isShuffling || isSorted || !isSorting || (isAnimated && !isPaused)}
             >
-              Step
+              {t('sorting.heap.animation.buttons.step')}
             </Button>
           ) : (
             <Button
               onClick={performStartManual}
               disabled={isManual || isShuffling || isSorted || !isSorting || isAnimated}
             >
-              Manual
+              {t('sorting.heap.animation.buttons.manual')}
             </Button>
           )}
           {isAnimated ? (
             isPaused ? (
               <Button onClick={performContinueSorting} disabled={isShuffling || isSorted || !isSorting}>
-                Continue
+                {t('sorting.heap.animation.buttons.continue')}
               </Button>
             ) : (
               <Button onClick={performPauseSorting} disabled={isShuffling || isSorted || !isSorting}>
-                Pause
+                {t('sorting.heap.animation.buttons.pause')}
               </Button>
             )
           ) : (
             <Button onClick={performStartAnimating} disabled={isSorted || !isSorting || isAnimated}>
-              Animate
+              {t('sorting.heap.animation.buttons.animate')}
             </Button>
           )}
         </ButtonPanel>

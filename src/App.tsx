@@ -16,15 +16,12 @@ import { LeaderboardProvider } from './context/LeaderboardContext';
 
 // Eine TODO-Liste
 //TODO: uninstall all unused packages
-//TODO: Translation of whole website
 //TODO: Responsive Design
 //TODO: Check ALL Sorting Algos for bugs!
 //TODO: Delete Dead/Unused Code
 //TODO: Naming Scheme anpassen in Code (überall)
-//TODO: Check all Algorithms for correctness (seems like they all differ in their pseudo style => look at book)
 //TODO: Refactor Generic Styled Components into other files, e.g. "ControlPanel" is under "insertion.style" but should be generic
 //TODO: Set keys for lists (what do I mean by that?)
-//TODO: Create Standard Messages for e.g. "Shuffling", "Shuffling finished. Sort!", etc.
 //TODO: Centralize Data at one place, e.g. "InitialData" => "CountingSortInitialData", etc.
 //TODO: Apply "user-select: none" everywhere, e.g. "SortableItem", Iterations, Buttons etc.
 //TODO: Make the Control Panel a own component, make it generic and prop the getter and setter

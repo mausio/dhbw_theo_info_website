@@ -83,13 +83,39 @@
       }
     },
     "heap": {
+      "description": "Heap Sort uses a binary heap data structure to sort elements by repeatedly extracting the maximum element and rebuilding the heap.",
+      "process": "Process:",
+      "steps": {
+        "1": "Build a max heap from the input array",
+        "2": "Swap the root (maximum element) with the last element of the heap",
+        "3": "Remove the last element from the heap (add it to the sorted section)",
+        "4": "Heapify the root element to maintain the max heap property",
+        "5": "Repeat steps 2-4 until the heap is empty"
+      },
+      "complexity": "Complexity:",
+      "case": "Case",
+      "time": "Time",
+      "best": "Best",
+      "average": "Average",
+      "worst": "Worst",
+      "space": "Space",
+      "bestTime": "O(n log n)",
+      "averageTime": "O(n log n)",
+      "worstTime": "O(n log n)",
+      "spaceComplexity": "O(1)",
       "animation": {
         "initialMessage": "shuffle, then sort! :)",
         "shuffling": "Shuffling!",
         "shufflingFinished": "Shuffling finished. Start sorting!",
         "sortingComplete": "Sorting complete!",
-        "outOfBounds": "out of bounce!",
+        "outOfBounds": "out of bounds!",
         "noChildren": "has no children",
+        "lookingAtNode": "Looking at value {{value}}",
+        "comparingWithChildren": "Comparing value {{parentValue}} with its children",
+        "swappingNodes": "Swapping values {{value1}} and {{value2}}",
+        "heapified": "Heapified subtree at value {{value}}",
+        "extractingMax": "Extracting maximum element from heap",
+        "placingExtracted": "Placing value {{value}} in sorted position",
         "buttons": {
           "shuffle": "Shuffle",
           "sort": "Sort",
@@ -111,12 +137,17 @@
         "4": "Build output array using counting array",
         "5": "Copy output array back to original array"
       },
-      "complexity": {
-        "best": "O(n+k)",
-        "average": "O(n+k)",
-        "worst": "O(n+k)",
-        "space": "O(n+k)"
-      },
+      "complexity": "Complexity:",
+      "case": "Case",
+      "time": "Time",
+      "best": "Best",
+      "average": "Average",
+      "worst": "Worst",
+      "space": "Space",
+      "bestTime": "O(n+k)",
+      "averageTime": "O(n+k)",
+      "worstTime": "O(n+k)",
+      "spaceComplexity": "O(n+k)",
       "animation": {
         "countingPhase": "Starting counting phase...",
         "step1": "Creating counting array...",
@@ -157,12 +188,17 @@
         "3": "Move to the next digit to the left",
         "4": "Repeat until all digits are processed"
       },
-      "complexity": {
-        "best": "O(nk)",
-        "average": "O(nk)",
-        "worst": "O(nk)",
-        "space": "O(n+k)"
-      },
+      "complexity": "Complexity:",
+      "case": "Case",
+      "time": "Time",
+      "best": "Best",
+      "average": "Average",
+      "worst": "Worst",
+      "space": "Space",
+      "bestTime": "O(nk)",
+      "averageTime": "O(nk)",
+      "worstTime": "O(nk)",
+      "spaceComplexity": "O(n+k)",
       "animation": {
         "initialMessage": "shuffle, then sort! :)",
         "shuffling": "Shuffling!",
@@ -199,29 +235,76 @@
         "3": "Merge the sorted halves back together",
         "4": "Continue until the entire array is sorted"
       },
-      "complexity": {
-        "best": "O(n log n)",
-        "average": "O(n log n)",
-        "worst": "O(n log n)",
-        "space": "O(n)"
-      },
+      "complexity": "Complexity:",
+      "case": "Case",
+      "time": "Time",
+      "best": "Best",
+      "average": "Average",
+      "worst": "Worst",
+      "space": "Space",
+      "bestTime": "O(n log n)",
+      "averageTime": "O(n log n)",
+      "worstTime": "O(n log n)",
+      "spaceComplexity": "O(n)",
       "animation": {
         "initialMessage": "shuffle, then sort! :)",
-        "lookingAtRange": "Looking at range [{{start}}-{{end}}]",
-        "findingMiddle": "Finding middle point at {{middle}}",
-        "dividing": "Dividing into [{{leftStart}}-{{leftEnd}}] and [{{rightStart}}-{{rightEnd}}]",
-        "sortingLeft": "Sorting left half [{{start}}-{{end}}]",
-        "sortingRight": "Sorting right half [{{start}}-{{end}}]",
-        "mergingRanges": "Merging ranges [{{leftStart}}-{{leftEnd}}] and [{{rightStart}}-{{rightEnd}}]",
-        "copyingLeft": "Copying left range [{{start}}-{{end}}]",
-        "copyingRight": "Copying right range [{{start}}-{{end}}]",
-        "mergingBack": "Merging back into range [{{start}}-{{end}}]",
-        "comparing": "Comparing L[{{leftIndex}}]={{leftValue}} and R[{{rightIndex}}]={{rightValue}}",
-        "placingLeft": "Placing L[{{index}}]={{value}} into position {{position}}",
-        "placingRight": "Placing R[{{index}}]={{value}} into position {{position}}",
-        "placingRemaining": "Placing remaining {{array}}[{{index}}]={{value}} into position {{position}}",
-        "mergeComplete": "Merge complete for range [{{start}}-{{end}}]"
+        "shuffling": "Shuffling!",
+        "shufflingFinished": "Shuffling finished. Start sorting!",
+        "sortingComplete": "Sorting complete!",
+        "outOfBounds": "out of bounce!",
+        "noChildren": "has no children",
+        "buttons": {
+          "shuffle": "Shuffle",
+          "sort": "Sort",
+          "step": "Step",
+          "manual": "Manual",
+          "continue": "Continue",
+          "pause": "Pause",
+          "animate": "Animate"
+        }
       }
+    },
+    "quick": {
+      "description": "QuickSort is a divide-and-conquer algorithm that works by selecting a pivot element and partitioning the array around it, with smaller elements on the left and larger ones on the right.",
+      "process": "Process:",
+      "steps": {
+        "1": "Choose a pivot element from the array",
+        "2": "Partition the array around the pivot",
+        "3": "Recursively sort the sub-arrays on left and right",
+        "4": "Combine the sorted sub-arrays"
+      },
+      "complexity": "Complexity:",
+      "case": "Case",
+      "time": "Time",
+      "best": "Best",
+      "average": "Average",
+      "worst": "Worst",
+      "space": "Space",
+      "bestTime": "O(n log n)",
+      "averageTime": "O(n log n)",
+      "worstTime": "O(n²)",
+      "spaceComplexity": "O(log n)"
+    },
+    "bucket": {
+      "description": "Bucket Sort divides the input into a finite number of buckets, sorts each bucket individually, and then concatenates them to get the final sorted array.",
+      "process": "Process:",
+      "steps": {
+        "1": "Create buckets and distribute elements",
+        "2": "Sort elements within each bucket",
+        "3": "Merge all buckets in order",
+        "4": "Combine elements to form sorted array"
+      },
+      "complexity": "Complexity:",
+      "case": "Case",
+      "time": "Time",
+      "best": "Best",
+      "average": "Average",
+      "worst": "Worst",
+      "space": "Space",
+      "bestTime": "Ω(n+k)",
+      "averageTime": "Θ(n+k)",
+      "worstTime": "O(n²)",
+      "spaceComplexity": "O(n+k)"
     }
   },
   "general": {

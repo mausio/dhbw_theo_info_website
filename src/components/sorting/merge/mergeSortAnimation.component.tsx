@@ -60,7 +60,7 @@ const MergeSortAnimation = () => {
     setRightSelectedIndex(null);
     setLeftArray(Array(5).fill(0));
     setRightArray(Array(5).fill(0));
-    setInfoText(t('sorting.animation.common.sortingComplete'));
+    setInfoText(t('sorting.merge.animation.sortingComplete'));
   };
 
   async function mergeSort(arr: number[], left: number, right: number) {
@@ -122,6 +122,9 @@ const MergeSortAnimation = () => {
     const newRightArray = Array(5).fill(0);
     const mainArray = [...arr];
 
+    setInfoText(t('sorting.merge.animation.preparingArrays'));
+    await stepPauseWaitRequest();
+
     setInfoText(t('sorting.merge.animation.copyingLeft', { start: left + 1, end: mid + 1 }));
     setStart(left);
     setEnd(mid);
@@ -130,10 +133,18 @@ const MergeSortAnimation = () => {
     for (let i = 0; i < n1; i++) {
       setSelectedIndex(left + i);
       setLeftSelectedIndex(i);
+      setInfoText(t('sorting.merge.animation.copyingElement', {
+        index: left + i + 1,
+        value: arr[left + i],
+        array: 'L',
+        targetIndex: i + 1
+      }));
       await stepPauseWaitRequest();
       
       L[i] = arr[left + i];
       newLeftArray[i] = L[i];
+      
+      setInfoText(t('sorting.merge.animation.removingElement', { index: left + i + 1 }));
       mainArray[left + i] = 0;
       
       setLeftArray([...newLeftArray]);
@@ -151,10 +162,18 @@ const MergeSortAnimation = () => {
     for (let j = 0; j < n2; j++) {
       setSelectedIndex(mid + 1 + j);
       setRightSelectedIndex(j);
+      setInfoText(t('sorting.merge.animation.copyingElement', {
+        index: mid + 1 + j + 1,
+        value: arr[mid + 1 + j],
+        array: 'R',
+        targetIndex: j + 1
+      }));
       await stepPauseWaitRequest();
       
       R[j] = arr[mid + 1 + j];
       newRightArray[j] = R[j];
+      
+      setInfoText(t('sorting.merge.animation.removingElement', { index: mid + 1 + j + 1 }));
       mainArray[mid + 1 + j] = 0;
       
       setRightArray([...newRightArray]);
@@ -286,9 +305,7 @@ const MergeSortAnimation = () => {
       k++;
     }
 
-    setInfoText(t('sorting.merge.animation.mergeComplete', { start: left + 1, end: right + 1 }));
-    await stepPauseWaitRequest();
-
+    setInfoText(t('sorting.merge.animation.clearingArrays'));
     setSelectedIndex(null);
     setComparingIndex(null);
     setPivotIndex(null);
@@ -298,7 +315,9 @@ const MergeSortAnimation = () => {
     setEnd(null);
     setLeftArray(Array(5).fill(0));
     setRightArray(Array(5).fill(0));
+    await stepPauseWaitRequest();
     
+    setInfoText(t('sorting.merge.animation.updatingMainArray'));
     arr.splice(left, right - left + 1, ...mainArray.slice(left, right + 1));
     setBars([...arr]);
     await stepPauseWaitRequest();
@@ -501,8 +520,8 @@ const MergeSortAnimation = () => {
             onChange={handleSliderChange}
             disabled={isManual}
             step={0.1}
-            min={0.2}
-            max={2}
+            min={0.1}
+            max={4}
             sx={{ color: '#39576f' }}
           />
         </SliderPanel>

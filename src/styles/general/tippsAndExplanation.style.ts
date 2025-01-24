@@ -7,7 +7,7 @@ const BaseContainer = styled.div`
   height: 30%;
   max-height: 1000px;
   min-height: 550px;
-  width: 300px;
+  width: 310px;
   padding: 0px 10px 35px 15px;
   margin: 0;
 
@@ -22,20 +22,32 @@ const BaseContainer = styled.div`
   & h5 {
     color: #2c3e50;
     margin: 1rem 0;
-  }
-
-  & p {
-    margin: 0.8rem 0;
-    line-height: 1.4;
+    font-size: 0.9rem;
   }
 
   & ol, & ul {
     margin-left: 1.5rem;
+    font-size: 0.9rem;
   }
 
   & li {
     margin: 0.5rem 0;
+    font-size: 0.9rem;
   }
+
+  & p {
+    font-size: 0.9rem;
+  }
+
+  & table {
+    font-size: 0.9rem;
+  }
+
+  & td {
+    font-size: 0.9rem;
+  }
+
+  font-size: 0.9rem;
 `;
 
 // Inherits: BaseContainer + fixed positioning, grid layout
@@ -82,7 +94,7 @@ export const ExplanationTitle = styled.div`
   height: 100%;
 
   position: relative; 
-left: 5px;
+left: 12px;
 right: auto;
 `;
 
@@ -102,6 +114,6 @@ export const TippsTitle = styled.div`
   height: 100%;
 position: relative; 
 left: auto;
-right: 8px;
+right: 12px;
   transform: none;
 `;
