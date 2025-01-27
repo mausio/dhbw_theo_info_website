@@ -5,6 +5,7 @@ export const IterationTitle = styled.p`
   margin: 0 0 15px 5px;
   padding: 0;
   color: white;
+  user-select: none;
 `;
 
 export const SingleIterationContainer = styled.div`
@@ -15,6 +16,7 @@ export const SingleIterationContainer = styled.div`
   height: fit-content;
   position: relative;
   padding: 15px 20px;
+  user-select: none;
 
   border-radius: 10px;
   box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 3px 0px inset;
@@ -31,6 +33,7 @@ export const IterationsContainer = styled.div`
   justify-content: center;
   justify-items: center;
   align-content: center;
+  user-select: none;
 
   margin: 35px 0 25px 0;
 `;
@@ -39,6 +42,7 @@ export const SortableContainer = styled.div`
   width: fit-content;
   height: 65px;
   padding: 0;
+  user-select: none;
 
   display: flex;
   justify-content: center;
@@ -69,6 +73,7 @@ export const ButtonIterationContainer = styled.div`
   display: flex;
   flex-direction: row;
   column-gap: 5px;
+  user-select: none;
 `;
 
 export const RecursionContainer = styled.div`

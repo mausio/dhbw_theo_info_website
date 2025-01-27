@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ChartContainer = styled.div`
   position: relative;
   margin: 7px auto;
+  user-select: none;
 `;
 
 export const BarContainer = styled.div`

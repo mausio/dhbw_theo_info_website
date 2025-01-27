@@ -38,6 +38,7 @@ max-width: 1100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  user-select: none;
 `;
 
 export const Button = styled.button`
@@ -46,7 +47,7 @@ export const Button = styled.button`
   justify-items: center;
   align-content: center;
   align-items: center;
-
+  user-select: none;
   width: auto;
 
   min-width: 65px;
@@ -275,4 +276,5 @@ export const ButtonTaskContainer = styled.div`
   display: flex;
   flex-direction: row;
   column-gap: 5px;
+  user-select: none;
 `;

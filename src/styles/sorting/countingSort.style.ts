@@ -68,9 +68,6 @@ export const DiagramInput = styled.input`
 export const SingleDiagramContainer = styled.div`
   width: 40%;
   margin: 0 0 0 10px;
-
-  //box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 5px 0px inset;
-  //background: white;
 `;
 
 export const DiagramIterationWrapper = styled.div`

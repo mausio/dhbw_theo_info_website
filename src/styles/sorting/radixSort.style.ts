@@ -6,6 +6,7 @@ export const RadixSortGrid = styled(GenericSortGrid)`
     'animation nothing'
     'code code'
     'task task';
+  user-select: none;
 `;
 
 export const DiagrammsContainer = styled.div`
@@ -21,8 +22,9 @@ export const DiagrammsContainer = styled.div`
 
   height: fit-content;
 
-  //background: white;
-  //box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
+  user-select: none;
+
+
 `;
 
 export const SingleDiagram = styled.div`
@@ -39,11 +41,11 @@ export const SingleDiagram = styled.div`
   border-radius: 10px;
   border: 1px solid gray;
 
-  //background-color: white;
-  //background: color-mix(in srgb, var(--tertiary), white 20%);
   background: radial-gradient(white, color-mix(in srgb, var(--primary), white 85%) 95%);
 
   box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 4px 0px inset;
+
+  user-select: none;
 `;
 
 export const FractionElement = styled.p`
@@ -56,6 +58,8 @@ export const FractionElement = styled.p`
   justify-content: center;
 
   background-color: white;
+
+  user-select: none;
 `;
 
 export const Row = styled.div`
@@ -72,6 +76,8 @@ export const Row = styled.div`
   //border: 0.1px solid black;
 
   transition: 0.3s ease-in-out;
+
+  user-select: none;
 `;
 
 export const Spacer = styled.div`

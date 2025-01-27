@@ -42,4 +42,5 @@ export const BucketNumber = styled.p`
   margin: 1px 0 5px 0;
   text-align: center;
   border-bottom: 2px dotted gray;
+  user-select: none;
 `;

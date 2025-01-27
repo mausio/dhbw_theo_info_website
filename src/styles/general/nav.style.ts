@@ -29,6 +29,7 @@ max-width: 1100px;
 `;
 
 export const Logo = styled(GenericImage)`
+  user-select: none;
   position: relative;
   top: -1px;
   height: 40px;
@@ -63,6 +64,7 @@ export const Logo = styled(GenericImage)`
 `;
 
 export const LogoLinkButton = styled.a`
+  user-select: none;
   width: auto;
   height: 100%;
 
@@ -84,6 +86,7 @@ export const LinkList = styled.ol`
 `;
 
 export const LinkButton = styled.button`
+  user-select: none;
   border: none;
   background-color: transparent;
   text-transform: capitalize;
@@ -192,6 +195,7 @@ export const SubLinkList = styled.ol`
 `;
 
 export const ClickableElementBinder = styled.div`
+  user-select: none;
   min-width: 90px;
   background: none;
   border: none;
