@@ -17,7 +17,7 @@ export const QuizContainer = styled.div`
   box-shadow: 
     rgb(0, 0, 0, 0.4) 1px 1px 4px 0px inset,
     rgb(0, 0, 0, 0.1) -1px -1px 2px 0px inset;
-  background: radial-gradient(white, color-mix(in srgb, var(--primary), white 90%) 95%);
+  background: radial-gradient(white, color-mix(in srgb, var(--primary), white 95%) 95%);
 `;
 
 export const QuizTitle = styled.h2`

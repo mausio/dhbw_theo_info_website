@@ -217,7 +217,7 @@ export const SingleTaskContainer = styled.div`
   border-radius: 25px;
 
   border: 1px solid darkgray;
-  background: radial-gradient(white, color-mix(in srgb, var(--primary), white 90%) 95%);
+background: radial-gradient(white, color-mix(in srgb, var(--primary), white 95%) 95%);
   box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
 
   pre {

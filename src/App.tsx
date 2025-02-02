@@ -13,15 +13,15 @@ import RadixSortPage from './pages/sorting/RadixSort.page.tsx';
 import HeapSortPage from './pages/sorting/HeapSort.page.tsx';
 import './translation/i18next.ts';
 import { LeaderboardProvider } from './context/LeaderboardContext';
+import { CommentsProvider } from './context/comments.context';
 
 //TODO: Still development needed:
 // => Leaderboard: should adjust dynamically using ... (REDUX) ? 
 // => Tipps: Add tipps to ALL Algos! 
 // => Responsiveness for all pages
-// => A feedback page for the user 
+// => Add a comment section under each algorithm; as a separate component under the algorithm page
 // => Implement a storytelling approach that transports users into a relatable scenario, using characters and avatars to represent students, and providing an engaging and interactive experience that fosters learner engagement and enthusiasm within the context of algorithmic theory in Informatik II.
 // => Implement a little quiz for the user at the end of the course or after each algo
-// => Research Gamification & implement 
 
 
 // Eine TODO-Liste
@@ -42,22 +42,24 @@ import { LeaderboardProvider } from './context/LeaderboardContext';
 
 function App() {
   return (
-    <LeaderboardProvider>
-      <Routes>
-        <Route path={'/'} element={<NavigationBar key={'NavigationBar'} />}>
-          <Route index element={<HomePage />} />
-          <Route path={APP_ROUTES.sorting.insertion} element={<InsertionSortPage />} />
-          <Route path={APP_ROUTES.sorting.merge} element={<MergeSortPage />} />
-          <Route path={APP_ROUTES.sorting.quick} element={<QuickSortPage />} />
-          <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
-          <Route path={APP_ROUTES.sorting.bucket} element={<BucketSortPage />} />
-          <Route path={APP_ROUTES.sorting.radix} element={<RadixSortPage />} />
-          <Route path={APP_ROUTES.sorting.heap} element={<HeapSortPage />} />
-          <Route path={'*'} element={<FourOfourPage />} />
-          <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
-        </Route>
-      </Routes>
-    </LeaderboardProvider>
+    <CommentsProvider>
+      <LeaderboardProvider>
+        <Routes>
+          <Route path={'/'} element={<NavigationBar key={'NavigationBar'} />}>
+            <Route index element={<HomePage />} />
+            <Route path={APP_ROUTES.sorting.insertion} element={<InsertionSortPage />} />
+            <Route path={APP_ROUTES.sorting.merge} element={<MergeSortPage />} />
+            <Route path={APP_ROUTES.sorting.quick} element={<QuickSortPage />} />
+            <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
+            <Route path={APP_ROUTES.sorting.bucket} element={<BucketSortPage />} />
+            <Route path={APP_ROUTES.sorting.radix} element={<RadixSortPage />} />
+            <Route path={APP_ROUTES.sorting.heap} element={<HeapSortPage />} />
+            <Route path={'*'} element={<FourOfourPage />} />
+            <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
+          </Route>
+        </Routes>
+      </LeaderboardProvider>
+    </CommentsProvider>
   );
 }
 

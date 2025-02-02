@@ -7,6 +7,7 @@ import { insertionSortAlgo } from '../../static/algorithms/sorting.algorithms.ts
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
+import CommentSection from '../../components/general/commentSection.component.tsx';
 
 const InsertionSortPage = () => {
   const { t } = useTranslation();
@@ -68,6 +69,8 @@ const InsertionSortPage = () => {
           </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>
+
+      <CommentSection algorithmId="insertionSort" />
     </TippsAndExplanationWrapper>
   );
 };
