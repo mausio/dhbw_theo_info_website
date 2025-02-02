@@ -15,11 +15,12 @@ import './translation/i18next.ts';
 import { LeaderboardProvider } from './context/LeaderboardContext';
 
 //TODO: Still development needed:
-// => Sorting Algo: HeapSort Tasks
-// => Sorting Algo: MergeSort Animation + Tasks
 // => Leaderboard: should adjust dynamically using ... (REDUX) ? 
 // => Tipps: Add tipps to ALL Algos! 
 // => Responsiveness for all pages
+// => A feedback page for the user 
+// => Implement a storytelling approach that transports users into a relatable scenario, using characters and avatars to represent students, and providing an engaging and interactive experience that fosters learner engagement and enthusiasm within the context of algorithmic theory in Informatik II.
+// => Implement a little quiz for the user at the end of the course or after each algo
 // => Research Gamification & implement 
 
 

@@ -2,7 +2,7 @@ import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../sty
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import { mergeSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
 import * as React from 'react';
-import MergeSortTaskOne from '../../components/sorting/merge/mergeSortTask.component.tsx';
+import MergeSortTaskComponent from '../../components/sorting/merge/mergeSortTask.component.tsx';
 import MergeSortAnimation from '../../components/sorting/merge/mergeSortAnimation.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
@@ -60,7 +60,9 @@ const MergeSortPage = () => {
         <GenericSortGrid>
           <MergeSortAnimation />
           <CodeBlockElement height={625} code={mergeSortAlgo} isFaderOn={true} />
-          <TasksContainer>{/*<MergeSortTaskOne />*/}</TasksContainer>
+          <TasksContainer>
+            {/* <MergeSortTaskComponent /> */}
+          </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>
     </TippsAndExplanationWrapper>

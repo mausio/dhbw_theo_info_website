@@ -6,6 +6,7 @@ import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import { insertionSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
+import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 
 const InsertionSortPage = () => {
   const { t } = useTranslation();
@@ -63,6 +64,7 @@ const InsertionSortPage = () => {
           <CodeBlockElement code={insertionSortAlgo} isFaderOn={false} height="400px" />
           <TasksContainer>
             <InsertionSortIterationTaskComponent />
+            <AlgorithmQuizComponent translationKey="sorting.insertion" />
           </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>

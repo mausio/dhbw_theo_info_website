@@ -62,6 +62,40 @@
         "description": "Given the input array, fill in the values of array A after each for loop.",
         "inputArray": "Input array:",
         "submit": "Submit?"
+      },
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the time complexity of Insertion Sort in the best case?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Which of the following is true about Insertion Sort?",
+            "answers": [
+              "It requires additional space proportional to input size",
+              "It is not suitable for small data sets",
+              "It performs well with already sorted data",
+              "It always takes the same time regardless of input"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What is the space complexity of Insertion Sort?",
+            "answers": [
+              "O(n)",
+              "O(log n)",
+              "O(n²)",
+              "O(1)"
+            ],
+            "correctAnswer": 3
+          }
+        ]
       }
     },
     "animation": {
@@ -262,6 +296,12 @@
           "pause": "Pause",
           "animate": "Animate"
         }
+      },
+      "task": {
+        "title": "Task 1: Step-wise Array Values",
+        "description": "Given the input array, fill in the values of the array after each merge step.",
+        "inputArray": "Input array:",
+        "submit": "Submit?"
       }
     },
     "quick": {
@@ -310,6 +350,15 @@
   "general": {
     "explanation": "^^^ Explanation ^^^",
     "tipps": "^^^ Tipps ^^^",
+    "quiz": {
+      "title": "Test Your Knowledge",
+      "next": "Next Question",
+      "check": "Check",
+      "finish": "Finish Quiz",
+      "completed": "Quiz Completed!",
+      "score": "Your score: {{score}}/{{total}}",
+      "restart": "Try Again"
+    },
     "leaderboard": {
       "title": "Top 10 Leaderboard 🏆",
       "rank": "Rank",

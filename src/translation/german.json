@@ -62,6 +62,40 @@
         "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder for-Schleife ein.",
         "inputArray": "Eingabearray:",
         "submit": "Einreichen?"
+      },
+      "quiz": {
+        "questions": [
+          {
+            "question": "Wie ist die Zeitkomplexität von Insertion Sort im besten Fall?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Welche der folgenden Aussagen über Insertion Sort ist richtig?",
+            "answers": [
+              "Es benötigt zusätzlichen Speicher proportional zur Eingabegröße",
+              "Es ist nicht geeignet für kleine Datenmengen",
+              "Es funktioniert gut mit bereits sortierten Daten",
+              "Es braucht immer die gleiche Zeit unabhängig von der Eingabe"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Wie ist die Speicherkomplexität von Insertion Sort?",
+            "answers": [
+              "O(n)",
+              "O(log n)",
+              "O(n²)",
+              "O(1)"
+            ],
+            "correctAnswer": 3
+          }
+        ]
       }
     },
     "animation": {
@@ -253,6 +287,12 @@
         "clearingArrays": "Leere temporäre Arrays",
         "updatingMainArray": "Aktualisiere Hauptarray mit sortierten Elementen",
         "sortingComplete": "Merge Sort erfolgreich abgeschlossen!"
+      },
+      "task": {
+        "title": "Aufgabe 1: Schrittweise Array-Werte",
+        "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays nach jedem Merge-Schritt ein.",
+        "inputArray": "Eingabearray:",
+        "submit": "Einreichen?"
       }
     },
     "quick": {
@@ -301,6 +341,15 @@
   "general": {
     "explanation": "^^^ Erklärung ^^^",
     "tipps": "^^^ Tipps ^^^",
+    "quiz": {
+      "title": "Teste dein Wissen",
+      "next": "Nächste Frage",
+      "check": "Prüfen",
+      "finish": "Quiz beenden",
+      "completed": "Quiz abgeschlossen!",
+      "score": "Dein Ergebnis: {{score}}/{{total}}",
+      "restart": "Nochmal versuchen"
+    },
     "leaderboard": {
       "title": "Top 10 Bestenliste 🏆",
       "rank": "Rang",
