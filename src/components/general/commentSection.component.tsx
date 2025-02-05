@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useComments, Comment } from '../../context/comments.context';
+import { useTranslation } from 'react-i18next';
+import { useComments } from '../../context/comments.context';
+import { Comment } from '../../types/comments.types';
 import {
   SideSpacer,
   CommentContainer,
@@ -23,6 +25,7 @@ interface CommentSectionProps {
 const MAX_COMMENT_LENGTH = 500;
 
 const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
+  const { t } = useTranslation();
   const { comments, currentUser, addComment, deleteComment, addReply } = useComments();
   const [newComment, setNewComment] = useState('');
   const [replyText, setReplyText] = useState<Record<string, string>>({});
@@ -90,11 +93,11 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
                 </CommentMetadata>
                 <ButtonGroup>
                   <Button onClick={() => setShowReplyForm(prev => ({ ...prev, [comment.id]: !prev[comment.id] }))}>
-                    Reply
+                    {t('comments.reply')}
                   </Button>
                   {comment.authorId === currentUser.id && (
                     <DeleteButton onClick={() => deleteComment(algorithmId, comment.id)}>
-                      Delete
+                      {t('comments.delete')}
                     </DeleteButton>
                   )}
                 </ButtonGroup>
@@ -110,7 +113,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
                     </CommentMetadata>
                     {reply.authorId === currentUser.id && (
                       <DeleteButton onClick={() => deleteComment(algorithmId, reply.id)}>
-                        Delete
+                        {t('comments.delete')}
                       </DeleteButton>
                     )}
                   </CommentHeader>
@@ -119,25 +122,23 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
               ))}
 
               {showReplyForm[comment.id] && (
-                <SingleComment isReply>
-                  <CommentForm onSubmit={(e) => { e.preventDefault(); handleReply(comment.id); }}>
+                  <CommentForm isReply onSubmit={(e) => { e.preventDefault(); handleReply(comment.id); }}>
                     <CommentInput
                       value={replyText[comment.id] || ''}
                       onChange={(e) => handleReplyChange(comment.id, e)}
-                      placeholder="Write a reply..."
+                      placeholder={t('comments.replyPlaceholder')}
                       maxLength={MAX_COMMENT_LENGTH}
                     />
                     <CharacterCount isNearLimit={isNearLimit(getRemainingCharacters(replyText[comment.id] || ''))}>
-                      {getRemainingCharacters(replyText[comment.id] || '')} characters remaining
+                      {t('comments.charactersRemaining', { count: getRemainingCharacters(replyText[comment.id] || '') })}
                     </CharacterCount>
                     <Button 
                       type="submit" 
                       disabled={(replyText[comment.id]?.length || 0) === 0 || (replyText[comment.id]?.length || 0) > MAX_COMMENT_LENGTH}
                     >
-                      Post Reply
+                      {t('comments.postReply')}
                     </Button>
                   </CommentForm>
-                </SingleComment>
               )}
             </SingleComment>
           ))}
@@ -146,14 +147,14 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
             <CommentInput
               value={newComment}
               onChange={handleCommentChange}
-              placeholder="Write a comment..."
+              placeholder={t('comments.writePlaceholder')}
               maxLength={MAX_COMMENT_LENGTH}
             />
             <CharacterCount isNearLimit={isNearLimit(getRemainingCharacters(newComment))}>
-              {getRemainingCharacters(newComment)} characters remaining
+              {t('comments.charactersRemaining', { count: getRemainingCharacters(newComment) })}
             </CharacterCount>
             <Button type="submit" disabled={newComment.length === 0 || newComment.length > MAX_COMMENT_LENGTH}>
-              Post Comment
+              {t('comments.postComment')}
             </Button>
           </CommentForm>
         

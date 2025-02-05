@@ -16,28 +16,21 @@ import { LeaderboardProvider } from './context/LeaderboardContext';
 import { CommentsProvider } from './context/comments.context';
 
 //TODO: Still development needed:
-// => Leaderboard: should adjust dynamically using ... (REDUX) ? 
+// => Leaderboard: show current user's points and if they are not in the top 10, show their rank and score!
+// => Point collection: tasks&quizzes should result in points (sum should be 100 points)
 // => Tipps: Add tipps to ALL Algos! 
 // => Responsiveness for all pages
-// => Add a comment section under each algorithm; as a separate component under the algorithm page
-// => Implement a storytelling approach that transports users into a relatable scenario, using characters and avatars to represent students, and providing an engaging and interactive experience that fosters learner engagement and enthusiasm within the context of algorithmic theory in Informatik II.
-// => Implement a little quiz for the user at the end of the course or after each algo
+// (=> Implement a storytelling approach that transports users into a relatable scenario, using characters and avatars to represent students, and providing an engaging and interactive experience that fosters learner engagement and enthusiasm within the context of algorithmic theory in Informatik II )
 
 
 // Eine TODO-Liste
 //TODO: uninstall all unused packages
-//TODO: Responsive Design
 //TODO: Check ALL Sorting Algos for bugs!
 //TODO: Delete Dead/Unused Code
-//TODO: Naming Scheme anpassen in Code (überall)
 //TODO: Refactor Generic Styled Components into other files, e.g. "ControlPanel" is under "insertion.style" but should be generic
 //TODO: Set keys for lists (what do I mean by that?)
-//TODO: Centralize Data at one place, e.g. "InitialData" => "CountingSortInitialData", etc.
-//TODO: Apply "user-select: none" everywhere, e.g. "SortableItem", Iterations, Buttons etc.
-//TODO: Make the Control Panel a own component, make it generic and prop the getter and setter
+//TODO: Centralize initial data at one place, e.g. "InitialData" => "CountingSortInitialData", etc.
 //TODO: Check Imprint Button as it not always reroutes to DHBW Imprint as expected
-
-
 
 
 function App() {

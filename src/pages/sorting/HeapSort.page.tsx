@@ -5,6 +5,8 @@ import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../sty
 import HeapSortAnimation from '../../components/sorting/heapSortAnimation.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
+import CommentSection from '../../components/general/commentSection.component.tsx';
+import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 
 const HeapSortPage = () => {
   const { t } = useTranslation();
@@ -61,11 +63,11 @@ const HeapSortPage = () => {
           <HeapSortAnimation />
           <CodeBlockElement height={600} code={heapSortAlgo} isFaderOn={true} />
           <TasksContainer>
-            {/*<RadixSortNumberTask />*/}
-            {/*<RadixSortWordsTask />*/}
+            <AlgorithmQuizComponent translationKey="sorting.heap" />
           </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>
+      <CommentSection algorithmId="heapSort" />
     </TippsAndExplanationWrapper>
   );
 };

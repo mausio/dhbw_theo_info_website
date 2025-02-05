@@ -6,6 +6,8 @@ import { countingSortAlgo } from '../../static/algorithms/sorting.algorithms.ts'
 import CountingSortDeterminationTask from '../../components/sorting/counting/countingSortDeterminationTask.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
+import CommentSection from '../../components/general/commentSection.component.tsx';
+import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 
 const CountingSortPage = () => {
   const { t } = useTranslation();
@@ -63,9 +65,11 @@ const CountingSortPage = () => {
           <CodeBlockElement height={650} code={countingSortAlgo} isFaderOn={false} />
           <TasksContainer>
             <CountingSortDeterminationTask />
+            <AlgorithmQuizComponent translationKey="sorting.counting" />
           </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>
+      <CommentSection algorithmId="countingSort" />
     </TippsAndExplanationWrapper>
   );
 };

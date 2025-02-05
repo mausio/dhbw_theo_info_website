@@ -7,6 +7,8 @@ import QuickSortPartitionTasks from '../../components/sorting/quick/quickSortPar
 import QuickSortEmptySpacesTask from '../../components/sorting/quick/quickSortEmptySpacesTask.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
+import CommentSection from '../../components/general/commentSection.component.tsx';
+import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 
 const QuickSortPage = () => {
   const { t } = useTranslation();
@@ -64,9 +66,11 @@ const QuickSortPage = () => {
           <TasksContainer>
             <QuickSortPartitionTasks />
             <QuickSortEmptySpacesTask />
+            <AlgorithmQuizComponent translationKey="sorting.quick" />
           </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>
+      <CommentSection algorithmId="quickSort" />
     </TippsAndExplanationWrapper>
   );
 };

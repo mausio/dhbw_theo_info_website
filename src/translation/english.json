@@ -94,6 +94,26 @@
               "O(1)"
             ],
             "correctAnswer": 3
+          },
+          {
+            "question": "What makes Insertion Sort efficient for small data sets?",
+            "answers": [
+              "It uses complex data structures",
+              "It has simple implementation and low overhead",
+              "It requires additional memory",
+              "It uses recursion"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "How does Insertion Sort perform on nearly sorted arrays?",
+            "answers": [
+              "Poorly, requires many swaps",
+              "Same as random data",
+              "Very efficiently, approaches O(n)",
+              "No difference from worst case"
+            ],
+            "correctAnswer": 2
           }
         ]
       }
@@ -137,6 +157,60 @@
       "averageTime": "O(n log n)",
       "worstTime": "O(n log n)",
       "spaceComplexity": "O(1)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the time complexity of Heap Sort in all cases (best, average, and worst)?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What data structure is used in Heap Sort?",
+            "answers": [
+              "Linked List",
+              "Stack",
+              "Binary Heap",
+              "Hash Table"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What is the space complexity of Heap Sort?",
+            "answers": [
+              "O(n)",
+              "O(log n)",
+              "O(n²)",
+              "O(1)"
+            ],
+            "correctAnswer": 3
+          },
+          {
+            "question": "What property must be maintained in a max heap?",
+            "answers": [
+              "Parent nodes are smaller than children",
+              "All levels must be complete",
+              "Parent nodes are greater than children",
+              "Nodes must be balanced"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Is Heap Sort stable?",
+            "answers": [
+              "Yes, always",
+              "No, it can change the relative order of equal elements",
+              "Depends on implementation",
+              "Only for small arrays"
+            ],
+            "correctAnswer": 1
+          }
+        ]
+      },
       "animation": {
         "initialMessage": "shuffle, then sort! :)",
         "shuffling": "Shuffling!",
@@ -211,6 +285,60 @@
           "unsorted": "Unsorted Array"
         },
         "submit": "Submit"
+      },
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the time complexity of Counting Sort?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n+k)",
+              "O(n)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What is a limitation of Counting Sort?",
+            "answers": [
+              "Can only sort positive integers",
+              "Requires a lot of memory for large ranges",
+              "Only works on sorted arrays",
+              "Cannot handle duplicates"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Is Counting Sort a comparison-based sorting algorithm?",
+            "answers": [
+              "Yes, it compares elements directly",
+              "No, it uses counting of elements",
+              "Sometimes, depends on input",
+              "Yes, but only for small arrays"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What makes Counting Sort efficient for integers?",
+            "answers": [
+              "It uses comparisons efficiently",
+              "It uses divide and conquer",
+              "It counts occurrences instead of comparing",
+              "It uses a binary tree"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What determines the extra space needed in Counting Sort?",
+            "answers": [
+              "The size of input array",
+              "The range of input values (k)",
+              "The number of unique elements",
+              "The sorting order"
+            ],
+            "correctAnswer": 1
+          }
+        ]
       }
     },
     "radix": {
@@ -258,6 +386,60 @@
           "reset": "Reset",
           "check": "Check"
         }
+      },
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the time complexity of Radix Sort?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(nk)",
+              "O(n+k)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What distinguishes Radix Sort from comparison-based sorting algorithms?",
+            "answers": [
+              "It uses a pivot element",
+              "It doesn't compare elements directly",
+              "It uses a heap structure",
+              "It requires sorted input"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "In which order does Radix Sort process digits?",
+            "answers": [
+              "Most significant to least significant",
+              "Least significant to most significant",
+              "Random order",
+              "Middle to ends"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What type of stability is crucial for Radix Sort to work correctly?",
+            "answers": [
+              "Memory stability",
+              "Sort stability",
+              "Time stability",
+              "Space stability"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What determines the number of passes in Radix Sort?",
+            "answers": [
+              "Array size",
+              "Number of unique elements",
+              "Number of digits in largest number",
+              "Memory constraints"
+            ],
+            "correctAnswer": 2
+          }
+        ]
       }
     },
     "merge": {
@@ -280,6 +462,60 @@
       "averageTime": "O(n log n)",
       "worstTime": "O(n log n)",
       "spaceComplexity": "O(n)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the time complexity of Merge Sort in all cases (best, average, and worst)?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What is the space complexity of Merge Sort?",
+            "answers": [
+              "O(n)",
+              "O(log n)",
+              "O(n²)",
+              "O(1)"
+            ],
+            "correctAnswer": 0
+          },
+          {
+            "question": "Which algorithmic paradigm does Merge Sort use?",
+            "answers": [
+              "Greedy Algorithm",
+              "Dynamic Programming",
+              "Divide and Conquer",
+              "Backtracking"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What is a key advantage of Merge Sort?",
+            "answers": [
+              "In-place sorting",
+              "Low memory usage",
+              "Guaranteed O(n log n) performance",
+              "Simple implementation"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What is a disadvantage of Merge Sort?",
+            "answers": [
+              "High time complexity",
+              "Requires extra space O(n)",
+              "Not stable",
+              "Cannot handle large datasets"
+            ],
+            "correctAnswer": 1
+          }
+        ]
+      },
       "animation": {
         "initialMessage": "shuffle, then sort! :)",
         "shuffling": "Shuffling!",
@@ -295,7 +531,26 @@
           "continue": "Continue",
           "pause": "Pause",
           "animate": "Animate"
-        }
+        },
+        "lookingAtRange": "Looking at range from index {{start}} to {{end}}",
+        "findingMiddle": "Finding middle point at index {{middle}}",
+        "dividing": "Dividing array into left part ({{leftStart}}-{{leftEnd}}) and right part ({{rightStart}}-{{rightEnd}})",
+        "sortingLeft": "Sorting left part from index {{start}} to {{end}}",
+        "sortingRight": "Sorting right part from index {{start}} to {{end}}",
+        "mergingRanges": "Merging ranges from {{leftStart}}-{{leftEnd}} and {{rightStart}}-{{rightEnd}}",
+        "preparingArrays": "Preparing temporary arrays for merging",
+        "copyingLeft": "Copying left part from index {{start}} to {{end}}",
+        "copyingRight": "Copying right part from index {{start}} to {{end}}",
+        "copyingElement": "Copying element A[{{index}}]={{value}} to {{array}}[{{targetIndex}}]",
+        "removingElement": "Removing element from main array at position {{index}}",
+        "mergingBack": "Merging elements back into main array from index {{start}} to {{end}}",
+        "comparing": "Comparing L[{{leftIndex}}]={{leftValue}} with R[{{rightIndex}}]={{rightValue}}",
+        "placingLeft": "Placing L[{{index}}]={{value}} at position {{position}}",
+        "placingRight": "Placing R[{{index}}]={{value}} at position {{position}}",
+        "placingRemaining": "Placing remaining {{array}}[{{index}}]={{value}} at position {{position}}",
+        "clearingArrays": "Clearing temporary arrays",
+        "updatingMainArray": "Updating main array with sorted elements",
+        "sortingComplete": "Merge Sort successfully completed!"
       },
       "task": {
         "title": "Task 1: Step-wise Array Values",
@@ -323,7 +578,61 @@
       "bestTime": "O(n log n)",
       "averageTime": "O(n log n)",
       "worstTime": "O(n²)",
-      "spaceComplexity": "O(log n)"
+      "spaceComplexity": "O(log n)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the time complexity of QuickSort in the average case?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What is the worst-case time complexity of QuickSort?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(log n)"
+            ],
+            "correctAnswer": 0
+          },
+          {
+            "question": "What is the key concept that QuickSort uses to sort the array?",
+            "answers": [
+              "Merging sorted subarrays",
+              "Building a heap structure",
+              "Partitioning around a pivot",
+              "Counting element frequencies"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What causes QuickSort's worst-case scenario?",
+            "answers": [
+              "Random data",
+              "Already sorted data",
+              "Choosing smallest/largest element as pivot",
+              "Large arrays"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Why is QuickSort often preferred in practice?",
+            "answers": [
+              "Stable sorting",
+              "Good cache performance and in-place sorting",
+              "Predictable performance",
+              "Low memory usage"
+            ],
+            "correctAnswer": 1
+          }
+        ]
+      }
     },
     "bucket": {
       "description": "Bucket Sort divides the input into a finite number of buckets, sorts each bucket individually, and then concatenates them to get the final sorted array.",
@@ -344,7 +653,61 @@
       "bestTime": "Ω(n+k)",
       "averageTime": "Θ(n+k)",
       "worstTime": "O(n²)",
-      "spaceComplexity": "O(n+k)"
+      "spaceComplexity": "O(n+k)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the average time complexity of Bucket Sort?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "Θ(n+k)",
+              "O(n)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "What is the main idea behind Bucket Sort?",
+            "answers": [
+              "Using a pivot element",
+              "Dividing into smaller buckets and sorting them",
+              "Building a heap structure",
+              "Counting element frequencies"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "When is Bucket Sort most efficient?",
+            "answers": [
+              "With random distributions",
+              "With uniform distribution of elements",
+              "With reverse sorted arrays",
+              "With already sorted arrays"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What factor affects the number of buckets needed?",
+            "answers": [
+              "Array size only",
+              "Data distribution and range",
+              "Available memory",
+              "Sorting algorithm used"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "What happens if all elements fall into the same bucket?",
+            "answers": [
+              "The algorithm fails",
+              "Performance becomes O(n)",
+              "Performance degrades to O(n²)",
+              "Extra buckets are created"
+            ],
+            "correctAnswer": 2
+          }
+        ]
+      }
     }
   },
   "general": {
@@ -376,5 +739,14 @@
       "pause": "Pause",
       "animate": "Animate"
     }
+  },
+  "comments": {
+    "reply": "Reply",
+    "delete": "Delete",
+    "postReply": "Post Reply",
+    "postComment": "Post Comment",
+    "charactersRemaining": "{{count}} characters remaining",
+    "writePlaceholder": "Write a comment...",
+    "replyPlaceholder": "Write a reply..."
   }
 }

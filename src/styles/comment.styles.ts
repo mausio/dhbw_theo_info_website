@@ -1,5 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { GenericMainContainer } from './general/generic.style';
+
+const shake = keyframes`
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+`;
 
 export const SideSpacer = styled.div`
   width: auto;
@@ -25,8 +33,8 @@ export const CommentContainer = styled(GenericMainContainer)`
 `;
 
 export const SingleComment = styled.div<{ isReply?: boolean }>`
-  padding: 15px 20px;
-  margin: ${props => props.isReply ? '10px 0 10px 50px' : '15px 0'};
+  padding: 20px 25px;
+  margin: ${props => props.isReply ? '10px 0 10px 50px' : '50px 0'};
   border-radius: 10px;
   border: 1px solid darkgray;
   box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
@@ -43,28 +51,32 @@ export const CommentForm = styled.form`
   flex-direction: column;
   gap: 10px;
   margin: 20px 0;
-  background: white;
   padding: 20px;
   border-radius: 10px;
   border: 1px solid darkgray;
-  box-shadow: rgb(0, 0, 0, 0.1) 2px 2px 5px 0px;
+    background: color-mix(in srgb, var(--tertiary), white 20%);
+      box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 4px 0px inset;
 `;
 
 export const CommentInput = styled.textarea`
   width: auto;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid dimgray;
   border-radius: 8px;
   min-height: 80px;
   font-family: inherit;
   font-size: 14px;
   resize: vertical;
-    background: radial-gradient(white, color-mix(in srgb, var(--primary), white 95%) 95%);
+  background: white;
+  box-shadow: rgb(0, 0, 0, 0.6) 2px 2px 3px 0px inset;
+  
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+          
   
   &:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary), white 80%);
+    outline: transparent;
+    border-color: dimgray;
   }
 `;
 
@@ -92,8 +104,12 @@ export const Button = styled.button`
   }
 
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.8;
     cursor: not-allowed;
+
+    &:active {
+      animation: ${shake} 0.15s ease-in-out;
+    }
   }
 `;
 
@@ -102,7 +118,7 @@ export const DeleteButton = styled(Button)`
   color: white;
   border-color: #dc3545;
   padding: 4px 12px;
-  font-size: 0.85em;
+  font-size: 0.8em;
 
   &:hover:not(:disabled) {
     background-color: #c82333;
@@ -131,7 +147,7 @@ export const CommentMetadata = styled.div`
 export const CharacterCount = styled.div<{ isNearLimit: boolean }>`
   text-align: right;
   font-size: 0.8em;
-  color: ${props => props.isNearLimit ? '#dc3545' : '#666'};
+  color: ${props => props.isNearLimit ? '#dc3545' : '#fff'};
   margin: -5px 0 5px 0;
 `;
 

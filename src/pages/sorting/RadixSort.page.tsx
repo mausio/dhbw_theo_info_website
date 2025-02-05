@@ -7,6 +7,8 @@ import RadixSortNumberTask from '../../components/sorting/radix/radixSortNumberT
 import RadixSortWordsTask from '../../components/sorting/radix/radixSortWordsTask.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
+import CommentSection from '../../components/general/commentSection.component.tsx';
+import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 
 const RadixSortPage = () => {
   const { t } = useTranslation();
@@ -64,9 +66,11 @@ const RadixSortPage = () => {
           <TasksContainer>
             <RadixSortNumberTask />
             <RadixSortWordsTask />
+            <AlgorithmQuizComponent translationKey="sorting.radix" />
           </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>
+      <CommentSection algorithmId="radixSort" />
     </TippsAndExplanationWrapper>
   );
 };

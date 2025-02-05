@@ -6,6 +6,8 @@ import MergeSortTaskComponent from '../../components/sorting/merge/mergeSortTask
 import MergeSortAnimation from '../../components/sorting/merge/mergeSortAnimation.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
+import CommentSection from '../../components/general/commentSection.component.tsx';
+import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 
 const MergeSortPage = () => {
   const { t } = useTranslation();
@@ -62,9 +64,11 @@ const MergeSortPage = () => {
           <CodeBlockElement height={625} code={mergeSortAlgo} isFaderOn={true} />
           <TasksContainer>
             {/* <MergeSortTaskComponent /> */}
+            <AlgorithmQuizComponent translationKey="sorting.merge" />
           </TasksContainer>
         </GenericSortGrid>
       </GenericMainContainer>
+      <CommentSection algorithmId="mergeSort" />
     </TippsAndExplanationWrapper>
   );
 };

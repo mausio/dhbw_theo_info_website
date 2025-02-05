@@ -94,6 +94,26 @@
               "O(1)"
             ],
             "correctAnswer": 3
+          },
+          {
+            "question": "Was macht Insertion Sort effizient für kleine Datenmengen?",
+            "answers": [
+              "Es verwendet komplexe Datenstrukturen",
+              "Es hat eine einfache Implementierung und geringen Overhead",
+              "Es benötigt zusätzlichen Speicher",
+              "Es verwendet Rekursion"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Wie verhält sich Insertion Sort bei fast sortierten Arrays?",
+            "answers": [
+              "Schlecht, benötigt viele Vertauschungen",
+              "Gleich wie bei zufälligen Daten",
+              "Sehr effizient, nähert sich O(n)",
+              "Kein Unterschied zum schlechtesten Fall"
+            ],
+            "correctAnswer": 2
           }
         ]
       }
@@ -137,6 +157,60 @@
       "averageTime": "O(n log n)",
       "worstTime": "O(n log n)",
       "spaceComplexity": "O(1)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "Wie ist die Zeitkomplexität von Heap Sort in allen Fällen (beste, durchschnittliche und schlechteste)?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Welche Datenstruktur wird in Heap Sort verwendet?",
+            "answers": [
+              "Verkettete Liste",
+              "Stack",
+              "Binärer Heap",
+              "Hash-Tabelle"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Wie ist die Speicherkomplexität von Heap Sort?",
+            "answers": [
+              "O(n)",
+              "O(log n)",
+              "O(n²)",
+              "O(1)"
+            ],
+            "correctAnswer": 3
+          },
+          {
+            "question": "Welche Eigenschaft muss in einem Max-Heap erhalten bleiben?",
+            "answers": [
+              "Elternknoten sind kleiner als Kindknoten",
+              "Alle Ebenen müssen vollständig sein",
+              "Elternknoten sind größer als Kindknoten",
+              "Knoten müssen ausbalanciert sein"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Ist Heap Sort stabil?",
+            "answers": [
+              "Ja, immer",
+              "Nein, es kann die relative Reihenfolge gleicher Elemente ändern",
+              "Hängt von der Implementierung ab",
+              "Nur bei kleinen Arrays"
+            ],
+            "correctAnswer": 1
+          }
+        ]
+      },
       "animation": {
         "initialMessage": "Mischen, dann sortieren! :)",
         "shuffling": "Mische!",
@@ -211,6 +285,60 @@
           "unsorted": "Unsortiertes Array"
         },
         "submit": "Einreichen"
+      },
+      "quiz": {
+        "questions": [
+          {
+            "question": "Wie ist die Zeitkomplexität von Counting Sort?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n+k)",
+              "O(n)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Was ist eine Einschränkung von Counting Sort?",
+            "answers": [
+              "Kann nur positive Ganzzahlen sortieren",
+              "Benötigt viel Speicher für große Wertebereiche",
+              "Funktioniert nur mit sortierten Arrays",
+              "Kann keine Duplikate verarbeiten"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Ist Counting Sort ein vergleichsbasierter Sortieralgorithmus?",
+            "answers": [
+              "Ja, es vergleicht Elemente direkt",
+              "Nein, es verwendet das Zählen von Elementen",
+              "Manchmal, abhängig von der Eingabe",
+              "Ja, aber nur für kleine Arrays"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Was macht Counting Sort effizient für Ganzzahlen?",
+            "answers": [
+              "Es verwendet Vergleiche effizient",
+              "Es verwendet Teile und Herrsche",
+              "Es zählt Vorkommen statt zu vergleichen",
+              "Es verwendet einen Binärbaum"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Was bestimmt den zusätzlichen Speicherbedarf bei Counting Sort?",
+            "answers": [
+              "Die Größe des Eingabe-Arrays",
+              "Der Wertebereich der Eingabewerte (k)",
+              "Die Anzahl der eindeutigen Elemente",
+              "Die Sortierreihenfolge"
+            ],
+            "correctAnswer": 1
+          }
+        ]
       }
     },
     "radix": {
@@ -258,6 +386,60 @@
           "reset": "Zurück",
           "check": "Prüfen"
         }
+      },
+      "quiz": {
+        "questions": [
+          {
+            "question": "Wie ist die Zeitkomplexität von Radix Sort?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(nk)",
+              "O(n+k)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Was unterscheidet Radix Sort von vergleichsbasierten Sortieralgorithmen?",
+            "answers": [
+              "Es verwendet ein Pivot-Element",
+              "Es vergleicht Elemente nicht direkt",
+              "Es verwendet eine Heap-Struktur",
+              "Es erfordert sortierte Eingaben"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "In welcher Reihenfolge verarbeitet Radix Sort die Ziffern?",
+            "answers": [
+              "Von der höchstwertigen zur niedrigstwertigen",
+              "Von der niedrigstwertigen zur höchstwertigen",
+              "In zufälliger Reihenfolge",
+              "Von der Mitte zu den Enden"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Welche Art von Stabilität ist entscheidend für die korrekte Funktionsweise von Radix Sort?",
+            "answers": [
+              "Speicherstabilität",
+              "Sortierstabilität",
+              "Zeitstabilität",
+              "Raumstabilität"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Was bestimmt die Anzahl der Durchläufe bei Radix Sort?",
+            "answers": [
+              "Array-Größe",
+              "Anzahl eindeutiger Elemente",
+              "Anzahl der Stellen in der größten Zahl",
+              "Speicherbeschränkungen"
+            ],
+            "correctAnswer": 2
+          }
+        ]
       }
     },
     "merge": {
@@ -280,10 +462,77 @@
       "averageTime": "O(n log n)",
       "worstTime": "O(n log n)",
       "spaceComplexity": "O(n)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "Wie ist die Zeitkomplexität von Merge Sort in allen Fällen (beste, durchschnittliche und schlechteste)?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Wie ist die Speicherkomplexität von Merge Sort?",
+            "answers": [
+              "O(n)",
+              "O(log n)",
+              "O(n²)",
+              "O(1)"
+            ],
+            "correctAnswer": 0
+          },
+          {
+            "question": "Welches algorithmische Paradigma verwendet Merge Sort?",
+            "answers": [
+              "Greedy-Algorithmus",
+              "Dynamische Programmierung",
+              "Teile und Herrsche",
+              "Backtracking"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Was ist ein wichtiger Vorteil von Merge Sort?",
+            "answers": [
+              "In-Place-Sortierung",
+              "Geringer Speicherverbrauch",
+              "Garantierte O(n log n) Leistung",
+              "Einfache Implementierung"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Was ist ein Nachteil von Merge Sort?",
+            "answers": [
+              "Hohe Zeitkomplexität",
+              "Benötigt zusätzlichen Speicher O(n)",
+              "Nicht stabil",
+              "Kann große Datensätze nicht verarbeiten"
+            ],
+            "correctAnswer": 1
+          }
+        ]
+      },
       "animation": {
+        "lookingAtRange": "Betrachte Bereich von Index {{start}} bis {{end}}",
+        "findingMiddle": "Finde Mittelpunkt bei Index {{middle}}",
+        "dividing": "Teile in linken Teil ({{leftStart}}-{{leftEnd}}) und rechten ({{rightStart}}-{{rightEnd}}) Teil",
+        "sortingLeft": "Sortiere linken Teil von Index {{start}} bis {{end}}",
+        "sortingRight": "Sortiere rechten Teil von Index {{start}} bis {{end}}",
+        "mergingRanges": "Führe Bereiche von {{leftStart}}-{{leftEnd}} und {{rightStart}}-{{rightEnd}} zusammen",
+        "preparingArrays": "Bereite temporäre Arrays für die Zusammenführung vor",
+        "copyingLeft": "Kopiere linken Teil von Index {{start}} bis {{end}}",
+        "copyingRight": "Kopiere rechten Teil von Index {{start}} bis {{end}}",
         "copyingElement": "Kopiere Element A[{{index}}]={{value}} nach {{array}}[{{targetIndex}}]",
         "removingElement": "Entferne Element aus dem Hauptarray an Position {{index}}",
-        "preparingArrays": "Bereite temporäre Arrays für die Zusammenführung vor",
+        "mergingBack": "Führe Elemente zurück in das Hauptarray von Index {{start}} bis {{end}}",
+        "comparing": "Vergleiche L[{{leftIndex}}]={{leftValue}} mit R[{{rightIndex}}]={{rightValue}}",
+        "placingLeft": "Platziere L[{{index}}]={{value}} an Position {{position}}",
+        "placingRight": "Platziere R[{{index}}]={{value}} an Position {{position}}",
+        "placingRemaining": "Platziere verbleibendes {{array}}[{{index}}]={{value}} an Position {{position}}",
         "clearingArrays": "Leere temporäre Arrays",
         "updatingMainArray": "Aktualisiere Hauptarray mit sortierten Elementen",
         "sortingComplete": "Merge Sort erfolgreich abgeschlossen!"
@@ -314,7 +563,61 @@
       "bestTime": "O(n log n)",
       "averageTime": "O(n log n)",
       "worstTime": "O(n²)",
-      "spaceComplexity": "O(log n)"
+      "spaceComplexity": "O(log n)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "Wie ist die Zeitkomplexität von QuickSort im Durchschnittsfall?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(1)"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Wie ist die Zeitkomplexität von QuickSort im schlechtesten Fall?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "O(n)",
+              "O(log n)"
+            ],
+            "correctAnswer": 0
+          },
+          {
+            "question": "Welches Schlüsselkonzept verwendet QuickSort zum Sortieren des Arrays?",
+            "answers": [
+              "Zusammenführen sortierter Teilarrays",
+              "Aufbau einer Heap-Struktur",
+              "Partitionierung um ein Pivot-Element",
+              "Zählen von Elementhäufigkeiten"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Was verursacht den schlechtesten Fall bei QuickSort?",
+            "answers": [
+              "Zufällige Daten",
+              "Bereits sortierte Daten",
+              "Wahl des kleinsten/größten Elements als Pivot",
+              "Große Arrays"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Warum wird QuickSort in der Praxis oft bevorzugt?",
+            "answers": [
+              "Stabile Sortierung",
+              "Gute Cache-Leistung und In-Place-Sortierung",
+              "Vorhersagbare Leistung",
+              "Geringer Speicherverbrauch"
+            ],
+            "correctAnswer": 1
+          }
+        ]
+      }
     },
     "bucket": {
       "description": "Bucket Sort teilt die Eingabe in eine endliche Anzahl von Behältern (Buckets) auf, sortiert jeden Behälter einzeln und verkettet sie dann zum endgültig sortierten Array.",
@@ -335,7 +638,61 @@
       "bestTime": "Ω(n+k)",
       "averageTime": "Θ(n+k)",
       "worstTime": "O(n²)",
-      "spaceComplexity": "O(n+k)"
+      "spaceComplexity": "O(n+k)",
+      "quiz": {
+        "questions": [
+          {
+            "question": "Wie ist die durchschnittliche Zeitkomplexität von Bucket Sort?",
+            "answers": [
+              "O(n²)",
+              "O(n log n)",
+              "Θ(n+k)",
+              "O(n)"
+            ],
+            "correctAnswer": 2
+          },
+          {
+            "question": "Was ist die Hauptidee hinter Bucket Sort?",
+            "answers": [
+              "Verwendung eines Pivot-Elements",
+              "Aufteilung in kleinere Behälter und deren Sortierung",
+              "Aufbau einer Heap-Struktur",
+              "Zählen von Elementhäufigkeiten"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Wann ist Bucket Sort am effizientesten?",
+            "answers": [
+              "Bei zufälligen Verteilungen",
+              "Bei gleichmäßiger Verteilung der Elemente",
+              "Bei umgekehrt sortierten Arrays",
+              "Bei bereits sortierten Arrays"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Welcher Faktor beeinflusst die Anzahl der benötigten Behälter?",
+            "answers": [
+              "Nur die Array-Größe",
+              "Datenverteilung und Wertebereich",
+              "Verfügbarer Speicher",
+              "Verwendeter Sortieralgorithmus"
+            ],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Was passiert, wenn alle Elemente in denselben Behälter fallen?",
+            "answers": [
+              "Der Algorithmus schlägt fehl",
+              "Die Leistung wird O(n)",
+              "Die Leistung verschlechtert sich zu O(n²)",
+              "Zusätzliche Behälter werden erstellt"
+            ],
+            "correctAnswer": 2
+          }
+        ]
+      }
     }
   },
   "general": {
@@ -367,5 +724,14 @@
       "pause": "Pause",
       "animate": "Animieren"
     }
+  },
+  "comments": {
+    "reply": "Antworten",
+    "delete": "Löschen",
+    "postReply": "Antwort senden",
+    "postComment": "Kommentar senden",
+    "charactersRemaining": "{{count}} Zeichen übrig",
+    "writePlaceholder": "Schreibe einen Kommentar...",
+    "replyPlaceholder": "Schreibe eine Antwort..."
   }
 }

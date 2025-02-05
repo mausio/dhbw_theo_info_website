@@ -7,7 +7,7 @@ export const GenericMainContainer = styled.div`
   height: 100%;
   inset: 0;
   margin: 25px auto;
-  padding: 10px 20px;
+  padding: 10px 20px 25px 20px;
   border-radius: 5px;
   //background-color: var(--quarternary);
   backdrop-filter: brightness(100) opacity(1);

@@ -106,7 +106,7 @@ export const QuizResultContainer = styled.div`
   box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 3px 0px inset;
 
   h3 {
-    color: #1a1a1a;
+    color: white;
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: 600;
@@ -115,6 +115,6 @@ export const QuizResultContainer = styled.div`
   p {
     font-size: 18px;
     margin-bottom: 25px;
-    color: #1a1a1a;
+    color: white;
   }
 `; 
