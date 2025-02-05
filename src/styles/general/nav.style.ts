@@ -213,3 +213,25 @@ export const SubListElement = styled(ListElement)`
   width: 100%;
   min-height: 15px;
 `;
+
+export const ResetButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  background-color: purple;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 10px;
+  opacity: 0.7;
+  transition: 0.2s ease-in-out;
+
+  scale: 1.5;
+
+  &:hover {
+    scale: 1.6;
+  }
+
+  &:active {
+    scale: 1.4;
+  }
+`;

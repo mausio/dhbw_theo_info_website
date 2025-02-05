@@ -4,6 +4,10 @@ interface CenterProps {
   center?: boolean;
 }
 
+interface LeaderboardRowProps {
+  isCurrentUser?: boolean;
+}
+
 export const LeaderboardContainer = styled.div`
   width: auto;
   min-width: 350px;
@@ -39,13 +43,34 @@ export const LeaderboardHeader = styled.th<CenterProps>`
   font-weight: bold;
 `;
 
-export const LeaderboardRow = styled.tr`
+export const LeaderboardRow = styled.tr<LeaderboardRowProps>`
   &:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.02);
   }
   &:hover {
     background-color: rgba(57, 87, 111, 0.05);
   }
+  ${props => props.isCurrentUser && `
+    background-color: rgba(var(--contrastAccent-rgb), 0.1) !important;
+  `}
+`;
+
+export const UserPositionDivider = styled.tr`
+  text-align: center;
+  color: var(--black);
+  opacity: 0.5;
+  font-weight: bold;
+  
+  td {
+    padding: 8px;
+  }
+`;
+
+export const CurrentUserRow = styled(LeaderboardRow)`
+  background-color: rgba(var(--contrastAccent-rgb), 0.1) !important;
+  font-weight: bold;
+  border-top: 1px solid rgba(var(--contrastAccent-rgb), 0.3);
+  border-bottom: 1px solid rgba(var(--contrastAccent-rgb), 0.3);
 `;
 
 export const RankCell = styled.td<CenterProps>`

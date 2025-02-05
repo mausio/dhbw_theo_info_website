@@ -10,6 +10,7 @@ import {
   NavigationBarContainer,
   SubLinkList,
   SubListElement,
+  ResetButton,
 } from '../../styles/general/nav.style.ts';
 import { APP_ROUTES } from '../../routes/routes.ts';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -19,6 +20,7 @@ import { ClickAwayListener } from '@mui/material';
 import { containsNot, removeNotFromString } from '../../utils/string.utils.ts';
 import i18next from '../../translation/i18next.ts';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../../context/user.context';
 
 const SingleElement = ({ childKey: key, childValue: value }) => {
   const navigate = useNavigate();
@@ -103,7 +105,7 @@ const DropdownElement = ({ childKey: key, childValue: value }) => {
 const NavigationBar = () => {
   const { t } = useTranslation();
   const [lang, setLang] = useState<'de' | 'en'>('en');
-
+  const { resetDefaultUser } = useUser();
   const navigate = useNavigate();
 
   function languageChange() {
@@ -148,6 +150,7 @@ const NavigationBar = () => {
       <Outlet />
       <GenericImprintNotice>
         <p>2025 DHBW Karlsruhe</p>
+        <ResetButton onClick={resetDefaultUser}>{t('navigation.reset')}</ResetButton>
         <ListElement onClick={() => handleNavigate(APP_ROUTES.imprint)}>{t('navigation.imprint')}</ListElement>
       </GenericImprintNotice>
     </>

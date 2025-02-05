@@ -14,6 +14,7 @@ import HeapSortPage from './pages/sorting/HeapSort.page.tsx';
 import './translation/i18next.ts';
 import { LeaderboardProvider } from './context/LeaderboardContext';
 import { CommentsProvider } from './context/comments.context';
+import { UserProvider } from './context/user.context';
 
 //TODO: Still development needed:
 // => Leaderboard: show current user's points and if they are not in the top 10, show their rank and score!
@@ -35,24 +36,26 @@ import { CommentsProvider } from './context/comments.context';
 
 function App() {
   return (
-    <CommentsProvider>
-      <LeaderboardProvider>
-        <Routes>
-          <Route path={'/'} element={<NavigationBar key={'NavigationBar'} />}>
-            <Route index element={<HomePage />} />
-            <Route path={APP_ROUTES.sorting.insertion} element={<InsertionSortPage />} />
-            <Route path={APP_ROUTES.sorting.merge} element={<MergeSortPage />} />
-            <Route path={APP_ROUTES.sorting.quick} element={<QuickSortPage />} />
-            <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
-            <Route path={APP_ROUTES.sorting.bucket} element={<BucketSortPage />} />
-            <Route path={APP_ROUTES.sorting.radix} element={<RadixSortPage />} />
-            <Route path={APP_ROUTES.sorting.heap} element={<HeapSortPage />} />
-            <Route path={'*'} element={<FourOfourPage />} />
-            <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
-          </Route>
-        </Routes>
-      </LeaderboardProvider>
-    </CommentsProvider>
+    <LeaderboardProvider>
+      <UserProvider>
+        <CommentsProvider>
+          <Routes>
+            <Route path={'/'} element={<NavigationBar key={'NavigationBar'} />}>
+              <Route index element={<HomePage />} />
+              <Route path={APP_ROUTES.sorting.insertion} element={<InsertionSortPage />} />
+              <Route path={APP_ROUTES.sorting.merge} element={<MergeSortPage />} />
+              <Route path={APP_ROUTES.sorting.quick} element={<QuickSortPage />} />
+              <Route path={APP_ROUTES.sorting.counting} element={<CountingSortPage />} />
+              <Route path={APP_ROUTES.sorting.bucket} element={<BucketSortPage />} />
+              <Route path={APP_ROUTES.sorting.radix} element={<RadixSortPage />} />
+              <Route path={APP_ROUTES.sorting.heap} element={<HeapSortPage />} />
+              <Route path={'*'} element={<FourOfourPage />} />
+              <Route path={APP_ROUTES.imprint} element={<RedirectExternalImprint />} />
+            </Route>
+          </Routes>
+        </CommentsProvider>
+      </UserProvider>
+    </LeaderboardProvider>
   );
 }
 
