@@ -11,7 +11,7 @@ const shake = keyframes`
 
 export const SideSpacer = styled.div`
   width: auto;
-  margin: 0 40px;
+  margin: 0 50px;
 `;
 
 export const CommentContainer = styled(GenericMainContainer)`
@@ -34,7 +34,7 @@ export const CommentContainer = styled(GenericMainContainer)`
 
 export const SingleComment = styled.div<{ isReply?: boolean }>`
   padding: 20px 25px;
-  margin: ${props => props.isReply ? '10px 0 10px 50px' : '50px 0'};
+  margin: ${props => props.isReply ? '25px 80px 10px 80px' : '50px 0'};
   border-radius: 10px;
   border: 1px solid darkgray;
   box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
@@ -155,6 +155,7 @@ export const CommentText = styled.p`
   margin: 0;
   line-height: 1.5;
   color: var(--black);
+  margin: 0 80px 0 0px;
 `;
 
 export const ButtonGroup = styled.div`

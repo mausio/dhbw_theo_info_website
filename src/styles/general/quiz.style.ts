@@ -10,7 +10,7 @@ const shake = keyframes`
 
 export const QuizContainer = styled.div`
   width: auto;
-  margin: 20px 0;
+  margin: 0 0 25px 0;
   padding: 25px;
   border-radius: 25px;
   background: white;
@@ -28,7 +28,11 @@ export const QuizTitle = styled.h2`
   font-weight: 600;
 `;
 
-export const QuestionContainer = styled.div`
+interface QuestionContainerProps {
+  isShaking?: boolean;
+}
+
+export const QuestionContainer = styled.div<QuestionContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +43,7 @@ export const QuestionContainer = styled.div`
   box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 3px 0px inset,
       rgb(0, 0, 0, 0.1) -1px -1px 2px 0px inset;
   background: white;
+  animation: ${props => props.isShaking ? shake : 'none'} 0.5s ease-in-out;
 
   h3 {
     text-align: center;

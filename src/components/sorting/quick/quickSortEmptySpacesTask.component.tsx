@@ -81,7 +81,7 @@ const QuickSortEmptySpacesTask = () => {
     };
     steps.push(partitionStep);
 
-    // console.log('adding some solvedLevelsArray at QuickSort');
+    // ('adding some solvedLevelsArray at QuickSort');
     // solvedLevelsArray.current = [...solvedLevelsArray.current, { uuid: partitionStep.uuid, isSolved: false }];
 
     return {

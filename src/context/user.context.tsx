@@ -7,7 +7,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 // Create a default user with initial tasks
 const createDefaultUser = (): User => ({
   id: '0',
-  name: 'Test',
+  name: 'Demo User',
   points: [], // Create a fresh copy of the tasks
 });
 
@@ -86,11 +86,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   }, [user]);
 
   const resetDefaultUser = () => {
-    console.log('Resetting user...');
+    ('Resetting user...');
     
     // Create a fresh default user
     const defaultUser = createDefaultUser();
-    console.log('New default user:', defaultUser);
+    ('New default user:', defaultUser);
     
     // Clear all storage
     sessionStorage.clear();
@@ -103,7 +103,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     localStorage.setItem('currentUser', JSON.stringify(defaultUser));
     sessionStorage.setItem('userSession', 'active');
     
-    console.log('Reset complete. Current user state:', defaultUser);
+    ('Reset complete. Current user state:', defaultUser);
   };
 
   const getTotalPoints = () => {

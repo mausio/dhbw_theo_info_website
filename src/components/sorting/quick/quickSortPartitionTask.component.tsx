@@ -35,7 +35,7 @@ const QuickSortPartitionTasks = () => {
 
     if (JSON.stringify(currentExpectedArray) === JSON.stringify(newTaskArray)) {
       if (expectedArrays.length <= iterationIndex + 1) {
-        console.log('finished!');
+        ('finished!');
         setIsSolved(true);
         handleConfetti();
         return;
@@ -45,7 +45,7 @@ const QuickSortPartitionTasks = () => {
 
       setIterations([...[...expectedArrays.slice(0, iterationIndex + 1)], [...newTaskArray]]);
     } else {
-      console.log('Incorrect array. Try again.');
+      ('Incorrect array. Try again.');
     }
   };
 

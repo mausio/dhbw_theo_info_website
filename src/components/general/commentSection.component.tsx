@@ -85,6 +85,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
       <CommentTitle>Comments</CommentTitle>
       
         <SideSpacer>
+        <SideSpacer>
           {comments[algorithmId]?.map((comment: Comment) => (
             <SingleComment key={comment.id}>
               <CommentHeader>
@@ -142,6 +143,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
               )}
             </SingleComment>
           ))}
+            </SideSpacer>
 
           <CommentForm onSubmit={handleSubmit}>
             <CommentInput

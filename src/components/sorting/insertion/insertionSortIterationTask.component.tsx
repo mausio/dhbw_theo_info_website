@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../../../context/user.context';
 
 import { MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
@@ -12,6 +13,7 @@ import { IterationsContainer } from '../../../styles/general/iteration.style.ts'
 
 const InsertionSortIterationTaskComponent = () => {
   const { t } = useTranslation();
+  const { addTask, updateTask } = useUser();
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -32,6 +34,13 @@ const InsertionSortIterationTaskComponent = () => {
 
   useEffect(() => {
     setExpectedArrays(insertionSort());
+    // Initialize the task when component mounts
+    addTask({
+      task: 'Insertion Sort Task',
+      taskId: 'insertionSort',
+      points: 10,
+      collectedPoints: 0
+    });
   }, []);
 
   const handleCheck = (newTaskArray: number[], iterationIndex: number) => {
@@ -39,10 +48,11 @@ const InsertionSortIterationTaskComponent = () => {
 
     if (JSON.stringify(currentExpectedArray) === JSON.stringify(newTaskArray)) {
       if (expectedArrays.length <= iterationIndex + 1) {
-        console.log('finished!');
+        ('finished!');
         setIsSolved(true);
         handleConfetti();
-
+        // Update task completion when solved
+        updateTask('insertionSort', 10);
         return;
       }
 
@@ -50,7 +60,7 @@ const InsertionSortIterationTaskComponent = () => {
 
       setIterations([...[...expectedArrays.slice(0, iterationIndex + 1)], [...newTaskArray]]);
     } else {
-      console.log('Incorrect array. Try again.');
+      ('Incorrect array. Try again.');
     }
   };
 

@@ -3,7 +3,7 @@ import { Handle, Position } from '@xyflow/react';
 
 function TextUpdaterNode({ data }) {
   const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
+    (evt.target.value);
   }, []);
 
   if (!data || !data.value || data.isSorted) {

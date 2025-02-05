@@ -117,7 +117,6 @@ const CountingSortDeterminationTask = () => {
       });
     }
 
-    console.log(iterations);
 
     if (sortedBars.length <= 0) {
       setSortedBars(sortedArray);
@@ -239,7 +238,7 @@ const CountingSortDeterminationTask = () => {
   }
 
   function setMarkedElements(num?) {
-    console.log('marking at iteration nr', num, iterationNr);
+    ('marking at iteration nr', num, iterationNr);
     if ((num ? num : iterationNr) < barsIterationSolution.length) {
       setMarkedCount(barsIterationSolution[num ? num : iterationNr].currentCountingArrayIndex);
       setMarkedSortable(barsIterationSolution[num ? num : iterationNr].currentSortableArrayIndex);
@@ -271,7 +270,7 @@ const CountingSortDeterminationTask = () => {
 
   function handleCheck(sortableBars, expectedSolution) {
     if (JSON.stringify(sortableBars) == JSON.stringify(expectedSolution)) {
-      console.log('done!');
+      ('done!');
       setIsSolved(true);
       setCountingBars(Array(countingBars.length).fill(0));
       setAccumulatingBars(Array(accumulatingBars.length).fill(0));

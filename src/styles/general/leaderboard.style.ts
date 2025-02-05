@@ -8,6 +8,17 @@ interface LeaderboardRowProps {
   isCurrentUser?: boolean;
 }
 
+const rainbowKeyframes = `
+  @keyframes rainbow-background {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+`;
+
 export const LeaderboardContainer = styled.div`
   width: auto;
   min-width: 350px;
@@ -51,7 +62,20 @@ export const LeaderboardRow = styled.tr<LeaderboardRowProps>`
     background-color: rgba(57, 87, 111, 0.05);
   }
   ${props => props.isCurrentUser && `
-    background-color: rgba(var(--contrastAccent-rgb), 0.1) !important;
+    background: linear-gradient(
+      90deg,
+            rgba(255, 0, 0, 0.15),
+      rgba(255, 165, 0, 0.15),
+      rgba(255, 255, 0, 0.15),
+      rgba(0, 255, 0, 0.15),
+      rgba(0, 0, 255, 0.15),
+      rgba(75, 0, 130, 0.15),
+      rgba(255, 0, 0, 0.15)
+    );
+    background-size: 200% 100%;
+    animation: rainbow-background 10s linear infinite;
+    font-weight: bold;
+    ${rainbowKeyframes}
   `}
 `;
 
@@ -67,10 +91,20 @@ export const UserPositionDivider = styled.tr`
 `;
 
 export const CurrentUserRow = styled(LeaderboardRow)`
-  background-color: rgba(var(--contrastAccent-rgb), 0.1) !important;
+  // background: linear-gradient(
+  //   90deg,
+  //         rgba(255, 0, 0, 0.1),
+  //   rgba(255, 165, 0, 0.1),
+  //   rgba(255, 255, 0, 0.1),
+  //   rgba(0, 255, 0, 0.1),
+  //   rgba(0, 0, 255, 0.1),
+  //   rgba(75, 0, 130, 0.1),
+  //   rgba(255, 0, 0, 0.1)
+  // );
+  // background-size: 200% 100%;
+  // animation: rainbow-background 10s linear infinite;
   font-weight: bold;
-  border-top: 1px solid rgba(var(--contrastAccent-rgb), 0.3);
-  border-bottom: 1px solid rgba(var(--contrastAccent-rgb), 0.3);
+  ${rainbowKeyframes}
 `;
 
 export const RankCell = styled.td<CenterProps>`

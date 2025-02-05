@@ -35,7 +35,7 @@ const RadixWordsIterationComponent = ({ expectedArray, taskArray, setTaskArray, 
   }, [taskArray]);
 
   const handleReset = () => {
-    console.log(expectedArray);
+    (expectedArray);
     setWorkingArray(taskArray);
   };
 

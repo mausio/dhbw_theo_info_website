@@ -23,27 +23,44 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
   const { t } = useTranslation();
   const { getCurrentUserData } = useUser();
   
+  
   // Get current user data
   const currentUserData = getCurrentUserData();
   
-  // Create a new array with top entries and current user data
+  // First, sort ALL entries by score and name (including non-displayed ones)
+  const allSortedEntries = [...entries].sort((a, b) => {
+    // First sort by score
+    const scoreDiff = b.score - a.score;
+    if (scoreDiff !== 0) return scoreDiff;
+    // If scores are equal, sort alphabetically by name
+    return a.name.localeCompare(b.name);
+  });
+
+  // Calculate user's position by counting how many users have a better score
+  const userPosition = currentUserData 
+    ? allSortedEntries.filter(entry => 
+        entry.score > currentUserData.score || 
+        (entry.score === currentUserData.score && entry.name.localeCompare(currentUserData.name) < 0)
+      ).length + 1
+    : -1;
+
+  // Now create display list with current user
   const processedEntries = entries.filter(entry => entry.id !== '0'); // Remove any old user entry
   if (currentUserData) {
-    processedEntries.push(currentUserData); // Add current user data
+    processedEntries.push(currentUserData);
   }
   
-  // Sort all entries by score
-  const sortedEntries = processedEntries.sort((a, b) => b.score - a.score);
+  // Sort display entries
+  const sortedEntries = processedEntries.sort((a, b) => {
+    const scoreDiff = b.score - a.score;
+    if (scoreDiff !== 0) return scoreDiff;
+    return a.name.localeCompare(b.name);
+  });
   
-  // Get top 10 entries
+  // Get top 10 entries for display
   const topEntries = sortedEntries.slice(0, 10);
-  
-  // Find current user's position
-  const userPosition = currentUserData 
-    ? sortedEntries.findIndex(entry => entry.id === currentUserData.id) + 1 
-    : -1;
   const isUserInTop10 = userPosition <= 10;
-  
+
   return (
     <LeaderboardContainer>
       <LeaderboardTitle>{t('general.leaderboard.title')}</LeaderboardTitle>
@@ -58,19 +75,23 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
             </tr>
           </thead>
           <tbody>
-            {topEntries.map((entry, index) => (
-              <LeaderboardRow 
-                key={entry.id} 
-                isCurrentUser={currentUserData ? entry.id === currentUserData.id : false}
-              >
-                <RankCell center>{index + 1}</RankCell>
-                <LeaderboardCell>{entry.name}</LeaderboardCell>
-                <LeaderboardCell center>{entry.score}</LeaderboardCell>
-                <LeaderboardCell>
-                  <ProgressBar progress={entry.score} />
-                </LeaderboardCell>
-              </LeaderboardRow>
-            ))}
+            {topEntries.map((entry) => {
+              // Calculate actual position for each entry
+              const position = allSortedEntries.findIndex(e => e.id === entry.id) + 1;
+              return (
+                <LeaderboardRow 
+                  key={entry.id} 
+                  isCurrentUser={currentUserData ? entry.id === currentUserData.id : false}
+                >
+                  <RankCell center>{position}</RankCell>
+                  <LeaderboardCell>{entry.name}</LeaderboardCell>
+                  <LeaderboardCell center>{entry.score}</LeaderboardCell>
+                  <LeaderboardCell>
+                    <ProgressBar progress={entry.score} />
+                  </LeaderboardCell>
+                </LeaderboardRow>
+              );
+            })}
             
             {!isUserInTop10 && currentUserData && (
               <>
@@ -78,7 +99,10 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
                   <td colSpan={4}>...</td>
                 </UserPositionDivider>
                 <CurrentUserRow>
-                  <RankCell center>{userPosition}</RankCell>
+                  <RankCell center>{allSortedEntries.filter(entry => 
+                    entry.score > currentUserData.score || 
+                    (entry.score === currentUserData.score && entry.name.localeCompare(currentUserData.name) < 0)
+                  ).length + 1}</RankCell>
                   <LeaderboardCell>{currentUserData.name}</LeaderboardCell>
                   <LeaderboardCell center>{currentUserData.score}</LeaderboardCell>
                   <LeaderboardCell>

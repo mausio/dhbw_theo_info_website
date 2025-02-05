@@ -7,11 +7,16 @@ const HomePage = () => {
   const { t } = useTranslation();
   const { leaderboardData } = useLeaderboard();
 
+  ('Raw leaderboard data:', leaderboardData);
+  // Sort all entries by score before passing to leaderboard
+  const sortedEntries = [...leaderboardData].sort((a, b) => b.score - a.score);
+  ('Sorted entries being passed to Leaderboard:', sortedEntries);
+
   return (
     <GenericMainContainer>
       <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
         <h1>{t('home.title')}</h1>
-        <Leaderboard entries={leaderboardData} />
+        <Leaderboard entries={sortedEntries} />
         <h2>{t('home.subtitle')}</h2>
         <p>{t('home.noLoginRequired')}</p>
         <p>{t('home.bonusNote')}</p>

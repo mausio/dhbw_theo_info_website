@@ -45,7 +45,7 @@ const RadixSortNumberIterationTask = () => {
 
       setIterations([...[...expectedArrays.slice(0, iterationIndex + 1)], [...newTaskArray]]);
     } else {
-      console.log('Incorrect array. Try again.');
+      ('Incorrect array. Try again.');
     }
   };
 

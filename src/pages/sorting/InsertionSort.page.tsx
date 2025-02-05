@@ -8,6 +8,7 @@ import TippsAndExplanationWrapper from '../../components/general/tippsAndExplana
 import { useTranslation } from 'react-i18next';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 import CommentSection from '../../components/general/commentSection.component.tsx';
+import TaskBadge from '../../components/general/taskBadge.component.tsx';
 
 const InsertionSortPage = () => {
   const { t } = useTranslation();
@@ -59,7 +60,10 @@ const InsertionSortPage = () => {
   return (
     <TippsAndExplanationWrapper tipps={tipps} explanation={explanation}>
       <GenericMainContainer>
-        <h1>Insertion Sort</h1>
+        <h1 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "20px 20px" }}>
+          Insertion Sort
+          <TaskBadge completedTasks={3} totalTasks={4} />
+        </h1>
         <GenericSortGrid>
           <InsertionSortAnimationComponent />
           <CodeBlockElement code={insertionSortAlgo} isFaderOn={false} height="400px" />

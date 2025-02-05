@@ -37,8 +37,7 @@ const RadixNumberIterationComponent = ({ expectedArray, taskArray, setTaskArray,
   }, [taskArray]);
 
   const handleReset = () => {
-    console.log(expectedArray);
-    console.log();
+    (expectedArray);
     setWorkingArray(taskArray);
   };
 

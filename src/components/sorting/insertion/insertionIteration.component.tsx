@@ -35,8 +35,7 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
   }, [taskArray]);
 
   const handleReset = () => {
-    console.log(expectedArray);
-    console.log();
+    (expectedArray);
     setWorkingArray(taskArray);
   };
 

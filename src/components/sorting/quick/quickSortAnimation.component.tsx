@@ -128,7 +128,7 @@ const QuickSortAnimation = () => {
         [A[i], A[j]] = [A[j], A[i]];
         setBars([...A]);
         if (i !== j) {
-          console.log(i, j);
+          (i, j);
           setInfoText(`Swapped A[${i + 1}] and A[${j + 1}]`);
         } else {
           setInfoText(`Nothing to swap`);
