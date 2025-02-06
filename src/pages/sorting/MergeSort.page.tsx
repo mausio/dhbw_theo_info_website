@@ -8,47 +8,11 @@ import TippsAndExplanationWrapper from '../../components/general/tippsAndExplana
 import { useTranslation } from 'react-i18next';
 import CommentSection from '../../components/general/commentSection.component.tsx';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
+import { getMergeSortExplanation } from '../../static/explanations/mergeSort.explanation';
 
 const MergeSortPage = () => {
   const { t } = useTranslation();
-
-  const explanation: React.ReactNode = (
-    <>
-      <p>
-        {t('sorting.merge.description')}
-      </p>
-      <h5>{t('sorting.merge.process')}</h5>
-      <ol>
-        <li>{t('sorting.merge.steps.1')}</li>
-        <li>{t('sorting.merge.steps.2')}</li>
-        <li>{t('sorting.merge.steps.3')}</li>
-        <li>{t('sorting.merge.steps.4')}</li>
-      </ol>
-      <h5>{t('sorting.merge.complexity')}</h5>
-      <table style={{ width: '100%' }}>
-        <tr>
-          <td style={{ width: '50%' }}>{t('sorting.merge.case')}</td>
-          <td style={{ width: '50%' }}>{t('sorting.merge.time')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.merge.best')}</td>
-          <td>{t('sorting.merge.bestTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.merge.average')}</td>
-          <td>{t('sorting.merge.averageTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.merge.worst')}</td>
-          <td>{t('sorting.merge.worstTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.merge.space')}</td>
-          <td>{t('sorting.merge.spaceComplexity')}</td>
-        </tr>
-      </table>
-    </>
-  );
+  const explanation: React.ReactNode = getMergeSortExplanation();
 
   const tipps: React.ReactNode | null = (
     <>

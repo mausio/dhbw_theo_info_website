@@ -9,47 +9,11 @@ import TippsAndExplanationWrapper from '../../components/general/tippsAndExplana
 import { useTranslation } from 'react-i18next';
 import CommentSection from '../../components/general/commentSection.component.tsx';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
+import { getQuickSortExplanation } from '../../static/explanations/quickSort.explanation';
 
 const QuickSortPage = () => {
   const { t } = useTranslation();
-
-  const explanation: React.ReactNode = (
-    <>
-      <p>
-        {t('sorting.quick.description')}
-      </p>
-      <h5>{t('sorting.quick.process')}</h5>
-      <ol>
-        <li>{t('sorting.quick.steps.1')}</li>
-        <li>{t('sorting.quick.steps.2')}</li>
-        <li>{t('sorting.quick.steps.3')}</li>
-        <li>{t('sorting.quick.steps.4')}</li>
-      </ol>
-      <h5>{t('sorting.quick.complexity')}</h5>
-      <table style={{ width: '100%' }}>
-        <tr>
-          <td style={{ width: '50%' }}>{t('sorting.quick.case')}</td>
-          <td style={{ width: '50%' }}>{t('sorting.quick.time')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.best')}</td>
-          <td>{t('sorting.quick.bestTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.average')}</td>
-          <td>{t('sorting.quick.averageTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.worst')}</td>
-          <td>{t('sorting.quick.worstTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.space')}</td>
-          <td>{t('sorting.quick.spaceComplexity')}</td>
-        </tr>
-      </table>
-    </>
-  );
+  const explanation: React.ReactNode = getQuickSortExplanation();
 
   const tipps: React.ReactNode = (
     <>

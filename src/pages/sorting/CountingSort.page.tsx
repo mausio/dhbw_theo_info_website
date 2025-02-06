@@ -8,48 +8,11 @@ import TippsAndExplanationWrapper from '../../components/general/tippsAndExplana
 import { useTranslation } from 'react-i18next';
 import CommentSection from '../../components/general/commentSection.component.tsx';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
+import { getCountingSortExplanation } from '../../static/explanations/countingSort.explanation';
 
 const CountingSortPage = () => {
   const { t } = useTranslation();
-
-  const explanation: React.ReactNode = (
-    <>
-      <p>
-        {t('sorting.counting.description')}
-      </p>
-      <h5>{t('sorting.counting.process')}</h5>
-      <ol>
-        <li>{t('sorting.counting.steps.1')}</li>
-        <li>{t('sorting.counting.steps.2')}</li>
-        <li>{t('sorting.counting.steps.3')}</li>
-        <li>{t('sorting.counting.steps.4')}</li>
-        <li>{t('sorting.counting.steps.5')}</li>
-      </ol>
-      <h5>{t('sorting.counting.complexity')}</h5>
-      <table style={{ width: '100%' }}>
-        <tr>
-          <td style={{ width: '50%' }}>{t('sorting.counting.case')}</td>
-          <td style={{ width: '50%' }}>{t('sorting.counting.time')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.counting.best')}</td>
-          <td>{t('sorting.counting.bestTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.counting.average')}</td>
-          <td>{t('sorting.counting.averageTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.counting.worst')}</td>
-          <td>{t('sorting.counting.worstTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.counting.space')}</td>
-          <td>{t('sorting.counting.spaceComplexity')}</td>
-        </tr>
-      </table>
-    </>
-  );
+  const explanation: React.ReactNode = getCountingSortExplanation();
 
   const tipps: React.ReactNode = (
     <>

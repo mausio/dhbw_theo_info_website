@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const BadgePadding = styled.div`
-    padding: 5px 8px 6px 8px;
+    padding: 7px 8px 6px 8px;
     background-color: var(--primary);
-    border-radius: 28px;
+    border-radius: 30px;
     background: white;
     box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 5px 0px inset;
     margin-right: 0px;
@@ -18,7 +18,7 @@ export const BadgeContainer = styled.div`
   font-size: 18px;
   color: var(--tertiary);
   border: 3px dotted darkgray;
-  border-radius: 25px;
+  border-radius: 30px;
   background: transparent;
 `;
 
