@@ -22,11 +22,28 @@ import { BraceSpan, Button, MarkedRedText } from '../../../styles/general/generi
 import { SortableItem } from '../../general/draggable.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
 
-const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, iterations: nrOfIteration }) => {
+interface InsertionIterationProps {
+  expectedArray: number[];
+  taskArray: number[];
+  setTaskArray: (array: number[]) => void;
+  iterations: number;
+  showPivot?: boolean;
+}
+
+const InsertionIterationComponent: React.FC<InsertionIterationProps> = ({ 
+  expectedArray, 
+  taskArray, 
+  setTaskArray, 
+  iterations: nrOfIteration,
+  showPivot = false 
+}) => {
   const [activeId, setActiveId] = useState<number | null>(null);
   const [workingArray, setWorkingArray] = useState<number[]>(taskArray);
   const [isWrongAnswer, setIsWrongAnswer] = useState<boolean>(false);
   const [isTrueAnswer, setIsTrueAnswer] = useState<boolean>(false);
+
+  // Get the pivot value for the current iteration
+  const pivotValue = taskArray[nrOfIteration];
 
   const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 5 } }), useSensor(TouchSensor));
 
@@ -83,6 +100,8 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
     setActiveId(null);
   };
 
+  console.log(expectedArray)
+
   return (
     <SingleIterationContainer>
       <IterationTitle>
@@ -99,7 +118,12 @@ const InsertionIterationComponent = ({ expectedArray, taskArray, setTaskArray, i
           <SortableContext items={workingArray} strategy={horizontalListSortingStrategy}>
             <SortableArrayContainer>
               {workingArray.map((item) => (
-                <SortableItem key={item} id={item} isDisabled={isTrueAnswer || isWrongAnswer} />
+                <SortableItem 
+                  key={item} 
+                  id={item} 
+                  isDisabled={isTrueAnswer || isWrongAnswer}
+                  isPivot={showPivot && item === pivotValue} 
+                />
               ))}
             </SortableArrayContainer>
           </SortableContext>

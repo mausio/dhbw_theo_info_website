@@ -96,7 +96,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
             {!isUserInTop10 && currentUserData && (
               <>
                 <UserPositionDivider>
-                  <td colSpan={4}>...</td>
+                  <td style={{ textAlign: 'center' }} colSpan={4}>...</td>
                 </UserPositionDivider>
                 <CurrentUserRow>
                   <RankCell center>{allSortedEntries.filter(entry => 

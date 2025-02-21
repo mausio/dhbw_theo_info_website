@@ -26,7 +26,28 @@
     "tipBigScreen": "Es ist schöner, große Bildschirme zu verwenden 🤓",
     "loginInstruction": "Verwenden Sie zur Anmeldung die Informationen, die Ihr Dozent Ihnen gegeben hat. 📜",
     "bonusInstruction": "Um den Bonus zu erhalten, schließen Sie alle Aufgaben vor der Prüfung ab!!! ⏳",
-    "fun": "Viel Spaß! 🎉"
+    "fun": "Viel Spaß! 🎉",
+    "story": {
+      "welcomeTitle": "Willkommen zu deinem Algorithmen-Abenteuer! 🚀",
+      "meetAlex": "Hallo! Ich bin Alex - Dein Algorithmen-Guide",
+      "intro": "Hallo! 👋 Ich bin Alex, ein Student wie du, und ich werde dich durch die spannende Welt der Algorithmen führen. Vor nicht allzu langer Zeit war ich selbst noch verwirrt von diesen Konzepten. Aber dann entdeckte ich, dass das Lernen von Algorithmen ein fantastisches Abenteuer sein kann, bei dem jeder Algorithmus seine eigene einzigartige Superkraft hat!",
+      "exerciseInfo": "Das Beste daran? Du kannst sofort mit dieser Reise beginnen - keine Anmeldung erforderlich! Wenn du jedoch den Vorlesungsbonus erhalten möchtest (und glaub mir, es lohnt sich! 🌟), melde dich an und reiche deine abgeschlossenen Aufgaben ein.",
+      "meetCharacters": "Lass mich dir unsere Algorithmen-Helden vorstellen:",
+      "quickSort": "Quick Sort - Der Sprinter, der teilt und herrscht",
+      "mergeSort": "Merge Sort - Der Meister des perfekten Zusammenfügens",
+      "heapSort": "Heap Sort - Der organisierte Bibliothekar der Daten",
+      "insertionSort": "Insertion Sort - Der sorgfältige Kartengeber",
+      "bucketSort": "Bucket Sort - Der Sortierhut unserer Algorithmenwelt",
+      "radixSort": "Radix Sort - Das stellenweise Genie",
+      "countingSort": "Counting Sort - Der Experte für Zählen und Ordnen",
+      "importantNotes": "Bevor wir unser Abenteuer beginnen, hier einige schnelle Tipps von einem Mitreisenden:",
+      "loginTip": "📜 Zur Anmeldung verwende die Informationen deines Dozenten",
+      "examTip": "⏳ Schließe alle Aufgaben vor der Prüfung ab, um deinen Bonus zu sichern",
+      "submitTip": "🔔 Vergiss nicht, nach jeder abgeschlossenen Aufgabe auf 'Absenden' zu klicken",
+      "screenTip": "🤓 Nutze einen großen Bildschirm für das beste Erlebnis",
+      "callToAction": "Bereit, mit mir auf dieses Abenteuer zu gehen? Jeder Algorithmus hat seine eigene Geschichte zu erzählen, und gemeinsam werden wir ihre Geheimnisse lüften! Verfolge deinen Fortschritt in der Bestenliste oben und verdiene dir dein Algorithmen-Meister-Abzeichen! 🏆",
+      "funWish": "Lass uns das Lernen von Algorithmen spaßig gestalten! 🎉"
+    }
   },
   "sorting": {
     "insertion": {
@@ -62,7 +83,10 @@
         "title": "Aufgabe 1 Schrittweise Wert",
         "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder for-Schleife ein.",
         "inputArray": "Eingabearray:",
-        "submit": "Einreichen?"
+        "submit": "Einreichen?",
+        "alreadyCompleted": "Sie haben diese Aufgabe bereits abgeschlossen!",
+        "pointsEarned": "Sie haben {{points}} Punkte verdient!",
+        "tryAgain": "Nochmal versuchen"
       },
       "quiz": {
         "questions": [
@@ -705,7 +729,8 @@
       "check": "Prüfen",
       "finish": "Quiz beenden",
       "completed": "Quiz abgeschlossen!",
-      "score": "Dein Ergebnis: {{score}}/{{total}}",
+      "score": "{{correctTasks}}/{{totalTasks}} Aufgaben richtig",
+      "points": "({{points}} Punkte erhalten)",
       "restart": "Nochmal versuchen"
     },
     "leaderboard": {
@@ -723,7 +748,9 @@
       "manual": "Manuell",
       "continue": "Fortsetzen",
       "pause": "Pause",
-      "animate": "Animieren"
+      "animate": "Animieren",
+      "showPivot": "Pivot anzeigen",
+      "hidePivot": "Pivot ausblenden"
     }
   },
   "comments": {

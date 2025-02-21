@@ -1,7 +1,7 @@
 import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../styles/general/generic.style.ts';
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import * as React from 'react';
-import { bucketSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
+import { bucketSortAlgo } from '../../static/algorithms/bucketSort';
 import BucketSortAnimation from '../../components/sorting/bucket/bucketSortAnimation.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';

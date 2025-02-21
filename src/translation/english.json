@@ -14,19 +14,33 @@
     "heap": "Heap",
     "quick": "Quick",
     "insertion": "Insertion",
-    "reset": "Reset Demo Progress"
+    "reset": "Reset Demo Progress",
+    "radixSort": "Radix Sort - The digit-by-digit mastermind",
+    "countingSort": "Counting Sort - The expert counter and organizer"
   },
   "home": {
     "title": "ALGO",
-    "subtitle": "Welcome to the exercises of algorithms!",
-    "noLoginRequired": "It is not necessary to log in in order to do the exercises.",
-    "bonusNote": "⚠️ However, if you would like to gain the lecture bonus, you must log in and submit completed tasks.",
-    "tipsTitle": "💡 Tipps:",
-    "tipSubmit": "After completing a task successfully, don't forget to click the submit button! 🔔",
-    "tipBigScreen": "It is nicer to use big screens 🤓",
-    "loginInstruction": "To log in, use the information given by your lecturer. 📜",
-    "bonusInstruction": "To gain the bonus, complete all the tasks before the exam!!! ⏳",
-    "fun": "Have fun! 🎉"
+    "story": {
+      "welcomeTitle": "Welcome to Your Algorithm Adventure! 🚀",
+      "meetAlex": "Hey there! I'm Alex - Your Algorithm Guide",
+      "intro": "Hey there! 👋 I'm Alex, a fellow student, and I'll be your guide through the exciting world of algorithms. Not long ago, I was just like you, puzzled by these concepts. But then I discovered that learning algorithms can be an amazing adventure, where each algorithm has its own unique superpower!",
+      "exerciseInfo": "The best part? You can start this journey right away - no login required! However, if you want to earn the lecture bonus (and trust me, it's worth it! 🌟), make sure to log in and submit your completed tasks.",
+      "meetCharacters": "Let me introduce you to our algorithm heroes:",
+      "quickSort": "Quick Sort - The speedster who divides and conquers",
+      "mergeSort": "Merge Sort - The master of combining pieces perfectly",
+      "heapSort": "Heap Sort - The organized librarian of data",
+      "insertionSort": "Insertion Sort - The careful card dealer",
+      "bucketSort": "Bucket Sort - The sorting hat of our algorithm world",
+      "radixSort": "Radix Sort - The digit-by-digit mastermind",
+      "countingSort": "Counting Sort - The expert counter and organizer",
+      "importantNotes": "Before we begin our adventure, here are some quick tips from a fellow traveler:",
+      "loginTip": "📜 To log in, just use the information from your lecturer",
+      "examTip": "⏳ Complete all tasks before the exam to secure your bonus",
+      "submitTip": "🔔 Don't forget to click 'submit' after completing each task",
+      "screenTip": "🤓 Use a big screen for the best experience",
+      "callToAction": "Ready to join me on this adventure? Each algorithm has its own story to tell, and together we'll unlock their secrets! Track your progress on the leaderboard above and earn your algorithm master badge! 🏆",
+      "funWish": "Let's make learning algorithms fun! 🎉"
+    }
   },
   "sorting": {
     "insertion": {
@@ -62,7 +76,10 @@
         "title": "Task 1 Step-wise value",
         "description": "Given the input array, fill in the values of array A after each for loop.",
         "inputArray": "Input array:",
-        "submit": "Submit?"
+        "submit": "Submit?",
+        "alreadyCompleted": "You already did this task '{{taskName}}' and got rewarded {{points}} points!",
+        "pointsEarned": "You earned {{points}} points for task '{{taskName}}'!",
+        "tryAgain": "Try Again"
       },
       "quiz": {
         "questions": [
@@ -720,7 +737,8 @@
       "check": "Check",
       "finish": "Finish Quiz",
       "completed": "Quiz Completed!",
-      "score": "Your score: {{score}}/{{total}}",
+      "score": "{{correctTasks}}/{{totalTasks}} tasks correct",
+      "points": "({{points}} points rewarded)",
       "restart": "Try Again"
     },
     "leaderboard": {
@@ -738,7 +756,9 @@
       "manual": "Manual",
       "continue": "Continue",
       "pause": "Pause",
-      "animate": "Animate"
+      "animate": "Animate",
+      "showPivot": "Show Pivot",
+      "hidePivot": "Hide Pivot"
     }
   },
   "comments": {

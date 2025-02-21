@@ -2,7 +2,21 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import * as React from 'react';
 
-export const SortableItem = ({ id: id, isDisabled: isDisabled, width: width, height: height }) => {
+interface SortableItemProps {
+  id: number;
+  isDisabled: boolean;
+  width?: string;
+  height?: string;
+  isPivot?: boolean;
+}
+
+export const SortableItem: React.FC<SortableItemProps> = ({ 
+  id, 
+  isDisabled, 
+  width, 
+  height,
+  isPivot = false 
+}) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     resizeObserverConfig: undefined,
     disabled: isDisabled,
@@ -18,6 +32,8 @@ export const SortableItem = ({ id: id, isDisabled: isDisabled, width: width, hei
         cursor: 'grab',
         border: isDragging || isDisabled ? '1px solid #000' : '1px solid #ddd',
         backgroundColor: isDragging || isDisabled ? 'lightgray' : 'whitesmoke',
+        color: isPivot ? '#ff0000' : 'inherit',
+        fontWeight: isPivot ? 'bold' : 'normal',
         textAlign: 'center',
         display: 'flex',
         alignItems: 'center',

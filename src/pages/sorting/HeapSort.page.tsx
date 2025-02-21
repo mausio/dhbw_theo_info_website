@@ -1,5 +1,5 @@
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
-import { heapSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
+import { heapSortAlgo } from '../../static/algorithms/heapSort';
 import * as React from 'react';
 import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../styles/general/generic.style.ts';
 import HeapSortAnimation from '../../components/sorting/heapSortAnimation.component.tsx';
@@ -15,6 +15,7 @@ const HeapSortPage = () => {
 
   const tipps: React.ReactNode = (
     <>
+    //TODO: Add tipps
     </>
   );
 

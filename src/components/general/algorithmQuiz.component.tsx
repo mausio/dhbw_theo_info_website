@@ -14,36 +14,42 @@ interface QuizQuestion {
 }
 
 interface AlgorithmQuizProps {
-  translationKey: string; // Key for the specific algorithm in translation files
+  translationKey: string;
 }
 
 const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }) => {
   const { t } = useTranslation();
-  const { addTask, updateTask } = useUser();
+  const { addTask, updateTask, getTaskById } = useUser();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [score, setScore] = useState<number>(0);
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
   const [isQuizComplete, setIsQuizComplete] = useState<boolean>(false);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [isShaking, setIsShaking] = useState<boolean>(false);
+  const [hasCompletedBefore, setHasCompletedBefore] = useState<boolean>(false);
+  const [previousScore, setPreviousScore] = useState<number>(0);
 
-  // Get questions from translation based on the algorithm key
   const questions: QuizQuestion[] = (t(`${translationKey}.quiz.questions`, { returnObjects: true }) || []) as QuizQuestion[];
+  const quizTaskId = `${translationKey.replace('.', '_')}_quiz`;
 
   useEffect(() => {
-    // Initialize the quiz task when component mounts
-    const quizTaskId = `${translationKey.split('.').pop()}Quiz`;
-    addTask({
-      task: `${translationKey.split('.').pop()} Quiz`,
-      taskId: quizTaskId,
-      points: 10,
-      collectedPoints: 0
-    });
+    const existingTask = getTaskById(quizTaskId);
+    if (existingTask && existingTask.collectedPoints > 0) {
+      setHasCompletedBefore(true);
+      setPreviousScore(existingTask.collectedPoints);
+    } else {
+      addTask({
+        task: `${translationKey} Quiz`,
+        taskId: quizTaskId,
+        points: questions.length * 2,
+        collectedPoints: 0
+      });
+    }
   }, []);
 
   const handleAnswerSelect = (answerIndex: number) => {
-    if (!showAnswer) {
+    if (!showAnswer && !hasCompletedBefore) {
       setSelectedAnswer(selectedAnswer === answerIndex ? null : answerIndex);
     }
   };
@@ -60,17 +66,16 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
     }
 
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
-      setScore(score + 1);
+      setCorrectAnswers(correctAnswers + 1);
     }
 
     if (currentQuestionIndex === questions.length - 1) {
       setIsQuizComplete(true);
       setShowConfetti(true);
-      // Update quiz completion when all questions are answered
-      const quizTaskId = `${translationKey.split('.').pop()}Quiz`;
-      const scorePercentage = (score / questions.length) * 10;
-      updateTask(quizTaskId, scorePercentage);
-      setTimeout(() => setShowConfetti(false), 5000);
+      setTimeout(() => setShowConfetti(false), 20000);
+      
+      const earnedPoints = correctAnswers * 2;
+      updateTask(quizTaskId, earnedPoints);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
@@ -78,23 +83,31 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
     }
   };
 
-  const restartQuiz = () => {
-    setCurrentQuestionIndex(0);
-    setSelectedAnswer(null);
-    setScore(0);
-    setIsQuizComplete(false);
-    setShowAnswer(false);
-  };
-
   const currentQuestion = questions[currentQuestionIndex];
+
+  if (hasCompletedBefore) {
+    return (
+      <QuizContainer>
+        <QuizTitle>{t('general.quiz.title')}</QuizTitle>
+        <QuizResultContainer>
+          <h3>
+            {t('general.quiz.score', { 
+              correctTasks: Math.floor(previousScore / 2), 
+              totalTasks: questions.length 
+            })}
+          </h3>
+          <p>{t('general.quiz.points', { points: previousScore })}</p>
+        </QuizResultContainer>
+      </QuizContainer>
+    );
+  }
 
   return (
     <QuizContainer>
       <ConfettiComponent run={showConfetti} recycle={false} />
-      <QuizTitle>{t(`${translationKey}.quiz.title`)}</QuizTitle>
-      
+      <QuizTitle>{t('general.quiz.title')}</QuizTitle>
       {!isQuizComplete ? (
-        <QuestionContainer isShaking={isShaking}>
+        <QuestionContainer>
           <h3>{currentQuestion.question}</h3>
           <QuizButtonContainer>
             {currentQuestion.answers.map((answer, index) => (
@@ -120,19 +133,20 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
           >
             {showAnswer 
               ? (currentQuestionIndex === questions.length - 1 
-                ? t('quiz.finish') 
-                : t('quiz.next'))
-              : t('quiz.check')}
+                ? t('general.quiz.finish') 
+                : t('general.quiz.next'))
+              : t('general.quiz.check')}
           </Button>
         </QuestionContainer>
       ) : (
         <QuizResultContainer>
           <h3>
-            {t('quiz.score')}: {score}/{questions.length}
+            {t('general.quiz.score', { 
+              correctTasks: correctAnswers, 
+              totalTasks: questions.length 
+            })}
           </h3>
-          <Button onClick={restartQuiz}>
-            {t('quiz.restart')}
-          </Button>
+          <p>{t('general.quiz.points', { points: correctAnswers * 2 })}</p>
         </QuizResultContainer>
       )}
     </QuizContainer>

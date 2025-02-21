@@ -10,10 +10,11 @@ import { printArray } from '../../general/print.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
 import InsertionIterationComponent from './insertionIteration.component.tsx';
 import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
+import { Button } from '../../../styles/general/generic.style.ts';
 
 const InsertionSortIterationTaskComponent = () => {
   const { t } = useTranslation();
-  const { addTask, updateTask } = useUser();
+  const { addTask, updateTask, getTaskById } = useUser();
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -21,6 +22,7 @@ const InsertionSortIterationTaskComponent = () => {
   const [isSolved, setIsSolved] = useState<boolean>(false);
   const [isRunningConfetti, setIsRunningConfetti] = useState<boolean>(false);
   const [isRecycling, setIsRecycling] = useState<boolean>(false);
+  const [showPivot, setShowPivot] = useState<boolean>(false);
 
   const handleConfetti = async () => {
     setIsRecycling(true);
@@ -38,7 +40,7 @@ const InsertionSortIterationTaskComponent = () => {
     addTask({
       task: 'Insertion Sort Task',
       taskId: 'insertionSort',
-      points: 10,
+      points: 5,
       collectedPoints: 0
     });
   }, []);
@@ -48,20 +50,27 @@ const InsertionSortIterationTaskComponent = () => {
 
     if (JSON.stringify(currentExpectedArray) === JSON.stringify(newTaskArray)) {
       if (expectedArrays.length <= iterationIndex + 1) {
-        ('finished!');
         setIsSolved(true);
         handleConfetti();
-        // Update task completion when solved
-        updateTask('insertionSort', 10);
+        
+        // Check if points were already awarded
+        const task = getTaskById('insertionSort');
+        if (task && task.collectedPoints === 0) {
+          // Only award points if they haven't been awarded yet
+          updateTask('insertionSort', 5);
+        }
         return;
       }
 
       setTaskArray([...newTaskArray]);
-
       setIterations([...[...expectedArrays.slice(0, iterationIndex + 1)], [...newTaskArray]]);
-    } else {
-      ('Incorrect array. Try again.');
     }
+  };
+
+  const handleReset = () => {
+    setTaskArray([...initialData]);
+    setIterations([[...initialData]]);
+    setIsSolved(false);
   };
 
   const insertionSort = () => {
@@ -84,12 +93,21 @@ const InsertionSortIterationTaskComponent = () => {
     return output;
   };
 
+  // Check if points were already awarded
+  const task = getTaskById('insertionSort');
+  const hasEarnedPoints = task?.collectedPoints === 5;
+
   return (
     <SingleTaskContainer>
-      <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
-      <h2>
-        {t('sorting.insertion.task.title')} <MarkedRedText>A</MarkedRedText>
-      </h2>
+            <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h2>
+          {t('sorting.insertion.task.title')} <MarkedRedText>A</MarkedRedText>
+        </h2>
+        <Button onClick={() => setShowPivot(!showPivot)}>
+          {showPivot ? t('general.buttons.hidePivot') : t('general.buttons.showPivot')}
+        </Button>
+      </div>
       <p>{t('sorting.insertion.task.description')}</p>
       <p>
         {t('sorting.insertion.task.inputArray')} <MarkedText>[{printArray(initialData)}]</MarkedText>
@@ -108,13 +126,49 @@ const InsertionSortIterationTaskComponent = () => {
             setTaskArray={(updatedArray) => handleCheck(updatedArray, index)}
             taskArray={iterations.length === index + 1 ? taskArray : iterations[index]}
             iterations={index + 1}
+            showPivot={showPivot}
           />
         ))}
-        {/*//TODO: Hier ein Interaktionsfenster erstellen für again, submit*/}
         {isSolved && (
-          <>
-            <p>{t('sorting.insertion.task.submit')}</p>
-          </>
+          <div style={{ textAlign: 'center', margin: "auto 40px"}}>
+            {hasEarnedPoints ? (
+              <p style={{color: "black"}}>
+                  {t('sorting.insertion.task.alreadyCompleted', { 
+                    points: task?.points,
+                    taskName: task?.task
+                  }).replace(
+                    String(task?.points),
+                    '[POINTS]'
+                  ).replace(
+                    task?.task,
+                    task?.task.toUpperCase()
+                  ).split('[POINTS]').map((part, i) => 
+                    i === 1 ? <><span style={{color: 'inherit'}}><MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText></span>{part}</> : part
+                  )}
+              </p>
+            ) : (
+              <>
+                <p>
+
+                    {t('sorting.insertion.task.pointsEarned', { 
+                      points: task?.points,
+                      taskName: task?.task
+                    }).replace(
+                      String(task?.points),
+                      '[POINTS]'
+                    ).replace(
+                      task?.task,
+                      task?.task.toUpperCase()
+                    ).split('[POINTS]').map((part, i) => 
+                      i === 1 ? <><span style={{color: 'inherit'}}><MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText></span>{part}</> : part
+                    )}
+                </p>
+                <Button onClick={handleReset}>
+                  {t('sorting.insertion.task.tryAgain')}
+                </Button>
+              </>
+            )}
+          </div>
         )}
       </IterationsContainer>
     </SingleTaskContainer>

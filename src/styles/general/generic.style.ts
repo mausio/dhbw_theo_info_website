@@ -16,7 +16,6 @@ export const GenericMainContainer = styled.div`
   -moz-box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 1);
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 1);
 
-  overflow: hidden;
 `;
 
 export const GenericImprintNotice = styled.div`

@@ -17,12 +17,10 @@ import { CommentsProvider } from './context/comments.context';
 import { UserProvider } from './context/user.context';
 
 //TODO: Still development needed:
-// => Leaderboard: show current user's points and if they are not in the top 10, show their rank and score!
 // => Point collection: tasks&quizzes should result in points (sum should be 100 points)
 // => Tipps: Add tipps to ALL Algos! 
 // => Responsiveness for all pages
-// (=> Implement a storytelling approach that transports users into a relatable scenario, using characters and avatars to represent students, and providing an engaging and interactive experience that fosters learner engagement and enthusiasm within the context of algorithmic theory in Informatik II )
-
+// => Task counter should be dynamic and show how many tasks have been completed
 
 // Eine TODO-Liste
 //TODO: uninstall all unused packages

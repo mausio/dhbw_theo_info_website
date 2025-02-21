@@ -2,7 +2,7 @@ import { GenericMainContainer, GenericSortGrid, TasksContainer } from '../../sty
 import * as React from 'react';
 import CodeBlockElement from '../../components/general/codeBlock.component.tsx';
 import CountingSortAnimation from '../../components/sorting/counting/countingSortAnimation.component.tsx';
-import { countingSortAlgo } from '../../static/algorithms/sorting.algorithms.ts';
+import { countingSortAlgo } from '../../static/algorithms/countingSort';
 import CountingSortDeterminationTask from '../../components/sorting/counting/countingSortDeterminationTask.component.tsx';
 import TippsAndExplanationWrapper from '../../components/general/tippsAndExplanation.component.tsx';
 import { useTranslation } from 'react-i18next';
