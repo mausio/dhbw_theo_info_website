@@ -11,8 +11,6 @@ interface LeaderboardContextType {
   updateUserProgress: (newScore: number) => void;
 }
 
-const generateRandomScore = () => Math.floor(Math.random() * 101); // 0-100
-
 const defaultLeaderboardData: LeaderboardEntry[] = [
   { id: '1', name: 'Alice Johnson', score: 8 },    
   { id: '2', name: 'Bob Smith', score: 9 },        
@@ -44,28 +42,19 @@ const LeaderboardContext = createContext<LeaderboardContextType | undefined>(und
 
 export const LeaderboardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(() => {
-    ('Initializing leaderboard data...');
-    // Load data from localStorage on initial render
     const savedData = localStorage.getItem('leaderboardData');
     if (savedData) {
       const parsedData = JSON.parse(savedData);
-      ('Found saved data:', parsedData);
       return parsedData;
     }
-    // If no saved data, initialize with default data and TestUser
     const initialData = [
-      { id: '0', name: 'Demo User', score: 0 },  // Add demo user first
-      ...defaultLeaderboardData  // Add ALL default entries
+      { id: '0', name: 'Demo User', score: 0 },  
+      ...defaultLeaderboardData 
     ];
-    ('Creating initial data with all entries:', initialData);
     localStorage.setItem('leaderboardData', JSON.stringify(initialData));
     return initialData;
   });
 
-  // Debug current data
-  useEffect(() => {
-    ('Current leaderboard data:', leaderboardData);
-  }, [leaderboardData]);
 
   const updateUserProgress = (newScore: number) => {
     setLeaderboardData(prevData => {
@@ -74,19 +63,15 @@ export const LeaderboardProvider: React.FC<{ children: React.ReactNode }> = ({ c
         entry.id === '0' ? { ...entry, score: newScore } : entry
       );
       
-      ('Updating leaderboard with new data:', updatedData);
-      // Save to localStorage
       localStorage.setItem('leaderboardData', JSON.stringify(updatedData));
       
       return updatedData;
     });
   };
 
-  // Force initialization with complete data on mount
   useEffect(() => {
     const currentData = localStorage.getItem('leaderboardData');
     if (!currentData || JSON.parse(currentData).length < defaultLeaderboardData.length + 1) {
-      // If no data or incomplete data, reinitialize with all entries
       const completeData = [
         { id: '0', name: 'Demo User', score: 0 },
         ...defaultLeaderboardData

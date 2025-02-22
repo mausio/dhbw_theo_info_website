@@ -27,7 +27,6 @@ const MergeSortPage = () => {
           <MergeSortAnimation />
           <CodeBlockElement height={625} code={mergeSortAlgo} isFaderOn={true} />
           <TasksContainer>
-            {/* <MergeSortTaskComponent /> */}
             <AlgorithmQuizComponent translationKey="sorting.merge" />
           </TasksContainer>
         </GenericSortGrid>

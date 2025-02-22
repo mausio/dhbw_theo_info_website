@@ -58,9 +58,7 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
 
     if (typeof activeId === 'number') {
       setActiveId(activeId);
-    } else {
-      console.error('Active ID is not a number:', activeId);
-    }
+    } 
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -78,9 +76,7 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
         }
         return arrayMove(items, oldIndex, newIndex);
       });
-    } else {
-      console.error('IDs are not numbers:', active.id, over?.id);
-    }
+    } 
 
     setActiveId(null);
   };

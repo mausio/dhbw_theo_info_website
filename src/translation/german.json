@@ -300,16 +300,18 @@
         "sortingComplete": "Array sortiert!"
       },
       "task": {
-        "title": "Aufgabe 1: Bestimmung der Zähl-Arrays",
-        "description": "Füllen Sie die Zähl-Arrays aus und konstruieren Sie das sortierte Array Schritt für Schritt.",
-        "inputArray": "Eingabe-Array:",
+        "title": "Aufgabe 1: Bestimmung der Counting Arrays",
+        "description": "Füllen Sie die Counting Arrays aus und konstruieren Sie das sortierte Array Schritt für Schritt.",
+        "inputArray": "Eingabearray:",
         "arrays": {
-          "counting": "Zähl-Array",
+          "counting": "Zählarray",
           "accumulating": "Akkumulierendes Array",
           "sortable": "Sortierbares Array",
           "unsorted": "Unsortiertes Array"
         },
-        "submit": "Einreichen"
+        "submit": "Absenden",
+        "alreadyCompleted": "Sie haben diese Aufgabe bereits abgeschlossen und {{points}} Punkte erhalten!",
+        "pointsEarned": "Glückwunsch! Sie haben {{points}} Punkte für diese Aufgabe erhalten!"
       },
       "quiz": {
         "questions": [
@@ -399,12 +401,16 @@
         "numbers": {
           "title": "Aufgabe 1 Schrittweise A Wert, Zahlen",
           "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder for-Schleife ein.",
-          "inputArray": "Eingabearray:"
+          "inputArray": "Eingabearray:",
+          "alreadyCompleted": "Sie haben diese Aufgabe bereits abgeschlossen und {{points}} Punkte erhalten!",
+          "pointsEarned": "Glückwunsch! Sie haben {{points}} Punkte für diese Aufgabe erhalten!"
         },
         "words": {
           "title": "Aufgabe 2 Schrittweise B Wert, Wörter",
           "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays B nach jeder for-Schleife ein.",
-          "inputArray": "Eingabearray:"
+          "inputArray": "Eingabearray:",
+          "alreadyCompleted": "Sie haben diese Aufgabe bereits abgeschlossen und {{points}} Punkte erhalten!",
+          "pointsEarned": "Glückwunsch! Sie haben {{points}} Punkte für diese Aufgabe erhalten!"
         },
         "iteration": {
           "afterIteration": "Nach Iteration Nr",
@@ -642,6 +648,13 @@
             "correctAnswer": 1
           }
         ]
+      },
+      "task": {
+        "title": "Aufgabe 1 Schrittweise A Wert der Partition",
+        "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder Partition ein.",
+        "inputArray": "Eingabearray:",
+        "alreadyCompleted": "Sie haben diese Aufgabe bereits abgeschlossen und {{points}} Punkte erhalten!",
+        "pointsEarned": "Glückwunsch! Sie haben {{points}} Punkte für diese Aufgabe erhalten!"
       }
     },
     "bucket": {

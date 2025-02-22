@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useUser } from '../../../context/user.context';
 
-import { MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
+import { Button, MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
 import { calcArrayTaskContainerHeight, generateRandomArrayOfNFromTo } from '../../../utils/number.utils.ts';
 import { printArray } from '../../general/print.component.tsx';
@@ -12,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 const RadixSortNumberIterationTask = () => {
   const { t } = useTranslation();
+  const { addTask, updateTask, getTaskById } = useUser();
   const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(5, 1, 9999));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -19,6 +21,15 @@ const RadixSortNumberIterationTask = () => {
   const [isSolved, setIsSolved] = useState<boolean>(false);
   const [isRunningConfetti, setIsRunningConfetti] = useState<boolean>(false);
   const [isRecycling, setIsRecycling] = useState<boolean>(false);
+
+  useEffect(() => {
+    addTask({
+      task: 'Radix Sort Number Task',
+      taskId: 'radixSortNumber',
+      points: 10,
+      collectedPoints: 0
+    });
+  }, []);
 
   const handleConfetti = async () => {
     setIsRecycling(true);
@@ -38,11 +49,14 @@ const RadixSortNumberIterationTask = () => {
         setIsSolved(true);
         handleConfetti();
 
+        const task = getTaskById('radixSortNumber');
+        if (task && task.collectedPoints === 0) {
+          updateTask('radixSortNumber', 10);
+        }
         return;
       }
 
       setTaskArray([...newTaskArray]);
-
       setIterations([...[...expectedArrays.slice(0, iterationIndex + 1)], [...newTaskArray]]);
     } else {
       ('Incorrect array. Try again.');
@@ -83,6 +97,9 @@ const RadixSortNumberIterationTask = () => {
     return expectedArray;
   }
 
+  const task = getTaskById('radixSortNumber');
+  const hasEarnedPoints = task?.collectedPoints === 10;
+
   return (
     <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
@@ -111,7 +128,25 @@ const RadixSortNumberIterationTask = () => {
             iterations={index + 1}
           />
         ))}
-        {/*//TODO: Hier ein Interaktionsfenster erstellen für again, submit*/}
+        {isSolved && (
+          <div style={{ textAlign: 'center', margin: "20px auto"}}>
+            {hasEarnedPoints ? (
+              <p style={{color: "black"}}>
+                {t('sorting.general.alreadyCompleted', {
+                  task: task?.task.toUpperCase(),
+                  points: <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText>
+                })}
+              </p>
+            ) : (
+              <p>
+                {t('sorting.general.pointsEarned', {
+                  task: task?.task.toUpperCase(),
+                  points: <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText>
+                })}
+              </p>
+            )}
+          </div>
+        )}
       </IterationsContainer>
     </SingleTaskContainer>
   );

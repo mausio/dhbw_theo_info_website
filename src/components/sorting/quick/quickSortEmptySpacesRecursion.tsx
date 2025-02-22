@@ -111,17 +111,12 @@ const QuickSortEmptySpaceRecursion = ({ partitions, showPivots, setSolvedList, s
 
   const updateSolvedLevelsArray = (part) => {
     const thisOb = solvedList.find((item) => item.uuid == part.uuid);
-    ('finding...', thisOb);
 
     const tempSolved = [...solvedList.filter((item) => item.uuid !== part.uuid)];
-    ('filtering...', tempSolved);
 
     tempSolved.push({ uuid: thisOb.uuid, isSolved: true });
-    ('pushing...', tempSolved);
 
-    ('setting...');
     setSolvedList(tempSolved);
-    // solvedLevelsArray.current = tempSolvedLevelsArr;
   };
 
   const handleSelect = (arrayType, array) => {

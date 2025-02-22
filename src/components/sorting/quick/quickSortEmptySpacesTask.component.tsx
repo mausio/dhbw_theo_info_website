@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { useUser } from '../../../context/user.context';
 import { generateRandomArrayOfN } from '../../../utils/number.utils.ts';
 import {
   BraceSpan,
@@ -40,6 +41,7 @@ export type QuickSortSolvedLevel = {
 };
 
 const QuickSortEmptySpacesTask = () => {
+  const { addTask, updateTask, getTaskById } = useUser();
   const initialArrayLength = 10;
   const solvedLevelsArray = useRef<QuickSortSolvedLevel[]>([]);
   const [solvedList, setSolvedList] = useState<QuickSortSolvedLevel[]>([]);
@@ -80,9 +82,6 @@ const QuickSortEmptySpacesTask = () => {
       uuid: uuidv4(),
     };
     steps.push(partitionStep);
-
-    // ('adding some solvedLevelsArray at QuickSort');
-    // solvedLevelsArray.current = [...solvedLevelsArray.current, { uuid: partitionStep.uuid, isSolved: false }];
 
     return {
       pivotIndex: i + 1,
@@ -165,44 +164,29 @@ const QuickSortEmptySpacesTask = () => {
     setWorkingArray([...initialData]);
   };
 
-  //TODO: maybe record if the user decided to get some help
   const toggleShowPivot = () => setIsShowingPivots(!isShowingPivots);
 
-  // const handleNewArray = async () => {
-  //   const emptySolvedLevels = [];
-  //   solvedLevelsArray.current = emptySolvedLevels;
-  //   const emptyTrigger = 0;
-  //   await setTriggerRerender(emptyTrigger);
-  //   const emptySolved = [];
-  //   await setSolvedList(emptySolved);
-  //   const emptyPart = [];
-  //   await setPartitionSteps(emptyPart);
-  //   const emptyWork = [];
-  //   await setWorkingArray(emptyWork);
-  //   const isntSolved = false;
-  //   setIsSolved(isntSolved);
-  //
-  //   await wait(1);
-  //
-  //   const initialData = generateRandomArrayOfN(initialArrayLength);
-  //   await setInitialData(initialData);
-  //
-  //   const newSteps = handleNewSteps([...initialData]);
-  //   await setPartitionSteps(newSteps);
-  //
-  //   await setWorkingArray(initialData);
-  //   const num = Math.floor(Math.random() * 99) + 1;
-  //   await setTriggerRerender(num);
-  // };
 
   const checkStructure = () => {
     if (solvedList.every((level) => level.isSolved) && !isSolved) {
       setIsSolved(true);
       handleConfetti();
+      
+      const task = getTaskById('quickSortEmptySpaces');
+      if (task && task.collectedPoints === 0) {
+        updateTask('quickSortEmptySpaces', 10);
+      }
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    addTask({
+      task: 'Quick Sort Empty Spaces Task',
+      taskId: 'quickSortEmptySpaces',
+      points: 10,
+      collectedPoints: 0
+    });
+  }, []);
 
   useEffect(() => {
     checkStructure();
@@ -216,6 +200,9 @@ const QuickSortEmptySpacesTask = () => {
     await wait(3000);
     setIsRecycling(false);
   };
+
+  const task = getTaskById('quickSortEmptySpaces');
+  const hasEarnedPoints = task?.collectedPoints === 10;
 
   return (
     <SingleTaskContainer>
@@ -270,6 +257,19 @@ const QuickSortEmptySpacesTask = () => {
           Submit
         </Button>
       </ButtonTaskContainer>
+      {isSolved && (
+        <div style={{ textAlign: 'center', margin: "20px auto"}}>
+          {hasEarnedPoints ? (
+            <p style={{color: "black"}}>
+              You have already completed {task?.task.toUpperCase()} and earned <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> points!
+            </p>
+          ) : (
+            <p>
+              Congratulations! You completed {task?.task.toUpperCase()} and earned <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> points!
+            </p>
+          )}
+        </div>
+      )}
     </SingleTaskContainer>
   );
 };

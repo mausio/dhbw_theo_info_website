@@ -1,11 +1,18 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../../context/user.context';
 
 import { Button } from '../../styles/general/generic.style';
 import ConfettiComponent from './confetti.component';
-import { AnswerButton, QuestionContainer, QuizButtonContainer, QuizContainer, QuizResultContainer, QuizTitle } from '../../styles/general/quiz.style';
+import {
+  AnswerButton,
+  QuestionContainer,
+  QuizButtonContainer,
+  QuizContainer,
+  QuizResultContainer,
+  QuizTitle,
+} from '../../styles/general/quiz.style';
 
 interface QuizQuestion {
   question: string;
@@ -30,7 +37,8 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
   const [hasCompletedBefore, setHasCompletedBefore] = useState<boolean>(false);
   const [previousScore, setPreviousScore] = useState<number>(0);
 
-  const questions: QuizQuestion[] = (t(`${translationKey}.quiz.questions`, { returnObjects: true }) || []) as QuizQuestion[];
+  const questions: QuizQuestion[] = (t(`${translationKey}.quiz.questions`, { returnObjects: true }) ||
+    []) as QuizQuestion[];
   const quizTaskId = `${translationKey.replace('.', '_')}_quiz`;
 
   useEffect(() => {
@@ -43,7 +51,7 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
         task: `${translationKey} Quiz`,
         taskId: quizTaskId,
         points: questions.length * 2,
-        collectedPoints: 0
+        collectedPoints: 0,
       });
     }
   }, []);
@@ -53,6 +61,22 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
       setSelectedAnswer(selectedAnswer === answerIndex ? null : answerIndex);
     }
   };
+
+  const submitQuizResults = useCallback(
+    (totalCorrect: number) => {
+      const finalPoints = totalCorrect * 2;
+
+      const task = getTaskById(quizTaskId);
+      if (task && task.collectedPoints === 0) {
+        updateTask(quizTaskId, finalPoints);
+      }
+
+      setIsQuizComplete(true);
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 20000);
+    },
+    [quizTaskId, getTaskById, updateTask]
+  );
 
   const handleNextQuestion = () => {
     if (!showAnswer) {
@@ -65,17 +89,12 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
       return;
     }
 
-    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
-      setCorrectAnswers(correctAnswers + 1);
-    }
+    const isCorrect = selectedAnswer === questions[currentQuestionIndex].correctAnswer;
+    const newCorrectTotal = isCorrect ? correctAnswers + 1 : correctAnswers;
+    setCorrectAnswers(newCorrectTotal);
 
     if (currentQuestionIndex === questions.length - 1) {
-      setIsQuizComplete(true);
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 20000);
-      
-      const earnedPoints = correctAnswers * 2;
-      updateTask(quizTaskId, earnedPoints);
+      submitQuizResults(newCorrectTotal);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
@@ -91,12 +110,12 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
         <QuizTitle>{t('general.quiz.title')}</QuizTitle>
         <QuizResultContainer>
           <h3>
-            {t('general.quiz.score', { 
-              correctTasks: Math.floor(previousScore / 2), 
-              totalTasks: questions.length 
+            {t('general.quiz.score', {
+              correctTasks: previousScore,
+              totalTasks: questions.length,
             })}
           </h3>
-          <p>{t('general.quiz.points', { points: previousScore })}</p>
+          <p>{t('general.quiz.points', { points: previousScore * 2 })}</p>
         </QuizResultContainer>
       </QuizContainer>
     );
@@ -104,7 +123,6 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
 
   return (
     <QuizContainer>
-      <ConfettiComponent run={showConfetti} recycle={false} />
       <QuizTitle>{t('general.quiz.title')}</QuizTitle>
       {!isQuizComplete ? (
         <QuestionContainer>
@@ -126,31 +144,31 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
           <Button
             onClick={handleNextQuestion}
             disabled={showAnswer ? selectedAnswer === null : false}
-            style={{ 
+            style={{
               marginTop: '20px',
-              animation: isShaking ? 'shake 0.15s 2' : 'none'
+              animation: isShaking ? 'shake 0.15s 2' : 'none',
             }}
           >
-            {showAnswer 
-              ? (currentQuestionIndex === questions.length - 1 
-                ? t('general.quiz.finish') 
-                : t('general.quiz.next'))
+            {showAnswer
+              ? currentQuestionIndex === questions.length - 1
+                ? t('general.quiz.finish')
+                : t('general.quiz.next')
               : t('general.quiz.check')}
           </Button>
         </QuestionContainer>
       ) : (
         <QuizResultContainer>
           <h3>
-            {t('general.quiz.score', { 
-              correctTasks: correctAnswers, 
-              totalTasks: questions.length 
+            {t('general.quiz.score', {
+              correctTasks: correctAnswers * 2,
+              totalTasks: questions.length,
             })}
           </h3>
-          <p>{t('general.quiz.points', { points: correctAnswers * 2 })}</p>
+          <p>{t('general.quiz.points', { points: correctAnswers * 4 })}</p>
         </QuizResultContainer>
       )}
     </QuizContainer>
   );
 };
 
-export default AlgorithmQuizComponent; 
+export default AlgorithmQuizComponent;

@@ -293,7 +293,7 @@
         "sortingComplete": "Array sorted!"
       },
       "task": {
-        "title": "Task 1: Determination of counting arrays",
+        "title": "Task 1: Determination of Counting Arrays",
         "description": "Fill in the counting arrays and construct the sorted array step by step.",
         "inputArray": "Input array:",
         "arrays": {
@@ -302,7 +302,9 @@
           "sortable": "Sortable Array",
           "unsorted": "Unsorted Array"
         },
-        "submit": "Submit"
+        "submit": "Submit",
+        "alreadyCompleted": "You have already completed {{task}} and earned {{points}} points!",
+        "pointsEarned": "Congratulations! You completed {{task}} and earned {{points}} points!"
       },
       "quiz": {
         "questions": [
@@ -392,12 +394,16 @@
         "numbers": {
           "title": "Task 1 Step-wise A value, numbers",
           "description": "Given the input array, fill in the values of array A after each for loop.",
-          "inputArray": "Input array:"
+          "inputArray": "Input array:",
+          "alreadyCompleted": "You have already completed {{task}} and earned {{points}} points!",
+          "pointsEarned": "Congratulations! You completed {{task}} and earned {{points}} points!"
         },
         "words": {
           "title": "Task 2 Step-wise B value, words",
           "description": "Given the input array, fill in the values of array B after each for loop.",
-          "inputArray": "Input array:"
+          "inputArray": "Input array:",
+          "alreadyCompleted": "You have already completed {{task}} and earned {{points}} points!",
+          "pointsEarned": "Congratulations! You completed {{task}} and earned {{points}} points!"
         },
         "iteration": {
           "afterIteration": "After Iteration Nr",
@@ -650,6 +656,13 @@
             "correctAnswer": 1
           }
         ]
+      },
+      "task": {
+        "title": "Task 1 Step-wise A value of partition",
+        "description": "Given the input array, fill in the values of array A after each partition",
+        "inputArray": "Input array:",
+        "alreadyCompleted": "You have already completed {{task}} and earned {{points}} points!",
+        "pointsEarned": "Congratulations! You completed {{task}} and earned {{points}} points!"
       }
     },
     "bucket": {

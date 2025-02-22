@@ -52,7 +52,6 @@ const InsertionIterationComponent: React.FC<InsertionIterationProps> = ({
   }, [taskArray]);
 
   const handleReset = () => {
-    (expectedArray);
     setWorkingArray(taskArray);
   };
 
@@ -100,7 +99,6 @@ const InsertionIterationComponent: React.FC<InsertionIterationProps> = ({
     setActiveId(null);
   };
 
-  console.log(expectedArray)
 
   return (
     <SingleIterationContainer>

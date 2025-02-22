@@ -17,19 +17,9 @@ import { CommentsProvider } from './context/comments.context';
 import { UserProvider } from './context/user.context';
 
 //TODO: Still development needed:
-// => Point collection: tasks&quizzes should result in points (sum should be 100 points)
-// => Tipps: Add tipps to ALL Algos! 
+// => Tipps: Add tipps to ALL Algos!
 // => Responsiveness for all pages
 // => Task counter should be dynamic and show how many tasks have been completed
-
-// Eine TODO-Liste
-//TODO: uninstall all unused packages
-//TODO: Check ALL Sorting Algos for bugs!
-//TODO: Delete Dead/Unused Code
-//TODO: Refactor Generic Styled Components into other files, e.g. "ControlPanel" is under "insertion.style" but should be generic
-//TODO: Set keys for lists (what do I mean by that?)
-//TODO: Centralize initial data at one place, e.g. "InitialData" => "CountingSortInitialData", etc.
-//TODO: Check Imprint Button as it not always reroutes to DHBW Imprint as expected
 
 
 function App() {

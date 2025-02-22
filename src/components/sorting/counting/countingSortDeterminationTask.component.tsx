@@ -18,6 +18,7 @@ import IndexChart from '../../general/indexChart.component.tsx';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { wait } from '../../../utils/promise.utils.ts';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../../../context/user.context';
 
 export type CountingIteration = {
   countingArray: number[];
@@ -28,10 +29,9 @@ export type CountingIteration = {
   currentUnsortedArrayIndex: number;
 };
 
-//TODO: Hier ist ein Bug. testen&testen&testen und finden =>
-
 const CountingSortDeterminationTask = () => {
   const { t } = useTranslation();
+  const { addTask, updateTask, getTaskById } = useUser();
   const n = 10;
   const [initialData] = useState<number[]>(generateRandomArrayOfNFromTo(n, 1, 5));
   const [accumulatingBarsSolution, setAccumulatingBarsSolution] = useState<number[]>([]);
@@ -55,6 +55,15 @@ const CountingSortDeterminationTask = () => {
   const [markedCount, setMarkedCount] = useState<number>(null);
   const [markedUnsorted, setMarkedUnsorted] = useState<number>(null);
   const [markedSortable, setMarkedSortable] = useState<number>(null);
+
+  useEffect(() => {
+    addTask({
+      task: 'Counting Sort Determination Task',
+      taskId: 'countingSortDetermination',
+      points: 10,
+      collectedPoints: 0
+    });
+  }, []);
 
   const handleConfetti = async () => {
     setIsRecycling(true);
@@ -275,11 +284,19 @@ const CountingSortDeterminationTask = () => {
       setCountingBars(Array(countingBars.length).fill(0));
       setAccumulatingBars(Array(accumulatingBars.length).fill(0));
       handleConfetti();
+
+      const task = getTaskById('countingSortDetermination');
+      if (task && task.collectedPoints === 0) {
+        updateTask('countingSortDetermination', 10);
+      }
       return true;
     }
 
     return false;
   }
+
+  const task = getTaskById('countingSortDetermination');
+  const hasEarnedPoints = task?.collectedPoints === 10;
 
   return (
     <SingleTaskContainer>
@@ -494,6 +511,25 @@ const CountingSortDeterminationTask = () => {
       <Button disabled={!isSolved} style={{ position: 'absolute', right: 15, top: 15 }}>
         {t('sorting.counting.task.submit')}
       </Button>
+      {isSolved && (
+        <div style={{ textAlign: 'center', margin: "20px auto"}}>
+          {hasEarnedPoints ? (
+            <p style={{color: "black"}}>
+              {t('sorting.counting.task.alreadyCompleted', {
+                task: task?.task.toUpperCase(),
+                points: <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText>
+              })}
+            </p>
+          ) : (
+            <p>
+              {t('sorting.counting.task.pointsEarned', {
+                task: task?.task.toUpperCase(),
+                points: <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText>
+              })}
+            </p>
+          )}
+        </div>
+      )}
     </SingleTaskContainer>
   );
 };

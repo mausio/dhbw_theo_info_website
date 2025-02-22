@@ -1,4 +1,4 @@
-// NOT disables the link :)
+// 'NOT' disables the link :)
 // Removing the NOT will enable the link, make it clickable and, therefore, can be used to navigate to a page
 
 export const APP_ROUTES = {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useUser } from '../../../context/user.context';
 
 import { Button, MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
@@ -10,6 +11,7 @@ import QuickSortIteration from './quickSortIteration.component.tsx';
 import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
 
 const QuickSortPartitionTasks = () => {
+  const { addTask, updateTask, getTaskById } = useUser();
   const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
@@ -35,18 +37,19 @@ const QuickSortPartitionTasks = () => {
 
     if (JSON.stringify(currentExpectedArray) === JSON.stringify(newTaskArray)) {
       if (expectedArrays.length <= iterationIndex + 1) {
-        ('finished!');
         setIsSolved(true);
         handleConfetti();
+        
+        const task = getTaskById('quickSortPartition');
+        if (task && task.collectedPoints === 0) {
+          updateTask('quickSortPartition', 10);
+        }
         return;
       }
 
       setTaskArray([...newTaskArray]);
-
       setIterations([...[...expectedArrays.slice(0, iterationIndex + 1)], [...newTaskArray]]);
-    } else {
-      ('Incorrect array. Try again.');
-    }
+    } 
   };
 
   const handlePiv = async (arr) => {
@@ -55,7 +58,7 @@ const QuickSortPartitionTasks = () => {
 
   const iterativeQuickSort = () => {
     const array = [...initialData];
-    const pivots: [] = [];
+    const pivots: number[] = [];
     const output = [];
     const stack = [];
     stack.push(0);
@@ -103,7 +106,22 @@ const QuickSortPartitionTasks = () => {
 
   useEffect(() => {
     setExpectedArrays(iterativeQuickSort());
+    addTask({
+      task: 'Quick Sort Partition Task',
+      taskId: 'quickSortPartition',
+      points: 10,
+      collectedPoints: 0
+    });
   }, []);
+
+  const handleReset = () => {
+    setTaskArray([...initialData]);
+    setIterations([[...initialData]]);
+    setIsSolved(false);
+  };
+
+  const task = getTaskById('quickSortPartition');
+  const hasEarnedPoints = task?.collectedPoints === 10;
 
   return (
     <SingleTaskContainer>
@@ -138,7 +156,24 @@ const QuickSortPartitionTasks = () => {
             pivotArray={showPivot ? pivotArray : []}
           />
         ))}
-        {/*//TODO: Hier ein Interaktionsfenster erstellen für again, submit*/}
+        {isSolved && (
+          <div style={{ textAlign: 'center', margin: "auto 40px"}}>
+            {hasEarnedPoints ? (
+              <p style={{color: "black"}}>
+                You have already completed {task?.task.toUpperCase()} and earned <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> points!
+              </p>
+            ) : (
+              <>
+                <p>
+                  Congratulations! You completed {task?.task.toUpperCase()} and earned <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> points!
+                </p>
+                <Button onClick={handleReset}>
+                  Try Again
+                </Button>
+              </>
+            )}
+          </div>
+        )}
       </IterationsContainer>
     </SingleTaskContainer>
   );

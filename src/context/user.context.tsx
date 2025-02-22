@@ -86,23 +86,17 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   }, [user]);
 
   const resetDefaultUser = () => {
-    ('Resetting user...');
-    
-    // Create a fresh default user
+  
     const defaultUser = createDefaultUser();
     
-    // Clear all storage
     sessionStorage.clear();
     localStorage.clear();
     
-    // Update the user state with the fresh default user
     setUser(defaultUser);
     
-    // Store the fresh state
     localStorage.setItem('currentUser', JSON.stringify(defaultUser));
     sessionStorage.setItem('userSession', 'active');
     
-    console.log('Reset complete. Current user state:', defaultUser);
   };
 
   const getTotalPoints = () => {
