@@ -251,8 +251,26 @@ const InsertionSortAnimationComponent = () => {
         <p>{infoText}</p>
       </KeyIndexContainer>
       <ChartAligner>
-        <BarChart bars={bars} selectedIndex={selectedIndex} comparingIndex={comparingIndex} pivotIndex={null} />
-        <IndexChart initialArray={initialData} selectedIndex={comparingIndex} />
+        <BarChart 
+          bars={bars} 
+          selectedIndex={selectedIndex} 
+          comparingIndex={comparingIndex} 
+          pivotIndex={null}
+          height={120}
+          barsHeight={15}
+          doNotShowNumber={false}
+          fullLength={true}
+        />
+        <IndexChart 
+          initialArray={initialData} 
+          selectedIndex={comparingIndex}
+          comparingIndex={null}
+          pivotIndex={null}
+          start={null}
+          end={null}
+          fullLength={true}
+          height={25}
+        />
       </ChartAligner>
       <ControlPanel>
         <SliderPanel>

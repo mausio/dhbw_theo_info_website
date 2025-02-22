@@ -3,7 +3,7 @@ import { CSS } from '@dnd-kit/utilities';
 import * as React from 'react';
 
 interface SortableItemProps {
-  id: number;
+  id: number | string;
   isDisabled: boolean;
   width?: string;
   height?: string;

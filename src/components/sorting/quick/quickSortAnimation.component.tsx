@@ -128,7 +128,6 @@ const QuickSortAnimation = () => {
         [A[i], A[j]] = [A[j], A[i]];
         setBars([...A]);
         if (i !== j) {
-          (i, j);
           setInfoText(`Swapped A[${i + 1}] and A[${j + 1}]`);
         } else {
           setInfoText(`Nothing to swap`);
@@ -283,13 +282,25 @@ const QuickSortAnimation = () => {
         <p>{infoText}</p>
       </KeyIndexContainer>
       <ChartAligner>
-        <BarChart bars={bars} selectedIndex={selectedIndex} comparingIndex={comparingIndex} pivotIndex={pivotIndex} />
+        <BarChart 
+          bars={bars} 
+          selectedIndex={selectedIndex} 
+          comparingIndex={comparingIndex} 
+          pivotIndex={pivotIndex}
+          height={120}
+          barsHeight={15}
+          doNotShowNumber={false}
+          fullLength={true}
+        />
         <IndexChart
           initialArray={initialData}
           selectedIndex={selectedIndex}
           pivotIndex={pivotIndex}
           start={isStart}
           end={isEnd}
+          comparingIndex={null}
+          fullLength={true}
+          height={25}
         />
       </ChartAligner>
       <ControlPanel>

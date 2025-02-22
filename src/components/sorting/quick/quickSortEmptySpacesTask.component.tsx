@@ -30,7 +30,7 @@ import {
 } from '@dnd-kit/core';
 import { arrayMove, horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { SortableItem } from '../../general/draggable.component.tsx';
-import { UUIDTypes } from 'uuid/dist/cjs/_types';
+import { UUIDTypes } from 'uuid';
 import { v4 as uuidv4 } from 'uuid';
 import ConfettiComponent from '../../general/confetti.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';

@@ -1,4 +1,4 @@
-import { UUIDTypes } from 'uuid/dist/cjs/_types';
+import { UUIDTypes } from 'uuid';
 
 export enum pos {
   left,
@@ -16,4 +16,12 @@ export type partitionStep = {
   pivot?: number[];
   right?: number[];
   rightPartitions?: partitionStep;
+};
+
+export type QuickSortTask = {
+  id: UUIDTypes;
+  task: string;
+  taskId: string;
+  points: number;
+  collectedPoints: number;
 };
