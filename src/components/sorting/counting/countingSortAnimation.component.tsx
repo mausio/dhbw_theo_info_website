@@ -342,20 +342,66 @@ const CountingSortAnimation = () => {
             bars={countingBars}
             comparingIndex={selectedIndex}
             pivotIndex={pivotIndex}
+            selectedIndex={null}
+            doNotShowNumber={false}
+            fullLength={countingBars.length}
           />
-          {/*Switching comparingIndex with selectedIndex, so the animation is better*/}
-          <IndexChart initialArray={countingBars} />
+          <IndexChart 
+            initialArray={countingBars}
+            selectedIndex={null}
+            comparingIndex={null}
+            pivotIndex={null}
+            start={null}
+            end={null}
+            fullLength={countingBars.length}
+            height={25}
+          />
         </div>
         <BarChartDivider />
         <div>
-          <BarChart barsHeight={15} height={90} comparingIndex={sortIndex} bars={sortedBars} />
-          {/*Setting comparingIndex with sortIndex, so the animation is better*/}
-          <IndexChart initialArray={initialData} pivotIndex={sortIndex} />
+          <BarChart 
+            barsHeight={15} 
+            height={90} 
+            comparingIndex={sortIndex} 
+            bars={sortedBars}
+            selectedIndex={null}
+            pivotIndex={null}
+            doNotShowNumber={false}
+            fullLength={sortedBars.length}
+          />
+          <IndexChart 
+            initialArray={initialData} 
+            pivotIndex={sortIndex}
+            selectedIndex={null}
+            comparingIndex={null}
+            start={null}
+            end={null}
+            fullLength={initialData.length}
+            height={25}
+          />
         </div>
         <BarChartDivider />
         <div>
-          <BarChart barsHeight={15} height={90} bars={bars} comparingIndex={comparingIndex} />
-          <IndexChart initialArray={initialData} />
+          <BarChart 
+            barsHeight={15} 
+            height={90} 
+            bars={bars} 
+            comparingIndex={comparingIndex}
+            selectedIndex={null}
+            pivotIndex={null}
+            doNotShowNumber={false}
+            fullLength={bars.length}
+          />
+          <IndexChart 
+            initialArray={initialData}
+            selectedIndex={null}
+            comparingIndex={null}
+            pivotIndex={null}
+            start={null}
+            end={null}
+            fullLength={initialData.length}
+            height={25}
+          />
         </div>
       </ChartAligner>
       <ControlPanel>

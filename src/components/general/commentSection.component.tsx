@@ -123,7 +123,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
               ))}
 
               {showReplyForm[comment.id] && (
-                  <CommentForm isReply onSubmit={(e) => { e.preventDefault(); handleReply(comment.id); }}>
+                  <CommentForm onSubmit={(e) => { e.preventDefault(); handleReply(comment.id); }}>
                     <CommentInput
                       value={replyText[comment.id] || ''}
                       onChange={(e) => handleReplyChange(comment.id, e)}

@@ -291,8 +291,26 @@ const BucketSortAnimation = () => {
       </KeyIndexContainer>
       <ChartAligner>
         <div>
-          <BarChart height={140} barsHeight={10} bars={bars} comparingIndex={barsComparingIndex} />
-          <IndexChart initialArray={initialData} comparingIndex={barsComparingIndex} start={isStart} end={isEnd} />
+          <BarChart 
+            height={140} 
+            barsHeight={10} 
+            bars={bars} 
+            comparingIndex={barsComparingIndex}
+            selectedIndex={null}
+            pivotIndex={null}
+            doNotShowNumber={false}
+            fullLength={bars.length} 
+          />
+          <IndexChart 
+            initialArray={initialData} 
+            comparingIndex={barsComparingIndex} 
+            start={isStart} 
+            end={isEnd}
+            selectedIndex={null}
+            pivotIndex={null}
+            fullLength={initialData.length}
+            height={25}
+          />
         </div>
         <BarChartDivider />
         <AllBucketsFrame>

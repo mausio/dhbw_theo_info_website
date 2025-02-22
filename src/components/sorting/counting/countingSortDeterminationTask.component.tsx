@@ -55,6 +55,7 @@ const CountingSortDeterminationTask = () => {
   const [markedCount, setMarkedCount] = useState<number>(null);
   const [markedUnsorted, setMarkedUnsorted] = useState<number>(null);
   const [markedSortable, setMarkedSortable] = useState<number>(null);
+  const [unsortedArray, setUnsortedArray] = useState<number[]>([]);
 
   useEffect(() => {
     addTask({
@@ -75,7 +76,7 @@ const CountingSortDeterminationTask = () => {
   };
 
   function countingSort(inputArr) {
-    if (inputArr.length === 0) return unsortedArray;
+    if (inputArr.length === 0) return [];
 
     const unsortedArray = [...inputArr];
 
@@ -166,19 +167,28 @@ const CountingSortDeterminationTask = () => {
     checkBar(newArr[index], barsIterationSolution[iterationNr].sortableArray[index], correctId, wrongId);
   };
 
-  const handleCountingBarsUpdate = (array, index, event, correctId, wrongId) => {
-    const newArr = performBarUpdate(array, index, event);
+  const handleCountingBarsUpdate = (bars: number[], index: number, e: any, correctId: string, wrongId: string) => {
+    if (e.type === 'keydown' && e.key !== 'Enter') {
+      return;
+    }
 
-    if (!newArr) return;
+    const value = parseInt(e.target.value);
+    if (isNaN(value)) {
+      setWrongAnswer(wrongId);
+      return;
+    }
 
-    setSelectedBar(null);
-    setPlaceHolder(null);
-
-    checkBar(newArr[index], countingBarsSolution[index], correctId, wrongId);
-    setCountingBars(newArr);
-
-    if (!isCountingBarsSolved) {
-      setIsCountingBarsSolved(checkBarsArray(newArr, countingBarsSolution));
+    if (value === countingBarsSolution[index]) {
+      setCorrectAnswer(correctId);
+      bars[index] = value;
+      setCountingBars(bars);
+      setSelectedBar('');
+      setPlaceHolder('');
+      if (bars.every((bar, i) => bar === countingBarsSolution[i])) {
+        setIsCountingBarsSolved(true);
+      }
+    } else {
+      setWrongAnswer(wrongId);
     }
   };
 
@@ -246,12 +256,12 @@ const CountingSortDeterminationTask = () => {
     return JSON.stringify(a) == JSON.stringify(b);
   }
 
-  function setMarkedElements(num?) {
-    ('marking at iteration nr', num, iterationNr);
-    if ((num ? num : iterationNr) < barsIterationSolution.length) {
-      setMarkedCount(barsIterationSolution[num ? num : iterationNr].currentCountingArrayIndex);
-      setMarkedSortable(barsIterationSolution[num ? num : iterationNr].currentSortableArrayIndex);
-      setMarkedUnsorted(barsIterationSolution[num ? num : iterationNr].currentUnsortedArrayIndex);
+  function setMarkedElements(num?: number) {
+    console.log('marking at iteration nr', num ?? iterationNr);
+    if ((num ?? iterationNr) < barsIterationSolution.length) {
+      setMarkedCount(barsIterationSolution[num ?? iterationNr].currentCountingArrayIndex);
+      setMarkedSortable(barsIterationSolution[num ?? iterationNr].currentSortableArrayIndex);
+      setMarkedUnsorted(barsIterationSolution[num ?? iterationNr].currentUnsortedArrayIndex);
     } else {
       setMarkedCount(null);
       setMarkedSortable(null);
@@ -314,7 +324,26 @@ const CountingSortDeterminationTask = () => {
             <DiagramName>
               <MarkedRedText>{t('sorting.counting.task.arrays.counting')}</MarkedRedText>
             </DiagramName>
-            <BarChart barsHeight={10} height={120} bars={countingBars} doNotShowNumber={true} fullLength={true} />
+            <BarChart
+              barsHeight={10}
+              height={120}
+              bars={countingBars}
+              doNotShowNumber={true}
+              fullLength={true}
+              selectedIndex={null}
+              comparingIndex={null}
+              pivotIndex={null}
+            />
+            <IndexChart
+              initialArray={countingBars}
+              fullLength={true}
+              selectedIndex={null}
+              comparingIndex={null}
+              pivotIndex={null}
+              start={null}
+              end={null}
+              height={25}
+            />
             <DiagramIterationWrapper>
               {countingBars.map((bar, index) => {
                 const id = `counting-bar-${index}`;
@@ -347,7 +376,6 @@ const CountingSortDeterminationTask = () => {
                 );
               })}
             </DiagramIterationWrapper>
-            <IndexChart initialArray={countingBars} fullLength={true} />
           </SingleDiagramContainer>
           {isCountingBarsSolved && (
             <>
@@ -363,6 +391,18 @@ const CountingSortDeterminationTask = () => {
                   bars={accumulatingBars}
                   doNotShowNumber={true}
                   fullLength={true}
+                  selectedIndex={null}
+                  comparingIndex={null}
+                />
+                <IndexChart
+                  pivotIndex={markedCount}
+                  initialArray={accumulatingBars}
+                  fullLength={true}
+                  selectedIndex={null}
+                  comparingIndex={null}
+                  start={null}
+                  end={null}
+                  height={25}
                 />
                 <DiagramIterationWrapper>
                   {accumulatingBars.map((bar, index) => {
@@ -403,7 +443,6 @@ const CountingSortDeterminationTask = () => {
                     );
                   })}
                 </DiagramIterationWrapper>
-                <IndexChart pivotIndex={markedCount} initialArray={accumulatingBars} fullLength={true} />
               </SingleDiagramContainer>
             </>
           )}
@@ -421,41 +460,19 @@ const CountingSortDeterminationTask = () => {
                 bars={sortableBars}
                 doNotShowNumber={true}
                 fullLength={true}
+                comparingIndex={null}
+                pivotIndex={null}
               />
-              <DiagramIterationWrapper>
-                {sortableBars.map((bar, index) => {
-                  const id = `sorting-bar-${index}`;
-                  const wrongId = `wrong-sorting-bar-${index}`;
-                  const correctId = `correct-sorting-bar-${index}`;
-                  return (
-                    <DiagramInput
-                      disabled={isSolved}
-                      value={selectedBar === id ? placeHolder : bar}
-                      onAbort={(e) => handleSortableBarsUpdate([...sortableBars], index, e, correctId, wrongId)}
-                      onBlur={(e) => handleSortableBarsUpdate([...sortableBars], index, e, correctId, wrongId)}
-                      onKeyDown={(e) => handleSortableBarsUpdate([...sortableBars], index, e, correctId, wrongId)}
-                      onChange={(e) => {
-                        if (selectedBar !== id) {
-                          setSelectedBar(id);
-                        }
-                        setPlaceHolder(e.target.value);
-                      }}
-                      style={{
-                        width: `${70 / sortableBars.length}%`,
-                        left: `${(index / sortableBars.length) * 100}%`,
-                        borderColor: markedSortable == index && 'lightslategray',
-                        animation:
-                          wrongAnswer == wrongId
-                            ? 'wrong 2s ease-in-out'
-                            : correctAnswer == correctId
-                              ? 'correct 2s ease-in-out'
-                              : null,
-                      }}
-                    />
-                  );
-                })}
-              </DiagramIterationWrapper>
-              <IndexChart selectedIndex={markedSortable} initialArray={sortableBars} fullLength={true} />
+              <IndexChart
+                selectedIndex={markedSortable}
+                initialArray={sortableBars}
+                fullLength={true}
+                comparingIndex={null}
+                pivotIndex={null}
+                start={null}
+                end={null}
+                height={25}
+              />
             </SingleDiagramContainer>
             <SingleDiagramContainer style={{ width: '100%' }}>
               <DiagramName>
@@ -468,41 +485,19 @@ const CountingSortDeterminationTask = () => {
                 bars={unsortedBars}
                 doNotShowNumber={true}
                 fullLength={true}
+                selectedIndex={null}
+                pivotIndex={null}
               />
-              <DiagramIterationWrapper>
-                {unsortedBars.map((bar, index) => {
-                  const id = `sorted-bar-${index}`;
-                  const wrongId = `wrong-unsorted-bar-${index}`;
-                  const correctId = `correct-unsorted-bar-${index}`;
-                  return (
-                    <DiagramInput
-                      disabled={isSolved}
-                      value={selectedBar === id ? placeHolder : bar}
-                      onAbort={(e) => handleUnsortedBarsUpdate([...unsortedBars], index, e, correctId, wrongId)}
-                      onBlur={(e) => handleUnsortedBarsUpdate([...unsortedBars], index, e, correctId, wrongId)}
-                      onKeyDown={(e) => handleUnsortedBarsUpdate([...unsortedBars], index, e, correctId, wrongId)}
-                      onChange={(e) => {
-                        if (selectedBar !== id) {
-                          setSelectedBar(id);
-                        }
-                        setPlaceHolder(e.target.value);
-                      }}
-                      style={{
-                        width: `${70 / unsortedBars.length}%`,
-                        left: `${(index / unsortedBars.length) * 100}%`,
-                        borderColor: markedUnsorted == index && 'lightslategray',
-                        animation:
-                          wrongAnswer == wrongId
-                            ? 'wrong 2s ease-in-out'
-                            : correctAnswer == correctId
-                              ? 'correct 2s ease-in-out'
-                              : null,
-                      }}
-                    />
-                  );
-                })}
-              </DiagramIterationWrapper>
-              <IndexChart selectedIndex={markedUnsorted} initialArray={unsortedBars} fullLength={true} />
+              <IndexChart
+                comparingIndex={markedUnsorted}
+                initialArray={unsortedBars}
+                fullLength={true}
+                selectedIndex={null}
+                pivotIndex={null}
+                start={null}
+                end={null}
+                height={25}
+              />
             </SingleDiagramContainer>
           </SecondStepContainer>
         )}

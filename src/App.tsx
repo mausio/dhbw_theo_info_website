@@ -17,7 +17,6 @@ import { CommentsProvider } from './context/comments.context';
 import { UserProvider } from './context/user.context';
 
 //TODO: Still development needed:
-// => Tipps: Add tipps to ALL Algos!
 // => Responsiveness for all pages
 // => Task counter should be dynamic and show how many tasks have been completed
 
