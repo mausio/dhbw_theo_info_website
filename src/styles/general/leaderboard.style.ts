@@ -20,6 +20,16 @@ const rainbowKeyframes = `
 `;
 
 export const LeaderboardContainer = styled.div`
+  @media (max-width: 768px) {
+    min-width: 300px;
+    max-width: 600px;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 250px;
+    max-width: 400px;
+  }
+
   width: auto;
   min-width: 350px;
   max-width: 800px;
@@ -32,6 +42,11 @@ export const LeaderboardContainer = styled.div`
 `;
 
 export const LeaderboardTitle = styled.h1`
+  @media (max-width: 480px) {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+
   font-size: 20px;
   margin: 10px 0;
   text-align: center;
@@ -39,6 +54,11 @@ export const LeaderboardTitle = styled.h1`
 `;
 
 export const LeaderboardTable = styled.table`
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
   width: 100%;
   border-collapse: collapse;
   border-radius: 10px;
@@ -48,6 +68,17 @@ export const LeaderboardTable = styled.table`
 `;
 
 export const LeaderboardHeader = styled.th<CenterProps>`
+  @media (max-width: 768px) {
+    padding: 5px 6px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
   padding: 6px 8px;
   text-align: ${props => props.center ? 'center' : 'left'};
   background: var(--tertiary);
@@ -104,6 +135,16 @@ export const CurrentUserRow = styled(LeaderboardRow)`
 `;
 
 export const RankCell = styled.td<CenterProps>`
+  @media (max-width: 768px) {
+    padding: 4px 6px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3px 4px;
+    font-size: 0.85rem;
+  }
+
   padding: 4px 8px;
   text-align: ${props => props.center ? 'center' : 'left'};
   color: var(--black);
@@ -112,6 +153,26 @@ export const RankCell = styled.td<CenterProps>`
 `;
 
 export const LeaderboardCell = styled.td<CenterProps>`
+  @media (max-width: 768px) {
+    padding: 4px 6px;
+    font-size: 0.9rem;
+
+    &:last-child {
+      width: 30%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 3px 4px;
+    font-size: 0.85rem;
+
+    &:last-child {
+      width: 10%;
+      padding-right: 0;
+      margin-right: 0;
+    }
+  }
+
   padding: 4px 8px;
   text-align: ${props => props.center ? 'center' : 'left'};
   color: var(--black);
@@ -136,6 +197,13 @@ export const NoDataMessage = styled.p`
 `;
 
 export const ProgressBar = styled.div<{ progress: number }>`
+  @media (max-width: 480px) {
+    height: 10px;
+    width: 90%;
+    margin-top: 1px;
+    margin: 0 auto;
+  }
+
   height: 12px;
   width: 90%;
   background-color: #f3f3f3;

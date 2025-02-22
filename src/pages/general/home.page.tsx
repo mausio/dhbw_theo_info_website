@@ -17,7 +17,8 @@ import {
   TipsList,
   TipsListItem,
   SectionHeader,
-  CallToAction
+  CallToAction,
+  AlgoTitle
 } from '../../styles/general/home.style';
 
 const HomePage = () => {
@@ -32,9 +33,11 @@ const HomePage = () => {
       {/* Title and Leaderboard Container */}
       <GenericMainContainer>
         <HomeContainer>
-          <Typography variant="h2" component="h1" gutterBottom style={{fontWeight: "900"}}>
-            {t('home.title')}
-          </Typography>
+          <AlgoTitle>
+            <Typography variant="h2" component="h1" gutterBottom style={{fontWeight: "900"}}>
+              {t('home.title')}
+            </Typography>
+          </AlgoTitle>
 
           <Leaderboard entries={sortedEntries} />
         </HomeContainer>
@@ -46,7 +49,7 @@ const HomePage = () => {
           <StoryCard>
             <div>
               {/* Welcome and Introduction */}
-              <Typography variant="h4" component="h2" gutterBottom>
+              <Typography variant="h2" component="h2" gutterBottom>
                 {t('home.story.welcomeTitle')}
               </Typography>
               

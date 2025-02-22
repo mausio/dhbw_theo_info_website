@@ -8,12 +8,27 @@ export const GenericImage = styled.img`
 `;
 
 export const NavigationBarContainer = styled.div`
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 8px 15px;
+    margin: 15px auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 10px;
+    height: auto;
+    min-height: 60px;
+    flex-direction: column;
+    margin: 10px auto;
+  }
+
   margin: 25px auto;
   position: relative;
   z-index: 1000;
   width: 80%;
   min-width: 300px;
-max-width: 1100px; 
+  max-width: 1100px; 
   height: 70px;
   padding: 5px 20px;
   border-radius: 5px;
@@ -29,16 +44,24 @@ max-width: 1100px;
 `;
 
 export const Logo = styled(GenericImage)`
+  @media (max-width: 768px) {
+    height: 35px;
+    width: 90px;
+  }
+
+  @media (max-width: 480px) {
+    height: 40px;
+    width: auto;
+    margin: 0;
+  }
+
   user-select: none;
   position: relative;
   top: -1px;
   height: 40px;
-  padding: 5px;
-
+  margin: auto 5px;
   width: 100px;
-
   border-radius: 5px;
-
   scale: 0.99;
   transition: 0.1s ease-out;
 
@@ -51,33 +74,52 @@ export const Logo = styled(GenericImage)`
 
   &:active {
     backdrop-filter: brightness(1);
-
     box-shadow:
       rgb(100, 100, 100, 0.9) 2px 2px 1px 0px inset,
       rgba(50, 50, 50, 0.6) -0.2px -0.2px 1px -1px inset,
       rgb(25, 25, 25, 0) 1.5px 1.5px 1px 0px,
       rgba(0, 0, 0, 0) -0.1px -0.1px 2px -1px;
-
     scale: 0.99;
     transition: ease-in 0.1s;
   }
 `;
 
 export const LogoLinkButton = styled.a`
+  @media (max-width: 480px) {
+    padding: 10px;
+    height: auto;
+  }
+
   user-select: none;
   width: auto;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   justify-items: center;
-
   padding: 20px;
+
+    @media (max-width: 480px) {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 export const LinkList = styled.ol`
+  @media (max-width: 768px) {
+    margin-right: 10px;
+    column-gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    justify-content: space-around;
+    column-gap: 5px;
+  }
+
   display: flex;
   justify-content: space-evenly;
   list-style: none;
@@ -86,6 +128,12 @@ export const LinkList = styled.ol`
 `;
 
 export const LinkButton = styled.button`
+  @media (max-width: 480px) {
+    padding: 5px;
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
   user-select: none;
   border: none;
   background-color: transparent;

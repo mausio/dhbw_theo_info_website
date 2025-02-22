@@ -18,7 +18,6 @@ import { UserProvider } from './context/user.context';
 
 //TODO: Still development needed:
 // => Responsiveness for all pages
-// => Algorithm quiz is not showing the number of correct answers (around double the correct answers)
 
 
 function App() {

@@ -4,19 +4,73 @@ import { Link } from "react-router-dom";
 import crumpledPaper from '../../static/media/crumpled-paper.jpg';
 
 export const HomeContainer = styled(Box)`
+  @media (max-width: 768px) {
+    margin: 20px 15px 15px 15px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 15px 10px 10px 10px;
+  }
+
   font-family: Arial, sans-serif;
   margin: 40px 30px 30px 30px;
 
 `;
 
 export const StoryCard = styled.div`
+  @media (max-width: 768px) {
+    padding: 25px;
+    
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    h5 {
+      font-size: 1.1rem;
+    }
+    
+    p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px;
+    
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+
+    h5 {
+      font-size: 0.9rem;
+    }
+    
+    p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+      text-align: justify;
+    }
+  }
+
   padding: 40px;
   margin: 0;
   position: relative;
-  background-image: url(${crumpledPaper});
-  background-size: cover;
-  background-position: center;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  background: none;
+  filter: none;
 
   &::before {
     content: '';
@@ -26,17 +80,25 @@ export const StoryCard = styled.div`
     background-size: cover;
     background-position: center;
     clip-path: polygon(
-      /* A more natural, fuzzy edge pattern */
       2% 0%, 4% 0.5%, 6% 0%, 8% 0.7%, 10% 0%, 12% 0.3%, 15% 0%, 18% 0.8%, 22% 0%, 25% 0.4%, 30% 0%, 35% 0.6%, 40% 0%, 45% 0.5%, 50% 0%, 55% 0.7%, 60% 0%, 65% 0.4%, 70% 0%, 75% 0.8%, 80% 0%, 85% 0.3%, 90% 0%, 95% 0.5%, 98% 0%,
       100% 2%, 99.5% 4%, 100% 6%, 99.3% 8%, 100% 10%, 99.7% 12%, 100% 15%, 99.2% 18%, 100% 22%, 99.6% 25%, 100% 30%, 99.4% 35%, 100% 40%, 99.5% 45%, 100% 50%, 99.3% 55%, 100% 60%, 99.6% 65%, 100% 70%, 99.2% 75%, 100% 80%, 99.7% 85%, 100% 90%, 99.5% 95%, 100% 98%,
       98% 100%, 95% 99.5%, 90% 100%, 85% 99.3%, 80% 100%, 75% 99.7%, 70% 100%, 65% 99.2%, 60% 100%, 55% 99.6%, 50% 100%, 45% 99.4%, 40% 100%, 35% 99.5%, 30% 100%, 25% 99.3%, 20% 100%, 15% 99.6%, 10% 100%, 5% 99.2%, 2% 100%,
       0% 98%, 0.5% 95%, 0% 90%, 0.7% 85%, 0% 80%, 0.3% 75%, 0% 70%, 0.8% 65%, 0% 60%, 0.4% 55%, 0% 50%, 0.6% 45%, 0% 40%, 0.5% 35%, 0% 30%, 0.7% 25%, 0% 20%, 0.4% 15%, 0% 10%, 0.8% 5%, 0% 2%
     );
     z-index: -1;
-    filter: brightness(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
-  /* Content needs to stay above the fuzzy edge */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url(${crumpledPaper});
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+  }
+
   & > * {
     position: relative;
     z-index: 1;
@@ -47,20 +109,44 @@ export const StoryCard = styled.div`
   }
 
   h2 {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     margin-bottom: 1.5rem;
     color: var(--accent);
     font-weight: 600;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
   }
 
   p {
     line-height: 1.6;
     color: rgba(0, 0, 0, 0.87);
-    font-size: 1.05rem;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    text-align: justify;
   }
 `;
 
 export const AvatarWrapper = styled(Box)`
+  @media (max-width: 480px) {
+    flex-direction: column;
+    text-align: center;
+    
+    .MuiAvatar-root {
+      margin-bottom: 16px;
+    }
+  }
+
   display: flex;
   align-items: center;
   margin-bottom: 24px;
@@ -74,6 +160,11 @@ export const AvatarWrapper = styled(Box)`
 `;
 
 export const IntroContent = styled(Box)`
+  @media (max-width: 480px) {
+    margin-left: 0;
+    text-align: center;
+  }
+
   margin-left: 16px;
   
   p {
@@ -122,10 +213,23 @@ export const AlgorithmListItem = styled(Link)`
 `;
 
 export const TipsSection = styled(Box)`
+  @media (max-width: 768px) {
+    margin: 40px 0;
+    transform: none;
+  }
+
+  @media (max-width: 480px) {
+    margin: 30px 0;
+    padding: 16px;
+  }
+
   margin: 60px 0;
   padding: 24px;
   position: relative;
   transform: rotate(-1deg);
+  background: none;
+  border: none;
+  border-radius: 5px;
 
   & > * {
     position: relative;
@@ -135,12 +239,9 @@ export const TipsSection = styled(Box)`
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-image: url(${crumpledPaper}); 
-    background-size: 140%;
+    background-size: cover;
     background-position: center;
     clip-path: polygon(
       0% 5%, 2% 0%, 5% 3%, 8% 1%, 12% 4%, 15% 0%, 18% 2%, 22% 1%, 25% 3%,
@@ -151,15 +252,7 @@ export const TipsSection = styled(Box)`
       35% 97%, 30% 100%, 25% 97%, 20% 100%, 15% 97%, 10% 100%, 5% 97%, 2% 100%, 0% 95%
     );
     z-index: 0;
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.09);
-    filter: brightness(0.99);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   &:nth-child(even) {
@@ -168,13 +261,6 @@ export const TipsSection = styled(Box)`
       background-position: right center;
     }
   }
-
-  border: none;
-  box-shadow: 
-    11px 5px 5px 0px rgba(0,0,0, 0.09),
-    0 0 15px 0px rgba(0, 0, 0, 0.05);
-  backdrop-filter: brightness(0.98);
-  border-radius: 5px;
 `;
 
 export const TipsList = styled.ul`
@@ -226,5 +312,55 @@ export const CallToAction = styled(Box)`
     transform: rotate(-1deg);
     opacity: 0.85;
     mix-blend-mode: multiply;
+  }
+`;
+
+export const AlgoTitle = styled.div`
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem !important;
+    }
+  }
+
+  h1 {
+    text-align: center;
+  }
+`;
+
+export const LeaderboardCell = styled.td<CenterProps>`
+  @media (max-width: 768px) {
+    padding: 4px 6px;
+    font-size: 0.9rem;
+
+    &:last-child {
+      width: 35%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 3px 4px;
+    font-size: 0.85rem;
+
+    &:last-child {
+      width: 30%;
+    }
+  }
+
+  padding: 4px 8px;
+  text-align: ${props => props.center ? 'center' : 'left'};
+  color: var(--black);
+  position: relative;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  
+  &:last-child {
+    width: 40%;
+    padding-right: 0;
   }
 `; 

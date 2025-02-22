@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
 export const GenericMainContainer = styled.div`
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 10px 15px 20px 15px;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 10px 10px 15px 10px;
+    margin: 15px auto;
+  }
+
   width: 80%;
   min-width: 300px;
   max-width: 1100px; 
@@ -19,9 +30,29 @@ export const GenericMainContainer = styled.div`
 `;
 
 export const GenericImprintNotice = styled.div`
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 8px 15px;
+    margin: 15px auto;
+    height: auto;
+    min-height: 45px;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 10px;
+    margin: 10px auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+    height: auto;
+    min-height: 60px;
+  }
+
   width: 80%;
   min-width: 300px;
-max-width: 1100px; 
+  max-width: 1100px;
   height: 55px;
   inset: 0;
   margin: 10px auto;
@@ -145,6 +176,17 @@ export const AlgorithmSection = styled.div`
 `;
 
 export const GenericSortGrid = styled.div`
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'animation'
+      'code'
+      'spacer'
+      'task';
+    column-gap: min(20px, 30px);
+    row-gap: min(15px, 30px);
+  }
+
   position: relative;
   width: 100%;
   max-width: 1000px; // Slightly smaller than container
