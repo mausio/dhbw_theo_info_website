@@ -14,14 +14,7 @@ import { getInsertionSortExplanation } from '../../static/explanations/insertion
 
 const InsertionSortPage = () => {
   const { t } = useTranslation();
-  const { user } = useUser();
-
-  // Calculate completed tasks for insertion sort
-  const totalTasks = 3; // Animation, Iteration Task, Quiz
-  const completedTasks = user?.points.filter(task => 
-    task.taskId.startsWith('insertionSort') && task.collectedPoints > 0
-  ).length || 0;
-
+  const totalTasks = 2;
   const explanation: React.ReactNode = getInsertionSortExplanation();
 
   const tipps: React.ReactNode = (
@@ -34,7 +27,7 @@ const InsertionSortPage = () => {
       <GenericMainContainer>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "20px 20px" }}>
           <h1>Insertion Sort</h1>
-          <TaskBadge completedTasks={completedTasks} totalTasks={totalTasks} />
+          <TaskBadge pageIdentifier="insertion" totalTasks={totalTasks} />
         </div>
         <GenericSortGrid>
           <InsertionSortAnimationComponent />

@@ -39,7 +39,7 @@ const InsertionSortIterationTaskComponent = () => {
     // Initialize the task when component mounts
     addTask({
       task: 'Insertion Sort Task',
-      taskId: 'insertionSort',
+      taskId: 'sorting_insertion_task',
       points: 5,
       collectedPoints: 0
     });
@@ -54,10 +54,10 @@ const InsertionSortIterationTaskComponent = () => {
         handleConfetti();
         
         // Check if points were already awarded
-        const task = getTaskById('insertionSort');
+        const task = getTaskById('sorting_insertion_task');
         if (task && task.collectedPoints === 0) {
           // Only award points if they haven't been awarded yet
-          updateTask('insertionSort', 5);
+          updateTask('sorting_insertion_task', 5);
         }
         return;
       }
@@ -94,7 +94,7 @@ const InsertionSortIterationTaskComponent = () => {
   };
 
   // Check if points were already awarded
-  const task = getTaskById('insertionSort');
+  const task = getTaskById('sorting_insertion_task');
   const hasEarnedPoints = task?.collectedPoints === 5;
 
   return (

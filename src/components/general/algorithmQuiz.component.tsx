@@ -39,7 +39,7 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
 
   const questions: QuizQuestion[] = (t(`${translationKey}.quiz.questions`, { returnObjects: true }) ||
     []) as QuizQuestion[];
-  const quizTaskId = `${translationKey.replace('.', '_')}_quiz`;
+  const quizTaskId = `${translationKey.split('.').join('')}Quiz`;
 
   useEffect(() => {
     const existingTask = getTaskById(quizTaskId);
@@ -94,7 +94,7 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
     setCorrectAnswers(newCorrectTotal);
 
     if (currentQuestionIndex === questions.length - 1) {
-      submitQuizResults(newCorrectTotal);
+      submitQuizResults(newCorrectTotal / 2);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
@@ -111,11 +111,11 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
         <QuizResultContainer>
           <h3>
             {t('general.quiz.score', {
-              correctTasks: previousScore,
+              correctTasks: previousScore / 2,
               totalTasks: questions.length,
             })}
           </h3>
-          <p>{t('general.quiz.points', { points: previousScore * 2 })}</p>
+          <p>{t('general.quiz.points', { points: previousScore  })}</p>
         </QuizResultContainer>
       </QuizContainer>
     );
@@ -160,11 +160,11 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
         <QuizResultContainer>
           <h3>
             {t('general.quiz.score', {
-              correctTasks: correctAnswers * 2,
+              correctTasks: correctAnswers ,
               totalTasks: questions.length,
             })}
           </h3>
-          <p>{t('general.quiz.points', { points: correctAnswers * 4 })}</p>
+          <p>{t('general.quiz.points', { points: correctAnswers*2 })}</p>
         </QuizResultContainer>
       )}
     </QuizContainer>

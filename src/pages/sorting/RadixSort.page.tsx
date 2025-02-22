@@ -10,9 +10,11 @@ import { useTranslation } from 'react-i18next';
 import CommentSection from '../../components/general/commentSection.component.tsx';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 import { getRadixSortExplanation } from '../../static/explanations/radixSort.explanation';
+import TaskBadge from '../../components/general/taskBadge.component.tsx';
 
 const RadixSortPage = () => {
   const { t } = useTranslation();
+  const totalTasks = 3;
   const explanation: React.ReactNode = getRadixSortExplanation();
 
   const tipps: React.ReactNode = (
@@ -23,7 +25,10 @@ const RadixSortPage = () => {
   return (
     <TippsAndExplanationWrapper tipps={tipps} explanation={explanation}>
       <GenericMainContainer>
-        <h1>Radix Sort</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "20px 20px" }}>
+          <h1>Radix Sort</h1>
+          <TaskBadge pageIdentifier="radix" totalTasks={totalTasks} />
+        </div>
         <GenericSortGrid>
           <RadixSortAnimation />
           <CodeBlockElement height={600} code={radixSortAlgo} isFaderOn={false} />

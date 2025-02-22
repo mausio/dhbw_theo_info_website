@@ -8,9 +8,11 @@ import { useTranslation } from 'react-i18next';
 import CommentSection from '../../components/general/commentSection.component.tsx';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 import { getHeapSortExplanation } from '../../static/explanations/heapSort.explanation';
+import TaskBadge from '../../components/general/taskBadge.component.tsx';
 
 const HeapSortPage = () => {
   const { t } = useTranslation();
+  const totalTasks = 1;
   const explanation: React.ReactNode = getHeapSortExplanation();
 
   const tipps: React.ReactNode = (
@@ -22,7 +24,10 @@ const HeapSortPage = () => {
   return (
     <TippsAndExplanationWrapper tipps={tipps} explanation={explanation}>
       <GenericMainContainer>
-        <h1>Heap Sort</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "20px 20px" }}>
+          <h1>Heap Sort</h1>
+          <TaskBadge pageIdentifier="heap" totalTasks={totalTasks} />
+        </div>
         <GenericSortGrid>
           <HeapSortAnimation />
           <CodeBlockElement height={600} code={heapSortAlgo} isFaderOn={true} />

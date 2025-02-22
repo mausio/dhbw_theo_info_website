@@ -18,7 +18,7 @@ import { UserProvider } from './context/user.context';
 
 //TODO: Still development needed:
 // => Responsiveness for all pages
-// => Task counter should be dynamic and show how many tasks have been completed
+// => Algorithm quiz is not showing the number of correct answers (around double the correct answers)
 
 
 function App() {

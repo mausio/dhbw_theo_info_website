@@ -10,9 +10,11 @@ import { useTranslation } from 'react-i18next';
 import CommentSection from '../../components/general/commentSection.component.tsx';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 import { getQuickSortExplanation } from '../../static/explanations/quickSort.explanation';
+import TaskBadge from '../../components/general/taskBadge.component.tsx';
 
 const QuickSortPage = () => {
   const { t } = useTranslation();
+  const totalTasks = 3;
   const explanation: React.ReactNode = getQuickSortExplanation();
 
   const tipps: React.ReactNode = (
@@ -23,7 +25,10 @@ const QuickSortPage = () => {
   return (
     <TippsAndExplanationWrapper tipps={tipps} explanation={explanation}>
       <GenericMainContainer>
-        <h1>Quicksort</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "20px 20px" }}>
+          <h1>Quicksort</h1>
+          <TaskBadge pageIdentifier="quick" totalTasks={totalTasks} />
+        </div>
         <GenericSortGrid>
           <QuickSortAnimation />
           <CodeBlockElement height={500} code={quickSortAlgo} isFaderOn={false} />

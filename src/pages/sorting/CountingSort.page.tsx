@@ -9,9 +9,11 @@ import { useTranslation } from 'react-i18next';
 import CommentSection from '../../components/general/commentSection.component.tsx';
 import AlgorithmQuizComponent from '../../components/general/algorithmQuiz.component.tsx';
 import { getCountingSortExplanation } from '../../static/explanations/countingSort.explanation';
+import TaskBadge from '../../components/general/taskBadge.component.tsx';
 
 const CountingSortPage = () => {
   const { t } = useTranslation();
+  const totalTasks = 2;
   const explanation: React.ReactNode = getCountingSortExplanation();
 
   const tipps: React.ReactNode = (
@@ -22,7 +24,10 @@ const CountingSortPage = () => {
   return (
     <TippsAndExplanationWrapper tipps={tipps} explanation={explanation}>
       <GenericMainContainer>
-        <h1>Counting Sort</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "20px 20px" }}>
+          <h1>Counting Sort</h1>
+          <TaskBadge pageIdentifier="counting" totalTasks={totalTasks} />
+        </div>
         <GenericSortGrid>
           <CountingSortAnimation />
           <CodeBlockElement height={650} code={countingSortAlgo} isFaderOn={false} />
