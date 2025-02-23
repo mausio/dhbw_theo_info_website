@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const BaseContainer = styled.div`
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   top: 15%;
   height: 30%;
   max-height: 1000px;
@@ -16,7 +16,8 @@ const BaseContainer = styled.div`
 
   transition: 0.6s ease-in-out;
   border-radius: 10px;
-  background: white;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2px);
   box-shadow: 0px 0px 12px 6px rgba(0, 0, 0, 0.2);
 
   & h5 {
@@ -48,6 +49,12 @@ const BaseContainer = styled.div`
   }
 
   font-size: 0.9rem;
+
+    @media (max-width: 480px) {
+    padding-right: 0;
+    min-height: 480px;
+    max-height: 520px;
+}
 `;
 
 // Inherits: BaseContainer + fixed positioning, grid layout
@@ -96,6 +103,13 @@ export const ExplanationTitle = styled.div`
   position: relative; 
 left: 12px;
 right: auto;
+
+  @media (max-width: 480px) {
+    font-size: 1.2em;
+    left: 5px;
+    margin-right: 0;
+    padding-right: 0;
+  }
 `;
 
 // Inherits: BaseTitle + vertical text orientation

@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react';
 import { BraceSpan, Button, MarkedRedText } from '../../../styles/general/generic.style.ts';
 import { SortableItem } from '../../general/draggable.component.tsx';
 import { wait } from '../../../utils/promise.utils.ts';
+import { useTranslation } from 'react-i18next';
 
 interface InsertionIterationProps {
   expectedArray: number[];
@@ -37,6 +38,7 @@ const InsertionIterationComponent: React.FC<InsertionIterationProps> = ({
   iterations: nrOfIteration,
   showPivot = false 
 }) => {
+  const { t } = useTranslation();
   const [activeId, setActiveId] = useState<number | null>(null);
   const [workingArray, setWorkingArray] = useState<number[]>(taskArray);
   const [isWrongAnswer, setIsWrongAnswer] = useState<boolean>(false);
@@ -103,7 +105,7 @@ const InsertionIterationComponent: React.FC<InsertionIterationProps> = ({
   return (
     <SingleIterationContainer>
       <IterationTitle>
-        After Iteration Nr <MarkedRedText>{nrOfIteration}</MarkedRedText>
+        {t('sorting.radix.task.iteration.afterIteration')} <MarkedRedText>{nrOfIteration}</MarkedRedText>
       </IterationTitle>
       <SortableContainer>
         <DndContext

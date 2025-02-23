@@ -12,6 +12,10 @@ const shake = keyframes`
 export const SideSpacer = styled.div`
   width: auto;
   margin: 0 50px;
+
+    @media(max-width: 480px){
+    margin: 0;
+}
 `;
 
 export const CommentContainer = styled(GenericMainContainer)`
@@ -30,6 +34,10 @@ export const CommentContainer = styled(GenericMainContainer)`
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 1);
 
   overflow: hidden;
+
+  @media(max-width: 480px){
+  width: 90%;
+  }
 `;
 
 export const SingleComment = styled.div<{ isReply?: boolean }>`
@@ -44,6 +52,10 @@ export const SingleComment = styled.div<{ isReply?: boolean }>`
   ` : `
     background: radial-gradient(white, color-mix(in srgb, var(--primary), white 92%) 95%);
   `}
+
+    @media(max-width: 480px){
+      margin: ${props => props.isReply ? '20px 0px 10px 10px' : '50px 0'};
+  }
 `;
 
 export const CommentForm = styled.form`
@@ -156,6 +168,10 @@ export const CommentText = styled.p`
   line-height: 1.5;
   color: var(--black);
   margin: 0 80px 0 0px;
+  
+    @media(max-width: 480px){
+    margin: 0;
+}
 `;
 
 export const ButtonGroup = styled.div`

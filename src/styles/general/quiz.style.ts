@@ -26,6 +26,11 @@ export const QuizTitle = styled.h2`
   text-align: center;
   color: #1a1a1a;
   font-weight: 600;
+
+      @media (max-width: 480px) {
+      font-size: 1.5rem;
+      padding: 0;
+}
 `;
 
 interface QuestionContainerProps {
@@ -52,6 +57,13 @@ export const QuestionContainer = styled.div<QuestionContainerProps>`
     font-size: 24px;
     font-weight: 500;
   }
+
+
+  @media (max-width: 480px) {
+    h3{font-size: 1rem;
+    }
+  
+}
 `;
 
 export const QuizButtonContainer = styled.div`
@@ -101,6 +113,11 @@ export const AnswerButton = styled.button<AnswerButtonProps>`
   &:disabled {
     opacity: ${props => props.selected ? 1 : 0.7};
   }
+
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+}
 `;
 
 export const QuizResultContainer = styled.div`
@@ -122,4 +139,14 @@ export const QuizResultContainer = styled.div`
     margin-bottom: 25px;
     color: white;
   }
+
+
+  @media (max-width: 480px) {
+  p{  
+  font-size: 0.9rem;
+  }
+  h3{
+  font-size: 1.2rem;
+  }
+}
 `; 

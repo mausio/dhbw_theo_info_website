@@ -19,8 +19,10 @@ import {
   SingleIterationContainer,
   SortableContainer,
 } from '../../../styles/general/iteration.style.ts';
+import { useTranslation } from 'react-i18next';
 
 const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIteration: nrOfIteration, pivotArray }) => {
+  const { t } = useTranslation();
   const [activeId, setActiveId] = useState<number | null>(null);
   const [workingArray, setWorkingArray] = useState<number[]>(taskArray);
   const [isWrongAnswer, setIsWrongAnswer] = useState<boolean>(false);
@@ -84,7 +86,7 @@ const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIterat
   return (
     <SingleIterationContainer>
       <IterationTitle>
-        After Iteration Nr <MarkedRedText>{nrOfIteration + 1}</MarkedRedText>
+        {t('sorting.radix.task.iteration.afterIteration')} <MarkedRedText>{nrOfIteration + 1}</MarkedRedText>
       </IterationTitle>
       <SortableContainer>
         <DndContext

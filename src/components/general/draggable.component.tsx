@@ -1,6 +1,15 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import * as React from 'react';
+import { styled } from 'styled-components';
+
+const ItemTag = styled.p`
+
+@media(max-width: 480px){
+  width: 30px !important;
+  height: 30px !important;
+}
+`;
 
 interface SortableItemProps {
   id: number | string;
@@ -24,7 +33,7 @@ export const SortableItem: React.FC<SortableItemProps> = ({
   });
 
   return (
-    <p
+    <ItemTag
       ref={setNodeRef}
       style={{
         transform: CSS.Transform.toString(transform),
@@ -49,6 +58,6 @@ export const SortableItem: React.FC<SortableItemProps> = ({
       {...listeners}
     >
       {id}
-    </p>
+    </ItemTag>
   );
 };

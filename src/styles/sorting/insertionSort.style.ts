@@ -64,7 +64,8 @@ export const ButtonPanel = styled.div`
 `;
 
 export const SliderPanel = styled.div`
-  width: 250px;
+  width: 70%;
+  height: auto;
   background: white;
   margin-top: 15px;
   padding: 0 20px;

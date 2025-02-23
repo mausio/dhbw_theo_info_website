@@ -6,6 +6,13 @@ export const IterationTitle = styled.p`
   padding: 0;
   color: white;
   user-select: none;
+
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
 `;
 
 export const SingleIterationContainer = styled.div`
@@ -21,6 +28,12 @@ export const SingleIterationContainer = styled.div`
   border-radius: 10px;
   box-shadow: rgb(0, 0, 0, 0.5) 1px 1px 3px 0px inset;
   background: color-mix(in srgb, var(--tertiary), white 20%);
+
+  
+    @media (max-width: 480px) {
+  margin: 0 auto;
+  padding: 10px 2px;
+    }
 `;
 
 export const IterationsContainer = styled.div`
@@ -36,6 +49,13 @@ export const IterationsContainer = styled.div`
   user-select: none;
 
   margin: 35px 0 25px 0;
+
+  @media(max-width: 480px){
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    row-gap: 20px;
+  }
 `;
 
 export const SortableContainer = styled.div`
@@ -52,6 +72,11 @@ export const SortableContainer = styled.div`
 
   border-radius: 5px;
   background: transparent;
+
+    @media (max-width: 480px) {
+  margin: 0;
+    }
+
 `;
 
 export const SortableArrayContainer = styled.div`
@@ -64,6 +89,10 @@ export const SortableArrayContainer = styled.div`
   column-gap: 5px;
   margin: 20px 0;
   justify-content: center;
+
+    @media (max-width: 480px) {
+    margin: 10px 0;
+}
 `;
 
 export const ButtonIterationContainer = styled.div`
