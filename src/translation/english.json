@@ -661,8 +661,10 @@
         "title": "Task 1 Step-wise A value of partition",
         "description": "Given the input array, fill in the values of array A after each partition",
         "inputArray": "Input array:",
+        "submit": "Submit",
         "alreadyCompleted": "You have already completed {{task}} and earned {{points}} points!",
-        "pointsEarned": "Congratulations! You completed {{task}} and earned {{points}} points!"
+        "pointsEarned": "Congratulations! You completed {{task}} and earned {{points}} points!",
+        "tryAgain": "Try Again"
       }
     },
     "bucket": {
@@ -770,8 +772,8 @@
       "continue": "Continue",
       "pause": "Pause",
       "animate": "Animate",
-      "showPivot": "Show Pivot",
-      "hidePivot": "Hide Pivot"
+      "showPivot": "Show Pivots",
+      "hidePivot": "Hide Pivots"
     }
   },
   "comments": {

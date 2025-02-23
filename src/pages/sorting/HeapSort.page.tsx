@@ -15,10 +15,7 @@ const HeapSortPage = () => {
   const totalTasks = 1;
   const explanation: React.ReactNode = getHeapSortExplanation();
 
-  const tipps: React.ReactNode = (
-    <>
-    //TODO: Add tipps
-    </>
+  const tipps: React.ReactNode = (<></>
   );
 
   return (

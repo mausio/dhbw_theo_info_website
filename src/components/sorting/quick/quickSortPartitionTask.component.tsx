@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useUser } from '../../../context/user.context';
+import { useTranslation } from 'react-i18next';
 
 import { Button, MarkedRedText, MarkedText, SingleTaskContainer } from '../../../styles/general/generic.style.ts';
+import { TaskTitle, TaskDescription, TaskInputArray } from '../../../styles/general/task.style.ts';
 import ConfettiComponent from '../../general/confetti.component.tsx';
 import { calcArrayTaskContainerHeight, generateRandomArrayOfN } from '../../../utils/number.utils.ts';
 import { printArray } from '../../general/print.component.tsx';
@@ -11,8 +13,9 @@ import QuickSortIteration from './quickSortIteration.component.tsx';
 import { IterationsContainer } from '../../../styles/general/iteration.style.ts';
 
 const QuickSortPartitionTasks = () => {
+  const { t } = useTranslation();
   const { addTask, updateTask, getTaskById } = useUser();
-  const [initialData] = useState<number[]>(generateRandomArrayOfN(8));
+  const [initialData] = useState<number[]>(generateRandomArrayOfN(7));
   const [taskArray, setTaskArray] = useState<number[]>([...initialData]);
   const [iterations, setIterations] = useState<number[][]>([[...initialData]]);
   const [pivotArray, setPivotArray] = useState<number[]>([]);
@@ -114,30 +117,21 @@ const QuickSortPartitionTasks = () => {
     });
   }, []);
 
-  const handleReset = () => {
-    setTaskArray([...initialData]);
-    setIterations([[...initialData]]);
-    setIsSolved(false);
-  };
-
   const task = getTaskById('quickSortPartition');
   const hasEarnedPoints = task?.collectedPoints === 10;
 
   return (
     <SingleTaskContainer>
       <ConfettiComponent run={isRunningConfetti} recycle={isRecycling} />
-      <h2>
-        Task 1 Step-wise <MarkedRedText>A</MarkedRedText> value of partition
-      </h2>
-      <p>Given the input array, fill in the values of array A after each partition</p>
-      <p>
-        Input array: <MarkedText>[{printArray(initialData)}]</MarkedText>
-      </p>
-      <Button onClick={toggleShowPivot} disabled={isSolved} style={{ position: 'absolute', right: 95, top: 15 }}>
-        Help: Pivots
-      </Button>
-      <Button disabled={!isSolved} style={{ position: 'absolute', right: 15, top: 15 }}>
-        Submit
+      <TaskTitle>
+        {t('sorting.quick.task.title')} <MarkedRedText>A</MarkedRedText>
+      </TaskTitle>
+      <TaskDescription>{t('sorting.quick.task.description')}</TaskDescription>
+      <TaskInputArray>
+        {t('sorting.quick.task.inputArray')} <MarkedText>[{printArray(initialData)}]</MarkedText>
+      </TaskInputArray>
+      <Button onClick={toggleShowPivot} disabled={isSolved} style={{ position: 'absolute', right: 10, top: 10 }}>
+        {t('general.buttons.showPivot')}
       </Button>
       <IterationsContainer
         style={{
@@ -160,16 +154,19 @@ const QuickSortPartitionTasks = () => {
           <div style={{ textAlign: 'center', margin: "auto 40px"}}>
             {hasEarnedPoints ? (
               <p style={{color: "black"}}>
-                You have already completed {task?.task.toUpperCase()} and earned <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> points!
+                {t('sorting.quick.task.alreadyCompleted', { 
+                  task: task?.task.toUpperCase(),
+                  points: task?.points
+                })}
               </p>
             ) : (
               <>
                 <p>
-                  Congratulations! You completed {task?.task.toUpperCase()} and earned <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> points!
+                  {t('sorting.quick.task.pointsEarned', { 
+                    task: task?.task.toUpperCase(),
+                    points: task?.points
+                  })}
                 </p>
-                <Button onClick={handleReset}>
-                  Try Again
-                </Button>
               </>
             )}
           </div>

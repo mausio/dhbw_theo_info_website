@@ -298,6 +298,11 @@ export const SingleTaskContainer = styled.div`
       min-height: 25px;
     }
   }
+
+  @media (max-width: 950px){
+  display: none;
+  
+  }
 `;
 
 export const Fader = styled.div`

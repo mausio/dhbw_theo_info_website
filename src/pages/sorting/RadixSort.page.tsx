@@ -31,7 +31,7 @@ const RadixSortPage = () => {
         </div>
         <GenericSortGrid>
           <RadixSortAnimation />
-          <CodeBlockElement height={600} code={radixSortAlgo} isFaderOn={false} />
+          <CodeBlockElement height={125} code={radixSortAlgo} isFaderOn={false} />
           <TasksContainer>
             <RadixSortNumberTask />
             <RadixSortWordsTask />

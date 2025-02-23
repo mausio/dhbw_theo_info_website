@@ -20,6 +20,7 @@ import {
   SortableContainer,
 } from '../../../styles/general/iteration.style.ts';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
 const QuickSortIteration = ({ expectedArray, taskArray, setTaskArray, nrOfIteration: nrOfIteration, pivotArray }) => {
   const { t } = useTranslation();
@@ -138,8 +139,16 @@ const SortableItem = ({ id: id, isDisabled: isDisabled, isPivot }) => {
     id,
   });
 
+  const ItemDiv = styled.div`
+  @media(max-width: 480px){
+  width: 35px !important;
+  height: 35px !important;
+  
+  }
+  `
+
   return (
-    <div
+    <ItemDiv
       ref={setNodeRef}
       style={{
         transform: CSS.Transform.toString(transform),
@@ -149,8 +158,11 @@ const SortableItem = ({ id: id, isDisabled: isDisabled, isPivot }) => {
         color: isPivot ? 'red' : 'black',
         border: isDragging || isDisabled ? '1px solid #000' : '1px solid #ddd',
         backgroundColor: isDragging || isDisabled ? 'lightgray' : 'whitesmoke',
-        display: 'inline-block',
         textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyItems: 'center',
+        justifyContent: 'center',
         borderRadius: '5px',
         width: '40px',
         height: '40px',
@@ -160,7 +172,7 @@ const SortableItem = ({ id: id, isDisabled: isDisabled, isPivot }) => {
       {...listeners}
     >
       {id}
-    </div>
+    </ItemDiv>
   );
 };
 

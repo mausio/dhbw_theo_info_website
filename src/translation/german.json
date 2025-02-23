@@ -651,10 +651,12 @@
       },
       "task": {
         "title": "Aufgabe 1 Schrittweise A Wert der Partition",
-        "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder Partition ein.",
+        "description": "Geben Sie für das gegebene Eingabearray die Werte des Arrays A nach jeder Partition ein",
         "inputArray": "Eingabearray:",
+        "submit": "Einreichen",
         "alreadyCompleted": "Sie haben diese Aufgabe bereits abgeschlossen und {{points}} Punkte erhalten!",
-        "pointsEarned": "Glückwunsch! Sie haben {{points}} Punkte für diese Aufgabe erhalten!"
+        "pointsEarned": "Glückwunsch! Sie haben {{points}} Punkte für diese Aufgabe erhalten!",
+        "tryAgain": "Nochmal versuchen"
       }
     },
     "bucket": {
@@ -762,8 +764,8 @@
       "continue": "Fortsetzen",
       "pause": "Pause",
       "animate": "Animieren",
-      "showPivot": "Pivot anzeigen",
-      "hidePivot": "Pivot ausblenden"
+      "showPivot": "Hilfe: Pivots",
+      "hidePivot": "Pivots ausblenden"
     }
   },
   "comments": {

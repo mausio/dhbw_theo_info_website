@@ -31,10 +31,10 @@ const QuickSortPage = () => {
         </div>
         <GenericSortGrid>
           <QuickSortAnimation />
-          <CodeBlockElement height={500} code={quickSortAlgo} isFaderOn={false} />
+          <CodeBlockElement height={460} code={quickSortAlgo} isFaderOn={false} />
           <TasksContainer>
             <QuickSortPartitionTasks />
-            <QuickSortEmptySpacesTask />
+            <QuickSortEmptySpacesTask /> 
             <AlgorithmQuizComponent translationKey="sorting.quick" />
           </TasksContainer>
         </GenericSortGrid>

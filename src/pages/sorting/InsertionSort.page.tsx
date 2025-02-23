@@ -31,7 +31,7 @@ const InsertionSortPage = () => {
         </div>
         <GenericSortGrid>
           <InsertionSortAnimationComponent />
-          <CodeBlockElement code={insertionSortAlgo} isFaderOn={false} height={500} />
+          <CodeBlockElement code={insertionSortAlgo} isFaderOn={false} height={270} />
           <TasksContainer>
             <InsertionSortIterationTaskComponent />
             <AlgorithmQuizComponent translationKey="sorting.insertion" />
