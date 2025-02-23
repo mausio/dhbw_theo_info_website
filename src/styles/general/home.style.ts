@@ -3,6 +3,10 @@ import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import crumpledPaper from '../../static/media/crumpled-paper.jpg';
 
+interface CenterProps {
+  center?: boolean;
+}
+
 export const HomeContainer = styled(Box)`
   @media (max-width: 768px) {
     margin: 20px 15px 15px 15px;
