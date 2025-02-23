@@ -2,6 +2,23 @@
 
 An interactive web application for learning and visualizing sorting algorithms, built with React, TypeScript, and Vite.
 
+## Project Statistics
+
+```
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+TypeScript                      95           1289             71           9882
+XML                             10              1              0            461
+Markdown                         1             24              0             85
+HTML                             2              0              0             26
+JavaScript                       1              1              0             25
+-------------------------------------------------------------------------------
+SUM:                           109           1315             71          10479
+-------------------------------------------------------------------------------
+```
+
+
 ## Features
 
 - Interactive visualizations of multiple sorting algorithms:
@@ -47,6 +64,7 @@ npm run dev
 ```
 
 The application will be available at `http://localhost:5173`
+
 
 ## Build
 
