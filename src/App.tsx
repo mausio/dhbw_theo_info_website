@@ -16,10 +16,6 @@ import { LeaderboardProvider } from './context/LeaderboardContext';
 import { CommentsProvider } from './context/comments.context';
 import { UserProvider } from './context/user.context';
 
-//TODO: Still development needed:
-// => Responsiveness for all pages
-
-
 function App() {
   return (
     <LeaderboardProvider>
