@@ -316,7 +316,7 @@ const BucketSortAnimation = () => {
         <AllBucketsFrame>
           {buckets.map((bucket, bucketIndex) => {
             return (
-              <BucketsContainer style={{ backgroundColor: selectedBucketIndex == bucketIndex && 'palevioletred' }}>
+              <BucketsContainer key={`bucket-${bucketIndex}`} style={{ backgroundColor: selectedBucketIndex == bucketIndex && 'palevioletred' }}>
                 <BucketNumber
                   style={{
                     color: selectedBucketIndex == bucketIndex && 'white',
@@ -327,9 +327,9 @@ const BucketSortAnimation = () => {
                 </BucketNumber>
                 {bucket.items &&
                   bucket.items.map((item, itemIndex) => {
-                    return <LittleBucket>{item}</LittleBucket>;
+                    return <LittleBucket key={`bucket-item-${bucketIndex}-${itemIndex}-${item}`}>{item}</LittleBucket>;
                   })}
-                <LittleBucket>/</LittleBucket>
+                <LittleBucket key={`bucket-${bucketIndex}-end`}>/</LittleBucket>
               </BucketsContainer>
             );
           })}

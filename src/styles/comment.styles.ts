@@ -159,7 +159,7 @@ export const CommentMetadata = styled.div`
 export const CharacterCount = styled.div<{ isNearLimit: boolean }>`
   text-align: right;
   font-size: 0.8em;
-  color: ${props => props.isNearLimit ? '#dc3545' : '#fff'};
+  color: ${props => props['data-near-limit'] ? '#dc3545' : '#fff'};
   margin: -5px 0 5px 0;
 `;
 

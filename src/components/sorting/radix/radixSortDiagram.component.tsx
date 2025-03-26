@@ -13,6 +13,7 @@ const RadixSortDiagram = ({
 
     return concatArray.map((element, index) => (
       <FractionElement
+        key={`element-${originalValue}-${index}`}
         style={{
           borderLeft: 0 < index && index < 4 && '1.5px dotted black',
           backgroundColor:
@@ -32,7 +33,7 @@ const RadixSortDiagram = ({
   const buildRows = () => {
     return radixData.map((splitter, rowIndex) => {
       if (typeof splitter != 'number' || typeof splitter == 'undefined') {
-        return <Row style={{}} />;
+        return <Row key={`empty-row-${rowIndex}`} style={{}} />;
       }
 
       const stringNumberArray = splitter.toString().split('');
@@ -42,6 +43,7 @@ const RadixSortDiagram = ({
 
       return (
         <Row
+          key={`row-${splitter}-${rowIndex}`}
           style={{
             boxShadow: selectedRow == rowIndex && 'black 0 0 0 3px',
           }}

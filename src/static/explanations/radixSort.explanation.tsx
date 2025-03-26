@@ -16,26 +16,30 @@ export const getRadixSortExplanation = (): React.ReactNode => {
       </ol>
       <h5>{t('sorting.radix.complexity')}</h5>
       <table style={{ width: '100%' }}>
-        <tr>
-          <td style={{ width: '50%' }}>{t('sorting.radix.case')}</td>
-          <td style={{ width: '50%' }}>{t('sorting.radix.time')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.radix.best')}</td>
-          <td>{t('sorting.radix.bestTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.radix.average')}</td>
-          <td>{t('sorting.radix.averageTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.radix.worst')}</td>
-          <td>{t('sorting.radix.worstTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.radix.space')}</td>
-          <td>{t('sorting.radix.spaceComplexity')}</td>
-        </tr>
+        <thead>
+          <tr>
+            <td style={{ width: '50%' }}>{t('sorting.radix.case')}</td>
+            <td style={{ width: '50%' }}>{t('sorting.radix.time')}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{t('sorting.radix.best')}</td>
+            <td>{t('sorting.radix.bestTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.radix.average')}</td>
+            <td>{t('sorting.radix.averageTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.radix.worst')}</td>
+            <td>{t('sorting.radix.worstTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.radix.space')}</td>
+            <td>{t('sorting.radix.spaceComplexity')}</td>
+          </tr>
+        </tbody>
       </table>
     </>
   );

@@ -19,26 +19,30 @@ export const getInsertionSortExplanation = (): React.ReactNode => {
       </ol>
       <h5>{t('sorting.insertion.complexity')}</h5>
       <table style={{ width: '100%' }}>
-        <tr>
-          <td style={{ width: '50%' }}>{t('sorting.insertion.case')}</td>
-          <td style={{ width: '50%' }}>{t('sorting.insertion.time')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.insertion.best')}</td>
-          <td>O(n)</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.insertion.average')}</td>
-          <td>O(n²)</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.insertion.worst')}</td>
-          <td>O(n²)</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.insertion.space')}</td>
-          <td>O(1)</td>
-        </tr>
+        <thead>
+          <tr>
+            <td style={{ width: '50%' }}>{t('sorting.insertion.case')}</td>
+            <td style={{ width: '50%' }}>{t('sorting.insertion.time')}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{t('sorting.insertion.best')}</td>
+            <td>O(n)</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.insertion.average')}</td>
+            <td>O(n²)</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.insertion.worst')}</td>
+            <td>O(n²)</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.insertion.space')}</td>
+            <td>O(1)</td>
+          </tr>
+        </tbody>
       </table>
     </>
   );

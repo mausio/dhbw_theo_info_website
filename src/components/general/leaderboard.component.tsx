@@ -68,9 +68,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
         <LeaderboardTable>
           <thead>
             <tr>
-              <LeaderboardHeader center>{t('general.leaderboard.rank')}</LeaderboardHeader>
+              <LeaderboardHeader data-center={true}>{t('general.leaderboard.rank')}</LeaderboardHeader>
               <LeaderboardHeader>{t('general.leaderboard.name')}</LeaderboardHeader>
-              <LeaderboardHeader center>{t('general.leaderboard.score')}</LeaderboardHeader>
+              <LeaderboardHeader data-center={true}>{t('general.leaderboard.score')}</LeaderboardHeader>
               <LeaderboardHeader>{t('general.leaderboard.progress')}</LeaderboardHeader>
             </tr>
           </thead>
@@ -83,9 +83,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
                   key={entry.id} 
                   isCurrentUser={currentUserData ? entry.id === currentUserData.id : false}
                 >
-                  <RankCell center>{position}</RankCell>
+                  <RankCell data-center={true}>{position}</RankCell>
                   <LeaderboardCell>{entry.name}</LeaderboardCell>
-                  <LeaderboardCell center>{entry.score}</LeaderboardCell>
+                  <LeaderboardCell data-center={true}>{entry.score}</LeaderboardCell>
                   <LeaderboardCell>
                     <ProgressBar progress={entry.score} />
                   </LeaderboardCell>
@@ -99,12 +99,12 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
                   <td style={{ textAlign: 'center' }} colSpan={4}>...</td>
                 </UserPositionDivider>
                 <CurrentUserRow>
-                  <RankCell center>{allSortedEntries.filter(entry => 
+                  <RankCell data-center={true}>{allSortedEntries.filter(entry => 
                     entry.score > currentUserData.score || 
                     (entry.score === currentUserData.score && entry.name.localeCompare(currentUserData.name) < 0)
                   ).length + 1}</RankCell>
                   <LeaderboardCell>{currentUserData.name}</LeaderboardCell>
-                  <LeaderboardCell center>{currentUserData.score}</LeaderboardCell>
+                  <LeaderboardCell data-center={true}>{currentUserData.score}</LeaderboardCell>
                   <LeaderboardCell>
                     <ProgressBar progress={currentUserData.score} />
                   </LeaderboardCell>

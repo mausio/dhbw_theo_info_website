@@ -132,9 +132,10 @@ const AlgorithmQuizComponent: React.FC<AlgorithmQuizProps> = ({ translationKey }
               <AnswerButton
                 key={index}
                 onClick={() => handleAnswerSelect(index)}
+                data-selected={selectedAnswer === index}
+                data-correct={showAnswer && index === currentQuestion.correctAnswer}
+                data-wrong={showAnswer && selectedAnswer === index && selectedAnswer !== currentQuestion.correctAnswer}
                 selected={selectedAnswer === index}
-                isCorrect={showAnswer && index === currentQuestion.correctAnswer}
-                isWrong={showAnswer && selectedAnswer === index && selectedAnswer !== currentQuestion.correctAnswer}
                 disabled={showAnswer}
               >
                 {answer}

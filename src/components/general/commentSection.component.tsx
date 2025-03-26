@@ -107,7 +107,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
               <CommentText>{comment.text}</CommentText>
 
               {comment.replies?.map((reply: Comment) => (
-                <SingleComment key={reply.id} isReply>
+                <SingleComment key={reply.id} isReply={true}>
                   <CommentHeader>
                     <CommentMetadata>
                       <strong>{reply.author}</strong> • {formatDate(reply.timestamp)}
@@ -130,7 +130,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
                       placeholder={t('comments.replyPlaceholder')}
                       maxLength={MAX_COMMENT_LENGTH}
                     />
-                    <CharacterCount isNearLimit={isNearLimit(getRemainingCharacters(replyText[comment.id] || ''))}>
+                    <CharacterCount 
+                      data-near-limit={isNearLimit(getRemainingCharacters(replyText[comment.id] || ''))}
+                      isNearLimit={isNearLimit(getRemainingCharacters(replyText[comment.id] || ''))}
+                    >
                       {t('comments.charactersRemaining', { count: getRemainingCharacters(replyText[comment.id] || '') })}
                     </CharacterCount>
                     <Button 
@@ -152,7 +155,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
               placeholder={t('comments.writePlaceholder')}
               maxLength={MAX_COMMENT_LENGTH}
             />
-            <CharacterCount isNearLimit={isNearLimit(getRemainingCharacters(newComment))}>
+            <CharacterCount 
+              data-near-limit={isNearLimit(getRemainingCharacters(newComment))}
+              isNearLimit={isNearLimit(getRemainingCharacters(newComment))}
+            >
               {t('comments.charactersRemaining', { count: getRemainingCharacters(newComment) })}
             </CharacterCount>
             <Button type="submit" disabled={newComment.length === 0 || newComment.length > MAX_COMMENT_LENGTH}>

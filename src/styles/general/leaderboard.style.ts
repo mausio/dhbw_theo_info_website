@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 interface CenterProps {
-  center?: boolean;
+  'data-center'?: boolean;
 }
 
 interface LeaderboardRowProps {
@@ -80,7 +80,7 @@ export const LeaderboardHeader = styled.th<CenterProps>`
   }
 
   padding: 6px 8px;
-  text-align: ${props => props.center ? 'center' : 'left'};
+  text-align: ${props => props['data-center'] ? 'center' : 'left'};
   background: var(--tertiary);
   color: white;
   font-weight: bold;
@@ -146,7 +146,7 @@ export const RankCell = styled.td<CenterProps>`
   }
 
   padding: 4px 8px;
-  text-align: ${props => props.center ? 'center' : 'left'};
+  text-align: ${props => props['data-center'] ? 'center' : 'left'};
   color: var(--black);
   vertical-align: middle;
   font-size: 0.95rem;
@@ -174,7 +174,7 @@ export const LeaderboardCell = styled.td<CenterProps>`
   }
 
   padding: 4px 8px;
-  text-align: ${props => props.center ? 'center' : 'left'};
+  text-align: ${props => props['data-center'] ? 'center' : 'left'};
   color: var(--black);
   position: relative;
   vertical-align: middle;

@@ -31,7 +31,7 @@ const SingleElement = ({ childKey: key, childValue: value }) => {
   };
 
   return (
-    <ListElement disabled={containsNot(key)} onClick={() => handleNavigate(value as string)} key={`${key}0`}>
+    <ListElement disabled={containsNot(key)} onClick={() => handleNavigate(value as string)} key={`single-${key}`}>
       <p>{t(`navigation.${removeNotFromString(key)}`)}</p>
     </ListElement>
   );
@@ -50,7 +50,7 @@ const DropdownSingleElement = ({ parentKey: parentKey, childValue: value, childK
   };
 
   return (
-    <SubListElement disabled={containsNot(value)} onClick={() => handleNavigate(value)} key={`${key}09`}>
+    <SubListElement disabled={containsNot(value)} onClick={() => handleNavigate(value)} key={`dropdown-item-${parentKey}-${key}`}>
       <p>{t(`navigation.${removeNotFromString(value)}`)}</p>
     </SubListElement>
   );
@@ -58,9 +58,9 @@ const DropdownSingleElement = ({ parentKey: parentKey, childValue: value, childK
 
 const DropdownList = ({ childValue: value, childKey: key }) => {
   return (
-    <SubLinkList key={`${key}3`}>
+    <SubLinkList key={`sublink-${key}`}>
       {Object.entries(value).map(([subKey, subValue]) => {
-        return <DropdownSingleElement parentKey={key} childValue={subValue} childKey={subKey} key={`${key}05`} />;
+        return <DropdownSingleElement parentKey={key} childValue={subValue} childKey={subKey} key={`dropdown-element-${key}-${subKey}`} />;
       })}
     </SubLinkList>
   );
@@ -91,12 +91,12 @@ const DropdownElement = ({ childKey: key, childValue: value }) => {
 
   return (
     <ClickAwayListener onClickAway={(e) => handleClickAway()}>
-      <ClickableElementBinder onClick={(e) => handleDropdownClick(e, key)} key={`${key}2`}>
-        <ListElement disabled={containsNot(key)} key={`${key}1`}>
+      <ClickableElementBinder onClick={(e) => handleDropdownClick(e, key)} key={`clickable-${key}`}>
+        <ListElement disabled={containsNot(key)} key={`list-element-${key}`}>
           <p>{t(`navigation.${removeNotFromString(key)}`)}</p>
           <ArrowDropDownIcon />
         </ListElement>
-        {key == menu && <DropdownList childKey={key} childValue={value} key={`${key}06`} />}
+        {key == menu && <DropdownList childKey={key} childValue={value} key={`dropdown-list-${key}`} />}
       </ClickableElementBinder>
     </ClickAwayListener>
   );
@@ -125,9 +125,9 @@ const NavigationBar = () => {
 
           switch (typeof value) {
             case 'string':
-              return <SingleElement childKey={key} childValue={value} key={`${key}07`} />;
+              return <SingleElement childKey={key} childValue={value} key={`route-single-${key}`} />;
             case 'object':
-              return <DropdownElement childValue={value} childKey={key} key={`${key}08`} />;
+              return <DropdownElement childValue={value} childKey={key} key={`route-dropdown-${key}`} />;
           }
         })}
       </>

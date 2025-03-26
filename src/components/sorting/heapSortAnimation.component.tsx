@@ -481,7 +481,7 @@ const HeapSortAnimation = () => {
             const id = Number.parseInt(node.id);
 
             return (
-              <SingleNodeValueIndexContainer>
+              <SingleNodeValueIndexContainer key={`node-${id}`}>
                 <NodeChartValue
                   style={{
                     filter: data.isSorted && 'brightness(0.9)',

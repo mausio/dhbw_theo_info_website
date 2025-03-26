@@ -16,26 +16,30 @@ export const getBucketSortExplanation = (): React.ReactNode => {
       </ol>
       <h5>{t('sorting.bucket.complexity')}</h5>
       <table style={{ width: '100%' }}>
-        <tr>
-          <td style={{ width: '50%' }}>{t('sorting.bucket.case')}</td>
-          <td style={{ width: '50%' }}>{t('sorting.bucket.time')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.bucket.best')}</td>
-          <td>{t('sorting.bucket.bestTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.bucket.average')}</td>
-          <td>{t('sorting.bucket.averageTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.bucket.worst')}</td>
-          <td>{t('sorting.bucket.worstTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.bucket.space')}</td>
-          <td>{t('sorting.bucket.spaceComplexity')}</td>
-        </tr>
+        <thead>
+          <tr>
+            <td style={{ width: '50%' }}>{t('sorting.bucket.case')}</td>
+            <td style={{ width: '50%' }}>{t('sorting.bucket.time')}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{t('sorting.bucket.best')}</td>
+            <td>{t('sorting.bucket.bestTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.bucket.average')}</td>
+            <td>{t('sorting.bucket.averageTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.bucket.worst')}</td>
+            <td>{t('sorting.bucket.worstTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.bucket.space')}</td>
+            <td>{t('sorting.bucket.spaceComplexity')}</td>
+          </tr>
+        </tbody>
       </table>
     </>
   );

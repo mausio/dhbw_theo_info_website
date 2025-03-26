@@ -76,8 +76,6 @@ export const QuizButtonContainer = styled.div`
 
 interface AnswerButtonProps {
   selected?: boolean;
-  isCorrect?: boolean;
-  isWrong?: boolean;
 }
 
 export const AnswerButton = styled.button<AnswerButtonProps>`
@@ -91,33 +89,32 @@ export const AnswerButton = styled.button<AnswerButtonProps>`
   font-size: 16px;
   text-align: left;
   box-shadow: ${props => {
-    if (props.isCorrect) return '#4CAF50 0px 0px 15px 3px';
-    if (props.isWrong) return 'rgba(226, 0, 26, 1.0) 0px 0px 12px 3px';
-    if (props.selected) return '#3a576f 0px 0px 12px 3px';
+    if (props['data-correct']) return '#4CAF50 0px 0px 15px 3px';
+    if (props['data-wrong']) return 'rgba(226, 0, 26, 1.0) 0px 0px 12px 3px';
+    if (props['data-selected']) return '#3a576f 0px 0px 12px 3px';
     return 'rgba(0, 0, 0, 0.15) 0px 2px 4px';
   }};
   transform: ${props => {
     if (props.disabled) return 'scale(1.0)';
-    return (!props.isCorrect && !props.isWrong && props.selected) ? 'scale(1.01)' : 'none';
+    return (!props['data-correct'] && !props['data-wrong'] && props['data-selected']) ? 'scale(1.01)' : 'none';
   }};
 
   &:hover:not(:disabled) {
     background: ${props => {
-      if (props.isCorrect || props.isWrong) return 'white';
+      if (props['data-correct'] || props['data-wrong']) return 'white';
       return '#f5f5f5';
     }};
     border-color: #b0b0b0;
-    transform: ${props => props.isCorrect || props.isWrong ? 'none' : 'translateY(-2px)'};
+    transform: ${props => props['data-correct'] || props['data-wrong'] ? 'none' : 'translateY(-2px)'};
   }
 
   &:disabled {
-    opacity: ${props => props.selected ? 1 : 0.7};
+    opacity: ${props => props['data-selected'] ? 1 : 0.7};
   }
-
 
   @media (max-width: 480px) {
     font-size: 0.9rem;
-}
+  }
 `;
 
 export const QuizResultContainer = styled.div`

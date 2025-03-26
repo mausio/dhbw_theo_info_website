@@ -16,26 +16,30 @@ export const getQuickSortExplanation = (): React.ReactNode => {
       </ol>
       <h5>{t('sorting.quick.complexity')}</h5>
       <table style={{ width: '100%' }}>
-        <tr>
-          <td style={{ width: '50%' }}>{t('sorting.quick.case')}</td>
-          <td style={{ width: '50%' }}>{t('sorting.quick.time')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.best')}</td>
-          <td>{t('sorting.quick.bestTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.average')}</td>
-          <td>{t('sorting.quick.averageTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.worst')}</td>
-          <td>{t('sorting.quick.worstTime')}</td>
-        </tr>
-        <tr>
-          <td>{t('sorting.quick.space')}</td>
-          <td>{t('sorting.quick.spaceComplexity')}</td>
-        </tr>
+        <thead>
+          <tr>
+            <td style={{ width: '50%' }}>{t('sorting.quick.case')}</td>
+            <td style={{ width: '50%' }}>{t('sorting.quick.time')}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{t('sorting.quick.best')}</td>
+            <td>{t('sorting.quick.bestTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.quick.average')}</td>
+            <td>{t('sorting.quick.averageTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.quick.worst')}</td>
+            <td>{t('sorting.quick.worstTime')}</td>
+          </tr>
+          <tr>
+            <td>{t('sorting.quick.space')}</td>
+            <td>{t('sorting.quick.spaceComplexity')}</td>
+          </tr>
+        </tbody>
       </table>
     </>
   );
