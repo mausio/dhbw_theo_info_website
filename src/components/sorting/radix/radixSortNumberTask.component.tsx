@@ -129,13 +129,10 @@ const RadixSortNumberIterationTask = () => {
           />
         ))}
         {isSolved && (
-          <div style={{ textAlign: 'center', margin: "20px auto"}}>
+          <div style={{ textAlign: 'center', margin: "20px auto" }}>
             {hasEarnedPoints ? (
               <p style={{color: "black"}}>
-                {t('sorting.general.alreadyCompleted', {
-                  task: task?.task.toUpperCase(),
-                  points: <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText>
-                })}
+                {task?.task.toUpperCase()} ALREADY COMPLETED: <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> POINTS
               </p>
             ) : (
               <p>
