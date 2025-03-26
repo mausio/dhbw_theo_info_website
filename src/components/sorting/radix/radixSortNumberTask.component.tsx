@@ -128,11 +128,13 @@ const RadixSortNumberIterationTask = () => {
             iterations={index + 1}
           />
         ))}
-        {isSolved && (
-          <div style={{ textAlign: 'center', margin: "20px auto" }}>
+
+      </IterationsContainer>
+      {isSolved && (
+          <div style={{ textAlign: 'center', margin: "auto 40px"}}>
             {hasEarnedPoints ? (
               <p style={{color: "black"}}>
-                {task?.task.toUpperCase()} ALREADY COMPLETED: <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> POINTS
+                You have already completed {task?.task.toUpperCase()} and earned <MarkedRedText style={{fontWeight: '900'}}>{task?.points}</MarkedRedText> points!
               </p>
             ) : (
               <p>
@@ -144,7 +146,6 @@ const RadixSortNumberIterationTask = () => {
             )}
           </div>
         )}
-      </IterationsContainer>
     </SingleTaskContainer>
   );
 };
