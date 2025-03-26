@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useComments } from '../../context/comments.context';
 import { Comment } from '../../types/comments.types';
+import styled from 'styled-components';
 import {
   SideSpacer,
   CommentContainer,
@@ -17,6 +18,34 @@ import {
   ButtonGroup,
   CommentTitle
 } from '../../styles/comment.styles';
+
+// Define the missing styled components
+const CommentUser = styled.strong`
+  color: black;
+  margin-right: 8px;
+`;
+
+const CommentTime = styled.span`
+  color: #666;
+  font-size: 0.9em;
+`;
+
+const ReplyFormContainer = styled.div`
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+`;
+
+const CommentTextArea = styled(CommentInput)`
+  width: 100%;
+  min-height: 60px;
+`;
+
+const NewCommentTextArea = styled(CommentInput)`
+  width: 100%;
+  margin-top: 20px;
+`;
 
 interface CommentSectionProps {
   algorithmId: string;
@@ -107,34 +136,23 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
               <CommentText>{comment.text}</CommentText>
 
               {comment.replies?.map((reply: Comment) => (
-                <SingleComment key={reply.id} isReply={true}>
-                  <CommentHeader>
-                    <CommentMetadata>
-                      <strong>{reply.author}</strong> • {formatDate(reply.timestamp)}
-                    </CommentMetadata>
-                    {reply.authorId === currentUser.id && (
-                      <DeleteButton onClick={() => deleteComment(algorithmId, reply.id)}>
-                        {t('comments.delete')}
-                      </DeleteButton>
-                    )}
-                  </CommentHeader>
+                <SingleComment key={reply.id} data-reply={true}>
+                  <CommentUser>{reply.author}</CommentUser>
+                  <CommentTime>{formatDate(reply.timestamp)}</CommentTime>
                   <CommentText>{reply.text}</CommentText>
                 </SingleComment>
               ))}
 
               {showReplyForm[comment.id] && (
-                  <CommentForm onSubmit={(e) => { e.preventDefault(); handleReply(comment.id); }}>
-                    <CommentInput
+                  <ReplyFormContainer>
+                    <CommentTextArea
                       value={replyText[comment.id] || ''}
                       onChange={(e) => handleReplyChange(comment.id, e)}
-                      placeholder={t('comments.replyPlaceholder')}
+                      placeholder={t('general.comment.replyPlaceholder')}
                       maxLength={MAX_COMMENT_LENGTH}
                     />
-                    <CharacterCount 
-                      data-near-limit={isNearLimit(getRemainingCharacters(replyText[comment.id] || ''))}
-                      isNearLimit={isNearLimit(getRemainingCharacters(replyText[comment.id] || ''))}
-                    >
-                      {t('comments.charactersRemaining', { count: getRemainingCharacters(replyText[comment.id] || '') })}
+                    <CharacterCount data-near-limit={isNearLimit(getRemainingCharacters(replyText[comment.id] || ''))}>
+                      {getRemainingCharacters(replyText[comment.id] || '')} {t('general.comment.charactersLeft')}
                     </CharacterCount>
                     <Button 
                       type="submit" 
@@ -142,29 +160,21 @@ const CommentSection: React.FC<CommentSectionProps> = ({ algorithmId }) => {
                     >
                       {t('comments.postReply')}
                     </Button>
-                  </CommentForm>
+                  </ReplyFormContainer>
               )}
             </SingleComment>
           ))}
             </SideSpacer>
 
-          <CommentForm onSubmit={handleSubmit}>
-            <CommentInput
-              value={newComment}
-              onChange={handleCommentChange}
-              placeholder={t('comments.writePlaceholder')}
-              maxLength={MAX_COMMENT_LENGTH}
-            />
-            <CharacterCount 
-              data-near-limit={isNearLimit(getRemainingCharacters(newComment))}
-              isNearLimit={isNearLimit(getRemainingCharacters(newComment))}
-            >
-              {t('comments.charactersRemaining', { count: getRemainingCharacters(newComment) })}
-            </CharacterCount>
-            <Button type="submit" disabled={newComment.length === 0 || newComment.length > MAX_COMMENT_LENGTH}>
-              {t('comments.postComment')}
-            </Button>
-          </CommentForm>
+          <NewCommentTextArea
+            value={newComment}
+            onChange={handleCommentChange}
+            placeholder={t('general.comment.newCommentPlaceholder')}
+            maxLength={MAX_COMMENT_LENGTH}
+          />
+          <CharacterCount data-near-limit={isNearLimit(getRemainingCharacters(newComment))}>
+            {getRemainingCharacters(newComment)} {t('general.comment.charactersLeft')}
+          </CharacterCount>
         
       </SideSpacer>
     </CommentContainer>

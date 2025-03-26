@@ -81,7 +81,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
               return (
                 <LeaderboardRow 
                   key={entry.id} 
-                  isCurrentUser={currentUserData ? entry.id === currentUserData.id : false}
+                  $isCurrentUser={currentUserData ? entry.id === currentUserData.id : false}
                 >
                   <RankCell data-center={true}>{position}</RankCell>
                   <LeaderboardCell>{entry.name}</LeaderboardCell>

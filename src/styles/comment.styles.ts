@@ -40,22 +40,22 @@ export const CommentContainer = styled(GenericMainContainer)`
   }
 `;
 
-export const SingleComment = styled.div<{ isReply?: boolean }>`
+export const SingleComment = styled.div<{ 'data-reply'?: boolean }>`
   padding: 20px 25px;
-  margin: ${props => props.isReply ? '25px 80px 10px 80px' : '50px 0'};
+  margin: ${props => props['data-reply'] ? '25px 80px 10px 80px' : '50px 0'};
   border-radius: 10px;
   border: 1px solid darkgray;
   box-shadow: rgb(0, 0, 0, 0.5) 2px 2px 5px 0px inset;
   
-  ${props => props.isReply ? `
+  ${props => props['data-reply'] ? `
     background: white;
   ` : `
     background: radial-gradient(white, color-mix(in srgb, var(--primary), white 92%) 95%);
   `}
 
     @media(max-width: 480px){
-      margin: ${props => props.isReply ? '20px 0px 10px 10px' : '50px 0'};
-  }
+      margin: ${props => props['data-reply'] ? '20px 0px 10px 10px' : '50px 0'};
+    }
 `;
 
 export const CommentForm = styled.form`
@@ -156,15 +156,14 @@ export const CommentMetadata = styled.div`
   }
 `;
 
-export const CharacterCount = styled.div<{ isNearLimit: boolean }>`
+export const CharacterCount = styled.div<{ 'data-near-limit'?: boolean }>`
   text-align: right;
   font-size: 0.8em;
   color: ${props => props['data-near-limit'] ? '#dc3545' : '#fff'};
   margin: -5px 0 5px 0;
 `;
 
-export const CommentText = styled.p`
-  margin: 0;
+export const CommentText = styled.p`  margin: 0;
   line-height: 1.5;
   color: var(--black);
   margin: 0 80px 0 0px;

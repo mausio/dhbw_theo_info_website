@@ -5,7 +5,7 @@ interface CenterProps {
 }
 
 interface LeaderboardRowProps {
-  isCurrentUser?: boolean;
+  $isCurrentUser?: boolean;
 }
 
 const rainbowKeyframes = `
@@ -94,7 +94,7 @@ export const LeaderboardRow = styled.tr<LeaderboardRowProps>`
   &:hover {
     background-color: rgba(57, 87, 111, 0.05);
   }
-  ${props => props.isCurrentUser && `
+  ${props => props.$isCurrentUser && `
     background: linear-gradient(
       90deg,
       rgba(255, 0, 0, 0.15),
@@ -129,7 +129,9 @@ export const UserPositionDivider = styled.tr`
   }
 `;
 
-export const CurrentUserRow = styled(LeaderboardRow)`
+export const CurrentUserRow = styled(LeaderboardRow).attrs({
+  $isCurrentUser: true,
+})`
   font-weight: bold;
   ${rainbowKeyframes}
 `;
