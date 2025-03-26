@@ -764,8 +764,8 @@
       "continue": "Fortsetzen",
       "pause": "Pause",
       "animate": "Animieren",
-      "showPivot": "Hilfe: Pivots",
-      "hidePivot": "Pivots ausblenden"
+      "showPivot": "Key einblenden",
+      "hidePivot": "Key ausblenden"
     }
   },
   "comments": {

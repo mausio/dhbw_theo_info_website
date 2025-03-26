@@ -772,8 +772,8 @@
       "continue": "Continue",
       "pause": "Pause",
       "animate": "Animate",
-      "showPivot": "Show Pivots",
-      "hidePivot": "Hide Pivots"
+      "showPivot": "Show Key",
+      "hidePivot": "Hide Key"
     }
   },
   "comments": {
